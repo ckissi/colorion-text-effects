@@ -1,0 +1,2173 @@
+/* Self-hosted fonts (latin subset) — same-origin and preloaded, so the hero
+   headline renders in Inter without a late swap that would delay LCP. */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/inter-latin-400-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/inter-latin-500-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/inter-latin-600-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/jetbrains-mono-latin-600-normal.woff2") format("woff2");
+}
+
+:root {
+  --primary: #FF4FD8;
+  --accent-2: #4FF8FF;
+  --background: #08070F;
+  --surface: #12101C;
+  --text-primary: #F5F2FF;
+  --text-secondary: #9E96B8;
+  --border: #262038;
+  --divider: #262038;
+  --base: 8px;
+  --gap: 16px;
+  --card-padding: 24px;
+  --section-padding: 80px;
+  --r-card: 16px;
+  --r-control: 8px;
+  --r-pill: 9999px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Visually hidden, but available to assistive tech and the accessibility tree.
+   Used for structural headings that the visual design doesn't surface. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+body {
+  background: var(--background);
+  color: var(--text-primary);
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mono {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(var(--base) * 3) calc(var(--base) * 5);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: color-mix(in srgb, var(--background) 88%, transparent);
+  color: var(--text-primary);
+  backdrop-filter: blur(12px);
+  z-index: 10;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--base) * 1.5);
+}
+
+.brand-mark {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--r-control);
+  background: linear-gradient(135deg, var(--primary), var(--accent-2));
+  display: grid;
+  place-items: center;
+  color: var(--background);
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.brand span.mono { color: var(--text-secondary); }
+
+.header-status {
+  display: flex;
+  align-items: center;
+  gap: var(--base);
+  color: var(--text-secondary);
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--r-pill);
+  background: var(--primary);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 color-mix(in srgb, var(--primary) 50%, transparent); }
+  50% { opacity: .5; box-shadow: 0 0 0 6px transparent; }
+}
+
+/* ---------- Header dropdown (Colorion tools) ---------- */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--base) * 2.5);
+}
+
+.menu { position: relative; }
+
+.menu-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--base);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  white-space: nowrap;
+  color: var(--background);
+  background: var(--primary);
+  padding: calc(var(--base) * 0.75) calc(var(--base) * 1.5);
+  border-radius: var(--r-control);
+}
+.menu-trigger::-webkit-details-marker { display: none; }
+
+.menu-caret { transition: transform .2s ease; }
+.menu[open] .menu-caret { transform: rotate(180deg); }
+
+.menu-list {
+  position: absolute;
+  top: calc(100% + var(--base));
+  right: 0;
+  z-index: 50;
+  min-width: 220px;
+  margin: 0;
+  padding: calc(var(--base) * 0.5);
+  list-style: none;
+  display: grid;
+  gap: 1px;
+  background: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--r-control);
+  box-shadow: 0 14px 30px -14px color-mix(in srgb, #000 70%, transparent);
+  animation: menu-rise .18s cubic-bezier(.22,1,.36,1) both;
+}
+
+@keyframes menu-rise {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.menu-list a {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: var(--base) calc(var(--base) * 1.5);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  white-space: nowrap;
+  color: inherit;
+  text-decoration: none;
+  border-radius: calc(var(--r-control) - 4px);
+  transition: background .15s, color .15s;
+}
+.menu-list a:hover,
+.menu-list a:focus-visible {
+  background: var(--primary);
+  color: var(--background);
+  outline: none;
+}
+
+@media (max-width: 560px) {
+  .header-status { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--section-padding) calc(var(--base) * 5) calc(var(--base) * 6);
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--base);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  padding: calc(var(--base) * 0.75) calc(var(--base) * 2);
+  margin-bottom: calc(var(--base) * 4);
+}
+
+h1 {
+  font-size: clamp(40px, 6vw, 64px);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: 0;
+  max-width: 66.6667%;
+  animation: reveal .8s cubic-bezier(.22,1,.36,1) both;
+}
+
+h1 em {
+  font-style: normal;
+  color: var(--background);
+  background: linear-gradient(100deg, var(--primary), var(--accent-2));
+  padding: 0 .15em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.hero p {
+  margin-top: calc(var(--base) * 3);
+  max-width: 66.6667%;
+  color: var(--text-secondary);
+  animation: reveal .8s .12s cubic-bezier(.22,1,.36,1) both;
+}
+
+.hero p code {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.9em;
+  background: color-mix(in srgb, var(--text-primary) 8%, transparent);
+  border: 1px solid var(--border);
+  padding: 1px 6px;
+  border-radius: var(--r-control);
+  color: var(--text-primary);
+}
+
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(20px); clip-path: inset(0 0 100% 0); }
+  to   { opacity: 1; transform: translateY(0);    clip-path: inset(0 0 0 0); }
+}
+
+/* ---------- Library panel ---------- */
+.library {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 calc(var(--base) * 5) var(--section-padding);
+}
+
+.panel {
+  background: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--divider);
+}
+
+.library-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: calc(var(--base) * 2) calc(var(--base) * 3);
+  border-bottom: 1px solid var(--divider);
+  color: var(--text-secondary);
+}
+
+/* Flat grid: shared hairline dividers, no gaps, no radius */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--divider);
+}
+
+@media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+
+.cell {
+  /* the three colour tokens every effect paints with */
+  --ink: var(--text-primary);
+  --ink-2: var(--primary);
+  --ink-3: var(--accent-2);
+  position: relative;
+  background: var(--surface);
+  padding: var(--card-padding);
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--base) * 4);
+  overflow: hidden;
+  transition: background .35s;
+  animation: reveal .7s cubic-bezier(.22,1,.36,1) both;
+}
+
+.cell:nth-child(odd) { animation-delay: .05s; }
+.cell:nth-child(3n)  { animation-delay: .1s; }
+
+.cell:hover { background: color-mix(in srgb, var(--primary) 7%, var(--surface)); }
+
+/* corner tick marks */
+.cell::before, .cell::after {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  pointer-events: none;
+}
+.cell::before {
+  top: -1px; left: -1px;
+  border-top: 1px solid var(--text-secondary);
+  border-left: 1px solid var(--text-secondary);
+}
+.cell::after {
+  bottom: -1px; right: -1px;
+  border-bottom: 1px solid var(--text-secondary);
+  border-right: 1px solid var(--text-secondary);
+}
+
+.cell-index {
+  position: absolute;
+  top: calc(var(--base) * 2);
+  left: calc(var(--base) * 3);
+  color: color-mix(in srgb, var(--text-secondary) 70%, var(--surface));
+}
+
+.stage {
+  height: 96px;
+  display: grid;
+  place-items: center;
+}
+
+.cell h3 {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+/* ---------- Text effects (ink on surface) ----------
+   Every effect paints with three colour tokens so a copied snippet can be
+   re-skinned by overriding them:
+     --ink    main text colour        (defaults to currentColor)
+     --ink-2  primary accent          (hot magenta)
+     --ink-3  secondary accent        (electric cyan)
+   All effect keyframes are fx-prefixed to stay collision-free. */
+
+/* 01 Borealis — aurora gradient drifting through the letters */
+.fx-aurora {
+  font: 600 30px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .06em;
+  background: linear-gradient(115deg, var(--ink-2), var(--ink-3), var(--ink-2), var(--ink-3)) 0 0 / 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: fx-aurora 7s linear infinite;
+}
+@keyframes fx-aurora {
+  0%   { background-position: 0% 50%;   filter: hue-rotate(0deg); }
+  100% { background-position: 300% 50%; filter: hue-rotate(360deg); }
+}
+
+/* 02 Glitchcore — RGB channel-split glitch with sliced jumps */
+.fx-glitch {
+  position: relative;
+  font: 600 30px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .06em;
+  color: var(--ink);
+}
+.fx-glitch::before, .fx-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+}
+.fx-glitch::before {
+  color: var(--ink-2);
+  clip-path: inset(0 0 55% 0);
+  animation: fx-glitch-a 2.6s steps(1) infinite;
+}
+.fx-glitch::after {
+  color: var(--ink-3);
+  clip-path: inset(45% 0 0 0);
+  animation: fx-glitch-b 2.6s steps(1) infinite;
+}
+@keyframes fx-glitch-a {
+  0%, 12%, 20%, 55%, 100% { transform: translate(0); opacity: 0; }
+  13% { transform: translate(-5px, -2px); opacity: .9; }
+  16% { transform: translate(4px, 1px);   opacity: .9; }
+  48% { transform: translate(-3px, 2px);  opacity: .9; }
+  51% { transform: translate(2px, -1px);  opacity: .9; }
+}
+@keyframes fx-glitch-b {
+  0%, 14%, 22%, 60%, 100% { transform: translate(0); opacity: 0; }
+  15% { transform: translate(5px, 2px);   opacity: .9; }
+  18% { transform: translate(-4px, -1px); opacity: .9; }
+  52% { transform: translate(3px, -2px);  opacity: .9; }
+  56% { transform: translate(-2px, 1px);  opacity: .9; }
+}
+
+/* 03 Teletype — typewriter with blinking caret (word must match the ch width) */
+.fx-typewriter {
+  font: 600 24px/1.2 "JetBrains Mono", monospace;
+  letter-spacing: 0;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  width: 10ch; /* = number of characters typed */
+  border-right: .55ch solid var(--ink-2);
+  animation: fx-type 3.6s steps(10) infinite,
+             fx-caret .65s steps(1) infinite;
+}
+@keyframes fx-type {
+  0%, 8%    { width: 0; }
+  55%, 100% { width: 10ch; }
+}
+@keyframes fx-caret {
+  50% { border-color: transparent; }
+}
+
+/* 04 Neon-Haus — buzzing neon sign with unstable tube flicker */
+.fx-neon {
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .14em;
+  color: var(--ink);
+  animation: fx-neon 3.2s linear infinite;
+}
+@keyframes fx-neon {
+  0%, 18%, 21%, 24%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 4px var(--ink),
+      0 0 11px var(--ink-2),
+      0 0 24px var(--ink-2),
+      0 0 48px var(--ink-2);
+  }
+  19%, 22%, 62% {
+    opacity: .35;
+    text-shadow: none;
+  }
+  63%, 64.5% {
+    opacity: .6;
+    text-shadow: 0 0 4px var(--ink-2);
+  }
+}
+
+/* 05 Aqua-Fill — the word fills with liquid that rises and drains */
+.fx-liquid {
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .06em;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--ink-3) 65%, transparent);
+  background: linear-gradient(0deg,
+      var(--ink-3) 0 46%,
+      color-mix(in srgb, var(--ink-3) 55%, transparent) 48%,
+      transparent 52% 100%
+    ) 0 0 / 100% 220%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: fx-liquid 3.4s ease-in-out infinite;
+}
+@keyframes fx-liquid {
+  0%, 100% { background-position: 0 -110%; }
+  50%      { background-position: 0 10%; }
+}
+
+/* 06 Chromia — brushed-metal letters with a passing sheen */
+.fx-chrome {
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .06em;
+  background: linear-gradient(105deg,
+      color-mix(in srgb, var(--ink) 40%, transparent) 0 38%,
+      var(--ink) 47%,
+      #fff 50%,
+      var(--ink) 53%,
+      color-mix(in srgb, var(--ink) 40%, transparent) 62% 100%
+    ) 0 0 / 260% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: fx-chrome 2.8s ease-in-out infinite;
+}
+@keyframes fx-chrome {
+  0%   { background-position: 130% 0; }
+  60%, 100% { background-position: -130% 0; }
+}
+
+/* 07 Lens-Drift — letters slip in and out of focus, one after another */
+.fx-focus {
+  font: 600 30px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+  color: var(--ink);
+}
+.fx-focus b {
+  font-weight: inherit;
+  display: inline-block;
+  animation: fx-focus 2.6s ease-in-out infinite;
+  animation-delay: calc(var(--i) * .18s);
+}
+@keyframes fx-focus {
+  0%, 100% { filter: blur(0);   opacity: 1; }
+  50%      { filter: blur(7px); opacity: .35; }
+}
+
+/* 08 Tidal-Type — letters ride a rolling sine wave */
+.fx-wave {
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  color: var(--ink-3);
+}
+.fx-wave b {
+  font-weight: inherit;
+  display: inline-block;
+  animation: fx-wave 1.3s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -.14s);
+}
+@keyframes fx-wave {
+  0%, 100% { transform: translateY(7px); }
+  50%      { transform: translateY(-7px); }
+}
+
+/* 09 Bisect — the word is sliced horizontally; halves drift apart and re-align */
+.fx-sliced {
+  position: relative;
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .06em;
+  color: transparent;
+}
+.fx-sliced::before, .fx-sliced::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: var(--ink);
+}
+.fx-sliced::before {
+  clip-path: inset(0 0 50% 0);
+  animation: fx-sliced-top 3s ease-in-out infinite;
+}
+.fx-sliced::after {
+  clip-path: inset(50% 0 0 0);
+  animation: fx-sliced-bot 3s ease-in-out infinite;
+}
+@keyframes fx-sliced-top {
+  0%, 22%, 78%, 100% { transform: translateX(0); }
+  38%, 62% { transform: translateX(8px); color: var(--ink-2); }
+}
+@keyframes fx-sliced-bot {
+  0%, 22%, 78%, 100% { transform: translateX(0); }
+  38%, 62% { transform: translateX(-8px); color: var(--ink-3); }
+}
+
+/* 10 Cipher — scrambled characters decode into the word, then re-encrypt */
+.fx-decoder {
+  font: 600 28px/1.2 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+  color: var(--ink-3);
+}
+.fx-decoder::after {
+  content: "▓K#R1&Q";
+  animation: fx-decoder 4s steps(1) infinite;
+}
+@keyframes fx-decoder {
+  0%   { content: "▓K#R1&Q"; color: var(--ink-3); }
+  8%   { content: "D%#OD3▒"; }
+  16%  { content: "DE☰O*ER"; }
+  24%  { content: "DEC0D£R"; }
+  32%  { content: "DECOD€R"; }
+  40%, 82% { content: "DECODER"; color: var(--ink); }
+  88%  { content: "D3C0*€R"; color: var(--ink-3); }
+  94%  { content: "▒#COD1Q"; }
+}
+
+/* 11 Redactor — a scanning bar sweeps the word, lighting letters as it passes */
+.fx-scanner {
+  position: relative;
+  font: 600 28px/1.2 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+  background: linear-gradient(90deg,
+      color-mix(in srgb, var(--ink) 25%, transparent) 0 40%,
+      var(--ink) 50%,
+      color-mix(in srgb, var(--ink) 25%, transparent) 60% 100%
+    ) 0 0 / 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: fx-scan-glow 2.6s ease-in-out infinite alternate;
+}
+.fx-scanner::after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  bottom: -6px;
+  left: 0;
+  width: 3px;
+  background: var(--ink-2);
+  box-shadow: 0 0 14px var(--ink-2);
+  animation: fx-scan-bar 2.6s ease-in-out infinite alternate;
+}
+@keyframes fx-scan-glow {
+  0%   { background-position: 100% 0; }
+  100% { background-position: 0% 0; }
+}
+@keyframes fx-scan-bar {
+  0%   { left: 0; transform: translateX(0); }
+  100% { left: 100%; transform: translateX(-100%); }
+}
+
+/* 12 Emberglow — letters smoulder under rising fire light */
+.fx-ember {
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  color: #ffd9a0;
+  animation: fx-ember 1.7s ease-in-out infinite alternate;
+}
+@keyframes fx-ember {
+  0% {
+    text-shadow:
+      0 -2px 6px  #ffab40,
+      0 -6px 14px #ff6d00,
+      0 -12px 28px #dd2c00,
+      0 -20px 44px rgba(213, 0, 0, .55);
+  }
+  100% {
+    text-shadow:
+      0 -3px 8px  #ffc46b,
+      0 -9px 20px #ff8f1f,
+      0 -18px 38px #ff3d00,
+      0 -30px 60px rgba(213, 0, 0, .8);
+  }
+}
+
+/* 13 Echo-Verse — ghost copies of the word ripple outward */
+.fx-echo {
+  position: relative;
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .12em;
+  color: var(--ink);
+}
+.fx-echo::before, .fx-echo::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  animation: fx-echo 2s ease-out infinite;
+}
+.fx-echo::before { color: var(--ink-2); }
+.fx-echo::after  { color: var(--ink-3); animation-delay: 1s; }
+@keyframes fx-echo {
+  0%   { opacity: .8; transform: scale(1);   filter: blur(0); }
+  100% { opacity: 0;  transform: scale(1.9); filter: blur(3px); }
+}
+
+/* 14 Deep-Type — extruded 3D block letters rocking on their axis */
+.fx-extrude {
+  font: 600 34px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+  color: var(--ink);
+  text-shadow:
+    1px 1px 0 color-mix(in srgb, var(--ink-2) 80%, #000),
+    2px 2px 0 color-mix(in srgb, var(--ink-2) 70%, #000),
+    3px 3px 0 color-mix(in srgb, var(--ink-2) 60%, #000),
+    4px 4px 0 color-mix(in srgb, var(--ink-2) 50%, #000),
+    5px 5px 0 color-mix(in srgb, var(--ink-2) 40%, #000),
+    6px 6px 0 color-mix(in srgb, var(--ink-2) 30%, #000),
+    7px 7px 12px rgba(0, 0, 0, .5);
+  animation: fx-extrude 3s ease-in-out infinite;
+}
+@keyframes fx-extrude {
+  0%, 100% { transform: rotate(-3.5deg) translateY(2px); }
+  50%      { transform: rotate(3.5deg)  translateY(-4px); }
+}
+
+/* 15 Wireframe — a dashed outline endlessly traces the letterforms */
+.fx-contour {
+  width: 240px;
+  height: 56px;
+  overflow: visible;
+}
+.fx-contour text {
+  font: 600 40px "JetBrains Mono", monospace;
+  letter-spacing: .02em;
+  fill: color-mix(in srgb, var(--ink) 10%, transparent);
+  stroke: var(--ink-3);
+  stroke-width: 1.2;
+  stroke-dasharray: 34 66;
+  animation: fx-contour 3.2s linear infinite;
+}
+@keyframes fx-contour {
+  to { stroke-dashoffset: -100; }
+}
+
+/* 16 Prisma — each letter refracts a different band of the spectrum */
+.fx-spectrum {
+  font: 600 26px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+}
+.fx-spectrum b {
+  font-weight: inherit;
+  display: inline-block;
+  color: #ff2d78;
+  filter: hue-rotate(calc(var(--i) * 42deg));
+  animation: fx-spectrum 2.4s linear infinite;
+  animation-delay: calc(var(--i) * -.1s);
+}
+@keyframes fx-spectrum {
+  to { filter: hue-rotate(calc(var(--i) * 42deg + 360deg)); }
+}
+
+/* 17 Jitterbug — nervous analogue jitter: skews, jumps and dropped frames */
+.fx-jitter {
+  font: 600 30px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .06em;
+  color: var(--ink);
+  animation: fx-jitter 1.9s steps(1) infinite;
+}
+@keyframes fx-jitter {
+  0%, 7%, 15%, 55%, 100% { transform: none; opacity: 1; }
+  8%  { transform: skewX(-14deg) translateX(-4px); }
+  10% { transform: skewX(10deg) translateX(3px); }
+  12% { transform: translateY(-3px); opacity: .6; }
+  46% { transform: skewX(8deg); }
+  48% { transform: skewX(-6deg) translateY(2px); opacity: .75; }
+  50% { transform: translateX(2px); }
+}
+
+/* 18 Anaglyph-3D — red/cyan stereo channels drift apart and snap back */
+.fx-anaglyph {
+  font: 600 30px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  color: var(--ink);
+  animation: fx-anaglyph 2.4s ease-in-out infinite;
+}
+@keyframes fx-anaglyph {
+  0%, 100% { text-shadow: 0 0 0 #ff3355, 0 0 0 #33ddff; }
+  50% {
+    text-shadow:
+      -6px 0 1px #ff3355,
+       6px 0 1px #33ddff;
+  }
+}
+
+/* 19 Split-Flap — airport departure board; letters flip on their plates */
+.fx-flap {
+  font: 600 24px/1 "JetBrains Mono", monospace;
+  letter-spacing: 0;
+  display: inline-flex;
+  gap: 3px;
+  perspective: 400px;
+  color: var(--ink);
+}
+.fx-flap b {
+  font-weight: inherit;
+  display: grid;
+  place-items: center;
+  width: 1.5em;
+  height: 1.9em;
+  background: linear-gradient(
+      color-mix(in srgb, var(--ink) 16%, transparent) 0 49%,
+      color-mix(in srgb, var(--ink) 8%, transparent) 51% 100%);
+  border-radius: 4px;
+  transform-origin: center;
+  animation: fx-flap 3.2s ease-in-out infinite;
+  animation-delay: calc(var(--i) * .12s);
+}
+@keyframes fx-flap {
+  0%, 55%, 100% { transform: rotateX(0); }
+  62% { transform: rotateX(-88deg); }
+  69% { transform: rotateX(0); }
+  74% { transform: rotateX(-25deg); }
+  79% { transform: rotateX(0); }
+}
+
+/* 20 Phosphor — CRT terminal: green glow, rolling scanlines, tube flicker */
+.fx-crt {
+  position: relative;
+  font: 600 26px/1.2 "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  padding: .3em .5em;
+  color: #4dff88;
+  text-shadow: 0 0 7px rgba(77, 255, 136, .8);
+  background: rgba(20, 60, 35, .18);
+  border-radius: 4px;
+  animation: fx-crt-flicker 3.4s steps(1) infinite;
+}
+.fx-crt::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg,
+      transparent 0 2px,
+      rgba(0, 0, 0, .38) 2px 4px);
+  animation: fx-crt-roll 6s linear infinite;
+}
+@keyframes fx-crt-flicker {
+  0%, 6%, 100% { opacity: 1; }
+  3%   { opacity: .82; }
+  4.5% { opacity: .95; transform: translateY(1px); }
+  70%  { opacity: .9; }
+  71%  { opacity: 1; transform: none; }
+}
+@keyframes fx-crt-roll {
+  to { background-position: 0 48px; }
+}
+
+/* 21 Pop-Riot — letters leap with a hard comic-book drop shadow */
+.fx-pop {
+  font: 600 34px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .04em;
+  color: var(--ink);
+}
+.fx-pop b {
+  font-weight: inherit;
+  display: inline-block;
+  animation: fx-pop 1.5s cubic-bezier(.3, 1.6, .4, 1) infinite;
+  animation-delay: calc(var(--i) * .09s);
+}
+@keyframes fx-pop {
+  0%, 55%, 100% { transform: translateY(0); text-shadow: 0 0 0 var(--ink-2); }
+  25% { transform: translateY(-12px) rotate(-4deg); text-shadow: 0 12px 0 var(--ink-2); }
+}
+
+/* 22 Limelight — a spotlight sweeps across otherwise unlit letters */
+.fx-spotlight {
+  font: 600 26px/1.2 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+  background: radial-gradient(3.5ch 100% at 50% 50%,
+      var(--ink) 20%,
+      color-mix(in srgb, var(--ink) 14%, transparent) 75%
+    ) 0 0 / 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: fx-spotlight 3.4s ease-in-out infinite alternate;
+}
+@keyframes fx-spotlight {
+  0%   { background-position: 100% 0; }
+  100% { background-position: 0% 0; }
+}
+
+/* 23 Rubber-Band — the word squashes and stretches like an elastic band */
+.fx-elastic {
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+  color: var(--ink-2);
+  animation: fx-elastic 1.6s ease-in-out infinite;
+}
+@keyframes fx-elastic {
+  0%, 100% { transform: scale(1, 1); }
+  28% { transform: scale(1.28, .72); }
+  44% { transform: scale(.78, 1.24); }
+  60% { transform: scale(1.12, .9); }
+  74% { transform: scale(.96, 1.05); }
+  86% { transform: scale(1.02, .98); }
+}
+
+/* 24 Still-Water — the word floats over its own rippling reflection
+   (uses -webkit-box-reflect: Chromium & Safari; degrades gracefully) */
+.fx-mirror {
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  color: var(--ink);
+  -webkit-box-reflect: below 2px linear-gradient(transparent 45%, rgba(255, 255, 255, .28));
+  animation: fx-mirror 3s ease-in-out infinite;
+}
+@keyframes fx-mirror {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+/* 25 Ransom-Note — mismatched cut-out letters shifting on the page */
+.fx-ransom {
+  font: 600 24px/1 "JetBrains Mono", monospace;
+  letter-spacing: 0;
+  display: inline-flex;
+  gap: 4px;
+  color: var(--ink);
+}
+.fx-ransom b {
+  font-weight: inherit;
+  display: grid;
+  place-items: center;
+  padding: .28em .3em;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--ink) 14%, transparent);
+  animation: fx-ransom 2.8s ease-in-out infinite alternate;
+  animation-delay: calc(var(--i) * -.5s);
+}
+.fx-ransom b:nth-child(odd) {
+  background: var(--ink-2);
+  color: #14020f;
+}
+.fx-ransom b:nth-child(3n) {
+  background: transparent;
+  outline: 1.5px dashed color-mix(in srgb, var(--ink) 55%, transparent);
+  color: var(--ink-3);
+}
+@keyframes fx-ransom {
+  0%   { transform: rotate(-6deg) translateY(1.5px); }
+  100% { transform: rotate(6deg)  translateY(-1.5px); }
+}
+
+/* 26 Meltdown — letters sag, stretch and drip before snapping back */
+.fx-melt {
+  font: 600 34px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  color: var(--ink-2);
+}
+.fx-melt b {
+  font-weight: inherit;
+  display: inline-block;
+  transform-origin: top center;
+  animation: fx-melt 2.8s ease-in infinite;
+  animation-delay: calc(var(--i) * .22s);
+}
+@keyframes fx-melt {
+  0%, 45%  { transform: scaleY(1) translateY(0); filter: blur(0); }
+  70%      { transform: scaleY(1.55) translateY(7px) scaleX(.92); filter: blur(1.5px); }
+  85%, 100% { transform: scaleY(1) translateY(0); filter: blur(0); }
+}
+
+/* 27 Cardio — a lub-dub heartbeat with a systolic glow */
+.fx-heartbeat {
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .12em;
+  color: var(--ink-2);
+  animation: fx-heartbeat 1.4s ease-in-out infinite;
+}
+@keyframes fx-heartbeat {
+  0%, 100% { transform: scale(1); text-shadow: 0 0 0 transparent; }
+  14% { transform: scale(1.14); text-shadow: 0 0 18px color-mix(in srgb, var(--ink-2) 65%, transparent); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.18); text-shadow: 0 0 26px color-mix(in srgb, var(--ink-2) 80%, transparent); }
+  70% { transform: scale(1); text-shadow: 0 0 0 transparent; }
+}
+
+/* 28 Hi-Liter — a marker pen paints across the word, then lifts off */
+.fx-marker {
+  font: 600 28px/1.3 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+  color: var(--ink);
+  padding: .1em .2em;
+  background: linear-gradient(100deg,
+      color-mix(in srgb, var(--ink-2) 85%, transparent),
+      color-mix(in srgb, var(--ink-2) 60%, transparent)
+    ) no-repeat 0 62%;
+  background-size: 0% 46%;
+  animation: fx-marker 3s ease-in-out infinite;
+}
+@keyframes fx-marker {
+  0%        { background-size: 0% 46%;   background-position: 0 62%; }
+  38%, 62%  { background-size: 100% 46%; background-position: 0 62%; }
+  100%      { background-size: 0% 46%;   background-position: 100% 62%; }
+}
+
+/* 29 Sundial — a long cast shadow circles the letters like a passing sun */
+.fx-sundial {
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  color: var(--ink);
+  animation: fx-sundial 5s linear infinite;
+}
+@keyframes fx-sundial {
+  0%, 100% {
+    text-shadow:
+      4px 0 var(--ink-2),
+      8px 0 color-mix(in srgb, var(--ink-2) 55%, transparent),
+      12px 0 color-mix(in srgb, var(--ink-2) 25%, transparent);
+  }
+  12.5% {
+    text-shadow:
+      2.8px 2.8px var(--ink-2),
+      5.6px 5.6px color-mix(in srgb, var(--ink-2) 55%, transparent),
+      8.4px 8.4px color-mix(in srgb, var(--ink-2) 25%, transparent);
+  }
+  25% {
+    text-shadow:
+      0 4px var(--ink-2),
+      0 8px color-mix(in srgb, var(--ink-2) 55%, transparent),
+      0 12px color-mix(in srgb, var(--ink-2) 25%, transparent);
+  }
+  37.5% {
+    text-shadow:
+      -2.8px 2.8px var(--ink-2),
+      -5.6px 5.6px color-mix(in srgb, var(--ink-2) 55%, transparent),
+      -8.4px 8.4px color-mix(in srgb, var(--ink-2) 25%, transparent);
+  }
+  50% {
+    text-shadow:
+      -4px 0 var(--ink-2),
+      -8px 0 color-mix(in srgb, var(--ink-2) 55%, transparent),
+      -12px 0 color-mix(in srgb, var(--ink-2) 25%, transparent);
+  }
+  62.5% {
+    text-shadow:
+      -2.8px -2.8px var(--ink-2),
+      -5.6px -5.6px color-mix(in srgb, var(--ink-2) 55%, transparent),
+      -8.4px -8.4px color-mix(in srgb, var(--ink-2) 25%, transparent);
+  }
+  75% {
+    text-shadow:
+      0 -4px var(--ink-2),
+      0 -8px color-mix(in srgb, var(--ink-2) 55%, transparent),
+      0 -12px color-mix(in srgb, var(--ink-2) 25%, transparent);
+  }
+  87.5% {
+    text-shadow:
+      2.8px -2.8px var(--ink-2),
+      5.6px -5.6px color-mix(in srgb, var(--ink-2) 55%, transparent),
+      8.4px -8.4px color-mix(in srgb, var(--ink-2) 25%, transparent);
+  }
+}
+
+/* 30 Negative — an inversion bar sweeps the word, flipping letters to their
+   photographic negative via mix-blend-mode: difference */
+.fx-negative {
+  position: relative;
+  font: 600 28px/1.2 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+  color: var(--ink);
+  padding: .18em .22em;
+}
+.fx-negative::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 34%;
+  background: var(--ink);
+  mix-blend-mode: difference;
+  animation: fx-negative 2.4s ease-in-out infinite alternate;
+}
+@keyframes fx-negative {
+  0%   { left: 0;    transform: translateX(0); }
+  100% { left: 100%; transform: translateX(-100%); }
+}
+
+/* 31 Holograph — translucent scanline projection with drifting chroma edges */
+.fx-hologram {
+  position: relative;
+  font: 600 28px/1.2 "JetBrains Mono", monospace;
+  letter-spacing: .12em;
+  color: color-mix(in srgb, var(--ink-3) 72%, var(--ink));
+  text-shadow:
+    0 0 6px color-mix(in srgb, var(--ink-3) 60%, transparent),
+    0 0 22px color-mix(in srgb, var(--ink-3) 45%, transparent);
+  isolation: isolate;
+  animation: fx-hologram-float 3.8s ease-in-out infinite;
+}
+.fx-hologram::before,
+.fx-hologram::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.fx-hologram::before {
+  color: var(--ink-2);
+  clip-path: inset(0 0 52% 0);
+  opacity: .58;
+  animation: fx-hologram-split 2.8s steps(1) infinite;
+}
+.fx-hologram::after {
+  color: transparent;
+  background: repeating-linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--ink) 70%, transparent) 0 1px,
+      transparent 1px 4px
+    );
+  -webkit-background-clip: text;
+  background-clip: text;
+  opacity: .48;
+  animation: fx-hologram-lines 1.2s linear infinite;
+}
+@keyframes fx-hologram-float {
+  0%, 100% { transform: translateY(2px) skewX(0deg); filter: brightness(1); }
+  50%      { transform: translateY(-4px) skewX(-3deg); filter: brightness(1.35); }
+}
+@keyframes fx-hologram-split {
+  0%, 14%, 40%, 72%, 100% { transform: translateX(0); opacity: .22; }
+  15% { transform: translateX(-5px); opacity: .8; }
+  17% { transform: translateX(4px);  opacity: .6; }
+  74% { transform: translateX(3px);  opacity: .7; }
+}
+@keyframes fx-hologram-lines {
+  to { background-position: 0 12px; }
+}
+
+/* 32 Gold-Foil — embossed metallic letters with a diagonal specular sweep */
+.fx-foil {
+  font: 600 36px/1.05 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+  color: transparent;
+  background:
+    linear-gradient(108deg,
+      #7a4a08 0%,
+      #f2c15d 18%,
+      #fff4b8 24%,
+      #b87014 36%,
+      #f6d66d 51%,
+      #8e560b 68%,
+      #fff0a2 76%,
+      #c98218 100%
+    ) 0 0 / 230% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow:
+    0 1px 0 rgba(255, 244, 184, .45),
+    0 9px 20px rgba(0, 0, 0, .36);
+  animation: fx-foil 3.1s ease-in-out infinite;
+}
+@keyframes fx-foil {
+  0%, 100% { background-position: 115% 0; filter: saturate(1.05); }
+  45%      { background-position: -35% 0; filter: saturate(1.35) brightness(1.12); }
+}
+
+/* 33 Pixel-Sort — blocky offsets smear the word into stepped digital columns */
+.fx-pixel {
+  position: relative;
+  font: 600 30px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+  color: var(--ink);
+  text-shadow:
+    1px 0 0 var(--ink-2),
+   -1px 0 0 var(--ink-3);
+}
+.fx-pixel::before,
+.fx-pixel::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  opacity: .85;
+}
+.fx-pixel::before {
+  color: var(--ink-2);
+  clip-path: polygon(0 0, 100% 0, 100% 28%, 0 28%, 0 44%, 100% 44%, 100% 58%, 0 58%);
+  animation: fx-pixel-a 2.2s steps(1) infinite;
+}
+.fx-pixel::after {
+  color: var(--ink-3);
+  clip-path: polygon(0 30%, 100% 30%, 100% 42%, 0 42%, 0 66%, 100% 66%, 100% 82%, 0 82%);
+  animation: fx-pixel-b 2.2s steps(1) infinite;
+}
+@keyframes fx-pixel-a {
+  0%, 20%, 54%, 100% { transform: translate(0); }
+  22% { transform: translate(7px, -2px); }
+  24% { transform: translate(-4px, 1px); }
+  56% { transform: translate(5px, 2px); }
+  58% { transform: translate(-7px, 0); }
+}
+@keyframes fx-pixel-b {
+  0%, 18%, 58%, 100% { transform: translate(0); }
+  19% { transform: translate(-6px, 2px); }
+  21% { transform: translate(4px, -1px); }
+  60% { transform: translate(-5px, -2px); }
+  63% { transform: translate(6px, 1px); }
+}
+
+/* 34 Starlight — a constellation shimmer twinkles across frosted letter faces */
+.fx-starlight {
+  font: 600 28px/1.2 "JetBrains Mono", monospace;
+  letter-spacing: .12em;
+  color: transparent;
+  background:
+    radial-gradient(circle at 14% 35%, #fff 0 2px, transparent 2.4px),
+    radial-gradient(circle at 42% 68%, #fff 0 1.6px, transparent 2px),
+    radial-gradient(circle at 75% 24%, #fff 0 2.2px, transparent 2.6px),
+    linear-gradient(100deg, var(--ink), var(--ink-3), var(--ink));
+  background-size: 120px 60px, 150px 72px, 180px 68px, 240% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--ink-3) 45%, transparent));
+  animation: fx-starlight 3.6s linear infinite;
+}
+@keyframes fx-starlight {
+  0%   { background-position: 0 0, 0 0, 0 0, 120% 0; }
+  100% { background-position: 120px 0, -150px 0, 180px 0, -120% 0; }
+}
+
+/* 35 Blueprint — technical outline letters over a moving drafting grid */
+.fx-blueprint {
+  font: 600 28px/1.15 "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  color: transparent;
+  padding: .28em .45em;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--ink-3) 80%, var(--ink));
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--ink-3) 22%, transparent) 1px, transparent 1px),
+    linear-gradient(0deg, color-mix(in srgb, var(--ink-3) 18%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--ink-3) 42%, transparent), transparent 35% 65%, color-mix(in srgb, var(--ink-3) 42%, transparent));
+  background-size: 12px 12px, 12px 12px, 240% 100%;
+  background-position: 0 0, 0 0, 100% 0;
+  border: 1px solid color-mix(in srgb, var(--ink-3) 42%, transparent);
+  box-shadow: inset 0 0 18px color-mix(in srgb, var(--ink-3) 18%, transparent);
+  animation: fx-blueprint 4s linear infinite;
+}
+@keyframes fx-blueprint {
+  to { background-position: 24px 0, 0 24px, -100% 0; }
+}
+
+/* 36 Vapor-Trail — soft neon copies trail behind a drifting word */
+.fx-vapor {
+  position: relative;
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .16em;
+  color: var(--ink);
+  text-shadow: 0 0 12px color-mix(in srgb, var(--ink) 45%, transparent);
+  animation: fx-vapor-main 2.8s ease-in-out infinite;
+}
+.fx-vapor::before,
+.fx-vapor::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  filter: blur(2px);
+  opacity: .62;
+}
+.fx-vapor::before {
+  color: var(--ink-2);
+  animation: fx-vapor-a 2.8s ease-in-out infinite;
+}
+.fx-vapor::after {
+  color: var(--ink-3);
+  animation: fx-vapor-b 2.8s ease-in-out infinite;
+}
+@keyframes fx-vapor-main {
+  0%, 100% { transform: translateX(-3px); }
+  50%      { transform: translateX(3px); }
+}
+@keyframes fx-vapor-a {
+  0%, 100% { transform: translate(-10px, 6px) scaleX(1.08); opacity: .22; }
+  50%      { transform: translate(-18px, -4px) scaleX(1.22); opacity: .58; }
+}
+@keyframes fx-vapor-b {
+  0%, 100% { transform: translate(10px, -5px) scaleX(1.08); opacity: .2; }
+  50%      { transform: translate(18px, 5px) scaleX(1.2); opacity: .56; }
+}
+
+/* 37 Kinetic-Type — characters slide on staggered rails and lock into place */
+.fx-kinetic {
+  font: 600 30px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .06em;
+  color: var(--ink);
+  display: inline-flex;
+}
+.fx-kinetic b {
+  font-weight: inherit;
+  display: inline-block;
+  transform-origin: center;
+  animation: fx-kinetic 2.6s cubic-bezier(.2, .8, .2, 1) infinite;
+  animation-delay: calc(var(--i) * .08s);
+}
+.fx-kinetic b:nth-child(2n) { color: var(--ink-3); }
+.fx-kinetic b:nth-child(3n) { color: var(--ink-2); }
+@keyframes fx-kinetic {
+  0%, 18%   { transform: translateY(0) rotate(0deg); filter: blur(0); }
+  34%       { transform: translateY(-18px) rotate(-9deg); filter: blur(.4px); }
+  52%       { transform: translateY(14px) rotate(7deg); }
+  68%, 100% { transform: translateY(0) rotate(0deg); filter: blur(0); }
+}
+
+/* 38 Blackout — redaction strips repeatedly hide and reveal classified text */
+.fx-blackout {
+  position: relative;
+  font: 600 24px/1.15 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+  color: var(--ink);
+  padding: .28em .12em;
+}
+.fx-blackout::before,
+.fx-blackout::after {
+  content: "";
+  position: absolute;
+  left: -.18em;
+  right: -.18em;
+  height: 44%;
+  background: var(--ink);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--ink-2) 45%, transparent);
+  animation: fx-blackout 3s steps(1) infinite;
+}
+.fx-blackout::before {
+  top: 0;
+  transform-origin: left;
+}
+.fx-blackout::after {
+  bottom: 0;
+  transform-origin: right;
+  animation-delay: .28s;
+}
+@keyframes fx-blackout {
+  0%, 20%, 72%, 100% { transform: scaleX(0); }
+  26%, 58%           { transform: scaleX(1); }
+  64%                { transform: scaleX(.38); }
+}
+
+/* 39 Magnetic — letters attract into a tight field, then repel outward */
+.fx-magnetic {
+  font: 600 30px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .06em;
+  color: var(--ink);
+  display: inline-flex;
+}
+.fx-magnetic b {
+  font-weight: inherit;
+  display: inline-block;
+  text-shadow: 0 0 0 var(--ink-2);
+  animation: fx-magnetic 2.7s ease-in-out infinite;
+  animation-delay: calc(var(--i) * .07s);
+}
+.fx-magnetic b:nth-child(odd) { color: var(--ink-3); }
+@keyframes fx-magnetic {
+  0%, 100% {
+    transform: translateX(0) scale(1);
+    text-shadow: 0 0 0 transparent;
+  }
+  42% {
+    transform: translateX(calc((3 - var(--i)) * 2px)) scale(1.12);
+    text-shadow: 0 0 16px color-mix(in srgb, var(--ink-2) 70%, transparent);
+  }
+  62% {
+    transform: translateX(calc((var(--i) - 3) * 3px)) scale(.96);
+  }
+}
+
+/* 40 Luma-Mesh — animated mesh-gradient ink with a soft luminous edge */
+.fx-mesh {
+  font: 600 38px/1.05 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+  color: transparent;
+  background:
+    radial-gradient(circle at 18% 28%, var(--ink-2) 0 12%, transparent 28%),
+    radial-gradient(circle at 78% 24%, var(--ink-3) 0 14%, transparent 30%),
+    radial-gradient(circle at 44% 82%, #ffffff 0 10%, transparent 24%),
+    linear-gradient(110deg, var(--ink-2), var(--ink-3));
+  background-size: 180% 180%, 170% 170%, 160% 160%, 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 18px color-mix(in srgb, var(--ink-3) 28%, transparent));
+  animation: fx-mesh 4.8s ease-in-out infinite alternate;
+}
+@keyframes fx-mesh {
+  0%   { background-position: 0% 20%, 100% 10%, 35% 100%, 100% 0; }
+  100% { background-position: 100% 80%, 0% 60%, 70% 0%, -100% 0; }
+}
+
+/* 41 Iridescent — pearlescent text whose colour shifts with a moving angle */
+.fx-iridescent {
+  font: 600 38px/1.05 "JetBrains Mono", monospace;
+  letter-spacing: .12em;
+  color: transparent;
+  background: conic-gradient(
+      from 20deg,
+      #f7fbff,
+      var(--ink-3),
+      #bba7ff,
+      var(--ink-2),
+      #fff7d6,
+      #f7fbff
+    ) 50% 50% / 220% 220%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: 0 10px 28px rgba(0, 0, 0, .28);
+  animation: fx-iridescent 4.5s linear infinite;
+}
+@keyframes fx-iridescent {
+  to { filter: hue-rotate(360deg); background-position: 120% 50%; }
+}
+
+/* 42 Glass-Type — translucent frosted letters with an offset refraction layer */
+.fx-glass {
+  position: relative;
+  font: 600 34px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .12em;
+  color: color-mix(in srgb, var(--ink) 58%, transparent);
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--ink) 52%, transparent);
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, .4),
+    0 12px 24px rgba(0, 0, 0, .3);
+  animation: fx-glass 3.4s ease-in-out infinite;
+}
+.fx-glass::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: var(--ink-3);
+  opacity: .34;
+  filter: blur(3px);
+  transform: translate(4px, 5px);
+}
+.fx-glass::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  background: linear-gradient(115deg, transparent 22%, #fff 44%, transparent 62%) 110% 0 / 260% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  opacity: .55;
+  animation: fx-glass-sheen 2.7s ease-in-out infinite;
+}
+@keyframes fx-glass {
+  50% { transform: translateY(-3px); }
+}
+@keyframes fx-glass-sheen {
+  to { background-position: -110% 0; }
+}
+
+/* 43 Datastream — matrix-like data bands flow through clipped letterforms */
+.fx-datastream {
+  position: relative;
+  font: 600 30px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .12em;
+  color: transparent;
+  background:
+    repeating-linear-gradient(0deg,
+      var(--ink-3) 0 2px,
+      color-mix(in srgb, var(--ink-3) 35%, transparent) 2px 4px,
+      transparent 4px 8px
+    ),
+    linear-gradient(90deg, var(--ink-2), var(--ink-3), var(--ink));
+  background-size: 100% 32px, 240% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: fx-datastream 1.6s linear infinite;
+}
+.fx-datastream::after {
+  content: "0101 1100 0011";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 170%;
+  color: color-mix(in srgb, var(--ink-3) 42%, transparent);
+  font-size: .42em;
+  letter-spacing: .16em;
+  transform: translateX(-50%);
+  animation: fx-datastream-code 1.6s linear infinite;
+}
+@keyframes fx-datastream {
+  to { background-position: 0 32px, -120% 0; }
+}
+@keyframes fx-datastream-code {
+  0% { opacity: .2; transform: translate(-50%, -2px); }
+  50% { opacity: .7; }
+  100% { opacity: .2; transform: translate(-50%, 10px); }
+}
+
+/* 44 Orbitals — letters circle tiny invisible tracks before settling back */
+.fx-orbit {
+  font: 600 30px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+  color: var(--ink);
+  display: inline-flex;
+}
+.fx-orbit b {
+  font-weight: inherit;
+  display: inline-block;
+  transform-origin: 50% 120%;
+  animation: fx-orbit 2.8s cubic-bezier(.45, 0, .2, 1) infinite;
+  animation-delay: calc(var(--i) * -.18s);
+}
+.fx-orbit b:nth-child(odd) { color: var(--ink-3); }
+.fx-orbit b:nth-child(3n) { color: var(--ink-2); }
+@keyframes fx-orbit {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  35%      { transform: translate(5px, -13px) rotate(16deg); }
+  70%      { transform: translate(-5px, 7px) rotate(-10deg); }
+}
+
+/* 45 Prism-Cut — diagonal glass shards refract the word into colour offsets */
+.fx-prismcut {
+  position: relative;
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .12em;
+  color: var(--ink);
+}
+.fx-prismcut::before,
+.fx-prismcut::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.fx-prismcut::before {
+  color: var(--ink-2);
+  clip-path: polygon(0 0, 66% 0, 46% 100%, 0 100%);
+  animation: fx-prismcut-a 3s ease-in-out infinite;
+}
+.fx-prismcut::after {
+  color: var(--ink-3);
+  clip-path: polygon(42% 0, 100% 0, 100% 100%, 24% 100%);
+  animation: fx-prismcut-b 3s ease-in-out infinite;
+}
+@keyframes fx-prismcut-a {
+  0%, 100% { transform: translate(0); opacity: .35; }
+  50%      { transform: translate(-7px, -2px); opacity: .85; }
+}
+@keyframes fx-prismcut-b {
+  0%, 100% { transform: translate(0); opacity: .35; }
+  50%      { transform: translate(7px, 2px); opacity: .85; }
+}
+
+/* 46 Soft-Blur — a modern bloom effect that breathes between crisp and hazy */
+.fx-softblur {
+  font: 600 36px/1.05 "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  color: var(--ink);
+  text-shadow:
+    0 0 0 var(--ink),
+    0 0 18px color-mix(in srgb, var(--ink-2) 45%, transparent),
+    0 0 34px color-mix(in srgb, var(--ink-3) 35%, transparent);
+  animation: fx-softblur 3.2s ease-in-out infinite;
+}
+@keyframes fx-softblur {
+  0%, 100% { filter: blur(0); opacity: 1; transform: scale(1); }
+  50%      { filter: blur(2.4px); opacity: .72; transform: scale(1.045); }
+}
+
+/* 47 Laser-Cut — a hot scanning blade carves a bright split through the word */
+.fx-laser {
+  position: relative;
+  font: 600 34px/1.08 "JetBrains Mono", monospace;
+  letter-spacing: .12em;
+  color: var(--ink);
+}
+.fx-laser::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: var(--ink-2);
+  clip-path: inset(44% 0 42% 0);
+  text-shadow: 0 0 10px var(--ink-2);
+  animation: fx-laser-slice 2.2s ease-in-out infinite;
+}
+.fx-laser::after {
+  content: "";
+  position: absolute;
+  left: -8%;
+  top: 49%;
+  width: 116%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #fff, var(--ink-2), transparent);
+  box-shadow: 0 0 13px var(--ink-2);
+  animation: fx-laser 2.2s ease-in-out infinite;
+}
+@keyframes fx-laser {
+  0%, 100% { transform: translateY(-14px) scaleX(.35); opacity: 0; }
+  44%, 58% { transform: translateY(0) scaleX(1); opacity: 1; }
+}
+@keyframes fx-laser-slice {
+  0%, 100% { transform: translateX(0); opacity: .2; }
+  50%      { transform: translateX(5px); opacity: 1; }
+}
+
+/* 48 Microchip — circuit-board traces scroll beneath monospaced letter masks */
+.fx-microchip {
+  font: 600 28px/1.15 "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  color: transparent;
+  padding: .35em .45em;
+  background:
+    linear-gradient(90deg, transparent 0 44%, var(--ink-3) 44% 47%, transparent 47% 100%),
+    linear-gradient(0deg, transparent 0 46%, var(--ink-2) 46% 49%, transparent 49% 100%),
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--ink-3) 35%, transparent) 0 1px, transparent 1px 14px),
+    linear-gradient(100deg, var(--ink), var(--ink-3));
+  background-size: 42px 42px, 42px 42px, 14px 100%, 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  border: 1px solid color-mix(in srgb, var(--ink-3) 24%, transparent);
+  animation: fx-microchip 3.8s linear infinite;
+}
+@keyframes fx-microchip {
+  to { background-position: 42px 0, 0 42px, 14px 0, -120% 0; }
+}
+
+/* 49 Heatmap — thermal colour blooms migrate across dense letter shapes */
+.fx-heatmap {
+  font: 600 30px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+  color: transparent;
+  background:
+    radial-gradient(circle at 20% 50%, #fff26d 0 8%, transparent 24%),
+    radial-gradient(circle at 70% 40%, #ff4f8b 0 12%, transparent 28%),
+    radial-gradient(circle at 44% 78%, var(--ink-3) 0 14%, transparent 32%),
+    linear-gradient(90deg, #2d7dff, #36f0b2, #ffcf4a, #ff4f8b);
+  background-size: 130% 130%, 150% 150%, 140% 140%, 260% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: fx-heatmap 3.5s ease-in-out infinite alternate;
+}
+@keyframes fx-heatmap {
+  0%   { background-position: 0 0, 100% 20%, 40% 100%, 100% 0; filter: saturate(1); }
+  100% { background-position: 100% 90%, 0 60%, 80% 0, -100% 0; filter: saturate(1.35); }
+}
+
+/* 50 Parallax — coloured shadow layers drift at different speeds per letter */
+.fx-parallax {
+  font: 600 30px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+  color: var(--ink);
+  display: inline-flex;
+}
+.fx-parallax b {
+  font-weight: inherit;
+  display: inline-block;
+  text-shadow:
+    4px 4px 0 color-mix(in srgb, var(--ink-2) 72%, transparent),
+   -4px -3px 0 color-mix(in srgb, var(--ink-3) 72%, transparent);
+  animation: fx-parallax 3s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -.11s);
+}
+@keyframes fx-parallax {
+  0%, 100% {
+    transform: translate(0);
+    text-shadow:
+      4px 4px 0 color-mix(in srgb, var(--ink-2) 72%, transparent),
+     -4px -3px 0 color-mix(in srgb, var(--ink-3) 72%, transparent);
+  }
+  50% {
+    transform: translateY(-4px);
+    text-shadow:
+      8px 2px 0 color-mix(in srgb, var(--ink-2) 72%, transparent),
+     -8px -1px 0 color-mix(in srgb, var(--ink-3) 72%, transparent);
+  }
+}
+
+/* 51 Ink-Trap — editorial serif-like traps pulse as heavy ink floods corners */
+.fx-inktrap {
+  position: relative;
+  font: 600 38px/1.05 "JetBrains Mono", monospace;
+  letter-spacing: .04em;
+  color: var(--ink);
+}
+.fx-inktrap::before,
+.fx-inktrap::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.fx-inktrap::before {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--ink-3);
+  opacity: .65;
+  animation: fx-inktrap-line 2.7s ease-in-out infinite;
+}
+.fx-inktrap::after {
+  color: var(--ink-2);
+  clip-path: polygon(0 0, 100% 0, 84% 22%, 18% 22%, 0 0, 0 100%, 20% 78%, 86% 78%, 100% 100%, 0 100%);
+  mix-blend-mode: screen;
+  animation: fx-inktrap-fill 2.7s ease-in-out infinite;
+}
+@keyframes fx-inktrap-line {
+  50% { transform: scale(1.05); opacity: .95; }
+}
+@keyframes fx-inktrap-fill {
+  0%, 100% { opacity: .18; transform: scale(.98); }
+  50%      { opacity: .72; transform: scale(1.02); }
+}
+
+/* 52 Topographic — contour-map lines crawl through the text fill */
+.fx-topographic {
+  font: 600 28px/1.15 "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  color: transparent;
+  background:
+    repeating-radial-gradient(ellipse at 30% 55%,
+      var(--ink) 0 1px,
+      transparent 1px 7px
+    ),
+    repeating-radial-gradient(ellipse at 78% 35%,
+      var(--ink-3) 0 1px,
+      transparent 1px 8px
+    );
+  background-size: 130px 70px, 170px 80px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--ink-3) 25%, transparent));
+  animation: fx-topographic 5s linear infinite;
+}
+@keyframes fx-topographic {
+  to { background-position: 130px 0, -170px 0; }
+}
+
+/* 53 Signal-Noise — broadcast interference bends the word into noisy bands */
+.fx-signal {
+  position: relative;
+  font: 600 30px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  color: var(--ink);
+  animation: fx-signal 2s steps(1) infinite;
+}
+.fx-signal::before,
+.fx-signal::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.fx-signal::before {
+  color: var(--ink-2);
+  clip-path: inset(0 0 58% 0);
+  animation: fx-signal-a 2s steps(1) infinite;
+}
+.fx-signal::after {
+  color: var(--ink-3);
+  clip-path: inset(42% 0 0 0);
+  animation: fx-signal-b 2s steps(1) infinite;
+}
+@keyframes fx-signal {
+  0%, 21%, 47%, 100% { filter: none; }
+  22%, 24% { filter: blur(.8px) contrast(1.4); }
+}
+@keyframes fx-signal-a {
+  0%, 20%, 52%, 100% { transform: translate(0); opacity: .15; }
+  23% { transform: translate(-8px, -1px); opacity: .9; }
+  54% { transform: translate(5px, 2px); opacity: .7; }
+}
+@keyframes fx-signal-b {
+  0%, 24%, 58%, 100% { transform: translate(0); opacity: .12; }
+  27% { transform: translate(8px, 1px); opacity: .86; }
+  60% { transform: translate(-5px, -2px); opacity: .72; }
+}
+
+/* 54 Portal — a conic vortex opens inside the letters and rotates behind them */
+.fx-portal {
+  position: relative;
+  font: 600 34px/1.05 "JetBrains Mono", monospace;
+  letter-spacing: .12em;
+  color: transparent;
+  background: conic-gradient(from 0deg, var(--ink-2), var(--ink), var(--ink-3), var(--ink-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: fx-portal 3.6s linear infinite;
+}
+.fx-portal::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  background: radial-gradient(circle, transparent 0 30%, #fff 34% 36%, transparent 40% 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  opacity: .72;
+  animation: fx-portal-pulse 1.8s ease-in-out infinite;
+}
+@keyframes fx-portal {
+  to { filter: hue-rotate(360deg); transform: rotate(.001deg); }
+}
+@keyframes fx-portal-pulse {
+  0%, 100% { transform: scale(.92); opacity: .24; }
+  50%      { transform: scale(1.08); opacity: .8; }
+}
+
+/* 55 Tilt-Shift — a sharp focal strip travels through blurred duplicate text */
+.fx-tiltshift {
+  position: relative;
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  color: color-mix(in srgb, var(--ink) 28%, transparent);
+  filter: blur(2px);
+}
+.fx-tiltshift::before,
+.fx-tiltshift::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.fx-tiltshift::before {
+  color: var(--ink);
+  filter: blur(0);
+  clip-path: inset(32% 0 32% 0);
+  animation: fx-tiltshift 2.8s ease-in-out infinite alternate;
+}
+.fx-tiltshift::after {
+  color: var(--ink-3);
+  opacity: .3;
+  filter: blur(6px);
+}
+@keyframes fx-tiltshift {
+  0%   { clip-path: inset(0 0 64% 0); transform: translateY(-2px); }
+  100% { clip-path: inset(64% 0 0 0); transform: translateY(2px); }
+}
+
+/* 56 Duotone — two offset colour plates slide across a crisp centre layer */
+.fx-duotone {
+  position: relative;
+  font: 600 38px/1.05 "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  color: var(--ink);
+}
+.fx-duotone::before,
+.fx-duotone::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.fx-duotone::before {
+  color: var(--ink-2);
+  animation: fx-duotone-a 2.6s ease-in-out infinite;
+}
+.fx-duotone::after {
+  color: var(--ink-3);
+  animation: fx-duotone-b 2.6s ease-in-out infinite;
+}
+@keyframes fx-duotone-a {
+  0%, 100% { transform: translate(-3px, 0); opacity: .42; }
+  50%      { transform: translate(-9px, -3px); opacity: .8; }
+}
+@keyframes fx-duotone-b {
+  0%, 100% { transform: translate(3px, 0); opacity: .42; }
+  50%      { transform: translate(9px, 3px); opacity: .8; }
+}
+
+/* 57 Glyph-Rain — characters fall in staggered vertical trails and re-form */
+.fx-glyphrain {
+  font: 600 28px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+  color: var(--ink);
+  display: inline-flex;
+}
+.fx-glyphrain b {
+  font-weight: inherit;
+  display: inline-block;
+  text-shadow:
+    0 -12px 0 color-mix(in srgb, var(--ink-3) 45%, transparent),
+    0 -24px 0 color-mix(in srgb, var(--ink-2) 28%, transparent);
+  animation: fx-glyphrain 2.4s cubic-bezier(.25, .8, .25, 1) infinite;
+  animation-delay: calc(var(--i) * .12s);
+}
+.fx-glyphrain b:nth-child(2n) { color: var(--ink-3); }
+@keyframes fx-glyphrain {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  38% {
+    transform: translateY(22px);
+    opacity: .22;
+  }
+  64% {
+    transform: translateY(-10px);
+    opacity: .75;
+  }
+}
+
+/* ---------- Lazy loading ---------- */
+/* skip rendering work for far-offscreen cells */
+.cell {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 280px;
+}
+
+/* .cell's display:flex outranks the UA stylesheet's [hidden] rule */
+.cell[hidden] { display: none; }
+
+/* once JS enables lazy mode, animations only run while a cell is on screen */
+.lazy-enabled .cell:not(.in-view) *,
+.lazy-enabled .cell:not(.in-view) *::before,
+.lazy-enabled .cell:not(.in-view) *::after {
+  animation-play-state: paused !important;
+}
+
+.sentinel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--base) * 2);
+  padding: calc(var(--base) * 3);
+  border-top: 1px solid var(--divider);
+  color: var(--text-secondary);
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--divider);
+  padding: calc(var(--base) * 4) calc(var(--base) * 5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: calc(var(--base) * 3);
+  flex-wrap: wrap;
+  color: var(--text-secondary);
+}
+
+.footer-links {
+  display: flex;
+  gap: calc(var(--base) * 3);
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color .2s, border-color .2s;
+}
+
+.footer-links a:hover,
+.footer-links a:focus-visible {
+  color: var(--text-primary);
+  border-bottom-color: currentColor;
+}
+
+.footer-badge {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+  opacity: .85;
+  transition: opacity .2s;
+}
+
+.footer-badge:hover,
+.footer-badge:focus-visible {
+  opacity: 1;
+}
+
+.footer-badge img {
+  height: 38px;
+  width: auto;
+  display: block;
+}
+
+/* ---------- Clickable cell affordance ---------- */
+.cell { cursor: pointer; }
+
+.cell-actions {
+  position: absolute;
+  top: calc(var(--base) * 2);
+  right: calc(var(--base) * 3);
+  display: flex;
+  gap: calc(var(--base));
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity .25s, transform .25s;
+}
+
+.cell-action {
+  color: var(--background);
+  background: var(--primary);
+  border: 0;
+  padding: 2px 6px;
+  border-radius: var(--r-control);
+  cursor: pointer;
+  pointer-events: none;
+  font-size: 12px;
+}
+
+.cell:hover .cell-actions,
+.cell:focus-visible .cell-actions { opacity: 1; transform: translateY(0); }
+
+.cell:hover .cell-action,
+.cell:focus-visible .cell-action { pointer-events: auto; }
+
+.cell-action:hover { filter: brightness(1.08); }
+
+.cell-action[data-action="prompt"] {
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 16%, var(--background));
+}
+
+.cell:focus-visible { outline: 2px solid var(--primary); outline-offset: -3px; }
+
+/* ---------- CSS modal ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  /* clamp the implicit track so the modal's unwrapped <pre> lines can't
+     inflate it past the viewport and push the dialog off-centre */
+  grid-template-columns: minmax(0, 100%);
+  place-items: center;
+  padding: calc(var(--base) * 3);
+  background: color-mix(in srgb, var(--background) 72%, transparent);
+  backdrop-filter: blur(8px);
+  animation: modal-fade .2s ease both;
+}
+.modal-overlay[hidden] { display: none; }
+
+@keyframes modal-fade { from { opacity: 0; } to { opacity: 1; } }
+
+.modal {
+  position: relative;
+  width: min(640px, 100%);
+  max-height: 86vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  animation: modal-rise .3s cubic-bezier(.22,1,.36,1) both;
+}
+
+@keyframes modal-rise {
+  from { opacity: 0; transform: translateY(16px) scale(.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* corner tick marks to match the grid cells */
+.modal::before, .modal::after {
+  content: "";
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  pointer-events: none;
+}
+.modal::before {
+  top: -1px; left: -1px;
+  border-top: 1px solid var(--primary);
+  border-left: 1px solid var(--primary);
+}
+.modal::after {
+  bottom: -1px; right: -1px;
+  border-bottom: 1px solid var(--primary);
+  border-right: 1px solid var(--primary);
+}
+
+.modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+  padding: calc(var(--base) * 2) calc(var(--base) * 3);
+  border-bottom: 1px solid var(--divider);
+}
+
+.modal-title-group {
+  display: flex;
+  align-items: baseline;
+  gap: calc(var(--base) * 1.5);
+}
+
+.modal-index {
+  color: var(--background);
+  background: var(--primary);
+  padding: 2px 6px;
+  border-radius: var(--r-control);
+}
+
+.modal-title {
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.modal-close {
+  appearance: none;
+  border: 1px solid var(--divider);
+  background: transparent;
+  color: var(--text-primary);
+  width: 28px;
+  height: 28px;
+  border-radius: var(--r-control);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background .2s, border-color .2s;
+}
+.modal-close:hover { background: color-mix(in srgb, var(--text-primary) 10%, var(--surface)); }
+
+.modal-preview {
+  display: grid;
+  place-items: center;
+  padding: calc(var(--base) * 3);
+  border-bottom: 1px solid var(--divider);
+  background: color-mix(in srgb, var(--primary) 6%, var(--surface));
+  overflow: hidden;
+}
+.modal-preview .stage {
+  --ink: var(--text-primary);
+  --ink-2: var(--primary);
+  --ink-3: var(--accent-2);
+  height: 96px;
+  display: grid;
+  place-items: center;
+}
+
+.modal-code-wrap {
+  overflow: auto;
+  background: var(--background);
+}
+
+.modal-code {
+  margin: 0;
+  padding: calc(var(--base) * 3);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  line-height: 1.65;
+  color: color-mix(in srgb, var(--text-primary) 88%, var(--background));
+  white-space: pre;
+  tab-size: 2;
+}
+
+.modal-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+  padding: calc(var(--base) * 2) calc(var(--base) * 3);
+  border-top: 1px solid var(--divider);
+}
+
+.modal-hint { color: var(--text-secondary); }
+
+.modal-copy {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  background: var(--primary);
+  color: var(--background);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: calc(var(--base) * 1.25) calc(var(--base) * 2.5);
+  border-radius: var(--r-control);
+  transition: filter .2s, background .2s, color .2s;
+}
+.modal-copy:hover { filter: brightness(1.08); }
+.modal-copy.copied { background: var(--text-primary); color: var(--background); }
+
+@media (max-width: 560px) {
+  .modal-title { font-size: 11px; }
+  .modal-code { font-size: 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}

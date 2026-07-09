@@ -1,0 +1,27 @@
+---
+import { perLetter, usesDataText, type EffectType } from '../data/effects';
+
+interface Props {
+  type: EffectType;
+  text: string;
+}
+
+const { type, text } = Astro.props;
+const letters = text.split('');
+---
+
+{type === 'contour' ? (
+  <svg class="fx-contour" viewBox="0 0 260 56" role="img" aria-label={text}>
+    <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle">{text}</text>
+  </svg>
+) : type === 'decoder' ? (
+  <div class="fx-decoder" role="img" aria-label={text}></div>
+) : perLetter.has(type) ? (
+  <div class={`fx-${type}`} role="img" aria-label={text}>
+    {letters.map((ch, i) => <b aria-hidden="true" style={`--i:${i}`}>{ch}</b>)}
+  </div>
+) : usesDataText.has(type) ? (
+  <div class={`fx-${type}`} data-text={text}>{text}</div>
+) : (
+  <div class={`fx-${type}`}>{text}</div>
+)}

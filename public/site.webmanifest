@@ -1,0 +1,12 @@
+{
+  "name": "CSS Text Effects",
+  "short_name": "Text Effects",
+  "description": "57 animated text effects built with pure CSS — no JavaScript, no dependencies, MIT licensed.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#08070F",
+  "theme_color": "#08070F",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

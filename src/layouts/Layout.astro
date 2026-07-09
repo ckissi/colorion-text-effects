@@ -1,0 +1,70 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'CSS Text Effects — 57 pure-CSS text animations, free to copy',
+  description = 'A library of 57 animated text effects built with pure CSS — gradient, glitch, typewriter, neon, liquid fill and more. Click any effect to copy its CSS. No JavaScript, no dependencies, MIT licensed.',
+} = Astro.props;
+
+// Absolute URLs for canonical + social tags. Astro.site is configured in
+// astro.config.mjs; fall back to the production origin during dev.
+const SITE = Astro.site ?? new URL('https://texteffects.colorion.co');
+const canonical = new URL(Astro.url.pathname, SITE).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'CSS Text Effects',
+  url: SITE.href,
+  description,
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index,follow" />
+    <meta name="theme-color" content="#08070F" />
+    <title>{title}</title>
+    <link rel="canonical" href={canonical} />
+
+    <!-- Favicons + PWA manifest -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CSS Text Effects" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Structured data -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+
+    <!-- Self-hosted fonts. Preload the above-the-fold weights (Inter 500 powers
+         the hero h1 / LCP element; Inter 400 the body copy; JetBrains Mono 600
+         paints every effect stage) so they arrive before paint. @font-face
+         lives in the inlined global.css. -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin-500-normal.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin-400-normal.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/jetbrains-mono-latin-600-normal.woff2" crossorigin />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
