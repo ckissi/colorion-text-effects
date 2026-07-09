@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://texteffects.colorion.co/sitemap.xml
+Sitemap: https://text-effects.colorion.co/sitemap.xml

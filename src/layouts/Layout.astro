@@ -13,7 +13,7 @@ const {
 
 // Absolute URLs for canonical + social tags. Astro.site is configured in
 // astro.config.mjs; fall back to the production origin during dev.
-const SITE = Astro.site ?? new URL('https://texteffects.colorion.co');
+const SITE = Astro.site ?? new URL('https://text-effects.colorion.co');
 const canonical = new URL(Astro.url.pathname, SITE).href;
 
 const jsonLd = {
