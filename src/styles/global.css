@@ -2515,9 +2515,16 @@ h1 em {
   }
 
   .site-sidebar.menu-enhanced.is-open .sidebar-nav {
-    max-height: 55vh;
+    max-height: none;
     padding-top: calc(var(--base) * 1.5);
     border-top: 1px solid var(--divider);
+  }
+
+  .site-sidebar.menu-enhanced.is-open {
+    position: fixed;
+    inset: 0;
+    align-content: start;
+    overflow-y: auto;
   }
 
   .sidebar-nav a {
