@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { effects } from '../data/effects';
 
 interface Props {
   title?: string;
@@ -7,8 +8,8 @@ interface Props {
 }
 
 const {
-  title = 'CSS Text Effects — 57 pure-CSS text animations, free to copy',
-  description = 'A library of 57 animated text effects built with pure CSS — gradient, glitch, typewriter, neon, liquid fill and more. Click any effect to copy its CSS. No JavaScript, no dependencies, MIT licensed.',
+  title = `CSS Text Effects — ${effects.length} pure-CSS text animations, free to copy`,
+  description = `A library of ${effects.length} animated text effects built with pure CSS — gradient, glitch, typewriter, neon, liquid fill and more. Click any effect to copy its CSS. No JavaScript, no dependencies, MIT licensed.`,
 } = Astro.props;
 
 // Absolute URLs for canonical + social tags. Astro.site is configured in

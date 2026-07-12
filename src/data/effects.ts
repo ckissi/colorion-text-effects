@@ -55,7 +55,16 @@ export type EffectType =
   | 'portal'
   | 'tiltshift'
   | 'duotone'
-  | 'glyphrain';
+  | 'glyphrain'
+  | 'zoetrope'
+  | 'dotmatrix'
+  | 'pendulum'
+  | 'smoke'
+  | 'eclipse'
+  | 'barcode'
+  | 'frost'
+  | 'moire'
+  | 'stamp';
 
 export interface Effect {
   index: string;
@@ -123,6 +132,15 @@ export const effects: Effect[] = [
   { index: '55', name: 'Tilt-Shift', type: 'tiltshift', text: 'SHIFT' },
   { index: '56', name: 'Duotone', type: 'duotone', text: 'DUO' },
   { index: '57', name: 'Glyph-Rain', type: 'glyphrain', text: 'GLYPHS' },
+  { index: '58', name: 'Zoetrope', type: 'zoetrope', text: 'ROTATE' },
+  { index: '59', name: 'Dot-Matrix', type: 'dotmatrix', text: 'PRINTOUT' },
+  { index: '60', name: 'Pendulum', type: 'pendulum', text: 'SWING' },
+  { index: '61', name: 'Smoke-Signal', type: 'smoke', text: 'SMOKE' },
+  { index: '62', name: 'Eclipse', type: 'eclipse', text: 'ECLIPSE' },
+  { index: '63', name: 'Barcode', type: 'barcode', text: 'BARCODE' },
+  { index: '64', name: 'Frostbite', type: 'frost', text: 'FROZEN' },
+  { index: '65', name: 'Moiré', type: 'moire', text: 'MOIRÉ' },
+  { index: '66', name: 'Rubber-Stamp', type: 'stamp', text: 'APPROVED' },
 ];
 
 /** effects whose letters are wrapped in indexed <b> spans for per-letter animation */
@@ -139,6 +157,9 @@ export const perLetter = new Set<EffectType>([
   'orbit',
   'parallax',
   'glyphrain',
+  'zoetrope',
+  'pendulum',
+  'smoke',
 ]);
 
 /** effects that duplicate their text into pseudo-elements via data-text */

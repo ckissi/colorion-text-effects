@@ -1887,6 +1887,228 @@ h1 em {
   }
 }
 
+/* 58 Zoetrope — letters whirl on a spinning 3D drum, one frame after another */
+.fx-zoetrope {
+  font: 600 30px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  color: var(--ink);
+  display: inline-flex;
+  perspective: 480px;
+}
+.fx-zoetrope b {
+  font-weight: inherit;
+  display: inline-block;
+  animation: fx-zoetrope 3s cubic-bezier(.55, 0, .25, 1) infinite;
+  animation-delay: calc(var(--i) * .09s);
+}
+.fx-zoetrope b:nth-child(3n)   { color: var(--ink-2); }
+.fx-zoetrope b:nth-child(3n+1) { color: var(--ink-3); }
+@keyframes fx-zoetrope {
+  0%, 12%   { transform: rotateY(0); filter: blur(0); }
+  40%       { filter: blur(1px); }
+  62%, 100% { transform: rotateY(360deg); filter: blur(0); }
+}
+
+/* 59 Dot-Matrix — halftone dot letters printed row by row under a bright head */
+.fx-dotmatrix {
+  font: 600 30px/1.15 "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  color: transparent;
+  background:
+    linear-gradient(180deg, transparent 0 16%, #fff 24%, transparent 32% 100%) 0 -100% / 100% 300%,
+    radial-gradient(circle, var(--ink-3) 0 1.3px, transparent 1.8px) 0 0 / 5px 5px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: fx-dotmatrix 2.8s linear infinite;
+}
+@keyframes fx-dotmatrix {
+  0%   { background-position: 0 -100%, 0 0; }
+  100% { background-position: 0 200%, 0 0; }
+}
+
+/* 60 Pendulum — letters swing from an unseen pivot in staggered phase */
+.fx-pendulum {
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .12em;
+  color: var(--ink);
+}
+.fx-pendulum b {
+  font-weight: inherit;
+  display: inline-block;
+  transform-origin: 50% -80%;
+  animation: fx-pendulum 1.8s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -.12s);
+}
+.fx-pendulum b:nth-child(even) { color: var(--ink-3); }
+@keyframes fx-pendulum {
+  0%, 100% { transform: rotate(10deg); }
+  50%      { transform: rotate(-10deg); }
+}
+
+/* 61 Smoke-Signal — letters curl upward and dissipate like smoke, then re-form */
+.fx-smoke {
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .14em;
+  color: var(--ink);
+}
+.fx-smoke b {
+  font-weight: inherit;
+  display: inline-block;
+  animation: fx-smoke 3.4s ease-in-out infinite;
+  animation-delay: calc(var(--i) * .16s);
+}
+@keyframes fx-smoke {
+  0%, 42%   { transform: none; opacity: 1; filter: blur(0); color: var(--ink); }
+  62%       { color: var(--ink-3); }
+  78%       { transform: translate(6px, -22px) rotate(14deg) scale(1.45); opacity: 0; filter: blur(7px); }
+  79%       { transform: translateY(10px) scale(.8); opacity: 0; filter: blur(4px); }
+  92%, 100% { transform: none; opacity: 1; filter: blur(0); }
+}
+
+/* 62 Eclipse — a dark moon crosses the glowing word and dims it in passing */
+.fx-eclipse {
+  position: relative;
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .14em;
+  color: var(--ink);
+  text-shadow:
+    0 0 10px color-mix(in srgb, var(--ink-2) 70%, transparent),
+    0 0 26px color-mix(in srgb, var(--ink-2) 40%, transparent);
+  animation: fx-eclipse-dim 5s ease-in-out infinite;
+}
+.fx-eclipse::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -1.5em;
+  width: 1.3em;
+  height: 1.3em;
+  border-radius: 50%;
+  background: #05040c;
+  box-shadow:
+    0 0 10px 2px color-mix(in srgb, var(--ink-2) 85%, transparent),
+    inset -4px -3px 8px rgba(0, 0, 0, .9);
+  transform: translateY(-50%);
+  animation: fx-eclipse 5s ease-in-out infinite;
+}
+@keyframes fx-eclipse {
+  0%   { left: -1.5em; }
+  50%  { left: calc(50% - .65em); }
+  100% { left: 100%; }
+}
+@keyframes fx-eclipse-dim {
+  0%, 28%, 72%, 100% { filter: brightness(1); }
+  50%                { filter: brightness(.4); }
+}
+
+/* 63 Barcode — striped code bars fill the word while a red beam scans it */
+.fx-barcode {
+  position: relative;
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .14em;
+  color: transparent;
+  background: repeating-linear-gradient(90deg,
+      var(--ink) 0 2px, transparent 2px 4px,
+      var(--ink) 4px 5px, transparent 5px 8px,
+      var(--ink) 8px 11px, transparent 11px 13px);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.fx-barcode::before {
+  content: "9 780316 668111";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: color-mix(in srgb, var(--ink) 55%, transparent);
+  font-size: .3em;
+  letter-spacing: .34em;
+  white-space: nowrap;
+}
+.fx-barcode::after {
+  content: "";
+  position: absolute;
+  top: -12%;
+  bottom: -12%;
+  left: -2%;
+  width: 2px;
+  background: var(--ink-2);
+  box-shadow:
+    0 0 12px var(--ink-2),
+    0 0 26px color-mix(in srgb, var(--ink-2) 60%, transparent);
+  animation: fx-barcode 1.9s ease-in-out infinite alternate;
+}
+@keyframes fx-barcode {
+  0%   { left: -2%; }
+  100% { left: 101%; }
+}
+
+/* 64 Frostbite — ice creeps up the letters under a crystalline shimmer */
+.fx-frost {
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  color: transparent;
+  background:
+    radial-gradient(circle at 22% 30%, #fff 0 1.6px, transparent 2.2px),
+    radial-gradient(circle at 68% 62%, #fff 0 1.3px, transparent 1.9px),
+    linear-gradient(0deg,
+      #fff 0%,
+      var(--ink-3) 34%,
+      color-mix(in srgb, var(--ink-3) 45%, var(--ink)) 60%,
+      var(--ink) 100%);
+  background-size: 90px 46px, 120px 58px, 100% 260%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: fx-frost 4s ease-in-out infinite alternate;
+}
+@keyframes fx-frost {
+  0% {
+    background-position: 0 0, 0 0, 0 0%;
+    filter: drop-shadow(0 0 2px color-mix(in srgb, var(--ink-3) 30%, transparent));
+  }
+  100% {
+    background-position: 18px 6px, -22px -8px, 0 100%;
+    filter: drop-shadow(0 0 12px color-mix(in srgb, var(--ink-3) 75%, transparent));
+  }
+}
+
+/* 65 Moiré — two line screens drift against each other, weaving interference bands */
+.fx-moire {
+  font: 600 34px/1.05 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+  color: transparent;
+  background:
+    repeating-linear-gradient(87deg, var(--ink-2) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, var(--ink-3) 0 1px, transparent 1px 4px),
+    linear-gradient(color-mix(in srgb, var(--ink) 30%, transparent), color-mix(in srgb, var(--ink) 30%, transparent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: fx-moire 6s linear infinite alternate;
+}
+@keyframes fx-moire {
+  0%   { background-position: 0 0, 0 0, 0 0; }
+  100% { background-position: 48px 0, -48px 0, 0 0; }
+}
+
+/* 66 Rubber-Stamp — the word slams down like an ink stamp, then fades off the page */
+.fx-stamp {
+  font: 600 26px/1 "JetBrains Mono", monospace;
+  letter-spacing: .14em;
+  color: var(--ink-2);
+  padding: .38em .5em;
+  border: 3px solid var(--ink-2);
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--ink-2) 55%, transparent);
+  animation: fx-stamp 3.2s cubic-bezier(.22, 1.4, .36, 1) infinite;
+}
+@keyframes fx-stamp {
+  0%, 6%    { transform: rotate(-6deg) scale(2.4); opacity: 0; filter: blur(4px); }
+  14%       { transform: rotate(-6deg) scale(.96); opacity: 1; filter: blur(0); }
+  18%       { transform: rotate(-6deg) scale(1.04); }
+  22%, 78%  { transform: rotate(-6deg) scale(1); opacity: 1; filter: blur(0); }
+  94%, 100% { transform: rotate(-6deg) scale(1); opacity: 0; filter: blur(.6px); }
+}
+
 /* ---------- Lazy loading ---------- */
 /* skip rendering work for far-offscreen cells */
 .cell {
