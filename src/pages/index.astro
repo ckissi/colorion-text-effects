@@ -20,71 +20,91 @@ const colorionLinks = [
   { label: 'Gradients', href: 'https://gradients.colorion.co' },
   { label: 'Gradient Buttons', href: 'https://gradientbuttons.colorion.co' },
   { label: 'Animated Buttons', href: 'https://animatedbuttons.colorion.co' },
-  { label: 'CSS Tooltips', href: 'https://csstooltips.colorion.co' },
-  { label: 'CSS Loaders', href: 'https://css-loaders.colorion.co' },
+  { label: 'Font Combinations', href: 'https://fontcombinations.colorion.co' },
+  { label: 'Kinetics', href: 'https://kinetics.colorion.co' },
+  { label: 'Toggles', href: 'https://toggles.colorion.co' },
+  { label: 'CSS Tooltips', href: 'https://tooltips.colorion.co' },
+  { label: 'CSS Loaders', href: 'https://cssloaders.colorion.co' },
 ];
 ---
 
 <Layout>
-  <header class="site-header">
-    <div class="brand">
+  <aside class="site-sidebar" aria-label="Colorion tools">
+    <div class="sidebar-brand">
       <div class="brand-mark">T</div>
-      <span class="mono">CSS Text Effects</span>
+      <div>
+        <span class="mono">CSS Text Effects</span>
+        <strong>Colorion Tools</strong>
+      </div>
     </div>
-    <div class="header-right">
-      <details class="menu" id="colorion-menu">
-        <summary class="menu-trigger mono">
-          Colorion Tools
-          <span class="menu-caret" aria-hidden="true">▾</span>
-        </summary>
-        <ul class="menu-list">
-          {
-            colorionLinks.map((link) => (
-              <li>
-                <a
-                  class="mono"
-                  href={`${link.href}?ref=${REF}`}
-                  target="_blank"
-                  rel="noopener"
-                  referrerpolicy="no-referrer-when-downgrade"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </details>
+    <button
+      class="sidebar-collapse"
+      type="button"
+      aria-label="Collapse Colorion tools sidebar"
+      aria-controls="colorion-sidebar-nav"
+      aria-expanded="true"
+    >
+      ‹
+    </button>
+    <button
+      class="sidebar-toggle"
+      type="button"
+      aria-label="Open Colorion tools menu"
+      aria-controls="colorion-sidebar-nav"
+      aria-expanded="false"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="sidebar-nav" id="colorion-sidebar-nav">
+      {
+        colorionLinks.map((link) => (
+          <a
+            class="mono"
+            href={`${link.href}?ref=${REF}`}
+            target="_blank"
+            rel="noopener"
+            referrerpolicy="no-referrer-when-downgrade"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+  </aside>
+
+  <div class="page-shell">
+    <header class="site-header">
       <div class="header-status mono">
         <span class="pulse-dot"></span>
         {effects.length} effects · MIT
       </div>
-    </div>
-  </header>
+    </header>
 
-  <section class="hero">
-    <span class="hero-tag mono">Pure CSS · Copy &amp; paste</span>
-    <h1>{effects.length} <em>CSS text effects</em>,<br />free to copy.</h1>
-    <p>
-      A library of {effects.length} animated text effects built with pure CSS —
-      aurora gradients, glitches, split-flap boards, liquid fills and other
-      lesser-seen tricks. No JavaScript, no dependencies. Copy the
-      self-contained <code>CSS</code> for any effect, or grab a ready-made
-      <code>Prompt</code> to have your coding agent recreate it. Every snippet
-      paints with the <code>--ink</code> colour tokens and respects
-      <code>prefers-reduced-motion</code>.
-    </p>
-  </section>
+    <section class="hero">
+      <span class="hero-tag mono">Pure CSS · Copy &amp; paste</span>
+      <h1>{effects.length} <em>CSS text effects</em>,<br />free to copy.</h1>
+      <p>
+        A library of {effects.length} animated text effects built with pure CSS —
+        aurora gradients, glitches, split-flap boards, liquid fills and other
+        lesser-seen tricks. No JavaScript, no dependencies. Copy the
+        self-contained <code>CSS</code> for any effect, or grab a ready-made
+        <code>Prompt</code> to have your coding agent recreate it. Every snippet
+        paints with the <code>--ink</code> colour tokens and respects
+        <code>prefers-reduced-motion</code>.
+      </p>
+    </section>
 
-  <main class="library">
-    <div class="panel">
-      <h2 class="sr-only">Text effect library</h2>
-      <div class="library-head">
-        <span class="mono">Click an effect to copy its CSS or prompt</span>
-        <span class="mono">{effects.length} effects</span>
-      </div>
+    <main class="library">
+      <div class="panel">
+        <h2 class="sr-only">Text effect library</h2>
+        <div class="library-head">
+          <span class="mono">Click an effect to copy its CSS or prompt</span>
+          <span class="mono">{effects.length} effects</span>
+        </div>
 
-      <div class="grid" id="effect-grid">
+        <div class="grid" id="effect-grid">
         {
           effects.map((effect) => (
             <article
@@ -108,52 +128,52 @@ const colorionLinks = [
             </article>
           ))
         }
-      </div>
-
-      <div class="sentinel" id="sentinel" hidden>
-        <span class="mono">Loading more effects…</span>
-      </div>
-    </div>
-  </main>
-
-  <footer class="site-footer">
-    <span class="mono">CSS Text Effects</span>
-    <nav class="footer-links mono">
-      <a href="https://colorion.co?ref=text-effects.colorion.co" target="_blank" rel="noopener" referrerpolicy="no-referrer-when-downgrade">Colorion</a>
-      <a href="https://2colors.colorion.co?ref=text-effects.colorion.co" target="_blank" rel="noopener" referrerpolicy="no-referrer-when-downgrade">2 Colors</a>
-      <a href="https://gradientbuttons.colorion.co?ref=text-effects.colorion.co" target="_blank" rel="noopener" referrerpolicy="no-referrer-when-downgrade">Gradient Buttons</a>
-      <a href="https://css-loaders.colorion.co?ref=text-effects.colorion.co" target="_blank" rel="noopener" referrerpolicy="no-referrer-when-downgrade">CSS Loaders</a>
-      <a href="https://github.com/ckissi/colorion-text-effects" target="_blank" rel="noopener">GitHub</a>
-    </nav>
-    <span class="mono">Pure CSS · No dependencies · MIT licensed</span>
-    <a class="footer-badge" href="https://sevalla.com?ref=text-effects.colorion.co" target="_blank" rel="noopener">
-      <img src="/hosted-on-sevalla.png" alt="Hosted on Sevalla" width="230" height="73" loading="lazy" />
-    </a>
-  </footer>
-
-  <!-- Copy-to-clipboard modal -->
-  <div class="modal-overlay" id="css-modal" hidden>
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-      <div class="modal-head">
-        <div class="modal-title-group">
-          <span class="modal-index mono" id="modal-index"></span>
-          <h2 class="modal-title mono" id="modal-title"></h2>
         </div>
-        <button class="modal-close mono" id="modal-close" aria-label="Close">✕</button>
+
+        <div class="sentinel" id="sentinel" hidden>
+          <span class="mono">Loading more effects…</span>
+        </div>
       </div>
-      <div class="modal-preview">
-        <div class="stage" id="modal-preview"></div>
-      </div>
-      <div class="modal-code-wrap">
-        <pre class="modal-code"><code id="modal-code"></code></pre>
-      </div>
-      <div class="modal-foot">
-        <span class="mono modal-hint" id="modal-hint">Pure CSS · self-contained</span>
-        <button class="modal-copy mono" id="modal-copy">Copy CSS</button>
+    </main>
+
+    <footer class="site-footer">
+      <span class="mono">CSS Text Effects</span>
+      <nav class="footer-links mono">
+        <a href="https://colorion.co?ref=text-effects.colorion.co" target="_blank" rel="noopener" referrerpolicy="no-referrer-when-downgrade">Colorion</a>
+        <a href="https://2colors.colorion.co?ref=text-effects.colorion.co" target="_blank" rel="noopener" referrerpolicy="no-referrer-when-downgrade">2 Colors</a>
+        <a href="https://gradientbuttons.colorion.co?ref=text-effects.colorion.co" target="_blank" rel="noopener" referrerpolicy="no-referrer-when-downgrade">Gradient Buttons</a>
+        <a href="https://cssloaders.colorion.co?ref=text-effects.colorion.co" target="_blank" rel="noopener" referrerpolicy="no-referrer-when-downgrade">CSS Loaders</a>
+        <a href="https://github.com/ckissi/colorion-text-effects" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <span class="mono">Pure CSS · No dependencies · MIT licensed</span>
+      <a class="footer-badge" href="https://sevalla.com?ref=text-effects.colorion.co" target="_blank" rel="noopener">
+        <img src="/hosted-on-sevalla.png" alt="Hosted on Sevalla" width="230" height="73" loading="lazy" />
+      </a>
+    </footer>
+
+    <!-- Copy-to-clipboard modal -->
+    <div class="modal-overlay" id="css-modal" hidden>
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-head">
+          <div class="modal-title-group">
+            <span class="modal-index mono" id="modal-index"></span>
+            <h2 class="modal-title mono" id="modal-title"></h2>
+          </div>
+          <button class="modal-close mono" id="modal-close" aria-label="Close">✕</button>
+        </div>
+        <div class="modal-preview">
+          <div class="stage" id="modal-preview"></div>
+        </div>
+        <div class="modal-code-wrap">
+          <pre class="modal-code"><code id="modal-code"></code></pre>
+        </div>
+        <div class="modal-foot">
+          <span class="mono modal-hint" id="modal-hint">Pure CSS · self-contained</span>
+          <button class="modal-copy mono" id="modal-copy">Copy CSS</button>
+        </div>
       </div>
     </div>
   </div>
-
 </Layout>
 
 <script>
@@ -325,19 +345,73 @@ const colorionLinks = [
     if (e.key === 'Escape' && !overlay.hasAttribute('hidden')) closeModal();
   });
 
-  // ---------- Header dropdown (Colorion tools) ----------
-  // <details> handles open/close natively; this just closes it when the user
-  // clicks away, presses Escape, or picks a destination.
-  const menu = document.getElementById('colorion-menu') as HTMLDetailsElement | null;
-  if (menu) {
+  // ---------- Mobile Colorion hamburger ----------
+  const sidebar = document.querySelector<HTMLElement>('.site-sidebar');
+  const sidebarToggle = document.querySelector<HTMLButtonElement>('.sidebar-toggle');
+  const sidebarCollapse = document.querySelector<HTMLButtonElement>('.sidebar-collapse');
+  const sidebarNav = document.getElementById('colorion-sidebar-nav');
+
+  if (sidebar && sidebarToggle && sidebarNav) {
+    sidebar.classList.add('menu-enhanced');
+
+    const setSidebarOpen = (open: boolean) => {
+      sidebar.classList.toggle('is-open', open);
+      sidebarToggle.setAttribute('aria-expanded', String(open));
+      sidebarToggle.setAttribute(
+        'aria-label',
+        open ? 'Close Colorion tools menu' : 'Open Colorion tools menu'
+      );
+    };
+
+    sidebarToggle.addEventListener('click', () => {
+      setSidebarOpen(!sidebar.classList.contains('is-open'));
+    });
+
+    sidebarNav.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => setSidebarOpen(false));
+    });
+
     document.addEventListener('click', (e) => {
-      if (menu.open && !menu.contains(e.target as Node)) menu.open = false;
+      if (sidebar.classList.contains('is-open') && !sidebar.contains(e.target as Node)) {
+        setSidebarOpen(false);
+      }
     });
+
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && menu.open) menu.open = false;
+      if (e.key === 'Escape' && sidebar.classList.contains('is-open')) {
+        setSidebarOpen(false);
+        sidebarToggle.focus();
+      }
     });
-    menu.querySelectorAll('a').forEach((a) =>
-      a.addEventListener('click', () => { menu.open = false; })
-    );
+  }
+
+  // ---------- Desktop sidebar collapse ----------
+  if (sidebar && sidebarCollapse) {
+    const STORAGE_KEY = 'colorion-sidebar-collapsed';
+
+    const setSidebarCollapsed = (collapsed: boolean) => {
+      sidebar.classList.toggle('is-collapsed', collapsed);
+      sidebarCollapse.setAttribute('aria-expanded', String(!collapsed));
+      sidebarCollapse.setAttribute(
+        'aria-label',
+        collapsed ? 'Expand Colorion tools sidebar' : 'Collapse Colorion tools sidebar'
+      );
+      sidebarCollapse.textContent = collapsed ? '›' : '‹';
+      try {
+        localStorage.setItem(STORAGE_KEY, collapsed ? '1' : '0');
+      } catch {
+        // Ignore storage failures; the current interaction still works.
+      }
+    };
+
+    try {
+      setSidebarCollapsed(localStorage.getItem(STORAGE_KEY) === '1');
+    } catch {
+      setSidebarCollapsed(false);
+    }
+
+    sidebarCollapse.addEventListener('click', () => {
+      setSidebarCollapsed(!sidebar.classList.contains('is-collapsed'));
+    });
   }
 </script>
