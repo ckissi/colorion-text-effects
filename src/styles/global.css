@@ -103,7 +103,7 @@ body {
   background: color-mix(in srgb, var(--surface) 92%, var(--background));
   border-right: 1px solid var(--border);
   overflow-y: auto;
-  transition: width .22s ease;
+  transition: translate .22s ease;
 }
 
 .sidebar-brand {
@@ -191,7 +191,7 @@ body {
 
 @media (min-width: 861px) {
   .site-sidebar.is-collapsed {
-    width: var(--sidebar-collapsed-width);
+    translate: calc(-100% + var(--sidebar-collapsed-width)) 0;
     align-items: center;
     padding-left: calc(var(--base) * 2);
     padding-right: calc(var(--base) * 2);
@@ -213,9 +213,14 @@ body {
     display: none;
   }
 
+  .site-sidebar.is-collapsed .sidebar-brand,
   .site-sidebar.is-collapsed .sidebar-collapse {
-    align-self: center;
-    margin-top: 0;
+    align-self: flex-end;
+    margin-right: 8px;
+  }
+
+  .site-sidebar.is-collapsed .sidebar-collapse {
+    margin-top: 8px;
   }
 }
 
