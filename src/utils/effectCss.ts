@@ -1,6 +1,7 @@
-import fs from 'node:fs';
-import path from 'node:path';
 import { effects, perLetter, usesDataText, type Effect } from '../data/effects';
+// Import as raw text so Vite tracks global.css and re-runs this module on edit
+// (fs.readFileSync alone does not create a dependency, so snippets went stale in dev).
+import css from '../styles/global.css?raw';
 
 /**
  * Build-time extraction of each effect's CSS from global.css.
@@ -11,9 +12,6 @@ import { effects, perLetter, usesDataText, type Effect } from '../data/effects';
  * self-contained by appending any shared `@keyframes` it references but
  * doesn't define itself.
  */
-
-const cssPath = path.join(process.cwd(), 'src/styles/global.css');
-const css = fs.readFileSync(cssPath, 'utf8');
 
 // The three colour tokens the effects paint with; surface them so the copied
 // snippet is genuinely standalone.
@@ -45,7 +43,8 @@ function extractKeyframes(src: string): Map<string, string> {
 const allKeyframes = extractKeyframes(css);
 
 // Slice the effects section into one block per numbered marker.
-const markerRe = /\/\*\s*(\d{2})\s+[^*]*?\*\//g;
+// Allow multi-line marker comments (e.g. 24 Still-Water, 30 Negative).
+const markerRe = /\/\*\s*(\d{2})\s+(?:[^*]|\*(?!\/))*\*\//g;
 const markers = [...css.matchAll(markerRe)];
 const sectionEnd = css.indexOf('/* ---------- Lazy loading');
 

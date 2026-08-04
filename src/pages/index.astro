@@ -229,7 +229,10 @@ const colorionLinks = [
   // so they don't bloat the document. Fetched once, on first use.
   let dataPromise: Promise<EffectData> | undefined;
   const loadData = () =>
-    (dataPromise ??= fetch('/effect-data.json').then((r) => r.json() as Promise<EffectData>));
+    (dataPromise ??= fetch('/effect-data.json', { cache: 'no-store' }).then(async (r) => {
+      if (!r.ok) throw new Error(`effect-data.json ${r.status}`);
+      return r.json() as Promise<EffectData>;
+    }));
 
   const MODE_CONFIG: Record<Mode, { key: keyof EffectData; copyLabel: string; hint: string }> = {
     css: { key: 'snippets', copyLabel: 'Copy CSS', hint: 'Pure CSS · self-contained' },

@@ -2157,6 +2157,510 @@ h1 em {
   94%, 100% { transform: rotate(-6deg) scale(1); opacity: 0; filter: blur(.6px); }
 }
 
+/* 67 LED-Board — stadium LED matrix letters with a chasing brightness sweep */
+.fx-led {
+  position: relative;
+  font: 700 34px/1.05 "JetBrains Mono", monospace;
+  letter-spacing: .18em;
+  color: color-mix(in srgb, var(--ink-2) 22%, transparent);
+  text-shadow: 0 0 1px color-mix(in srgb, var(--ink-2) 35%, transparent);
+}
+.fx-led::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  background:
+    radial-gradient(circle closest-side,
+      #fff 0 28%,
+      var(--ink-2) 34% 62%,
+      transparent 68%) 0 0 / 4.5px 4.5px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter:
+    drop-shadow(0 0 6px color-mix(in srgb, var(--ink-2) 70%, transparent))
+    drop-shadow(0 0 16px color-mix(in srgb, var(--ink-2) 35%, transparent));
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 18%,
+    #000 42%,
+    transparent 68%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 18%,
+    #000 42%,
+    transparent 68%
+  );
+  -webkit-mask-size: 240% 100%;
+  mask-size: 240% 100%;
+  -webkit-mask-position: 120% 0;
+  mask-position: 120% 0;
+  animation: fx-led 2.1s linear infinite;
+}
+.fx-led::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  background:
+    radial-gradient(circle closest-side,
+      color-mix(in srgb, var(--ink-2) 55%, transparent) 0 55%,
+      transparent 62%) 0 0 / 4.5px 4.5px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  opacity: .45;
+}
+@keyframes fx-led {
+  to {
+    -webkit-mask-position: -120% 0;
+    mask-position: -120% 0;
+  }
+}
+
+/* 68 Light-Leak — cinematic colour veils wash diagonally through the word */
+.fx-lightleak {
+  position: relative;
+  font: 600 34px/1.05 "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  color: var(--ink);
+  isolation: isolate;
+}
+.fx-lightleak::before,
+.fx-lightleak::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  mix-blend-mode: screen;
+}
+.fx-lightleak::before {
+  background: linear-gradient(
+      118deg,
+      transparent 12%,
+      #ff5a1f 34%,
+      #ffd27a 44%,
+      #fff 48%,
+      transparent 62%
+    ) 120% 0 / 240% 100%;
+  filter: blur(.35px);
+  animation: fx-lightleak-a 4.4s ease-in-out infinite;
+}
+.fx-lightleak::after {
+  background: linear-gradient(
+      248deg,
+      transparent 18%,
+      var(--ink-3) 38%,
+      var(--ink-2) 48%,
+      transparent 68%
+    ) -20% 0 / 240% 100%;
+  opacity: .9;
+  animation: fx-lightleak-b 5.6s ease-in-out infinite;
+}
+@keyframes fx-lightleak-a {
+  0%, 100% { background-position: 130% 0; opacity: .12; }
+  42%      { background-position: -30% 0; opacity: 1; }
+}
+@keyframes fx-lightleak-b {
+  0%, 100% { background-position: -30% 0; opacity: .1; }
+  55%      { background-position: 130% 0; opacity: .95; }
+}
+
+/* 69 Kilovolt — letters crackle with staggered electric discharge flashes */
+.fx-voltage {
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .12em;
+  color: var(--ink);
+  display: inline-flex;
+}
+.fx-voltage b {
+  font-weight: inherit;
+  display: inline-block;
+  animation: fx-voltage 2.6s steps(1) infinite;
+  animation-delay: calc(var(--i) * .08s);
+}
+@keyframes fx-voltage {
+  0%, 100% {
+    transform: none;
+    color: var(--ink);
+    text-shadow: none;
+    filter: brightness(1);
+  }
+  7% {
+    transform: translate(1px, -1px) skewX(-10deg);
+    color: #fff;
+    text-shadow:
+      0 0 4px #fff,
+      0 0 14px var(--ink-3),
+      2px 0 0 var(--ink-2),
+     -2px 0 0 var(--ink-3);
+    filter: brightness(1.85);
+  }
+  9% {
+    transform: translate(-1px, 1px) skewX(8deg);
+    color: var(--ink-3);
+    text-shadow:
+      0 0 10px var(--ink-3),
+      0 0 22px color-mix(in srgb, var(--ink-3) 70%, transparent);
+  }
+  11%, 48% {
+    transform: none;
+    color: var(--ink);
+    text-shadow: none;
+    filter: brightness(1);
+  }
+  61% {
+    transform: translate(0, -1px) skewX(4deg);
+    color: #fff;
+    text-shadow:
+      0 0 6px var(--ink-2),
+      0 0 18px var(--ink-2),
+     -1px 0 0 var(--ink-3);
+    filter: brightness(1.6);
+  }
+  63% {
+    transform: none;
+    color: var(--ink);
+    text-shadow: none;
+    filter: brightness(1);
+  }
+}
+
+/* 70 Carrara — liquid marble veins drift through polished stone letterforms */
+.fx-marble {
+  font: 600 34px/1.05 "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  color: transparent;
+  background:
+    radial-gradient(ellipse 40% 70% at 18% 42%,
+      color-mix(in srgb, var(--ink) 55%, transparent) 0%,
+      transparent 55%),
+    radial-gradient(ellipse 50% 40% at 72% 58%,
+      color-mix(in srgb, var(--ink-3) 40%, transparent) 0%,
+      transparent 50%),
+    linear-gradient(118deg,
+      #f4f0ea 0%,
+      #d9d2c8 14%,
+      var(--ink-2) 22%,
+      #ebe6df 34%,
+      var(--ink-3) 48%,
+      #cfc7bb 58%,
+      #f7f3ed 72%,
+      var(--ink) 86%,
+      #e8e2d8 100%);
+  background-size: 160% 160%, 180% 180%, 280% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .28));
+  animation: fx-marble 5.2s ease-in-out infinite alternate;
+}
+@keyframes fx-marble {
+  0% {
+    background-position: 8% 30%, 90% 70%, 0% 50%;
+    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .28)) saturate(1);
+  }
+  100% {
+    background-position: 78% 68%, 12% 22%, 100% 50%;
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, .34)) saturate(1.15);
+  }
+}
+
+/* 71 Ripple — concentric water rings expand through the word like a pond splash */
+.fx-ripple {
+  position: relative;
+  font: 600 34px/1.05 "JetBrains Mono", monospace;
+  letter-spacing: .12em;
+  color: color-mix(in srgb, var(--ink-3) 55%, var(--ink));
+}
+.fx-ripple::before,
+.fx-ripple::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.fx-ripple::before {
+  background:
+    repeating-radial-gradient(
+      circle at 50% 55%,
+      transparent 0 6px,
+      color-mix(in srgb, var(--ink-3) 85%, #fff) 7px 9px,
+      transparent 10px 16px
+    );
+  background-size: 100% 100%;
+  opacity: .9;
+  animation: fx-ripple 2.4s linear infinite;
+}
+.fx-ripple::after {
+  background:
+    repeating-radial-gradient(
+      circle at 50% 55%,
+      transparent 0 8px,
+      var(--ink-2) 9px 11px,
+      transparent 12px 20px
+    );
+  opacity: .55;
+  animation: fx-ripple 2.4s linear infinite reverse;
+  mix-blend-mode: screen;
+}
+@keyframes fx-ripple {
+  0% {
+    background-size: 40% 40%;
+    background-position: 50% 55%;
+    opacity: .35;
+  }
+  70% { opacity: .95; }
+  100% {
+    background-size: 220% 220%;
+    background-position: 50% 55%;
+    opacity: .15;
+  }
+}
+
+/* 72 Shatter — letters fracture outward then snap back into place */
+.fx-shatter {
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  color: var(--ink);
+  display: inline-flex;
+  perspective: 420px;
+}
+.fx-shatter b {
+  font-weight: inherit;
+  display: inline-block;
+  transform-origin: 50% 60%;
+  animation: fx-shatter 3.2s cubic-bezier(.22, 1.15, .36, 1) infinite;
+  animation-delay: calc(var(--i) * .07s);
+}
+@keyframes fx-shatter {
+  0%, 18% {
+    transform: none;
+    opacity: 1;
+    filter: blur(0);
+    color: var(--ink);
+    text-shadow: none;
+  }
+  28% {
+    transform:
+      translate(
+        calc((var(--i) - 2.5) * 14px),
+        calc(-18px - var(--i) * 3px)
+      )
+      rotate(calc((var(--i) - 2.5) * 18deg))
+      scale(.88);
+    opacity: .55;
+    filter: blur(.4px);
+    color: var(--ink-2);
+    text-shadow:
+      2px 0 0 color-mix(in srgb, var(--ink-3) 70%, transparent),
+     -2px 0 0 color-mix(in srgb, var(--ink-2) 70%, transparent);
+  }
+  38% {
+    transform:
+      translate(
+        calc((var(--i) - 2.5) * 22px),
+        calc(8px + var(--i) * 2px)
+      )
+      rotate(calc((var(--i) - 2.5) * -12deg))
+      scale(1.05);
+    opacity: .25;
+    filter: blur(1.2px);
+  }
+  48% {
+    transform: translate(0, -6px) scale(1.08);
+    opacity: 0;
+    filter: blur(2px);
+  }
+  49% {
+    transform: scale(.7);
+    opacity: 0;
+    filter: blur(0);
+    color: var(--ink-3);
+  }
+  62%, 100% {
+    transform: none;
+    opacity: 1;
+    filter: blur(0);
+    color: var(--ink);
+    text-shadow: none;
+  }
+}
+
+/* 73 Film-Grain — analogue silver-halide noise crawls over the letterforms */
+.fx-grain {
+  position: relative;
+  font: 600 36px/1.05 "JetBrains Mono", monospace;
+  letter-spacing: .14em;
+  color: var(--ink);
+  animation: fx-grain-flicker 3.6s ease-in-out infinite;
+}
+.fx-grain::before,
+.fx-grain::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.fx-grain::before {
+  background-image:
+    radial-gradient(circle, #fff 0 .55px, transparent .85px),
+    radial-gradient(circle, #000 0 .45px, transparent .75px),
+    radial-gradient(circle, #fff 0 .4px, transparent .7px);
+  background-size: 3px 3px, 4px 4px, 5px 5px;
+  background-position: 0 0, 1px 2px, 2px 1px;
+  opacity: .42;
+  mix-blend-mode: soft-light;
+  animation: fx-grain .28s steps(4) infinite;
+}
+.fx-grain::after {
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--ink) 0%, transparent) 0%,
+      color-mix(in srgb, #fff 22%, transparent) 48%,
+      color-mix(in srgb, var(--ink) 0%, transparent) 100%
+    ) 0 -40% / 100% 60%;
+  opacity: .55;
+  mix-blend-mode: overlay;
+  animation: fx-grain-scan 2.6s linear infinite;
+}
+@keyframes fx-grain {
+  0%   { background-position: 0 0, 1px 2px, 2px 1px; }
+  25%  { background-position: 2px -1px, -1px 3px, 0 2px; }
+  50%  { background-position: -1px 2px, 3px 0, 1px -1px; }
+  75%  { background-position: 1px 1px, -2px -1px, 3px 2px; }
+  100% { background-position: 0 0, 1px 2px, 2px 1px; }
+}
+@keyframes fx-grain-scan {
+  0%   { background-position: 0 -50%; opacity: .15; }
+  45%  { opacity: .6; }
+  100% { background-position: 0 160%; opacity: .2; }
+}
+@keyframes fx-grain-flicker {
+  0%, 100% { filter: contrast(1.04) brightness(1); }
+  32%      { filter: contrast(1.14) brightness(1.05); }
+  58%      { filter: contrast(.97) brightness(.94); }
+  76%      { filter: contrast(1.08) brightness(1.02); }
+}
+
+/* 74 Caustics — underwater light ribbons swim and refract through the word */
+.fx-caustic {
+  font: 600 34px/1.05 "JetBrains Mono", monospace;
+  letter-spacing: .12em;
+  color: transparent;
+  background:
+    radial-gradient(ellipse 55% 35% at 18% 42%,
+      #fff 0 8%, transparent 42%),
+    radial-gradient(ellipse 45% 50% at 68% 58%,
+      color-mix(in srgb, var(--ink-3) 90%, #fff) 0 10%, transparent 46%),
+    radial-gradient(ellipse 40% 30% at 42% 78%,
+      #fff 0 6%, transparent 40%),
+    radial-gradient(ellipse 50% 40% at 82% 28%,
+      color-mix(in srgb, var(--ink-2) 75%, #fff) 0 9%, transparent 44%),
+    radial-gradient(ellipse 35% 45% at 30% 18%,
+      var(--ink-3) 0 7%, transparent 38%),
+    linear-gradient(
+      165deg,
+      color-mix(in srgb, var(--ink-3) 70%, var(--ink)) 0%,
+      var(--ink) 42%,
+      color-mix(in srgb, var(--ink-2) 55%, var(--ink)) 100%
+    );
+  background-size:
+    160% 160%,
+    180% 170%,
+    150% 150%,
+    170% 160%,
+    140% 150%,
+    100% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 12px color-mix(in srgb, var(--ink-3) 42%, transparent));
+  animation: fx-caustic 4.2s ease-in-out infinite alternate;
+}
+@keyframes fx-caustic {
+  0% {
+    background-position:
+      0% 25%, 100% 80%, 35% 100%, 90% 5%, 20% 10%, 0 0;
+    filter:
+      drop-shadow(0 0 8px color-mix(in srgb, var(--ink-3) 30%, transparent))
+      brightness(1);
+  }
+  100% {
+    background-position:
+      85% 70%, 5% 15%, 70% 0%, 15% 90%, 75% 85%, 0 0;
+    filter:
+      drop-shadow(0 0 20px color-mix(in srgb, var(--ink-3) 60%, transparent))
+      brightness(1.18);
+  }
+}
+
+/* 75 Origami — paper letters hinge open on staggered folds, then tuck shut */
+.fx-fold {
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  color: var(--ink);
+  display: inline-flex;
+  perspective: 640px;
+  transform-style: preserve-3d;
+}
+.fx-fold b {
+  font-weight: inherit;
+  display: inline-block;
+  transform-origin: left center;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  animation: fx-fold 3.8s cubic-bezier(.4, 0, .2, 1) infinite;
+  animation-delay: calc(var(--i) * .11s);
+}
+@keyframes fx-fold {
+  0%, 8% {
+    transform: rotateY(-92deg) translateZ(0);
+    opacity: 0;
+    color: color-mix(in srgb, var(--ink) 55%, #000);
+    text-shadow: none;
+    filter: brightness(.55);
+  }
+  22% {
+    transform: rotateY(8deg) translateZ(6px);
+    opacity: 1;
+    color: var(--ink);
+    text-shadow: 4px 0 10px color-mix(in srgb, var(--ink-2) 35%, transparent);
+    filter: brightness(1.08);
+  }
+  30%, 58% {
+    transform: rotateY(0deg) translateZ(0);
+    opacity: 1;
+    color: var(--ink);
+    text-shadow: none;
+    filter: brightness(1);
+  }
+  72% {
+    transform: rotateY(-12deg) translateZ(4px);
+    opacity: 1;
+    color: var(--ink-3);
+    text-shadow: -3px 0 8px color-mix(in srgb, var(--ink-3) 30%, transparent);
+    filter: brightness(1.05);
+  }
+  86%, 100% {
+    transform: rotateY(92deg) translateZ(0);
+    opacity: 0;
+    color: color-mix(in srgb, var(--ink) 55%, #000);
+    text-shadow: none;
+    filter: brightness(.55);
+  }
+}
+
 /* ---------- Lazy loading ---------- */
 /* skip rendering work for far-offscreen cells */
 .cell {

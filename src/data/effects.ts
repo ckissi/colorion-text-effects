@@ -64,7 +64,16 @@ export type EffectType =
   | 'barcode'
   | 'frost'
   | 'moire'
-  | 'stamp';
+  | 'stamp'
+  | 'led'
+  | 'lightleak'
+  | 'voltage'
+  | 'marble'
+  | 'ripple'
+  | 'shatter'
+  | 'grain'
+  | 'caustic'
+  | 'fold';
 
 export interface Effect {
   index: string;
@@ -141,6 +150,15 @@ export const effects: Effect[] = [
   { index: '64', name: 'Frostbite', type: 'frost', text: 'FROZEN' },
   { index: '65', name: 'Moiré', type: 'moire', text: 'MOIRÉ' },
   { index: '66', name: 'Rubber-Stamp', type: 'stamp', text: 'APPROVED' },
+  { index: '67', name: 'LED-Board', type: 'led', text: 'LIVE' },
+  { index: '68', name: 'Light-Leak', type: 'lightleak', text: 'EXPOSE' },
+  { index: '69', name: 'Kilovolt', type: 'voltage', text: 'CHARGE' },
+  { index: '70', name: 'Carrara', type: 'marble', text: 'MARBLE' },
+  { index: '71', name: 'Ripple', type: 'ripple', text: 'RIPPLE' },
+  { index: '72', name: 'Shatter', type: 'shatter', text: 'BREAK' },
+  { index: '73', name: 'Film-Grain', type: 'grain', text: 'NOIR' },
+  { index: '74', name: 'Caustics', type: 'caustic', text: 'POOL' },
+  { index: '75', name: 'Origami', type: 'fold', text: 'FOLD' },
 ];
 
 /** effects whose letters are wrapped in indexed <b> spans for per-letter animation */
@@ -160,6 +178,9 @@ export const perLetter = new Set<EffectType>([
   'zoetrope',
   'pendulum',
   'smoke',
+  'voltage',
+  'shatter',
+  'fold',
 ]);
 
 /** effects that duplicate their text into pseudo-elements via data-text */
@@ -179,4 +200,8 @@ export const usesDataText = new Set<EffectType>([
   'portal',
   'tiltshift',
   'duotone',
+  'led',
+  'lightleak',
+  'ripple',
+  'grain',
 ]);

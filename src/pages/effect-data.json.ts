@@ -6,5 +6,9 @@ import { snippets, prompts } from '../utils/effectCss';
 // text stays out of the initial HTML document.
 export const GET: APIRoute = () =>
   new Response(JSON.stringify({ snippets, prompts }), {
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      // Avoid stale copies after new effects ship (dev HMR + long-lived browser tabs).
+      'Cache-Control': 'no-cache',
+    },
   });
