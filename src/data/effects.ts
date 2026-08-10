@@ -73,7 +73,10 @@ export type EffectType =
   | 'shatter'
   | 'grain'
   | 'caustic'
-  | 'fold';
+  | 'fold'
+  | 'domino'
+  | 'zipper'
+  | 'equalizer';
 
 export interface Effect {
   index: string;
@@ -159,6 +162,9 @@ export const effects: Effect[] = [
   { index: '73', name: 'Film-Grain', type: 'grain', text: 'NOIR' },
   { index: '74', name: 'Caustics', type: 'caustic', text: 'POOL' },
   { index: '75', name: 'Origami', type: 'fold', text: 'FOLD' },
+  { index: '76', name: 'Domino', type: 'domino', text: 'TOPPLE' },
+  { index: '77', name: 'Zip-Merge', type: 'zipper', text: 'ZIPPER' },
+  { index: '78', name: 'Equalizer', type: 'equalizer', text: 'LEVELS' },
 ];
 
 /** effects whose letters are wrapped in indexed <b> spans for per-letter animation */
@@ -181,6 +187,9 @@ export const perLetter = new Set<EffectType>([
   'voltage',
   'shatter',
   'fold',
+  'domino',
+  'zipper',
+  'equalizer',
 ]);
 
 /** effects that duplicate their text into pseudo-elements via data-text */
