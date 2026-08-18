@@ -1,6 +1,6 @@
 # CSS Text Effects
 
-A library of 57 animated text effects built with pure CSS — aurora gradients,
+A library of 81 animated text effects built with pure CSS — aurora gradients,
 glitches, split-flap boards, liquid fills, CRT phosphor terminals and other
 lesser-seen tricks. No JavaScript, no dependencies, MIT licensed.
 

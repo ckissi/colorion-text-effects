@@ -76,7 +76,10 @@ export type EffectType =
   | 'fold'
   | 'domino'
   | 'zipper'
-  | 'equalizer';
+  | 'equalizer'
+  | 'gooey'
+  | 'sonar'
+  | 'warp';
 
 export interface Effect {
   index: string;
@@ -165,6 +168,9 @@ export const effects: Effect[] = [
   { index: '76', name: 'Domino', type: 'domino', text: 'TOPPLE' },
   { index: '77', name: 'Zip-Merge', type: 'zipper', text: 'ZIPPER' },
   { index: '78', name: 'Equalizer', type: 'equalizer', text: 'LEVELS' },
+  { index: '79', name: 'Mercury', type: 'gooey', text: 'MERCURY' },
+  { index: '80', name: 'Sonar', type: 'sonar', text: 'SONAR' },
+  { index: '81', name: 'Hyperspace', type: 'warp', text: 'WARP' },
 ];
 
 /** effects whose letters are wrapped in indexed <b> spans for per-letter animation */
@@ -190,6 +196,8 @@ export const perLetter = new Set<EffectType>([
   'domino',
   'zipper',
   'equalizer',
+  'gooey',
+  'warp',
 ]);
 
 /** effects that duplicate their text into pseudo-elements via data-text */
@@ -213,4 +221,5 @@ export const usesDataText = new Set<EffectType>([
   'lightleak',
   'ripple',
   'grain',
+  'sonar',
 ]);

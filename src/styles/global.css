@@ -2854,6 +2854,153 @@ h1 em {
   }
 }
 
+/* 79 Mercury — liquid-metal letters puddle together, then reform */
+.fx-gooey {
+  font: 600 30px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+  display: inline-flex;
+  align-items: flex-end;
+}
+.fx-gooey b {
+  font-weight: inherit;
+  display: inline-block;
+  color: transparent;
+  background: linear-gradient(
+    185deg,
+    #f4f7ff 8%,
+    var(--ink-3) 34%,
+    #d5dbe6 50%,
+    var(--ink-2) 72%,
+    #9aa3b5 100%
+  );
+  background-size: 100% 190%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 6px 8px color-mix(in srgb, var(--ink-3) 30%, transparent));
+  animation: fx-gooey 3.4s cubic-bezier(.45, .06, .28, 1) infinite;
+  animation-delay: calc(var(--i) * .06s);
+}
+@keyframes fx-gooey {
+  0%, 16%, 100% {
+    transform: translateX(0) scale(1, 1);
+    background-position: 50% 0%;
+    filter: drop-shadow(0 6px 8px color-mix(in srgb, var(--ink-3) 30%, transparent));
+  }
+  44%, 54% {
+    transform: translateX(calc((3 - var(--i)) * 5px)) scale(1.14, .7);
+    background-position: 50% 90%;
+    filter: drop-shadow(0 2px 12px color-mix(in srgb, var(--ink-2) 55%, transparent));
+  }
+}
+
+/* 80 Sonar — a radar sweep lights the word like a returning ping */
+@property --sonar {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+.fx-sonar {
+  position: relative;
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .16em;
+  color: color-mix(in srgb, var(--ink-3) 40%, var(--ink));
+  animation: fx-sonar 2.6s linear infinite;
+}
+.fx-sonar::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 122px;
+  height: 122px;
+  margin: -61px 0 0 -61px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 50% 50%, var(--ink-2) 0 2px, transparent 3px),
+    repeating-radial-gradient(
+      circle at 50% 50%,
+      transparent 0 13px,
+      color-mix(in srgb, var(--ink-3) 18%, transparent) 14px 15px
+    ),
+    conic-gradient(
+      from var(--sonar),
+      transparent 0 348deg,
+      color-mix(in srgb, var(--ink-3) 22%, transparent) 354deg,
+      color-mix(in srgb, var(--ink-2) 58%, transparent) 360deg
+    );
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--ink-3) 30%, transparent),
+    0 0 18px color-mix(in srgb, var(--ink-3) 16%, transparent);
+}
+.fx-sonar::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  background: conic-gradient(
+    from var(--sonar),
+    transparent 0 292deg,
+    var(--ink-3) 328deg,
+    #fff 348deg,
+    var(--ink-2) 360deg
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--ink-3) 50%, transparent));
+}
+@keyframes fx-sonar {
+  to { --sonar: 360deg; }
+}
+
+/* 81 Hyperspace — letters punch out of deep Z and blow past the camera */
+.fx-warp {
+  font: 600 34px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .14em;
+  color: var(--ink);
+  display: inline-flex;
+  perspective: 520px;
+  transform-style: preserve-3d;
+}
+.fx-warp b {
+  font-weight: inherit;
+  display: inline-block;
+  transform-style: preserve-3d;
+  animation: fx-warp 2.7s cubic-bezier(.22, .82, .24, 1) infinite;
+  animation-delay: calc(var(--i) * .08s);
+}
+@keyframes fx-warp {
+  0%, 100% {
+    transform: translateZ(-160px) scale(.62) rotateX(10deg);
+    opacity: .4;
+    color: var(--ink-3);
+    filter: blur(2.5px);
+    text-shadow: none;
+  }
+  22% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  30%, 62% {
+    transform: translateZ(0) scale(1) rotateX(0deg);
+    opacity: 1;
+    color: #fff;
+    filter: blur(0);
+    text-shadow:
+      0 0 12px var(--ink-3),
+      0 0 28px color-mix(in srgb, var(--ink-2) 70%, transparent);
+  }
+  82% {
+    transform: translateZ(190px) scale(1.42) rotateX(-10deg);
+    opacity: .22;
+    color: var(--ink-2);
+    filter: blur(3px);
+    text-shadow: 0 0 22px var(--ink-2);
+  }
+}
+
 /* ---------- Lazy loading ---------- */
 /* skip rendering work for far-offscreen cells */
 .cell {
