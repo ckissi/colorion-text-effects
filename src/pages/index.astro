@@ -139,10 +139,6 @@ const colorionLinks = [
     <footer class="site-footer">
       <span class="mono">CSS Text Effects</span>
       <nav class="footer-links mono">
-        <a href="https://colorion.co?ref=text-effects.colorion.co" target="_blank" rel="noopener" referrerpolicy="no-referrer-when-downgrade">Colorion</a>
-        <a href="https://2colors.colorion.co?ref=text-effects.colorion.co" target="_blank" rel="noopener" referrerpolicy="no-referrer-when-downgrade">2 Colors</a>
-        <a href="https://gradientbuttons.colorion.co?ref=text-effects.colorion.co" target="_blank" rel="noopener" referrerpolicy="no-referrer-when-downgrade">Gradient Buttons</a>
-        <a href="https://cssloaders.colorion.co?ref=text-effects.colorion.co" target="_blank" rel="noopener" referrerpolicy="no-referrer-when-downgrade">CSS Loaders</a>
         <a href="https://github.com/ckissi/colorion-text-effects" target="_blank" rel="noopener">GitHub</a>
       </nav>
       <span class="mono">Pure CSS · No dependencies · MIT licensed</span>
@@ -168,7 +164,15 @@ const colorionLinks = [
           <pre class="modal-code"><code id="modal-code"></code></pre>
         </div>
         <div class="modal-foot">
-          <span class="mono modal-hint" id="modal-hint">Pure CSS · self-contained</span>
+          <a
+            class="modal-credit"
+            href="https://x.com/domi_kissi"
+            target="_blank"
+            rel="noopener"
+          >
+            <img src="/domi.jpg" alt="" width="32" height="32" />
+            <span>Design inspiration by @domi_kissi.</span>
+          </a>
           <button class="modal-copy mono" id="modal-copy">Copy CSS</button>
         </div>
       </div>
@@ -234,9 +238,9 @@ const colorionLinks = [
       return r.json() as Promise<EffectData>;
     }));
 
-  const MODE_CONFIG: Record<Mode, { key: keyof EffectData; copyLabel: string; hint: string }> = {
-    css: { key: 'snippets', copyLabel: 'Copy CSS', hint: 'Pure CSS · self-contained' },
-    prompt: { key: 'prompts', copyLabel: 'Copy prompt', hint: 'LLM prompt · paste into your coding agent' },
+  const MODE_CONFIG: Record<Mode, { key: keyof EffectData; copyLabel: string }> = {
+    css: { key: 'snippets', copyLabel: 'Copy CSS' },
+    prompt: { key: 'prompts', copyLabel: 'Copy prompt' },
   };
 
   // Warm the cache as soon as the user signals intent (pointer over the grid).
@@ -246,7 +250,6 @@ const colorionLinks = [
   const overlay = document.getElementById('css-modal')!;
   const modalIndex = document.getElementById('modal-index')!;
   const modalTitle = document.getElementById('modal-title')!;
-  const modalHint = document.getElementById('modal-hint')!;
   const modalPreview = document.getElementById('modal-preview')!;
   const modalCode = document.getElementById('modal-code')!;
   const copyBtn = document.getElementById('modal-copy') as HTMLButtonElement;
@@ -268,7 +271,6 @@ const colorionLinks = [
     currentText = '';
     modalIndex.textContent = cell.dataset.index || '';
     modalTitle.textContent = cell.dataset.name || '';
-    modalHint.textContent = config.hint;
     modalCode.textContent = 'Loading…';
 
     // clone the live effect for the preview

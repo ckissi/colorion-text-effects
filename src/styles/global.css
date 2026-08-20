@@ -3258,7 +3258,38 @@ h1 em {
   border-top: 1px solid var(--divider);
 }
 
-.modal-hint { color: var(--text-secondary); }
+.modal-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--base) * 1.25);
+  color: var(--text-secondary);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.modal-credit:hover,
+.modal-credit:focus-visible {
+  color: var(--text-primary);
+}
+
+.modal-credit:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+  border-radius: var(--r-control);
+}
+
+.modal-credit img {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  object-fit: cover;
+  border: 1px solid var(--divider);
+  border-radius: var(--r-pill);
+}
 
 .modal-copy {
   appearance: none;
@@ -3280,6 +3311,8 @@ h1 em {
 @media (max-width: 560px) {
   .modal-title { font-size: 11px; }
   .modal-code { font-size: 11px; }
+  .modal-foot { align-items: stretch; flex-direction: column; }
+  .modal-copy { width: 100%; }
 }
 
 @media (max-width: 860px) {
