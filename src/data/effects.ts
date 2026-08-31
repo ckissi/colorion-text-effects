@@ -79,7 +79,16 @@ export type EffectType =
   | 'equalizer'
   | 'gooey'
   | 'sonar'
-  | 'warp';
+  | 'warp'
+  | 'shimmer'
+  | 'ticker'
+  | 'kaboom'
+  | 'karaoke'
+  | 'lenticular'
+  | 'balloon'
+  | 'lens'
+  | 'smear'
+  | 'keycap';
 
 export interface Effect {
   index: string;
@@ -171,6 +180,20 @@ export const effects: Effect[] = [
   { index: '79', name: 'Mercury', type: 'gooey', text: 'MERCURY' },
   { index: '80', name: 'Sonar', type: 'sonar', text: 'SONAR' },
   { index: '81', name: 'Hyperspace', type: 'warp', text: 'WARP' },
+  { index: '82', name: 'Ghostwrite', type: 'shimmer', text: 'THINKING' },
+  {
+    index: '83',
+    name: 'Tickertape',
+    type: 'ticker',
+    text: 'MARQUEE\u00a0\u2726\u00a0MARQUEE\u00a0\u2726\u00a0MARQUEE\u00a0\u2726\u00a0MARQUEE\u00a0\u2726\u00a0MARQUEE\u00a0\u2726\u00a0',
+  },
+  { index: '84', name: 'Kaboom', type: 'kaboom', text: 'SLAM!' },
+  { index: '85', name: 'Lyric-Fill', type: 'karaoke', text: 'CHORUS' },
+  { index: '86', name: 'Lenti-Card', type: 'lenticular', text: 'SHINY' },
+  { index: '87', name: 'Helium', type: 'balloon', text: 'PUFFY' },
+  { index: '88', name: 'Liquid-Lens', type: 'lens', text: 'REFRACT' },
+  { index: '89', name: 'Whiplash', type: 'smear', text: 'WHOOSH' },
+  { index: '90', name: 'Keycap', type: 'keycap', text: 'PRESS' },
 ];
 
 /** effects whose letters are wrapped in indexed <b> spans for per-letter animation */
@@ -198,6 +221,10 @@ export const perLetter = new Set<EffectType>([
   'equalizer',
   'gooey',
   'warp',
+  'karaoke',
+  'balloon',
+  'smear',
+  'keycap',
 ]);
 
 /** effects that duplicate their text into pseudo-elements via data-text */
@@ -222,4 +249,6 @@ export const usesDataText = new Set<EffectType>([
   'ripple',
   'grain',
   'sonar',
+  'lenticular',
+  'lens',
 ]);

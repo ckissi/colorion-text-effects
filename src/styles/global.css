@@ -3001,6 +3001,469 @@ h1 em {
   }
 }
 
+/* 82 Ghostwrite — the AI shimmer: a soft luminance band sweeps muted letters */
+.fx-shimmer {
+  font: 600 30px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .14em;
+  color: transparent;
+  background: linear-gradient(90deg,
+      color-mix(in srgb, var(--ink) 16%, transparent) 0 40%,
+      color-mix(in srgb, var(--ink) 55%, transparent) 46%,
+      #fff 50%,
+      color-mix(in srgb, var(--ink) 55%, transparent) 54%,
+      color-mix(in srgb, var(--ink) 16%, transparent) 60% 100%
+    ) 0 0 / 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: fx-shimmer 2.8s linear infinite;
+}
+@keyframes fx-shimmer {
+  to { background-position: 300% 0; }
+}
+
+/* 83 Tickertape — endless editorial marquee gliding one seamless loop
+   (the word repeats five times; the track slides exactly one copy width) */
+.fx-ticker {
+  justify-self: start;
+  width: max-content;
+  font: 600 34px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+  color: var(--ink);
+  white-space: nowrap;
+  animation: fx-ticker 9s linear infinite;
+}
+@keyframes fx-ticker {
+  to { transform: translateX(-20%); }
+}
+
+/* 84 Kaboom — the word crashes in from nowhere with an RGB shake and shockwave */
+.fx-kaboom {
+  position: relative;
+  font: 700 40px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  color: var(--ink);
+  animation: fx-kaboom 3s infinite;
+}
+.fx-kaboom::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2.4em;
+  height: 1.5em;
+  border: 2px solid var(--ink-3);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: fx-kaboom-ring 3s ease-out infinite;
+}
+@keyframes fx-kaboom {
+  0%, 30% {
+    opacity: 0;
+    transform: scale(3.4) translateY(-10px);
+    filter: blur(14px);
+    animation-timing-function: cubic-bezier(.55, 0, 1, .45);
+  }
+  36% {
+    opacity: 1;
+    transform: scale(.88);
+    filter: blur(0);
+    animation-timing-function: cubic-bezier(.2, 1.6, .4, 1);
+  }
+  41% {
+    transform: scale(1.07);
+    animation-timing-function: steps(1, end);
+  }
+  45% {
+    color: #fff;
+    text-shadow: -6px 0 0 var(--ink-2), 6px 0 0 var(--ink-3);
+    transform: translate(-5px, 3px) scale(1);
+  }
+  49% { transform: translate(4px, -3px); }
+  53% {
+    transform: translate(-2px, 1px);
+    text-shadow: -2px 0 0 var(--ink-2), 2px 0 0 var(--ink-3);
+    animation-timing-function: cubic-bezier(.2, .8, .2, 1);
+  }
+  57%, 88% {
+    transform: none;
+    color: var(--ink);
+    text-shadow: none;
+    filter: blur(0);
+    opacity: 1;
+  }
+  95%, 100% {
+    opacity: 0;
+    transform: scale(.8);
+    filter: blur(5px);
+  }
+}
+@keyframes fx-kaboom-ring {
+  0%, 34% { opacity: 0; transform: translate(-50%, -50%) scale(.25); }
+  40%     { opacity: .85; }
+  72%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(2.7); }
+}
+
+/* 85 Lyric-Fill — karaoke highlight paints each letter left-to-right with a bounce */
+.fx-karaoke {
+  font: 600 32px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .12em;
+  display: inline-flex;
+}
+.fx-karaoke b {
+  font-weight: inherit;
+  display: inline-block;
+  color: color-mix(in srgb, var(--ink) 42%, transparent);
+  background: linear-gradient(
+      180deg,
+      #fff 0%,
+      var(--ink-2) 42%,
+      var(--ink-3) 100%
+    ) no-repeat 0 0 / 0% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: fx-karaoke 4.4s cubic-bezier(.2, .85, .25, 1) infinite;
+  animation-delay: calc(var(--i) * .28s);
+}
+@keyframes fx-karaoke {
+  0%, 6% {
+    background-size: 0% 100%;
+    transform: translateY(0) scale(1);
+    color: color-mix(in srgb, var(--ink) 42%, transparent);
+    filter: none;
+  }
+  14% {
+    background-size: 100% 100%;
+    transform: translateY(-9px) scale(1.16);
+    color: transparent;
+    filter: drop-shadow(0 0 10px color-mix(in srgb, var(--ink-2) 70%, transparent));
+  }
+  22%, 64% {
+    background-size: 100% 100%;
+    transform: translateY(0) scale(1);
+    color: transparent;
+    filter: none;
+  }
+  78%, 100% {
+    background-size: 0% 100%;
+    transform: translateY(0) scale(1);
+    color: color-mix(in srgb, var(--ink) 42%, transparent);
+    filter: none;
+  }
+}
+
+/* 86 Lenti-Card — a holographic trading card tilts, ridge-stripes flipping colour */
+.fx-lenticular {
+  position: relative;
+  font: 700 36px/1 "JetBrains Mono", monospace;
+  letter-spacing: .12em;
+  color: transparent;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgb(255 255 255 / .28) 0 1px,
+      transparent 1px 3px
+    ),
+    linear-gradient(
+      115deg,
+      var(--ink-2) 0%,
+      #fff 18%,
+      var(--ink-3) 36%,
+      #ffe08a 52%,
+      var(--ink-2) 70%,
+      #fff 86%,
+      var(--ink-3) 100%
+    );
+  background-size: 4px 100%, 240% 100%;
+  background-position: 0 0, 120% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: fx-lenti-tilt 2.8s ease-in-out infinite alternate;
+}
+.fx-lenticular::before,
+.fx-lenticular::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.fx-lenticular::before {
+  color: var(--ink-2);
+  -webkit-mask-image: repeating-linear-gradient(90deg, #000 0 2px, transparent 2px 4px);
+  mask-image: repeating-linear-gradient(90deg, #000 0 2px, transparent 2px 4px);
+  animation: fx-lenti-a 2.8s ease-in-out infinite alternate;
+}
+.fx-lenticular::after {
+  color: var(--ink-3);
+  -webkit-mask-image: repeating-linear-gradient(90deg, transparent 0 2px, #000 2px 4px);
+  mask-image: repeating-linear-gradient(90deg, transparent 0 2px, #000 2px 4px);
+  animation: fx-lenti-b 2.8s ease-in-out infinite alternate;
+}
+@keyframes fx-lenti-tilt {
+  from {
+    transform: perspective(460px) rotateY(-20deg);
+    filter: hue-rotate(0deg) saturate(1.15);
+    background-position: 0 0, 120% 0;
+  }
+  to {
+    transform: perspective(460px) rotateY(20deg);
+    filter: hue-rotate(28deg) saturate(1.35);
+    background-position: 0 0, -20% 0;
+  }
+}
+@keyframes fx-lenti-a {
+  from { transform: translateX(-3px); opacity: .4; }
+  to   { transform: translateX(4px);  opacity: .85; }
+}
+@keyframes fx-lenti-b {
+  from { transform: translateX(3px);  opacity: .85; }
+  to   { transform: translateX(-4px); opacity: .35; }
+}
+
+/* 87 Helium — balloon letters inflate from flat, catch a highlight, then deflate */
+.fx-balloon {
+  font: 700 34px/1 "JetBrains Mono", monospace;
+  letter-spacing: .06em;
+  display: inline-flex;
+  filter: drop-shadow(0 9px 10px color-mix(in srgb, var(--ink-2) 38%, transparent));
+}
+.fx-balloon b {
+  font-weight: inherit;
+  display: inline-block;
+  color: transparent;
+  background:
+    radial-gradient(circle at 32% 22%, #fff 0 9%, transparent 22%),
+    radial-gradient(circle at 50% 58%,
+      var(--ink-2) 0 40%,
+      color-mix(in srgb, var(--ink-2) 42%, #3a001f) 76%,
+      color-mix(in srgb, var(--ink-2) 18%, #14000a) 100%);
+  background-size: 160% 160%, 100% 100%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  transform-origin: 50% 85%;
+  animation: fx-balloon 3.1s cubic-bezier(.34, 1.5, .64, 1) infinite;
+  animation-delay: calc(var(--i) * .13s);
+}
+.fx-balloon b:nth-child(even) {
+  background:
+    radial-gradient(circle at 32% 22%, #fff 0 9%, transparent 22%),
+    radial-gradient(circle at 50% 58%,
+      var(--ink-3) 0 40%,
+      color-mix(in srgb, var(--ink-3) 42%, #003038) 76%,
+      color-mix(in srgb, var(--ink-3) 18%, #001014) 100%);
+  background-size: 160% 160%, 100% 100%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+@keyframes fx-balloon {
+  0%, 6% {
+    transform: scale(.72, .58) translateY(8px);
+    filter: blur(.4px);
+    background-position: 50% 90%, 0 0;
+  }
+  28% {
+    transform: scale(1.14, 1.2) translateY(-8px) rotate(-5deg);
+    filter: blur(0);
+    background-position: 16% 6%, 0 0;
+  }
+  40%, 74% {
+    transform: scale(1, 1) translateY(0) rotate(0deg);
+    filter: blur(0);
+    background-position: 32% 22%, 0 0;
+  }
+  92%, 100% {
+    transform: scale(.72, .58) translateY(8px);
+    filter: blur(.4px);
+    background-position: 50% 90%, 0 0;
+  }
+}
+
+/* 88 Liquid-Lens — a glass puck glides over the word: a soft-masked copy
+   refracts the letters while the puck itself is clipped to an ellipse
+   (clip-path, not a mask — a mask does not clip `backdrop-filter`) */
+.fx-lens {
+  position: relative;
+  font: 600 30px/1.2 "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  color: color-mix(in srgb, var(--ink) 78%, transparent);
+}
+/* the magnified, chromatically split copy seen through the glass */
+.fx-lens::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: -16px 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  font-size: 1.12em;
+  color: var(--ink);
+  text-shadow:
+    -2px 0 color-mix(in srgb, var(--ink-2) 70%, transparent),
+     2px 0 color-mix(in srgb, var(--ink-3) 70%, transparent);
+  -webkit-mask-image: radial-gradient(ellipse 38px 28px at 50% 50%,
+      #000 0 54%, rgb(0 0 0 / .55) 78%, transparent 88%);
+  mask-image: radial-gradient(ellipse 38px 28px at 50% 50%,
+      #000 0 54%, rgb(0 0 0 / .55) 78%, transparent 88%);
+  -webkit-mask-size: 86px 100%;
+  mask-size: 86px 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  animation: fx-lens-refract 4.6s cubic-bezier(.6, 0, .4, 1) infinite;
+}
+/* the puck itself: rim highlight, sheen and a real backdrop blur */
+.fx-lens::after {
+  content: "";
+  position: absolute;
+  inset: -16px 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 38px 28px at 50% 50%,
+      transparent 0 66%,
+      rgb(255 255 255 / .5) 78% 86%,
+      transparent 96%),
+    radial-gradient(ellipse 28px 18px at 38% 26%,
+      rgb(255 255 255 / .16),
+      transparent 72%),
+    radial-gradient(ellipse 34px 24px at 50% 58%,
+      color-mix(in srgb, var(--ink-3) 14%, transparent),
+      transparent 78%);
+  background-size: 86px 100%;
+  background-repeat: no-repeat;
+  -webkit-backdrop-filter: blur(1px) saturate(1.8) brightness(1.14);
+  backdrop-filter: blur(1px) saturate(1.8) brightness(1.14);
+  animation: fx-lens-glass 4.6s cubic-bezier(.6, 0, .4, 1) infinite;
+}
+@keyframes fx-lens-refract {
+  0%, 6% {
+    -webkit-mask-position: -86px 0;
+    mask-position: -86px 0;
+  }
+  94%, 100% {
+    -webkit-mask-position: calc(100% + 86px) 0;
+    mask-position: calc(100% + 86px) 0;
+  }
+}
+@keyframes fx-lens-glass {
+  0%, 6% {
+    clip-path: ellipse(40px 30px at -43px 50%);
+    background-position: -86px 0;
+  }
+  94%, 100% {
+    clip-path: ellipse(40px 30px at calc(100% + 43px) 50%);
+    background-position: calc(100% + 86px) 0;
+  }
+}
+
+/* 89 Whiplash — letters whip in on a stretched motion-blur smear, land with a
+   squash, then get dragged off the other side */
+.fx-smear {
+  font: 700 34px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+  color: var(--ink);
+  display: inline-flex;
+}
+.fx-smear b {
+  font-weight: inherit;
+  display: inline-block;
+  animation: fx-smear 2.9s cubic-bezier(.16, .9, .3, 1) infinite;
+  animation-delay: calc(var(--i) * .07s);
+}
+.fx-smear b:nth-child(3n)   { color: var(--ink-3); }
+.fx-smear b:nth-child(3n+2) { color: var(--ink-2); }
+@keyframes fx-smear {
+  0% {
+    transform: translateX(-120px) scale(3.4, .68) skewX(-16deg);
+    filter: blur(5px);
+    opacity: 0;
+  }
+  17% {
+    transform: translateX(0) scale(1, 1) skewX(0deg);
+    filter: blur(0);
+    opacity: 1;
+  }
+  25% { transform: scale(.84, 1.14); }
+  33% { transform: scale(1.06, .95); }
+  41%, 72% { transform: scale(1, 1); filter: blur(0); opacity: 1; }
+  92%, 100% {
+    transform: translateX(120px) scale(3.4, .68) skewX(16deg);
+    filter: blur(5px);
+    opacity: 0;
+  }
+}
+
+/* 90 Keycap — mechanical keycaps bottom out one after another, the skirt
+   collapsing under each cap as it clicks */
+.fx-keycap {
+  font: 700 19px/1 "JetBrains Mono", monospace;
+  letter-spacing: .02em;
+  display: inline-flex;
+  gap: 8px;
+  padding-bottom: 9px;
+}
+.fx-keycap b {
+  position: relative;
+  font-weight: inherit;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 40px;
+  border-radius: 10px;
+  color: var(--ink);
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--ink) 22%, transparent) 0%,
+      color-mix(in srgb, var(--ink) 7%, transparent) 46%,
+      transparent 100%),
+    color-mix(in srgb, var(--ink-2) 10%, #16121f);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--ink) 32%, transparent),
+    0 6px 0 color-mix(in srgb, var(--ink-2) 42%, #0b0812),
+    0 10px 16px rgb(0 0 0 / .5);
+  animation: fx-keycap 3.4s cubic-bezier(.3, 1.4, .5, 1) infinite;
+  animation-delay: calc(var(--i) * .16s);
+}
+.fx-keycap b::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 50% 50%,
+    color-mix(in srgb, var(--ink-3) 55%, transparent),
+    transparent 70%);
+  opacity: 0;
+  animation: fx-keycap-click 3.4s ease-out infinite;
+  animation-delay: calc(var(--i) * .16s);
+}
+@keyframes fx-keycap {
+  0%, 8% {
+    transform: translateY(0);
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, var(--ink) 32%, transparent),
+      0 6px 0 color-mix(in srgb, var(--ink-2) 42%, #0b0812),
+      0 10px 16px rgb(0 0 0 / .5);
+  }
+  16% {
+    transform: translateY(6px);
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, var(--ink) 14%, transparent),
+      0 0 0 color-mix(in srgb, var(--ink-2) 42%, #0b0812),
+      0 3px 8px rgb(0 0 0 / .55);
+  }
+  30%, 100% {
+    transform: translateY(0);
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, var(--ink) 32%, transparent),
+      0 6px 0 color-mix(in srgb, var(--ink-2) 42%, #0b0812),
+      0 10px 16px rgb(0 0 0 / .5);
+  }
+}
+@keyframes fx-keycap-click {
+  0%, 12% { opacity: 0; }
+  16%     { opacity: .9; }
+  34%,100%{ opacity: 0; }
+}
+
 /* ---------- Lazy loading ---------- */
 /* skip rendering work for far-offscreen cells */
 .cell {
