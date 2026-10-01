@@ -7,6 +7,7 @@ import { effects, perLetter, usesDataText, type Effect as EffectData } from '../
 import { categories, categoryLabels, categoryPath, effectPath, effectSeo } from '../../data/seo';
 import { effectBlurbs, effectCss, effectMarkup, prompts, snippets } from '../../utils/effectCss';
 import { guides, relatedEffects } from '../../utils/effectGuide';
+import { effectDates } from '../../utils/lastmod';
 
 export function getStaticPaths() {
   return effects.map((effect) => ({ params: { slug: effectSeo(effect).slug }, props: { effect } }));
@@ -34,8 +35,18 @@ const markup = effectMarkup(effect);
 const css = effectCss[effect.type] ?? '';
 const loop = guide.loopSeconds ? `${+guide.loopSeconds.toFixed(2)}s` : '';
 
-const title = `${keyword} in Pure CSS — Free Copy & Paste Code`;
-const description = `${lede}. A free ${lowerKeyword} made with pure CSS — no JavaScript. Copy the HTML and CSS, or an AI prompt to recreate it.`;
+// Google truncates titles past ~60 characters and descriptions past ~155, so
+// fall back to shorter forms when the long ones would be cut off.
+const title = [`${keyword} — Pure CSS, Free Code`, `${keyword} in Pure CSS`].find((t) => t.length <= 60) ?? keyword;
+// First clause of the lede: up to the first comma, colon or dash.
+const shortLede = lede.split(/,\s|:\s|\s—\s|;\s/)[0];
+const description =
+  [
+    `${keyword} in pure CSS: ${sentence}. Free HTML & CSS to copy, no JavaScript.`,
+    `${keyword} in pure CSS: ${shortLede.charAt(0).toLowerCase() + shortLede.slice(1)}. Free HTML & CSS to copy, no JavaScript.`,
+  ].find((d) => d.length <= 155) ??
+  `Free ${lowerKeyword} made with pure CSS, no JavaScript. Copy the HTML and CSS, or an AI prompt to recreate it.`;
+const { published, modified } = effectDates(effect);
 
 const SITE = Astro.site ?? new URL('https://text-effects.colorion.co');
 const url = new URL(effectPath(effect), SITE).href;
@@ -54,6 +65,8 @@ const schema = [
     description,
     url,
     inLanguage: 'en',
+    datePublished: published.toISOString(),
+    dateModified: modified.toISOString(),
     isPartOf: { '@id': `${SITE.href}#website` },
     image: new URL('/og-image.png', SITE).href,
     proficiencyLevel: 'Beginner',
@@ -91,7 +104,7 @@ if (guide.techniques.some((t) => t.id === 'property'))
   support.push('@property needs Chrome 85+, Safari 16.4+ or Firefox 128+; older browsers show the effect without the interpolated value.');
 ---
 
-<Layout title={title} description={description} schema={schema} ogType="article">
+<Layout title={title} description={description} schema={schema} ogType="article" styles={[effect, ...related].map((e) => e.type)}>
   <Sidebar />
 
   <div class="page-shell">
@@ -132,6 +145,7 @@ if (guide.techniques.some((t) => t.id === 'property'))
               <li>{guide.keyframeCount} @keyframes</li>
               {loop && <li>{loop} loop</li>}
               <li>{perLetter.has(effect.type) ? 'Per-letter' : 'Whole word'}</li>
+              <li><a href={`/text-effect-generator/?effect=${effectSeo(effect).slug}`}>Try with your text →</a></li>
             </ul>
             <div class="effect-copy-buttons">
               <button class="modal-copy mono effect-copy-alt" type="button" data-copy="prompt" data-label="Copy AI prompt">

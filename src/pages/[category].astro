@@ -18,11 +18,18 @@ const info = categories[category];
 const list = effectsIn(category);
 const n = list.length;
 
-const title = `${n} ${info.heading} — Free Copy & Paste Code`;
-// "CSS 3D Text Effects" → "3D text effects" for use mid-sentence
-const phrase = info.heading.replace(/^CSS /, '').toLowerCase().replace(/\bcss\b/g, 'CSS').replace(/\b3d\b/g, '3D');
+const title =
+  [`${n} ${info.heading} — Free Copy & Paste Code`, `${n} ${info.heading} — Free Code`, `${n} ${info.heading}`].find(
+    (t) => t.length <= 60
+  ) ?? info.heading;
+// "Retro CSS Text Effects" → "retro text effects" (the sentence already says "pure CSS")
+const phrase = info.heading.replace(/\bCSS /, '').toLowerCase().replace(/\b3d\b/g, '3D');
 const summary = info.summary.replace(/\s*(?:built with|in) pure CSS\.$/, '.');
-const description = `${n} free ${phrase} made with pure CSS. ${summary} No JavaScript — copy the HTML and CSS or an AI prompt.`;
+const description =
+  [
+    `${n} free ${phrase} made with pure CSS. ${summary} No JavaScript — copy the HTML and CSS or an AI prompt.`,
+    `${n} free ${phrase} in pure CSS. ${summary} No JavaScript, just copy & paste.`,
+  ].find((d) => d.length <= 155) ?? `${n} free ${phrase} in pure CSS. ${summary}`;
 
 const SITE = Astro.site ?? new URL('https://text-effects.colorion.co');
 const url = new URL(categoryPath(category), SITE).href;
@@ -54,7 +61,7 @@ const schema = [
 ];
 ---
 
-<Layout title={title} description={description} schema={schema}>
+<Layout title={title} description={description} schema={schema} styles={list.map((e) => e.type)}>
   <Sidebar />
 
   <div class="page-shell">

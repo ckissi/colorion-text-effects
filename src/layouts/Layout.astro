@@ -1,6 +1,6 @@
 ---
-import '../styles/global.css';
-import { effects } from '../data/effects';
+import { effects, type EffectType } from '../data/effects';
+import { pageCss } from '../utils/pageCss';
 
 interface Props {
   title?: string;
@@ -8,6 +8,8 @@ interface Props {
   /** extra schema.org nodes, merged into the page's JSON-LD @graph */
   schema?: Record<string, unknown>[];
   ogType?: 'website' | 'article';
+  /** effects rendered on the page; only their CSS is inlined (default: all) */
+  styles?: readonly EffectType[];
 }
 
 const {
@@ -15,6 +17,7 @@ const {
   description = `A library of ${effects.length} animated text effects built with pure CSS — gradient, glitch, typewriter, neon, liquid fill and more. Click any effect to copy its CSS. No JavaScript, no dependencies, MIT licensed.`,
   schema = [],
   ogType = 'website',
+  styles = effects.map((e) => e.type),
 } = Astro.props;
 
 // Absolute URLs for canonical + social tags. Astro.site is configured in
@@ -47,6 +50,9 @@ const jsonLd = {
     <title>{title}</title>
     <link rel="canonical" href={canonical} />
 
+    <!-- Site chrome + only the effects this page renders (see utils/pageCss.ts) -->
+    <style is:inline set:html={pageCss(styles)}></style>
+
     <!-- Favicons + PWA manifest -->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -77,7 +83,7 @@ const jsonLd = {
     <!-- Self-hosted fonts. Preload the above-the-fold weights (Inter 500 powers
          the hero h1 / LCP element; Inter 400 the body copy; JetBrains Mono 600
          paints every effect stage) so they arrive before paint. @font-face
-         lives in the inlined global.css. -->
+         lives in the inlined stylesheet. -->
     <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin-500-normal.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin-400-normal.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/fonts/jetbrains-mono-latin-600-normal.woff2" crossorigin />

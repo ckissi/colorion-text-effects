@@ -40,7 +40,7 @@ function extractKeyframes(src: string): Map<string, string> {
   return map;
 }
 
-const allKeyframes = extractKeyframes(css);
+export const allKeyframes = extractKeyframes(css);
 
 // Slice the effects section into one block per numbered marker.
 // Allow multi-line marker comments (e.g. 24 Still-Water, 30 Negative).
@@ -49,10 +49,14 @@ const markers = [...css.matchAll(markerRe)];
 const sectionEnd = css.indexOf('/* ---------- Lazy loading');
 
 const byIndex = new Map<string, string>();
+/** 1-based [first, last] line of each effect's block in global.css, keyed by effect index */
+export const blockLines = new Map<string, [number, number]>();
+const lineAt = (offset: number) => css.slice(0, offset).split('\n').length;
 markers.forEach((marker, i) => {
   const start = marker.index!;
   const end = i + 1 < markers.length ? markers[i + 1].index! : sectionEnd;
   byIndex.set(marker[1], css.slice(start, end).trim());
+  blockLines.set(marker[1], [lineAt(start), lineAt(end) - 1]);
 });
 
 function selfContained(block: string): string {
@@ -66,12 +70,15 @@ function selfContained(block: string): string {
   return extras.length ? `${block}\n\n${extras.join('\n\n')}` : block;
 }
 
+/** Raw CSS block per effect type, exactly as written in global.css (no keyframes appended). */
+export const effectBlocks: Record<string, string> = {};
 export const effectCss: Record<string, string> = {};
 // One-line description from each effect's marker comment (text after the "—").
 export const effectBlurbs: Record<string, string> = {};
 for (const effect of effects) {
   const block = byIndex.get(effect.index);
   if (!block) continue;
+  effectBlocks[effect.type] = block;
   effectCss[effect.type] = INK_NOTE + selfContained(block);
   const marker = block.match(/^\/\*\s*\d{2}\s+((?:[^*]|\*(?!\/))*)\*\//);
   const blurb = marker?.[1].replace(/\s+/g, ' ').split(/\s+—\s+/).slice(1).join(' — ').trim();

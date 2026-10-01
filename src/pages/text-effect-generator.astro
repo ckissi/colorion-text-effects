@@ -1,0 +1,337 @@
+---
+import Layout from '../layouts/Layout.astro';
+import EffectCard from '../components/EffectCard.astro';
+import Sidebar from '../components/Sidebar.astro';
+import { effects, perLetter, usesDataText } from '../data/effects';
+import { categories, categoryOrder, categoryPath } from '../data/seo';
+
+const n = effects.length;
+const title = 'Text Effect Generator — Free Animated CSS Text Maker';
+const description = `Free text effect generator: type your text, pick colours and preview ${n} animated text effects live. Copy the HTML & CSS in one click, no sign-up.`;
+
+// What the client needs to rebuild each effect's markup for a new word.
+const meta = Object.fromEntries(
+  effects.map((e) => [
+    e.type,
+    { text: e.text, letters: perLetter.has(e.type), dataText: usesDataText.has(e.type) },
+  ])
+);
+
+const SITE = Astro.site ?? new URL('https://text-effects.colorion.co');
+const url = new URL('/text-effect-generator/', SITE).href;
+const schema = [
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'CSS Text Effects', item: SITE.href },
+      { '@type': 'ListItem', position: 2, name: 'Text Effect Generator', item: url },
+    ],
+  },
+  {
+    '@type': 'WebApplication',
+    name: 'Text Effect Generator',
+    url,
+    description,
+    applicationCategory: 'DesignApplication',
+    operatingSystem: 'Any',
+    browserRequirements: 'Requires a modern browser',
+    isAccessibleForFree: true,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    isPartOf: { '@id': `${SITE.href}#website` },
+  },
+];
+---
+
+<Layout title={title} description={description} schema={schema}>
+  <Sidebar />
+
+  <div class="page-shell">
+    <header class="site-header effect-header">
+      <nav class="breadcrumbs mono" aria-label="Breadcrumb">
+        <a href="/">CSS Text Effects</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Text effect generator</span>
+      </nav>
+      <div class="header-status mono">
+        <span class="pulse-dot"></span>
+        {n} effects · MIT
+      </div>
+    </header>
+
+    <section class="hero">
+      <span class="hero-tag mono">Free · No sign-up · Pure CSS output</span>
+      <h1>Text effect <em>generator</em></h1>
+      <p>
+        Type your own text, pick your colours and watch all {n} animated text effects update live. When one
+        fits, copy its HTML and CSS — already set to your text and colours — and paste it into any website.
+        The generated code is plain CSS: no JavaScript, no libraries, no images.
+      </p>
+    </section>
+
+    <main class="library">
+      <form class="panel gen-controls" id="gen-form" autocomplete="off" onsubmit="return false">
+        <label class="gen-field gen-text">
+          <span class="mono">Your text</span>
+          <input type="text" id="gen-text" name="text" maxlength="16" placeholder="Type something…" spellcheck="false" />
+        </label>
+        <label class="gen-field gen-color">
+          <span class="mono">Text</span>
+          <input type="color" id="gen-ink" name="ink" value="#F5F2FF" />
+        </label>
+        <label class="gen-field gen-color">
+          <span class="mono">Accent 1</span>
+          <input type="color" id="gen-ink2" name="ink2" value="#FF4FD8" />
+        </label>
+        <label class="gen-field gen-color">
+          <span class="mono">Accent 2</span>
+          <input type="color" id="gen-ink3" name="ink3" value="#4FF8FF" />
+        </label>
+        <button type="button" class="gen-reset mono" id="gen-reset">Reset</button>
+      </form>
+
+      <div class="panel gen-panel">
+        <h2 class="sr-only">Preview every text effect</h2>
+        <div class="library-head">
+          <span class="mono">Hover a card · CSS copies the code with your text · Prompt copies an AI prompt</span>
+          <span class="mono" id="gen-status" aria-live="polite">{n} effects</span>
+        </div>
+        <div class="grid gen-grid" id="gen-grid">
+          {effects.map((effect) => <EffectCard effect={effect} actions />)}
+        </div>
+      </div>
+    </main>
+
+    <section class="guide" aria-labelledby="gen-how">
+      <h2 id="gen-how">How to use the text effect generator</h2>
+      <ol class="effect-list gen-steps">
+        <li><strong>Type your text</strong> in the box above. Every effect re-renders with it instantly; long words are scaled to fit the preview.</li>
+        <li><strong>Pick three colours</strong>: the main text colour and two accents. Glows, shadows, gradients and highlights all use them.</li>
+        <li><strong>Copy the code.</strong> Hover a card and press <code>CSS</code> to copy the HTML and CSS with your text and colours, or <code>Prompt</code> to copy instructions for an AI coding agent.</li>
+        <li><strong>Paste it</strong> into your page. The CSS is self-contained, works in all modern browsers and switches the animation off for visitors who prefer reduced motion.</li>
+      </ol>
+      <p>
+        A few effects keep their own wording because the text lives inside the CSS animation: the scramble
+        decoder and the text-changing rotator. Open their pages to see how to edit those words.
+      </p>
+
+      <h2>Text effects you can generate</h2>
+      <ul class="guide-styles">
+        {
+          categoryOrder.map((c) => (
+            <li>
+              <a href={categoryPath(c)}>{categories[c].heading}</a>
+              <span>{categories[c].summary}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+
+  <script type="application/json" id="gen-meta" set:html={JSON.stringify(meta)} />
+</Layout>
+
+<script>
+  type Meta = Record<string, { text: string; letters: boolean; dataText: boolean }>;
+  type EffectData = { snippets: Record<string, string>; prompts: Record<string, string> };
+
+  const meta: Meta = JSON.parse(document.getElementById('gen-meta')!.textContent || '{}');
+  const form = document.getElementById('gen-form') as HTMLFormElement;
+  const textInput = document.getElementById('gen-text') as HTMLInputElement;
+  const colorInputs = {
+    ink: document.getElementById('gen-ink') as HTMLInputElement,
+    ink2: document.getElementById('gen-ink2') as HTMLInputElement,
+    ink3: document.getElementById('gen-ink3') as HTMLInputElement,
+  };
+  const DEFAULTS = { ink: '#F5F2FF', ink2: '#FF4FD8', ink3: '#4FF8FF' };
+  const cells = Array.from(document.querySelectorAll<HTMLElement>('#gen-grid .cell'));
+
+  // Effects whose words are written into the CSS itself (content keyframes).
+  const FIXED = new Set(['decoder', 'rotator']);
+
+  const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+  /** Mirrors effectMarkup() in src/utils/effectCss.ts, plus per-effect length fixes. */
+  function markupFor(type: string, raw: string): string {
+    const m = meta[type];
+    if (FIXED.has(type) || !raw) raw = m.text;
+    let text = raw;
+    if (type === 'ticker') text = Array(5).fill(`${raw} ✦ `).join('');
+    const t = esc(text);
+    if (type === 'contour') {
+      const width = Math.max(260, Math.round((260 * raw.length) / m.text.length));
+      return `<svg class="fx-contour" viewBox="0 0 ${width} 56" role="img" aria-label="${t}"><text x="50%" y="50%" dominant-baseline="central" text-anchor="middle">${t}</text></svg>`;
+    }
+    if (type === 'decoder') return `<div class="fx-decoder" role="img" aria-label="${t}"></div>`;
+    if (m.letters) {
+      // per-letter spans collapse ordinary spaces, so keep them as no-break spaces
+      const spans = [...text.replace(/ /g, ' ')]
+        .map((ch, i) => `<b aria-hidden="true" style="--i:${i}">${esc(ch)}</b>`)
+        .join('');
+      return `<div class="fx-${type}" role="img" aria-label="${t}">${spans}</div>`;
+    }
+    if (m.dataText) return `<div class="fx-${type}" data-text="${t}">${t}</div>`;
+    return `<div class="fx-${type}">${t}</div>`;
+  }
+
+  // The typewriter's width and steps() are tied to the character count.
+  const typeStyle = document.createElement('style');
+  document.head.append(typeStyle);
+  const typewriterCss = (n: number) =>
+    `#gen-grid .fx-typewriter{width:${n}ch;animation:fx-gen-type 3.6s steps(${n}) infinite,fx-caret .65s steps(1) infinite}` +
+    `@keyframes fx-gen-type{0%,8%{width:0}55%,100%{width:${n}ch}}`;
+
+  const state = () => ({
+    text: textInput.value.trim(),
+    ink: colorInputs.ink.value,
+    ink2: colorInputs.ink2.value,
+    ink3: colorInputs.ink3.value,
+  });
+
+  /** Shrink a preview that is wider than its card (layout width ignores the effect's own transforms). */
+  function fit(cell: HTMLElement) {
+    const stage = cell.querySelector<HTMLElement>('.stage')!;
+    stage.style.transform = '';
+    const el = stage.firstElementChild as HTMLElement | null;
+    // the marquee is meant to run past the card edges
+    if (!el || cell.dataset.type === 'ticker') return;
+    const avail = cell.clientWidth - 48;
+    const w = el instanceof SVGElement ? el.getBoundingClientRect().width : el.offsetWidth;
+    if (w > avail) stage.style.transform = `scale(${(avail / w).toFixed(3)})`;
+  }
+
+  function render() {
+    const s = state();
+    for (const cell of cells) {
+      const type = cell.dataset.type!;
+      const stage = cell.querySelector<HTMLElement>('.stage')!;
+      stage.innerHTML = markupFor(type, s.text);
+      cell.style.setProperty('--ink', s.ink);
+      cell.style.setProperty('--ink-2', s.ink2);
+      cell.style.setProperty('--ink-3', s.ink3);
+      fit(cell);
+    }
+    typeStyle.textContent = s.text && s.text.length !== 10 ? typewriterCss(s.text.length) : '';
+    // Shareable URL: ?text=…&ink=… (defaults omitted)
+    const params = new URLSearchParams();
+    if (s.text) params.set('text', s.text);
+    (Object.keys(DEFAULTS) as (keyof typeof DEFAULTS)[]).forEach((k) => {
+      if (s[k].toLowerCase() !== DEFAULTS[k].toLowerCase()) params.set(k, s[k].replace('#', ''));
+    });
+    const qs = params.toString();
+    history.replaceState(null, '', qs ? `?${qs}` : location.pathname);
+  }
+
+  // ---------- Copy ----------
+  let dataPromise: Promise<EffectData> | undefined;
+  const loadData = () =>
+    (dataPromise ??= fetch('/effect-data.json', { cache: 'no-store' }).then((r) => {
+      if (!r.ok) throw new Error(`effect-data.json ${r.status}`);
+      return r.json() as Promise<EffectData>;
+    }));
+  document.getElementById('gen-grid')!.addEventListener('pointerenter', loadData, { once: true });
+
+  const ROOT_TOKENS = /:root \{ --ink: currentColor; --ink-2: #FF4FD8; --ink-3: #4FF8FF; \}/;
+
+  function customCss(type: string, snippet: string): string {
+    const s = state();
+    let css = snippet.replace(/^<!-- Markup:[\s\S]*?-->\s*/, '');
+    const ink = s.ink.toLowerCase() === DEFAULTS.ink.toLowerCase() ? 'currentColor' : s.ink;
+    css = css.replace(ROOT_TOKENS, () => `:root { --ink: ${ink}; --ink-2: ${s.ink2}; --ink-3: ${s.ink3}; }`);
+    if (type === 'typewriter' && s.text) {
+      const n = s.text.length;
+      css = css.replace(/\b10ch\b/g, `${n}ch`).replace(/steps\(10\)/g, `steps(${n})`);
+    }
+    return css;
+  }
+
+  async function copy(cell: HTMLElement, mode: 'css' | 'prompt', btn: HTMLButtonElement) {
+    const type = cell.dataset.type!;
+    const s = state();
+    let data: EffectData;
+    try {
+      data = await loadData();
+    } catch {
+      btn.textContent = 'Failed';
+      return;
+    }
+    const markup = markupFor(type, s.text);
+    const css = customCss(type, data.snippets[type] || '');
+    let text: string;
+    if (mode === 'css') {
+      text = `<!-- HTML -->\n${markup}\n\n<style>\n${css}\n</style>\n`;
+    } else {
+      const word = FIXED.has(type) || !s.text ? meta[type].text : s.text;
+      text = (data.prompts[type] || '')
+        .replace(/Use this exact HTML markup:\n\n[^\n]*/, () => `Use this exact HTML markup:\n\n${markup}`)
+        .replace(/Apply this CSS:\n\n[\s\S]*?\n\nRequirements:/, () => `Apply this CSS:\n\n${css}\n\nRequirements:`)
+        .split(`"${meta[type].text}"`)
+        .join(`"${word}"`);
+    }
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.append(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+    }
+    (window as { plausible?: (e: string, o: object) => void }).plausible?.('Copy', {
+      props: { effect: cell.dataset.name || '', mode, from: 'generator' },
+    });
+    const label = btn.innerHTML;
+    btn.textContent = 'Copied ✓';
+    setTimeout(() => (btn.innerHTML = label), 1600);
+  }
+
+  cells.forEach((cell) => {
+    cell.querySelectorAll<HTMLButtonElement>('[data-action]').forEach((btn) => {
+      const mode = btn.dataset.action === 'prompt' ? 'prompt' : 'css';
+      btn.setAttribute('aria-label', `Copy ${mode === 'css' ? 'HTML and CSS' : 'AI prompt'} for ${cell.dataset.name} with your text`);
+      btn.addEventListener('click', () => copy(cell, mode, btn));
+    });
+  });
+
+  // ---------- Wire up ----------
+  const params = new URLSearchParams(location.search);
+  if (params.get('text')) textInput.value = params.get('text')!.slice(0, 16);
+  (Object.keys(colorInputs) as (keyof typeof colorInputs)[]).forEach((k) => {
+    const v = params.get(k);
+    if (v && /^[0-9a-f]{6}$/i.test(v)) colorInputs[k].value = `#${v}`;
+  });
+
+  let frame = 0;
+  form.addEventListener('input', () => {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(render);
+  });
+  document.getElementById('gen-reset')!.addEventListener('click', () => {
+    textInput.value = '';
+    (Object.keys(colorInputs) as (keyof typeof colorInputs)[]).forEach((k) => (colorInputs[k].value = DEFAULTS[k]));
+    render();
+    textInput.focus();
+  });
+  addEventListener('resize', () => cells.forEach(fit));
+
+  // Pause off-screen previews, as on the home page.
+  document.documentElement.classList.add('lazy-enabled');
+  const io = new IntersectionObserver(
+    (entries) => entries.forEach((e) => e.target.classList.toggle('in-view', e.isIntersecting)),
+    { rootMargin: '100px' }
+  );
+  cells.forEach((c) => io.observe(c));
+
+  if (location.search) render();
+
+  // Arriving from an effect page: /text-effect-generator/?effect=<slug>
+  const target = params.get('effect') && cells.find((c) => c.dataset.slug === params.get('effect'));
+  if (target) {
+    target.scrollIntoView({ block: 'center' });
+    target.classList.add('gen-target');
+  }
+  textInput.focus({ preventScroll: !!target });
+</script>
