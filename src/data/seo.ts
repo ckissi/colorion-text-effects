@@ -64,7 +64,7 @@ export const categories: Record<Category, CategoryInfo> = {
     summary: 'Typewriter, scramble, highlighter, shimmer and wipe-in text reveals in pure CSS.',
     intro: [
       'Reveal animations control how much of the word is visible over time. A typewriter animates the width of an overflow: hidden box with steps(), one step per character. Wipes and highlighter strokes animate clip-path or a background-size sweep across the text.',
-      'Other reveals here swap characters inside @keyframes content to decode scrambled text, pass a luminance band over muted letters for the “AI thinking” shimmer, or stamp, redact and karaoke-fill the word.',
+      'Other reveals here swap characters inside @keyframes content to decode scrambled text, pass a luminance band over muted letters for the “AI thinking” shimmer, or stamp, redact and karaoke-fill the word, and hide it under shimmering invisible ink.',
     ],
   },
   depth: {
@@ -79,10 +79,10 @@ export const categories: Record<Category, CategoryInfo> = {
   retro: {
     slug: 'css-retro-text-effects',
     heading: 'Retro CSS Text Effects',
-    summary: 'CRT terminal, split-flap, LED board, dot-matrix and matrix-rain text in pure CSS.',
+    summary: '70s retro, CRT terminal, split-flap, LED board, dot-matrix and matrix-rain text in pure CSS.',
     intro: [
       'Retro display effects recreate hardware with gradients. repeating-linear-gradient draws CRT scanlines and LED grids, radial gradients form dot-matrix pixels, and steps() timing reproduces the mechanical clack of a split-flap departure board.',
-      'Each effect here is still live, selectable text — no canvas, no images — so it stays accessible and scales cleanly with font-size.',
+      'Stacked offset text-shadow layers in a warm cream, orange and brown palette give the classic 70s retro type look. Each effect here is still live, selectable text — no canvas, no images — so it stays accessible and scales cleanly with font-size.',
     ],
   },
   motion: {
@@ -91,16 +91,16 @@ export const categories: Record<Category, CategoryInfo> = {
     summary: 'Per-letter wave, bounce, pendulum, domino, explode and marquee text animations in pure CSS.',
     intro: [
       'Letter-by-letter animation in CSS wraps each character in its own element with an index custom property — <b style="--i:3">. Every letter runs the same @keyframes, but animation-delay: calc(var(--i) * 0.08s) offsets them so the motion ripples through the word.',
-      'With that one pattern you get waves, bounces, swinging pendulums, toppling dominoes, shattering and smoke-like letters. Transforms keep it GPU-composited, so it stays smooth even on long words.',
+      'With that one pattern you get waves, bounces, swinging pendulums, toppling dominoes, shattering and smoke-like letters, and laser bolts that fire each letter into place. Transforms keep it GPU-composited, so it stays smooth even on long words.',
     ],
   },
   texture: {
     slug: 'css-textured-text-effects',
     heading: 'CSS Textured & Material Text Effects',
-    summary: 'Chrome, gold foil, marble, glass, liquid, ice and film-grain text in pure CSS.',
+    summary: 'Chrome, gold foil, marble, glass, liquid, ice, grunge and film-grain text in pure CSS.',
     intro: [
       'Material effects fill the letters with a texture instead of a flat colour. Layered linear and radial gradients clipped to the text imitate brushed chrome, gold foil, marble veining and frost; a moving highlight band adds the specular sheen.',
-      'Glass and lens effects use backdrop-filter to blur what is behind them, and noise, caustics and liquid fills are built from animated gradients and masks — no image files required.',
+      'Glass and lens effects use backdrop-filter to blur what is behind them, and noise, grunge wear, caustics and liquid fills are built from animated gradients, inline SVG noise and masks — no image files required.',
     ],
   },
 };
@@ -124,7 +124,7 @@ const seo: Record<EffectType, EffectSeo> = {
   neon: { slug: 'neon-text-effect', keyword: 'Neon Text Effect', category: 'glow' },
   liquid: { slug: 'liquid-fill-text-animation', keyword: 'Liquid Fill Text Animation', category: 'texture' },
   chrome: { slug: 'chrome-text-effect', keyword: 'Chrome Metallic Text Effect', category: 'texture' },
-  focus: { slug: 'blur-focus-text-animation', keyword: 'Blur Focus Text Animation', category: 'motion' },
+  focus: { slug: 'blur-focus-text-animation', keyword: 'Text Blur Focus Effect', category: 'motion' },
   wave: { slug: 'wave-text-animation', keyword: 'Wavy Text Animation', category: 'motion' },
   sliced: { slug: 'sliced-text-effect', keyword: 'Sliced Text Effect', category: 'glitch' },
   decoder: { slug: 'text-scramble-effect', keyword: 'Text Scramble Decode Effect', category: 'reveal' },
@@ -201,13 +201,22 @@ const seo: Record<EffectType, EffectSeo> = {
   warp: { slug: 'hyperspace-zoom-text-animation', keyword: 'Hyperspace Zoom Text Animation', category: 'depth' },
   shimmer: { slug: 'shimmer-text-effect', keyword: 'Shimmer Text Effect', category: 'reveal' },
   ticker: { slug: 'marquee-text-animation', keyword: 'Infinite Marquee Text Animation', category: 'motion' },
-  kaboom: { slug: 'slam-text-animation', keyword: 'Slam-In Impact Text Animation', category: 'motion' },
+  kaboom: { slug: 'slam-text-animation', keyword: 'Text Slam Effect Animation', category: 'motion' },
   karaoke: { slug: 'karaoke-text-fill-animation', keyword: 'Karaoke Text Fill Animation', category: 'reveal' },
   lenticular: { slug: 'holographic-card-text-effect', keyword: 'Holographic Card Text Effect', category: 'gradient' },
   balloon: { slug: 'balloon-text-animation', keyword: 'Inflating Balloon Text Animation', category: 'motion' },
   lens: { slug: 'liquid-glass-text-effect', keyword: 'Liquid Glass Lens Text Effect', category: 'texture' },
   smear: { slug: 'motion-blur-text-animation', keyword: 'Motion Blur Text Animation', category: 'motion' },
   keycap: { slug: 'keyboard-keycap-text-animation', keyword: 'Keyboard Keycap Text Animation', category: 'depth' },
+  groovy: { slug: 'retro-text-effect', keyword: 'Retro 70s Text Effect', category: 'retro' },
+  grunge: { slug: 'grunge-text-effect', keyword: 'Grunge Distressed Text Effect', category: 'texture' },
+  pewpew: { slug: 'pew-pew-text-effect', keyword: 'Pew Pew Laser Text Effect', category: 'motion' },
+  invisible: { slug: 'invisible-ink-text-effect', keyword: 'Invisible Ink Text Effect', category: 'reveal' },
+  loud: { slug: 'loud-text-animation', keyword: 'Loud Shouting Text Animation', category: 'motion' },
+  gentle: { slug: 'gentle-text-animation', keyword: 'Gentle Whisper Text Animation', category: 'reveal' },
+  rotator: { slug: 'text-changing-animation', keyword: 'Text Changing Animation', category: 'reveal' },
+  loader: { slug: 'text-loading-animation', keyword: 'Text Loading Animation', category: 'motion' },
+  fade: { slug: 'fading-text-effect', keyword: 'Fading Text Effect', category: 'reveal' },
 };
 
 export const effectSeo = (effect: Effect): EffectSeo => seo[effect.type];

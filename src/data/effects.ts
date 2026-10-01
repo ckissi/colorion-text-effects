@@ -88,7 +88,16 @@ export type EffectType =
   | 'balloon'
   | 'lens'
   | 'smear'
-  | 'keycap';
+  | 'keycap'
+  | 'groovy'
+  | 'grunge'
+  | 'pewpew'
+  | 'invisible'
+  | 'loud'
+  | 'gentle'
+  | 'rotator'
+  | 'loader'
+  | 'fade';
 
 export interface Effect {
   index: string;
@@ -194,6 +203,15 @@ export const effects: Effect[] = [
   { index: '88', name: 'Liquid-Lens', type: 'lens', text: 'REFRACT' },
   { index: '89', name: 'Whiplash', type: 'smear', text: 'WHOOSH' },
   { index: '90', name: 'Keycap', type: 'keycap', text: 'PRESS' },
+  { index: '91', name: 'Groovy', type: 'groovy', text: 'GROOVY' },
+  { index: '92', name: 'Grunge', type: 'grunge', text: 'GRUNGE' },
+  { index: '93', name: 'Pew-Pew', type: 'pewpew', text: 'PEW\u00a0PEW' },
+  { index: '94', name: 'Invisible-Ink', type: 'invisible', text: 'SECRET' },
+  { index: '95', name: 'Loud', type: 'loud', text: 'HEY!' },
+  { index: '96', name: 'Whisper', type: 'gentle', text: 'psst…' },
+  { index: '97', name: 'Rotator', type: 'rotator', text: 'BOLD' },
+  { index: '98', name: 'Loader', type: 'loader', text: 'LOADING' },
+  { index: '99', name: 'Dissolve', type: 'fade', text: 'FADE\u00a0AWAY' },
 ];
 
 /** effects whose letters are wrapped in indexed <b> spans for per-letter animation */
@@ -225,6 +243,10 @@ export const perLetter = new Set<EffectType>([
   'balloon',
   'smear',
   'keycap',
+  'groovy',
+  'pewpew',
+  'loader',
+  'fade',
 ]);
 
 /** effects that duplicate their text into pseudo-elements via data-text */
@@ -251,4 +273,6 @@ export const usesDataText = new Set<EffectType>([
   'sonar',
   'lenticular',
   'lens',
+  'grunge',
+  'invisible',
 ]);
