@@ -1,9 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Effect from '../../components/Effect.astro';
+import EffectCard from '../../components/EffectCard.astro';
 import Sidebar from '../../components/Sidebar.astro';
 import { effects, perLetter, usesDataText, type Effect as EffectData } from '../../data/effects';
-import { categoryLabels, effectPath, effectSeo } from '../../data/seo';
+import { categories, categoryLabels, categoryPath, effectPath, effectSeo } from '../../data/seo';
 import { effectBlurbs, effectCss, effectMarkup, prompts, snippets } from '../../utils/effectCss';
 import { guides, relatedEffects } from '../../utils/effectGuide';
 
@@ -43,7 +44,8 @@ const schema = [
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'CSS Text Effects', item: SITE.href },
-      { '@type': 'ListItem', position: 2, name: keyword, item: url },
+      { '@type': 'ListItem', position: 2, name: categories[category].heading, item: new URL(categoryPath(category), SITE).href },
+      { '@type': 'ListItem', position: 3, name: keyword, item: url },
     ],
   },
   {
@@ -97,6 +99,8 @@ if (guide.techniques.some((t) => t.id === 'property'))
       <nav class="breadcrumbs mono" aria-label="Breadcrumb">
         <a href="/" id="home-link">CSS Text Effects</a>
         <span aria-hidden="true">/</span>
+        <a href={categoryPath(category)} class="breadcrumb-category">{categoryLabels[category]}</a>
+        <span aria-hidden="true" class="breadcrumb-category">/</span>
         <span aria-current="page">{effect.name}</span>
       </nav>
       <div class="header-status mono">
@@ -108,7 +112,7 @@ if (guide.techniques.some((t) => t.id === 'property'))
 
     <main class="effect-page" data-slug={effectSeo(effect).slug}>
       <section class="hero effect-hero">
-        <span class="hero-tag mono">{categoryLabels[category]} · Pure CSS · No JavaScript</span>
+        <span class="hero-tag mono"><a href={categoryPath(category)}>{categoryLabels[category]}</a> · Pure CSS · No JavaScript</span>
         <h1>{keyword} <em>in pure CSS</em></h1>
         <p>
           {lede}. <strong>{effect.name}</strong> is a free {lowerKeyword} built with nothing but HTML and
@@ -124,7 +128,7 @@ if (guide.techniques.some((t) => t.id === 'property'))
           </div>
           <div class="effect-demo-foot">
             <ul class="effect-facts mono">
-              <li>{categoryLabels[category]}</li>
+              <li><a href={categoryPath(category)}>{categoryLabels[category]}</a></li>
               <li>{guide.keyframeCount} @keyframes</li>
               {loop && <li>{loop} loop</li>}
               <li>{perLetter.has(effect.type) ? 'Per-letter' : 'Whole word'}</li>
@@ -214,21 +218,14 @@ if (guide.techniques.some((t) => t.id === 'property'))
 
         <section class="effect-section">
           <h2>Related text effects</h2>
+          <p>
+            More in <a href={categoryPath(category)}>{categories[category].heading.toLowerCase().replace(/\bcss\b/g, 'CSS').replace(/\b3d\b/g, '3D')}</a>, plus
+            effects built with the same techniques.
+          </p>
           <div class="panel">
             <div class="grid effect-related">
               {
-                related.map((r) => (
-                  <a class="cell" href={effectPath(r)}>
-                    <span class="cell-index mono">{r.index}</span>
-                    <div class="stage">
-                      <Effect type={r.type} text={r.text} />
-                    </div>
-                    <h3>
-                      {r.name}
-                      <span class="cell-keyword">{effectSeo(r).keyword}</span>
-                    </h3>
-                  </a>
-                ))
+                related.map((r) => <EffectCard effect={r} />)
               }
             </div>
           </div>

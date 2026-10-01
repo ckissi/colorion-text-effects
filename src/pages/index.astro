@@ -1,15 +1,52 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Effect from '../components/Effect.astro';
+import EffectCard from '../components/EffectCard.astro';
+import CategoryNav from '../components/CategoryNav.astro';
 import Sidebar from '../components/Sidebar.astro';
 import { effects } from '../data/effects';
-import { effectPath, effectSeo } from '../data/seo';
+import { categories, categoryOrder, categoryPath, effectPath, effectSeo } from '../data/seo';
 
 // The CSS snippets + LLM prompts are emitted as a static /effect-data.json file
 // (see effect-data.json.ts) and fetched on demand when the modal first opens,
 // so that text stays out of the initial HTML document.
 
 const SITE = Astro.site ?? new URL('https://text-effects.colorion.co');
+const n = effects.length;
+
+const title = `CSS Text Effects & Animations — ${n} Free Copy & Paste Snippets`;
+const description = `${n} free CSS text effects and text animations — gradient, glitch, neon, typewriter, 3D and more. Pure CSS, no JavaScript: copy & paste the code or an AI prompt. MIT licensed.`;
+
+// Shown on the page and mirrored into FAQPage structured data.
+const faq = [
+  {
+    q: 'How do I animate text with CSS?',
+    a: 'Define the motion in a @keyframes rule and attach it with the animation property. The properties that animate smoothly are transform, opacity, filter, background-position, text-shadow and clip-path. To animate letter by letter, wrap each character in its own element with an index (style="--i:0") and offset the animation with animation-delay: calc(var(--i) * 0.08s).',
+  },
+  {
+    q: 'Can I make text effects without JavaScript?',
+    a: `Yes. All ${n} effects here are pure CSS — even the scramble-decode effect, which swaps characters with the content property inside @keyframes. There is nothing to install and nothing to run.`,
+  },
+  {
+    q: 'How do I make gradient text in CSS?',
+    a: 'Give the text a gradient background, clip it to the letters with background-clip: text (plus -webkit-background-clip: text), and set color: transparent. Make the background wider than the text and animate background-position to make the gradient flow.',
+  },
+  {
+    q: 'How do I change the colours of an effect?',
+    a: 'Every effect paints with three custom properties: --ink for the main text colour and --ink-2 / --ink-3 for the accents. Override them on the element or on :root to re-skin any effect without touching its keyframes.',
+  },
+  {
+    q: 'Do these CSS text effects work in all browsers?',
+    a: 'They work in current Chrome, Edge, Safari and Firefox. The few effects that rely on a non-standard feature, such as -webkit-box-reflect, say so on their page and degrade gracefully. All of them stop animating under prefers-reduced-motion.',
+  },
+  {
+    q: 'Are the text effects free for commercial use?',
+    a: 'Yes. The whole library is MIT licensed, so you can use, modify and ship the effects in personal and commercial projects.',
+  },
+  {
+    q: 'What does the Prompt button do?',
+    a: 'It copies a ready-made instruction for an AI coding agent (Claude Code, Cursor, Copilot and others) containing the exact markup and CSS, so the agent can drop the effect into your project.',
+  },
+];
 const schema = [
   {
     '@type': 'CollectionPage',
@@ -17,6 +54,7 @@ const schema = [
     name: 'CSS Text Effects',
     url: SITE.href,
     isPartOf: { '@id': `${SITE.href}#website` },
+    description,
     mainEntity: {
       '@type': 'ItemList',
       numberOfItems: effects.length,
@@ -28,10 +66,18 @@ const schema = [
       })),
     },
   },
+  {
+    '@type': 'FAQPage',
+    mainEntity: faq.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  },
 ];
 ---
 
-<Layout schema={schema}>
+<Layout title={title} description={description} schema={schema}>
   <Sidebar />
 
   <div class="page-shell">
@@ -44,7 +90,7 @@ const schema = [
 
     <section class="hero">
       <span class="hero-tag mono">Pure CSS · Copy &amp; paste</span>
-      <h1>{effects.length} <em>CSS text effects</em>,<br />free to copy.</h1>
+      <h1 class="home-title">{n} <em>CSS text effects</em><br />&amp; animations, free to copy.</h1>
       <p>
         A library of {effects.length} animated text effects built with pure CSS —
         aurora gradients, glitches, split-flap boards, liquid fills and other
@@ -57,6 +103,7 @@ const schema = [
     </section>
 
     <main class="library">
+      <CategoryNav />
       <div class="panel">
         <h2 class="sr-only">Text effect library</h2>
         <div class="library-head">
@@ -65,36 +112,41 @@ const schema = [
         </div>
 
         <div class="grid" id="effect-grid">
-        {
-          effects.map((effect) => (
-            <article
-              class="cell"
-              data-type={effect.type}
-              data-name={effect.name}
-              data-index={effect.index}
-              data-slug={effectSeo(effect).slug}
-            >
-              <span class="cell-index mono">{effect.index}</span>
-              <div class="cell-actions">
-                <button class="cell-action mono" type="button" data-action="prompt" aria-label={`Copy LLM prompt for ${effect.name} text effect`}><span aria-hidden="true">◳</span> Prompt</button>
-                <button class="cell-action mono" type="button" data-action="css" aria-label={`View CSS for ${effect.name} text effect`}><span aria-hidden="true">⧉</span> CSS</button>
-              </div>
-              <div class="stage">
-                <Effect type={effect.type} text={effect.text} />
-              </div>
-              <h3>
-                <a class="cell-link" href={effectPath(effect)}>
-                  {effect.name}
-                  <span class="cell-keyword">{effectSeo(effect).keyword}</span>
-                </a>
-              </h3>
-            </article>
-          ))
-        }
+          {effects.map((effect) => <EffectCard effect={effect} actions />)}
         </div>
 
       </div>
     </main>
+
+    <section class="guide" aria-labelledby="guide-title">
+      <h2 id="guide-title">How CSS text animations work</h2>
+      <p>
+        Every effect in this library is built from a handful of CSS techniques. Pick a style to see
+        the effects that use it, or open any effect for a breakdown of exactly how it is made.
+      </p>
+      <ul class="guide-styles">
+        {
+          categoryOrder.map((c) => (
+            <li>
+              <a href={categoryPath(c)}>{categories[c].heading}</a>
+              <span>{categories[c].summary}</span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <h2 id="faq-title">Frequently asked questions</h2>
+      <div class="faq">
+        {
+          faq.map(({ q, a }) => (
+            <div>
+              <h3>{q}</h3>
+              <p>{a}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
 
     <footer class="site-footer">
       <span class="mono">CSS Text Effects</span>

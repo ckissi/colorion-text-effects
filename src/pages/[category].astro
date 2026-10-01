@@ -1,0 +1,101 @@
+---
+import Layout from '../layouts/Layout.astro';
+import EffectCard from '../components/EffectCard.astro';
+import CategoryNav from '../components/CategoryNav.astro';
+import Sidebar from '../components/Sidebar.astro';
+import { categories, categoryOrder, categoryPath, effectPath, effectSeo, effectsIn, type Category } from '../data/seo';
+
+export function getStaticPaths() {
+  return categoryOrder.map((category) => ({ params: { category: categories[category].slug }, props: { category } }));
+}
+
+interface Props {
+  category: Category;
+}
+
+const { category } = Astro.props;
+const info = categories[category];
+const list = effectsIn(category);
+const n = list.length;
+
+const title = `${n} ${info.heading} — Free Copy & Paste Code`;
+// "CSS 3D Text Effects" → "3D text effects" for use mid-sentence
+const phrase = info.heading.replace(/^CSS /, '').toLowerCase().replace(/\bcss\b/g, 'CSS').replace(/\b3d\b/g, '3D');
+const summary = info.summary.replace(/\s*(?:built with|in) pure CSS\.$/, '.');
+const description = `${n} free ${phrase} made with pure CSS. ${summary} No JavaScript — copy the HTML and CSS or an AI prompt.`;
+
+const SITE = Astro.site ?? new URL('https://text-effects.colorion.co');
+const url = new URL(categoryPath(category), SITE).href;
+const schema = [
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'CSS Text Effects', item: SITE.href },
+      { '@type': 'ListItem', position: 2, name: info.heading, item: url },
+    ],
+  },
+  {
+    '@type': 'CollectionPage',
+    name: info.heading,
+    description,
+    url,
+    isPartOf: { '@id': `${SITE.href}#website` },
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: n,
+      itemListElement: list.map((effect, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: effectSeo(effect).keyword,
+        url: new URL(effectPath(effect), SITE).href,
+      })),
+    },
+  },
+];
+---
+
+<Layout title={title} description={description} schema={schema}>
+  <Sidebar />
+
+  <div class="page-shell">
+    <header class="site-header effect-header">
+      <nav class="breadcrumbs mono" aria-label="Breadcrumb">
+        <a href="/">CSS Text Effects</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{info.heading}</span>
+      </nav>
+      <div class="header-status mono">
+        <span class="pulse-dot"></span>
+        {n} effects
+      </div>
+    </header>
+
+    <section class="hero effect-hero">
+      <span class="hero-tag mono">Pure CSS · No JavaScript · MIT</span>
+      <h1>{n} <em>{info.heading}</em></h1>
+      {info.intro.map((p) => <p>{p}</p>)}
+    </section>
+
+    <main class="library">
+      <CategoryNav current={category} />
+      <div class="panel">
+        <h2 class="sr-only">{info.heading}</h2>
+        <div class="library-head">
+          <span class="mono">Click an effect for its code &amp; guide</span>
+          <span class="mono">{n} effects</span>
+        </div>
+        <div class="grid">
+          {list.map((effect) => <EffectCard effect={effect} />)}
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <span class="mono">CSS Text Effects</span>
+      <nav class="footer-links mono">
+        <a href="https://github.com/ckissi/colorion-text-effects" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <span class="mono">Pure CSS · No dependencies · MIT licensed</span>
+    </footer>
+  </div>
+</Layout>

@@ -1,0 +1,22 @@
+---
+import { categories, categoryLabels, categoryOrder, categoryPath, effectsIn, type Category } from '../data/seo';
+import { effects } from '../data/effects';
+
+interface Props {
+  /** highlights the active category; omit on the home page ("All") */
+  current?: Category;
+}
+
+const { current } = Astro.props;
+---
+
+<nav class="category-nav mono" aria-label="Browse effects by style">
+  <a href="/" aria-current={current ? undefined : 'page'}>All <span>{effects.length}</span></a>
+  {
+    categoryOrder.map((c) => (
+      <a href={categoryPath(c)} aria-current={c === current ? 'page' : undefined} title={categories[c].heading}>
+        {categoryLabels[c]} <span>{effectsIn(c).length}</span>
+      </a>
+    ))
+  }
+</nav>

@@ -1,0 +1,40 @@
+---
+import Effect from './Effect.astro';
+import type { Effect as EffectData } from '../data/effects';
+import { effectPath, effectSeo } from '../data/seo';
+
+interface Props {
+  effect: EffectData;
+  /** show the Prompt / CSS quick-copy buttons (home page modal) */
+  actions?: boolean;
+}
+
+const { effect, actions = false } = Astro.props;
+const { slug, keyword } = effectSeo(effect);
+---
+
+<!-- The name link's ::after stretches over the card, so clicking the effect opens its page. -->
+<article class="cell" data-type={effect.type} data-name={effect.name} data-index={effect.index} data-slug={slug}>
+  <span class="cell-index mono">{effect.index}</span>
+  {
+    actions && (
+      <div class="cell-actions">
+        <button class="cell-action mono" type="button" data-action="prompt" aria-label={`Copy LLM prompt for ${effect.name} text effect`}>
+          <span aria-hidden="true">◳</span> Prompt
+        </button>
+        <button class="cell-action mono" type="button" data-action="css" aria-label={`View CSS for ${effect.name} text effect`}>
+          <span aria-hidden="true">⧉</span> CSS
+        </button>
+      </div>
+    )
+  }
+  <div class="stage">
+    <Effect type={effect.type} text={effect.text} />
+  </div>
+  <h3>
+    <a class="cell-link" href={effectPath(effect)}>
+      {effect.name}
+      <span class="cell-keyword">{keyword}</span>
+    </a>
+  </h3>
+</article>

@@ -20,6 +20,97 @@ export const categoryLabels: Record<Category, string> = {
   texture: 'Material & texture',
 };
 
+interface CategoryInfo {
+  slug: string;
+  /** H1 / title phrase — the search term the page targets */
+  heading: string;
+  /** one-line summary for meta descriptions and cards */
+  summary: string;
+  /** intro paragraphs explaining the technique family */
+  intro: string[];
+}
+
+export const categories: Record<Category, CategoryInfo> = {
+  gradient: {
+    slug: 'css-gradient-text-animations',
+    heading: 'CSS Gradient Text Animations',
+    summary: 'Animated gradient, rainbow and colour-shifting text built with pure CSS.',
+    intro: [
+      'Gradient text in CSS starts with one trick: paint a gradient as the element’s background, clip it to the glyphs with background-clip: text, and make the text colour transparent. The letters become a window onto the gradient.',
+      'To animate it, the background is made larger than the text and its background-position is moved with @keyframes, so colour flows through the word. Other effects here rotate a conic-gradient, cycle hue-rotate() or layer offset colour plates for iridescent, holographic and mesh-gradient looks.',
+    ],
+  },
+  glitch: {
+    slug: 'css-glitch-text-effects',
+    heading: 'CSS Glitch Text Effects',
+    summary: 'RGB split, sliced, jittering and signal-noise glitch text in pure CSS.',
+    intro: [
+      'Most CSS glitch effects duplicate the word into ::before and ::after with content: attr(data-text), tint each copy a different colour, and clip them into horizontal bands with clip-path. Shifting those bands a few pixels at random-looking keyframes produces the RGB-split tear.',
+      'steps() timing makes the jumps snap instead of ease, which is what sells the digital-error feel. The effects below also use skew, blur and repeating gradients for jitter, pixel sorting, holographic scanlines and broadcast interference.',
+    ],
+  },
+  glow: {
+    slug: 'css-neon-glow-text-effects',
+    heading: 'CSS Neon & Glow Text Effects',
+    summary: 'Neon signs, fire, sparkle, electric and soft-glow text in pure CSS.',
+    intro: [
+      'Glow in CSS is built from stacked text-shadow layers: a tight, bright shadow for the tube core and progressively wider, softer shadows for the halo. Animating their opacity or blur radius makes the light flicker, pulse or breathe.',
+      'The effects in this collection combine that with filter: drop-shadow(), brightness() and blend modes to produce neon signs, embers, heartbeats, spotlights, eclipses and crackling electricity — all without images or JavaScript.',
+    ],
+  },
+  reveal: {
+    slug: 'css-text-reveal-animations',
+    heading: 'CSS Text Reveal & Typing Animations',
+    summary: 'Typewriter, scramble, highlighter, shimmer and wipe-in text reveals in pure CSS.',
+    intro: [
+      'Reveal animations control how much of the word is visible over time. A typewriter animates the width of an overflow: hidden box with steps(), one step per character. Wipes and highlighter strokes animate clip-path or a background-size sweep across the text.',
+      'Other reveals here swap characters inside @keyframes content to decode scrambled text, pass a luminance band over muted letters for the “AI thinking” shimmer, or stamp, redact and karaoke-fill the word.',
+    ],
+  },
+  depth: {
+    slug: 'css-3d-text-effects',
+    heading: 'CSS 3D Text Effects',
+    summary: 'Extruded, rotating, folding, reflected and long-shadow 3D text in pure CSS.',
+    intro: [
+      'There are two ways to give text depth in CSS. The first stacks many offset text-shadow layers to extrude the letters into a solid block or cast a long shadow. The second uses real 3D transforms — perspective, rotateX, rotateY and translateZ — to move letters through space.',
+      'This collection covers both: extruded and anaglyph type, parallax shadow layers, letters that fold like paper or spin on a drum, keycaps that press down, reflections and hyperspace zooms.',
+    ],
+  },
+  retro: {
+    slug: 'css-retro-text-effects',
+    heading: 'Retro CSS Text Effects',
+    summary: 'CRT terminal, split-flap, LED board, dot-matrix and matrix-rain text in pure CSS.',
+    intro: [
+      'Retro display effects recreate hardware with gradients. repeating-linear-gradient draws CRT scanlines and LED grids, radial gradients form dot-matrix pixels, and steps() timing reproduces the mechanical clack of a split-flap departure board.',
+      'Each effect here is still live, selectable text — no canvas, no images — so it stays accessible and scales cleanly with font-size.',
+    ],
+  },
+  motion: {
+    slug: 'css-letter-animations',
+    heading: 'CSS Letter Animations',
+    summary: 'Per-letter wave, bounce, pendulum, domino, explode and marquee text animations in pure CSS.',
+    intro: [
+      'Letter-by-letter animation in CSS wraps each character in its own element with an index custom property — <b style="--i:3">. Every letter runs the same @keyframes, but animation-delay: calc(var(--i) * 0.08s) offsets them so the motion ripples through the word.',
+      'With that one pattern you get waves, bounces, swinging pendulums, toppling dominoes, shattering and smoke-like letters. Transforms keep it GPU-composited, so it stays smooth even on long words.',
+    ],
+  },
+  texture: {
+    slug: 'css-textured-text-effects',
+    heading: 'CSS Textured & Material Text Effects',
+    summary: 'Chrome, gold foil, marble, glass, liquid, ice and film-grain text in pure CSS.',
+    intro: [
+      'Material effects fill the letters with a texture instead of a flat colour. Layered linear and radial gradients clipped to the text imitate brushed chrome, gold foil, marble veining and frost; a moving highlight band adds the specular sheen.',
+      'Glass and lens effects use backdrop-filter to blur what is behind them, and noise, caustics and liquid fills are built from animated gradients and masks — no image files required.',
+    ],
+  },
+};
+
+export const categoryPath = (category: Category) => `/${categories[category].slug}/`;
+
+export const categoryOrder = Object.keys(categories) as Category[];
+
+export const effectsIn = (category: Category) => effects.filter((e) => seo[e.type].category === category);
+
 interface EffectSeo {
   slug: string;
   keyword: string;
