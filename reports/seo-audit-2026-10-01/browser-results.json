@@ -1,0 +1,892 @@
+[
+  {
+    "title": "99 CSS Text Effects & Animations — Free Copy & Paste",
+    "ttfb_ms": 149,
+    "fcp_ms": 500,
+    "lcp_ms": 1036,
+    "lcp_element": "<p>\nA library of 99 animated text effects built with pure CSS —\n        aurora gradients, glitches, split-flap boards, liquid fills and other\n        lesser-seen tricks. No JavaScript, no dependencies. Copy the\n        self-contained <code>CSS</code> for any effect, or grab a ready-made\n<code>Prompt",
+    "cls": 0.6518177125898237,
+    "initial_long_tasks": 2,
+    "initial_blocking_ms": 70,
+    "document_encoded_bytes": 34739,
+    "document_decoded_bytes": 236024,
+    "total_transfer_bytes": 173610,
+    "resources": [
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-500-normal.woff2",
+        "transfer_bytes": 24572,
+        "encoded_bytes": 24272,
+        "duration_ms": 929
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-400-normal.woff2",
+        "transfer_bytes": 23964,
+        "encoded_bytes": 23664,
+        "duration_ms": 936
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/jetbrains-mono-latin-600-normal.woff2",
+        "transfer_bytes": 22160,
+        "encoded_bytes": 21860,
+        "duration_ms": 891
+      },
+      {
+        "url": "https://plausible.elerion.com/js/pa-4W7kNHJcWKuw1loNX79vh.js",
+        "transfer_bytes": 0,
+        "encoded_bytes": 0,
+        "duration_ms": 254
+      },
+      {
+        "url": "https://text-effects.colorion.co/_astro/hoisted.CL9gQAg8.js",
+        "transfer_bytes": 1976,
+        "encoded_bytes": 1676,
+        "duration_ms": 350
+      },
+      {
+        "url": "https://text-effects.colorion.co/domi.jpg",
+        "transfer_bytes": 17458,
+        "encoded_bytes": 17158,
+        "duration_ms": 814
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-600-normal.woff2",
+        "transfer_bytes": 24752,
+        "encoded_bytes": 24452,
+        "duration_ms": 904
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/jetbrains-mono-latin-400-normal.woff2",
+        "transfer_bytes": 21468,
+        "encoded_bytes": 21168,
+        "duration_ms": 897
+      },
+      {
+        "url": "https://text-effects.colorion.co/_astro/hoisted.Bq6M1TAU.js",
+        "transfer_bytes": 891,
+        "encoded_bytes": 591,
+        "duration_ms": 314
+      },
+      {
+        "url": "https://text-effects.colorion.co/favicon.ico",
+        "transfer_bytes": 715,
+        "encoded_bytes": 415,
+        "duration_ms": 159
+      },
+      {
+        "url": "https://text-effects.colorion.co/favicon.svg",
+        "transfer_bytes": 615,
+        "encoded_bytes": 315,
+        "duration_ms": 370
+      }
+    ],
+    "viewport_width": 390,
+    "document_width": 390,
+    "overflows": [],
+    "visible_cards": 0,
+    "path": "/",
+    "mobile": true,
+    "errors": []
+  },
+  {
+    "title": "10 CSS Neon & Glow Text Effects — Free Copy & Paste Code",
+    "ttfb_ms": 88,
+    "fcp_ms": 360,
+    "lcp_ms": 1024,
+    "lcp_element": "<p>Glow in CSS is built from stacked text-shadow layers: a tight, bright shadow for the tube core and progressively wider, softer shadows for the halo. Animating their opacity or blur radius makes the light flicker, pulse or breathe.</p>",
+    "cls": 0,
+    "initial_long_tasks": 1,
+    "initial_blocking_ms": 29,
+    "document_encoded_bytes": 11333,
+    "document_decoded_bytes": 55589,
+    "total_transfer_bytes": 126767,
+    "resources": [
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-500-normal.woff2",
+        "transfer_bytes": 24572,
+        "encoded_bytes": 24272,
+        "duration_ms": 816
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/jetbrains-mono-latin-600-normal.woff2",
+        "transfer_bytes": 22160,
+        "encoded_bytes": 21860,
+        "duration_ms": 764
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-400-normal.woff2",
+        "transfer_bytes": 23964,
+        "encoded_bytes": 23664,
+        "duration_ms": 838
+      },
+      {
+        "url": "https://plausible.elerion.com/js/pa-4W7kNHJcWKuw1loNX79vh.js",
+        "transfer_bytes": 0,
+        "encoded_bytes": 0,
+        "duration_ms": 441
+      },
+      {
+        "url": "https://text-effects.colorion.co/_astro/hoisted.Bq6M1TAU.js",
+        "transfer_bytes": 891,
+        "encoded_bytes": 591,
+        "duration_ms": 193
+      },
+      {
+        "url": "https://text-effects.colorion.co/domi.jpg",
+        "transfer_bytes": 17458,
+        "encoded_bytes": 17158,
+        "duration_ms": 648
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-600-normal.woff2",
+        "transfer_bytes": 24752,
+        "encoded_bytes": 24452,
+        "duration_ms": 818
+      },
+      {
+        "url": "https://text-effects.colorion.co/favicon.ico",
+        "transfer_bytes": 715,
+        "encoded_bytes": 415,
+        "duration_ms": 200
+      },
+      {
+        "url": "https://text-effects.colorion.co/favicon.svg",
+        "transfer_bytes": 622,
+        "encoded_bytes": 322,
+        "duration_ms": 163
+      }
+    ],
+    "viewport_width": 390,
+    "document_width": 390,
+    "overflows": [],
+    "visible_cards": 0,
+    "path": "/css-neon-glow-text-effects/",
+    "mobile": true,
+    "errors": []
+  },
+  {
+    "title": "Neon Text Effect — Pure CSS, Free Code",
+    "ttfb_ms": 126,
+    "fcp_ms": 428,
+    "lcp_ms": 1128,
+    "lcp_element": "<p> Buzzing neon sign with unstable tube flicker. <strong>Neon-Haus</strong> is a free neon text effect built with nothing but HTML and\n          CSS — no JavaScript, no images, no dependencies. Copy the code below, or grab the AI prompt and\n          let your coding agent rebuild it.\n</p>",
+    "cls": 0.004908408247562804,
+    "initial_long_tasks": 2,
+    "initial_blocking_ms": 66,
+    "document_encoded_bytes": 11837,
+    "document_decoded_bytes": 55808,
+    "total_transfer_bytes": 149659,
+    "resources": [
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-500-normal.woff2",
+        "transfer_bytes": 24572,
+        "encoded_bytes": 24272,
+        "duration_ms": 889
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/jetbrains-mono-latin-600-normal.woff2",
+        "transfer_bytes": 22160,
+        "encoded_bytes": 21860,
+        "duration_ms": 821
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-400-normal.woff2",
+        "transfer_bytes": 23964,
+        "encoded_bytes": 23664,
+        "duration_ms": 896
+      },
+      {
+        "url": "https://plausible.elerion.com/js/pa-4W7kNHJcWKuw1loNX79vh.js",
+        "transfer_bytes": 0,
+        "encoded_bytes": 0,
+        "duration_ms": 483
+      },
+      {
+        "url": "https://text-effects.colorion.co/_astro/hoisted.x9vwQLOg.js",
+        "transfer_bytes": 920,
+        "encoded_bytes": 620,
+        "duration_ms": 338
+      },
+      {
+        "url": "https://text-effects.colorion.co/domi.jpg",
+        "transfer_bytes": 17458,
+        "encoded_bytes": 17158,
+        "duration_ms": 725
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-600-normal.woff2",
+        "transfer_bytes": 24752,
+        "encoded_bytes": 24452,
+        "duration_ms": 886
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/jetbrains-mono-latin-400-normal.woff2",
+        "transfer_bytes": 21468,
+        "encoded_bytes": 21168,
+        "duration_ms": 841
+      },
+      {
+        "url": "https://text-effects.colorion.co/_astro/hoisted.Bq6M1TAU.js",
+        "transfer_bytes": 891,
+        "encoded_bytes": 591,
+        "duration_ms": 201
+      },
+      {
+        "url": "https://text-effects.colorion.co/favicon.ico",
+        "transfer_bytes": 715,
+        "encoded_bytes": 415,
+        "duration_ms": 161
+      },
+      {
+        "url": "https://text-effects.colorion.co/favicon.svg",
+        "transfer_bytes": 622,
+        "encoded_bytes": 322,
+        "duration_ms": 156
+      }
+    ],
+    "viewport_width": 390,
+    "document_width": 390,
+    "overflows": [],
+    "visible_cards": 0,
+    "path": "/effects/neon-text-effect/",
+    "mobile": true,
+    "errors": []
+  },
+  {
+    "title": "Text Effect Generator — Free Animated CSS Text Maker",
+    "ttfb_ms": 146,
+    "fcp_ms": 448,
+    "lcp_ms": 448,
+    "lcp_element": "<span class=\"hero-tag mono\">Free · No sign-up · Pure CSS output</span>",
+    "cls": 0.5775331971148447,
+    "initial_long_tasks": 1,
+    "initial_blocking_ms": 32,
+    "document_encoded_bytes": 32336,
+    "document_decoded_bytes": 222672,
+    "total_transfer_bytes": 172006,
+    "resources": [
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-500-normal.woff2",
+        "transfer_bytes": 24572,
+        "encoded_bytes": 24272,
+        "duration_ms": 884
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/jetbrains-mono-latin-600-normal.woff2",
+        "transfer_bytes": 22160,
+        "encoded_bytes": 21860,
+        "duration_ms": 802
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-400-normal.woff2",
+        "transfer_bytes": 23964,
+        "encoded_bytes": 23664,
+        "duration_ms": 861
+      },
+      {
+        "url": "https://plausible.elerion.com/js/pa-4W7kNHJcWKuw1loNX79vh.js",
+        "transfer_bytes": 0,
+        "encoded_bytes": 0,
+        "duration_ms": 472
+      },
+      {
+        "url": "https://text-effects.colorion.co/_astro/hoisted.CHq4kGT4.js",
+        "transfer_bytes": 2762,
+        "encoded_bytes": 2462,
+        "duration_ms": 642
+      },
+      {
+        "url": "https://text-effects.colorion.co/domi.jpg",
+        "transfer_bytes": 17458,
+        "encoded_bytes": 17158,
+        "duration_ms": 664
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-600-normal.woff2",
+        "transfer_bytes": 24752,
+        "encoded_bytes": 24452,
+        "duration_ms": 834
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/jetbrains-mono-latin-400-normal.woff2",
+        "transfer_bytes": 21468,
+        "encoded_bytes": 21168,
+        "duration_ms": 818
+      },
+      {
+        "url": "https://text-effects.colorion.co/_astro/hoisted.Bq6M1TAU.js",
+        "transfer_bytes": 897,
+        "encoded_bytes": 597,
+        "duration_ms": 185
+      },
+      {
+        "url": "https://text-effects.colorion.co/favicon.ico",
+        "transfer_bytes": 715,
+        "encoded_bytes": 415,
+        "duration_ms": 156
+      },
+      {
+        "url": "https://text-effects.colorion.co/favicon.svg",
+        "transfer_bytes": 622,
+        "encoded_bytes": 322,
+        "duration_ms": 157
+      }
+    ],
+    "viewport_width": 390,
+    "document_width": 390,
+    "overflows": [],
+    "visible_cards": 0,
+    "generator_interactions": {
+      "events": [
+        {
+          "name": "keydown",
+          "duration": 136,
+          "target": "gen-text",
+          "interactionId": 5358
+        },
+        {
+          "name": "keypress",
+          "duration": 136,
+          "target": "gen-text",
+          "interactionId": 5358
+        },
+        {
+          "name": "keydown",
+          "duration": 80,
+          "target": "gen-text",
+          "interactionId": 5365
+        },
+        {
+          "name": "keypress",
+          "duration": 80,
+          "target": "gen-text",
+          "interactionId": 5365
+        },
+        {
+          "name": "keydown",
+          "duration": 80,
+          "target": "gen-text",
+          "interactionId": 5372
+        },
+        {
+          "name": "keypress",
+          "duration": 80,
+          "target": "gen-text",
+          "interactionId": 5372
+        },
+        {
+          "name": "keydown",
+          "duration": 88,
+          "target": "gen-text",
+          "interactionId": 5379
+        },
+        {
+          "name": "keypress",
+          "duration": 88,
+          "target": "gen-text",
+          "interactionId": 5379
+        },
+        {
+          "name": "keydown",
+          "duration": 88,
+          "target": "gen-text",
+          "interactionId": 5386
+        },
+        {
+          "name": "keypress",
+          "duration": 88,
+          "target": "gen-text",
+          "interactionId": 5386
+        }
+      ],
+      "longtasks": [
+        {
+          "time": 1519.9000000953674,
+          "duration": 82
+        },
+        {
+          "time": 5530.5,
+          "duration": 125
+        },
+        {
+          "time": 5687.900000095367,
+          "duration": 77
+        },
+        {
+          "time": 5840.799999952316,
+          "duration": 79
+        },
+        {
+          "time": 5994.100000143051,
+          "duration": 83
+        },
+        {
+          "time": 6149.700000047684,
+          "duration": 83
+        }
+      ],
+      "text": "HELLO"
+    },
+    "path": "/text-effect-generator/",
+    "mobile": true,
+    "errors": []
+  },
+  {
+    "title": "99 CSS Text Effects & Animations — Free Copy & Paste",
+    "ttfb_ms": 176,
+    "fcp_ms": 264,
+    "lcp_ms": 332,
+    "lcp_element": "<h1 class=\"home-title\">99 <em>CSS text effects</em><br>&amp; animations, free to copy.</h1>",
+    "cls": 0.0013577271412037037,
+    "initial_long_tasks": 0,
+    "initial_blocking_ms": 0,
+    "document_encoded_bytes": 34711,
+    "document_decoded_bytes": 236024,
+    "total_transfer_bytes": 173589,
+    "resources": [
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-500-normal.woff2",
+        "transfer_bytes": 24572,
+        "encoded_bytes": 24272,
+        "duration_ms": 52
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/jetbrains-mono-latin-600-normal.woff2",
+        "transfer_bytes": 22160,
+        "encoded_bytes": 21860,
+        "duration_ms": 45
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-400-normal.woff2",
+        "transfer_bytes": 23964,
+        "encoded_bytes": 23664,
+        "duration_ms": 56
+      },
+      {
+        "url": "https://text-effects.colorion.co/_astro/hoisted.CL9gQAg8.js",
+        "transfer_bytes": 1976,
+        "encoded_bytes": 1676,
+        "duration_ms": 40
+      },
+      {
+        "url": "https://plausible.elerion.com/js/pa-4W7kNHJcWKuw1loNX79vh.js",
+        "transfer_bytes": 0,
+        "encoded_bytes": 0,
+        "duration_ms": 101
+      },
+      {
+        "url": "https://text-effects.colorion.co/domi.jpg",
+        "transfer_bytes": 17458,
+        "encoded_bytes": 17158,
+        "duration_ms": 72
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-600-normal.woff2",
+        "transfer_bytes": 24752,
+        "encoded_bytes": 24452,
+        "duration_ms": 55
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/jetbrains-mono-latin-400-normal.woff2",
+        "transfer_bytes": 21468,
+        "encoded_bytes": 21168,
+        "duration_ms": 57
+      },
+      {
+        "url": "https://text-effects.colorion.co/_astro/hoisted.Bq6M1TAU.js",
+        "transfer_bytes": 891,
+        "encoded_bytes": 591,
+        "duration_ms": 56
+      },
+      {
+        "url": "https://text-effects.colorion.co/favicon.ico",
+        "transfer_bytes": 715,
+        "encoded_bytes": 415,
+        "duration_ms": 46
+      },
+      {
+        "url": "https://text-effects.colorion.co/favicon.svg",
+        "transfer_bytes": 622,
+        "encoded_bytes": 322,
+        "duration_ms": 50
+      }
+    ],
+    "viewport_width": 1440,
+    "document_width": 1440,
+    "overflows": [],
+    "visible_cards": 6,
+    "path": "/",
+    "mobile": false,
+    "errors": []
+  },
+  {
+    "title": "10 CSS Neon & Glow Text Effects — Free Copy & Paste Code",
+    "ttfb_ms": 97,
+    "fcp_ms": 188,
+    "lcp_ms": 272,
+    "lcp_element": "<div class=\"fx-neon\">NEON</div>",
+    "cls": 0.0015581481481481481,
+    "initial_long_tasks": 0,
+    "initial_blocking_ms": 0,
+    "document_encoded_bytes": 11315,
+    "document_decoded_bytes": 55589,
+    "total_transfer_bytes": 126742,
+    "resources": [
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-500-normal.woff2",
+        "transfer_bytes": 24572,
+        "encoded_bytes": 24272,
+        "duration_ms": 72
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-400-normal.woff2",
+        "transfer_bytes": 23964,
+        "encoded_bytes": 23664,
+        "duration_ms": 42
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/jetbrains-mono-latin-600-normal.woff2",
+        "transfer_bytes": 22160,
+        "encoded_bytes": 21860,
+        "duration_ms": 77
+      },
+      {
+        "url": "https://text-effects.colorion.co/domi.jpg",
+        "transfer_bytes": 17458,
+        "encoded_bytes": 17158,
+        "duration_ms": 44
+      },
+      {
+        "url": "https://text-effects.colorion.co/_astro/hoisted.Bq6M1TAU.js",
+        "transfer_bytes": 891,
+        "encoded_bytes": 591,
+        "duration_ms": 47
+      },
+      {
+        "url": "https://plausible.elerion.com/js/pa-4W7kNHJcWKuw1loNX79vh.js",
+        "transfer_bytes": 0,
+        "encoded_bytes": 0,
+        "duration_ms": 133
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-600-normal.woff2",
+        "transfer_bytes": 24752,
+        "encoded_bytes": 24452,
+        "duration_ms": 118
+      },
+      {
+        "url": "https://text-effects.colorion.co/favicon.ico",
+        "transfer_bytes": 715,
+        "encoded_bytes": 415,
+        "duration_ms": 93
+      },
+      {
+        "url": "https://text-effects.colorion.co/favicon.svg",
+        "transfer_bytes": 615,
+        "encoded_bytes": 315,
+        "duration_ms": 47
+      }
+    ],
+    "viewport_width": 1440,
+    "document_width": 1440,
+    "overflows": [],
+    "visible_cards": 6,
+    "path": "/css-neon-glow-text-effects/",
+    "mobile": false,
+    "errors": []
+  },
+  {
+    "title": "Neon Text Effect — Pure CSS, Free Code",
+    "ttfb_ms": 134,
+    "fcp_ms": 264,
+    "lcp_ms": 264,
+    "lcp_element": "<div class=\"fx-neon\">NEON</div>",
+    "cls": 0.000052493489583333334,
+    "initial_long_tasks": 0,
+    "initial_blocking_ms": 0,
+    "document_encoded_bytes": 11861,
+    "document_decoded_bytes": 55808,
+    "total_transfer_bytes": 149695,
+    "resources": [
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-500-normal.woff2",
+        "transfer_bytes": 24572,
+        "encoded_bytes": 24272,
+        "duration_ms": 44
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-400-normal.woff2",
+        "transfer_bytes": 23964,
+        "encoded_bytes": 23664,
+        "duration_ms": 42
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/jetbrains-mono-latin-600-normal.woff2",
+        "transfer_bytes": 22160,
+        "encoded_bytes": 21860,
+        "duration_ms": 117
+      },
+      {
+        "url": "https://plausible.elerion.com/js/pa-4W7kNHJcWKuw1loNX79vh.js",
+        "transfer_bytes": 0,
+        "encoded_bytes": 0,
+        "duration_ms": 104
+      },
+      {
+        "url": "https://text-effects.colorion.co/_astro/hoisted.x9vwQLOg.js",
+        "transfer_bytes": 926,
+        "encoded_bytes": 626,
+        "duration_ms": 165
+      },
+      {
+        "url": "https://text-effects.colorion.co/domi.jpg",
+        "transfer_bytes": 17458,
+        "encoded_bytes": 17158,
+        "duration_ms": 184
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-600-normal.woff2",
+        "transfer_bytes": 24752,
+        "encoded_bytes": 24452,
+        "duration_ms": 151
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/jetbrains-mono-latin-400-normal.woff2",
+        "transfer_bytes": 21468,
+        "encoded_bytes": 21168,
+        "duration_ms": 144
+      },
+      {
+        "url": "https://text-effects.colorion.co/_astro/hoisted.Bq6M1TAU.js",
+        "transfer_bytes": 897,
+        "encoded_bytes": 597,
+        "duration_ms": 102
+      },
+      {
+        "url": "https://text-effects.colorion.co/favicon.ico",
+        "transfer_bytes": 715,
+        "encoded_bytes": 415,
+        "duration_ms": 92
+      },
+      {
+        "url": "https://text-effects.colorion.co/favicon.svg",
+        "transfer_bytes": 622,
+        "encoded_bytes": 322,
+        "duration_ms": 72
+      }
+    ],
+    "viewport_width": 1440,
+    "document_width": 1440,
+    "overflows": [],
+    "visible_cards": 0,
+    "path": "/effects/neon-text-effect/",
+    "mobile": false,
+    "errors": []
+  },
+  {
+    "title": "Text Effect Generator — Free Animated CSS Text Maker",
+    "ttfb_ms": 131,
+    "fcp_ms": 272,
+    "lcp_ms": 320,
+    "lcp_element": "<h1>Text effect <em>generator</em></h1>",
+    "cls": 0.003877089436848958,
+    "initial_long_tasks": 0,
+    "initial_blocking_ms": 0,
+    "document_encoded_bytes": 32364,
+    "document_decoded_bytes": 222672,
+    "total_transfer_bytes": 172041,
+    "resources": [
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-500-normal.woff2",
+        "transfer_bytes": 24572,
+        "encoded_bytes": 24272,
+        "duration_ms": 154
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-400-normal.woff2",
+        "transfer_bytes": 23964,
+        "encoded_bytes": 23664,
+        "duration_ms": 135
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/jetbrains-mono-latin-600-normal.woff2",
+        "transfer_bytes": 22160,
+        "encoded_bytes": 21860,
+        "duration_ms": 157
+      },
+      {
+        "url": "https://plausible.elerion.com/js/pa-4W7kNHJcWKuw1loNX79vh.js",
+        "transfer_bytes": 0,
+        "encoded_bytes": 0,
+        "duration_ms": 182
+      },
+      {
+        "url": "https://text-effects.colorion.co/_astro/hoisted.CHq4kGT4.js",
+        "transfer_bytes": 2769,
+        "encoded_bytes": 2469,
+        "duration_ms": 135
+      },
+      {
+        "url": "https://text-effects.colorion.co/domi.jpg",
+        "transfer_bytes": 17458,
+        "encoded_bytes": 17158,
+        "duration_ms": 134
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/inter-latin-600-normal.woff2",
+        "transfer_bytes": 24752,
+        "encoded_bytes": 24452,
+        "duration_ms": 150
+      },
+      {
+        "url": "https://text-effects.colorion.co/fonts/jetbrains-mono-latin-400-normal.woff2",
+        "transfer_bytes": 21468,
+        "encoded_bytes": 21168,
+        "duration_ms": 126
+      },
+      {
+        "url": "https://text-effects.colorion.co/_astro/hoisted.Bq6M1TAU.js",
+        "transfer_bytes": 897,
+        "encoded_bytes": 597,
+        "duration_ms": 47
+      },
+      {
+        "url": "https://text-effects.colorion.co/favicon.ico",
+        "transfer_bytes": 715,
+        "encoded_bytes": 415,
+        "duration_ms": 61
+      },
+      {
+        "url": "https://text-effects.colorion.co/favicon.svg",
+        "transfer_bytes": 622,
+        "encoded_bytes": 322,
+        "duration_ms": 41
+      }
+    ],
+    "viewport_width": 1440,
+    "document_width": 1440,
+    "overflows": [],
+    "visible_cards": 6,
+    "generator_interactions": {
+      "events": [
+        {
+          "name": "pointerdown",
+          "duration": 64,
+          "target": "gen-text",
+          "interactionId": 8199
+        },
+        {
+          "name": "pointerup",
+          "duration": 64,
+          "target": "gen-text",
+          "interactionId": 8199
+        },
+        {
+          "name": "click",
+          "duration": 64,
+          "target": "gen-text",
+          "interactionId": 8199
+        },
+        {
+          "name": "keydown",
+          "duration": 64,
+          "target": "gen-text",
+          "interactionId": 8206
+        },
+        {
+          "name": "keypress",
+          "duration": 64,
+          "target": "gen-text",
+          "interactionId": 8206
+        },
+        {
+          "name": "keyup",
+          "duration": 32,
+          "target": "gen-text",
+          "interactionId": 8206
+        },
+        {
+          "name": "keydown",
+          "duration": 32,
+          "target": "gen-text",
+          "interactionId": 8213
+        },
+        {
+          "name": "keypress",
+          "duration": 32,
+          "target": "gen-text",
+          "interactionId": 8213
+        },
+        {
+          "name": "keyup",
+          "duration": 32,
+          "target": "gen-text",
+          "interactionId": 8213
+        },
+        {
+          "name": "keydown",
+          "duration": 32,
+          "target": "gen-text",
+          "interactionId": 8220
+        },
+        {
+          "name": "keypress",
+          "duration": 32,
+          "target": "gen-text",
+          "interactionId": 8220
+        },
+        {
+          "name": "keyup",
+          "duration": 32,
+          "target": "gen-text",
+          "interactionId": 8220
+        },
+        {
+          "name": "keydown",
+          "duration": 32,
+          "target": "gen-text",
+          "interactionId": 8227
+        },
+        {
+          "name": "keypress",
+          "duration": 32,
+          "target": "gen-text",
+          "interactionId": 8227
+        },
+        {
+          "name": "keyup",
+          "duration": 16,
+          "target": "gen-text",
+          "interactionId": 8227
+        },
+        {
+          "name": "keydown",
+          "duration": 48,
+          "target": "gen-text",
+          "interactionId": 8234
+        },
+        {
+          "name": "keypress",
+          "duration": 48,
+          "target": "gen-text",
+          "interactionId": 8234
+        },
+        {
+          "name": "keyup",
+          "duration": 48,
+          "target": "gen-text",
+          "interactionId": 8234
+        }
+      ],
+      "longtasks": [
+        {
+          "time": 4484.200000047684,
+          "duration": 51
+        }
+      ],
+      "text": "HELLO"
+    },
+    "path": "/text-effect-generator/",
+    "mobile": false,
+    "errors": []
+  }
+]

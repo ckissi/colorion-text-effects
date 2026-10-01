@@ -199,6 +199,7 @@ const colorionLinks = [
 
     const setSidebarCollapsed = (collapsed: boolean) => {
       sidebar.classList.toggle('is-collapsed', collapsed);
+      document.documentElement.classList.toggle('sidebar-collapsed', collapsed);
       sidebarCollapse.setAttribute('aria-expanded', String(!collapsed));
       sidebarCollapse.setAttribute(
         'aria-label',

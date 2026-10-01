@@ -1,0 +1,763 @@
+[
+  {
+    "path": "/",
+    "run": 1,
+    "shifts": [
+      {
+        "time": 1242.1000001430511,
+        "value": 0.20196423821925868,
+        "sources": [
+          {
+            "html": "<p>\nA library of 99 animated text effects built with pure CSS —\n        aurora gradients, glitches, split-flap boards, liquid fills and other\n        lesser-seen tricks. No JavaScript, no dependencies. Copy the\n        self-contained <code>CSS</code> for any effect, or grab a ready-made\n<code>Prompt</code> to have your coding agent recreate it. Every snippet\n        paints with the <code>--ink</co",
+            "previous": {
+              "x": 16,
+              "y": 470.79132080078125,
+              "width": 358,
+              "height": 213.9375,
+              "top": 470.79132080078125,
+              "right": 374,
+              "bottom": 684.7288208007812,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 470.79132080078125,
+              "width": 358,
+              "height": 255.9375,
+              "top": 470.79132080078125,
+              "right": 374,
+              "bottom": 726.7288208007812,
+              "left": 16
+            }
+          },
+          {
+            "previous": {
+              "x": 16,
+              "y": 318.9845886230469,
+              "width": 358,
+              "height": 90.59375,
+              "top": 318.9845886230469,
+              "right": 374,
+              "bottom": 409.5783386230469,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 359.5783386230469,
+              "width": 358,
+              "height": 87.1875,
+              "top": 359.5783386230469,
+              "right": 374,
+              "bottom": 446.7658386230469,
+              "left": 16
+            }
+          },
+          {
+            "html": "<main class=\"library\"> <nav class=\"category-nav mono\" aria-label=\"Browse effects by style\"> <a href=\"/\" aria-current=\"page\">All <span>99</span></a> <a href=\"/css-gradient-text-animations/\" title=\"CSS Gradient Text Animations\"> Gradient &amp; colour <span>10</span> </a><a href=\"/css-glitch-text-effects/\" title=\"CSS Glitch Text Effects\"> Glitch &amp; distortion <span>7</span> </a><a href=\"/css-neon-",
+            "previous": {
+              "x": 0,
+              "y": 733.109375,
+              "width": 390,
+              "height": 110.890625,
+              "top": 733.109375,
+              "right": 390,
+              "bottom": 844,
+              "left": 0
+            },
+            "current": {
+              "x": 0,
+              "y": 774.703125,
+              "width": 390,
+              "height": 69.296875,
+              "top": 774.703125,
+              "right": 390,
+              "bottom": 844,
+              "left": 0
+            }
+          },
+          {
+            "previous": {
+              "x": 16,
+              "y": 280.3908386230469,
+              "width": 358,
+              "height": 87.59375,
+              "top": 280.3908386230469,
+              "right": 374,
+              "bottom": 367.9845886230469,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 280.3908386230469,
+              "width": 358,
+              "height": 86.59375,
+              "top": 280.3908386230469,
+              "right": 374,
+              "bottom": 366.9845886230469,
+              "left": 16
+            }
+          },
+          {
+            "previous": {
+              "x": 16,
+              "y": 678.1350708007812,
+              "width": 358,
+              "height": 45.59375,
+              "top": 678.1350708007812,
+              "right": 374,
+              "bottom": 723.7288208007812,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 677.5413208007812,
+              "width": 358,
+              "height": 45.59375,
+              "top": 677.5413208007812,
+              "right": 374,
+              "bottom": 723.1350708007812,
+              "left": 16
+            }
+          }
+        ]
+      }
+    ],
+    "mutations": [
+      {
+        "time": 760.6000001430511,
+        "tag": "ASIDE",
+        "class": "site-sidebar menu-enhanced",
+        "height": 91
+      },
+      {
+        "time": 768.8000001907349,
+        "tag": "HTML",
+        "class": "lazy-enabled",
+        "height": 36617.0625
+      }
+    ],
+    "lcp": 800,
+    "cls": 0.20196423821925868
+  },
+  {
+    "path": "/",
+    "run": 2,
+    "shifts": [
+      {
+        "time": 1216.7999999523163,
+        "value": 0.029438743687075934,
+        "sources": [
+          {
+            "html": "<p>\nA library of 99 animated text effects built with pure CSS —\n        aurora gradients, glitches, split-flap boards, liquid fills and other\n        lesser-seen tricks. No JavaScript, no dependencies. Copy the\n        self-contained <code>CSS</code> for any effect, or grab a ready-made\n<code>Prompt</code> to have your coding agent recreate it. Every snippet\n        paints with the <code>--ink</co",
+            "previous": {
+              "x": 16,
+              "y": 470.81488037109375,
+              "width": 358,
+              "height": 213.9375,
+              "top": 470.81488037109375,
+              "right": 374,
+              "bottom": 684.7523803710938,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 470.81488037109375,
+              "width": 358,
+              "height": 255.9375,
+              "top": 470.81488037109375,
+              "right": 374,
+              "bottom": 726.7523803710938,
+              "left": 16
+            }
+          },
+          {
+            "previous": {
+              "x": 16,
+              "y": 318.9862060546875,
+              "width": 358,
+              "height": 90.59375,
+              "top": 318.9862060546875,
+              "right": 374,
+              "bottom": 409.5799560546875,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 359.5799560546875,
+              "width": 358,
+              "height": 87.1875,
+              "top": 359.5799560546875,
+              "right": 374,
+              "bottom": 446.7674560546875,
+              "left": 16
+            }
+          },
+          {
+            "html": "<main class=\"library\"> <nav class=\"category-nav mono\" aria-label=\"Browse effects by style\"> <a href=\"/\" aria-current=\"page\">All <span>99</span></a> <a href=\"/css-gradient-text-animations/\" title=\"CSS Gradient Text Animations\"> Gradient &amp; colour <span>10</span> </a><a href=\"/css-glitch-text-effects/\" title=\"CSS Glitch Text Effects\"> Glitch &amp; distortion <span>7</span> </a><a href=\"/css-neon-",
+            "previous": {
+              "x": 0,
+              "y": 733.109375,
+              "width": 390,
+              "height": 110.890625,
+              "top": 733.109375,
+              "right": 390,
+              "bottom": 844,
+              "left": 0
+            },
+            "current": {
+              "x": 0,
+              "y": 774.703125,
+              "width": 390,
+              "height": 69.296875,
+              "top": 774.703125,
+              "right": 390,
+              "bottom": 844,
+              "left": 0
+            }
+          },
+          {
+            "previous": {
+              "x": 16,
+              "y": 280.3924560546875,
+              "width": 358,
+              "height": 87.59375,
+              "top": 280.3924560546875,
+              "right": 374,
+              "bottom": 367.9862060546875,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 280.3924560546875,
+              "width": 358,
+              "height": 86.59375,
+              "top": 280.3924560546875,
+              "right": 374,
+              "bottom": 366.9862060546875,
+              "left": 16
+            }
+          }
+        ]
+      },
+      {
+        "time": 1238.5,
+        "value": 0.05346880923090745,
+        "sources": [
+          {
+            "previous": {
+              "x": 16,
+              "y": 576.1767578125,
+              "width": 358,
+              "height": 45.59375,
+              "top": 576.1767578125,
+              "right": 374,
+              "bottom": 621.7705078125,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 575.1767578125,
+              "width": 358,
+              "height": 45.59375,
+              "top": 575.1767578125,
+              "right": 374,
+              "bottom": 620.7705078125,
+              "left": 16
+            }
+          },
+          {
+            "previous": {
+              "x": 16,
+              "y": 601.7705078125,
+              "width": 358,
+              "height": 45.59375,
+              "top": 601.7705078125,
+              "right": 374,
+              "bottom": 647.3642578125,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 600.7705078125,
+              "width": 358,
+              "height": 45.59375,
+              "top": 600.7705078125,
+              "right": 374,
+              "bottom": 646.3642578125,
+              "left": 16
+            }
+          },
+          {
+            "previous": {
+              "x": 16,
+              "y": 678.5517578125,
+              "width": 358,
+              "height": 45.59375,
+              "top": 678.5517578125,
+              "right": 374,
+              "bottom": 724.1455078125,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 677.5517578125,
+              "width": 358,
+              "height": 45.59375,
+              "top": 677.5517578125,
+              "right": 374,
+              "bottom": 723.1455078125,
+              "left": 16
+            }
+          },
+          {
+            "previous": {
+              "x": 16,
+              "y": 653.9580078125,
+              "width": 358,
+              "height": 42.59375,
+              "top": 653.9580078125,
+              "right": 374,
+              "bottom": 696.5517578125,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 654.9580078125,
+              "width": 358,
+              "height": 42.59375,
+              "top": 654.9580078125,
+              "right": 374,
+              "bottom": 697.5517578125,
+              "left": 16
+            }
+          },
+          {
+            "previous": {
+              "x": 16,
+              "y": 628.3642578125,
+              "width": 358,
+              "height": 17,
+              "top": 628.3642578125,
+              "right": 374,
+              "bottom": 645.3642578125,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 654.9580078125,
+              "width": 358,
+              "height": 17,
+              "top": 654.9580078125,
+              "right": 374,
+              "bottom": 671.9580078125,
+              "left": 16
+            }
+          }
+        ]
+      }
+    ],
+    "mutations": [
+      {
+        "time": 759.7000000476837,
+        "tag": "ASIDE",
+        "class": "site-sidebar menu-enhanced",
+        "height": 91
+      },
+      {
+        "time": 768,
+        "tag": "HTML",
+        "class": "lazy-enabled",
+        "height": 36617.0625
+      }
+    ],
+    "lcp": 792,
+    "cls": 0.08290755291798338
+  },
+  {
+    "path": "/",
+    "run": 3,
+    "shifts": [
+      {
+        "time": 1280.5,
+        "value": 0.05384012040612209,
+        "sources": [
+          {
+            "previous": {
+              "x": 16,
+              "y": 534.59619140625,
+              "width": 358,
+              "height": 45.59375,
+              "top": 534.59619140625,
+              "right": 374,
+              "bottom": 580.18994140625,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 533.59619140625,
+              "width": 358,
+              "height": 45.59375,
+              "top": 533.59619140625,
+              "right": 374,
+              "bottom": 579.18994140625,
+              "left": 16
+            }
+          },
+          {
+            "previous": {
+              "x": 16,
+              "y": 560.18994140625,
+              "width": 358,
+              "height": 45.59375,
+              "top": 560.18994140625,
+              "right": 374,
+              "bottom": 605.78369140625,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 559.18994140625,
+              "width": 358,
+              "height": 45.59375,
+              "top": 559.18994140625,
+              "right": 374,
+              "bottom": 604.78369140625,
+              "left": 16
+            }
+          },
+          {
+            "previous": {
+              "x": 16,
+              "y": 636.97119140625,
+              "width": 358,
+              "height": 45.59375,
+              "top": 636.97119140625,
+              "right": 374,
+              "bottom": 682.56494140625,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 635.97119140625,
+              "width": 358,
+              "height": 45.59375,
+              "top": 635.97119140625,
+              "right": 374,
+              "bottom": 681.56494140625,
+              "left": 16
+            }
+          },
+          {
+            "previous": {
+              "x": 16,
+              "y": 612.37744140625,
+              "width": 358,
+              "height": 42.59375,
+              "top": 612.37744140625,
+              "right": 374,
+              "bottom": 654.97119140625,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 613.37744140625,
+              "width": 358,
+              "height": 42.59375,
+              "top": 613.37744140625,
+              "right": 374,
+              "bottom": 655.97119140625,
+              "left": 16
+            }
+          },
+          {
+            "previous": {
+              "x": 16,
+              "y": 586.78369140625,
+              "width": 358,
+              "height": 17,
+              "top": 586.78369140625,
+              "right": 374,
+              "bottom": 603.78369140625,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 613.37744140625,
+              "width": 358,
+              "height": 17,
+              "top": 613.37744140625,
+              "right": 374,
+              "bottom": 630.37744140625,
+              "left": 16
+            }
+          }
+        ]
+      },
+      {
+        "time": 1294.5,
+        "value": 0.029438743687075934,
+        "sources": [
+          {
+            "html": "<p>\nA library of 99 animated text effects built with pure CSS —\n        aurora gradients, glitches, split-flap boards, liquid fills and other\n        lesser-seen tricks. No JavaScript, no dependencies. Copy the\n        self-contained <code>CSS</code> for any effect, or grab a ready-made\n<code>Prompt</code> to have your coding agent recreate it. Every snippet\n        paints with the <code>--ink</co",
+            "previous": {
+              "x": 16,
+              "y": 470.8017578125,
+              "width": 358,
+              "height": 213.9375,
+              "top": 470.8017578125,
+              "right": 374,
+              "bottom": 684.7392578125,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 470.8017578125,
+              "width": 358,
+              "height": 255.9375,
+              "top": 470.8017578125,
+              "right": 374,
+              "bottom": 726.7392578125,
+              "left": 16
+            }
+          },
+          {
+            "previous": {
+              "x": 16,
+              "y": 318.9851379394531,
+              "width": 358,
+              "height": 90.59375,
+              "top": 318.9851379394531,
+              "right": 374,
+              "bottom": 409.5788879394531,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 359.5788879394531,
+              "width": 358,
+              "height": 87.1875,
+              "top": 359.5788879394531,
+              "right": 374,
+              "bottom": 446.7663879394531,
+              "left": 16
+            }
+          },
+          {
+            "html": "<main class=\"library\"> <nav class=\"category-nav mono\" aria-label=\"Browse effects by style\"> <a href=\"/\" aria-current=\"page\">All <span>99</span></a> <a href=\"/css-gradient-text-animations/\" title=\"CSS Gradient Text Animations\"> Gradient &amp; colour <span>10</span> </a><a href=\"/css-glitch-text-effects/\" title=\"CSS Glitch Text Effects\"> Glitch &amp; distortion <span>7</span> </a><a href=\"/css-neon-",
+            "previous": {
+              "x": 0,
+              "y": 733.109375,
+              "width": 390,
+              "height": 110.890625,
+              "top": 733.109375,
+              "right": 390,
+              "bottom": 844,
+              "left": 0
+            },
+            "current": {
+              "x": 0,
+              "y": 774.703125,
+              "width": 390,
+              "height": 69.296875,
+              "top": 774.703125,
+              "right": 390,
+              "bottom": 844,
+              "left": 0
+            }
+          },
+          {
+            "previous": {
+              "x": 16,
+              "y": 280.3913879394531,
+              "width": 358,
+              "height": 87.59375,
+              "top": 280.3913879394531,
+              "right": 374,
+              "bottom": 367.9851379394531,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 280.3913879394531,
+              "width": 358,
+              "height": 86.59375,
+              "top": 280.3913879394531,
+              "right": 374,
+              "bottom": 366.9851379394531,
+              "left": 16
+            }
+          }
+        ]
+      }
+    ],
+    "mutations": [
+      {
+        "time": 831,
+        "tag": "ASIDE",
+        "class": "site-sidebar menu-enhanced",
+        "height": 91
+      },
+      {
+        "time": 840.4000000953674,
+        "tag": "HTML",
+        "class": "lazy-enabled",
+        "height": 36617.0625
+      }
+    ],
+    "lcp": 860,
+    "cls": 0.08327886409319803
+  },
+  {
+    "path": "/text-effect-generator/",
+    "run": 1,
+    "shifts": [
+      {
+        "time": 1226.8999998569489,
+        "value": 0.008623037443004425,
+        "sources": [
+          {
+            "html": "<main class=\"library\"> <form class=\"panel gen-controls\" id=\"gen-form\" autocomplete=\"off\" onsubmit=\"return false\"> <label class=\"gen-field gen-text\"> <span class=\"mono\">Your text</span> <input type=\"text\" id=\"gen-text\" name=\"text\" maxlength=\"16\" placeholder=\"Type something…\" spellcheck=\"false\"> </label> <label class=\"gen-field gen-color\"> <span class=\"mono\">Text</span> <input type=\"color\" id=\"gen-i",
+            "previous": {
+              "x": 0,
+              "y": 603.53125,
+              "width": 390,
+              "height": 240.46875,
+              "top": 603.53125,
+              "right": 390,
+              "bottom": 844,
+              "left": 0
+            },
+            "current": {
+              "x": 0,
+              "y": 629.125,
+              "width": 390,
+              "height": 214.875,
+              "top": 629.125,
+              "right": 390,
+              "bottom": 844,
+              "left": 0
+            }
+          }
+        ]
+      }
+    ],
+    "mutations": [
+      {
+        "time": 762,
+        "tag": "ASIDE",
+        "class": "site-sidebar menu-enhanced",
+        "height": 91
+      },
+      {
+        "time": 762.2000000476837,
+        "tag": "HTML",
+        "class": "lazy-enabled",
+        "height": 35381.953125
+      }
+    ],
+    "lcp": 788,
+    "cls": 0.008623037443004425
+  },
+  {
+    "path": "/text-effect-generator/",
+    "run": 2,
+    "shifts": [
+      {
+        "time": 1283.5,
+        "value": 0.008623037443004425,
+        "sources": [
+          {
+            "html": "<main class=\"library\"> <form class=\"panel gen-controls\" id=\"gen-form\" autocomplete=\"off\" onsubmit=\"return false\"> <label class=\"gen-field gen-text\"> <span class=\"mono\">Your text</span> <input type=\"text\" id=\"gen-text\" name=\"text\" maxlength=\"16\" placeholder=\"Type something…\" spellcheck=\"false\"> </label> <label class=\"gen-field gen-color\"> <span class=\"mono\">Text</span> <input type=\"color\" id=\"gen-i",
+            "previous": {
+              "x": 0,
+              "y": 603.53125,
+              "width": 390,
+              "height": 240.46875,
+              "top": 603.53125,
+              "right": 390,
+              "bottom": 844,
+              "left": 0
+            },
+            "current": {
+              "x": 0,
+              "y": 629.125,
+              "width": 390,
+              "height": 214.875,
+              "top": 629.125,
+              "right": 390,
+              "bottom": 844,
+              "left": 0
+            }
+          }
+        ]
+      }
+    ],
+    "mutations": [
+      {
+        "time": 816.5999999046326,
+        "tag": "ASIDE",
+        "class": "site-sidebar menu-enhanced",
+        "height": 91
+      },
+      {
+        "time": 816.5999999046326,
+        "tag": "HTML",
+        "class": "lazy-enabled",
+        "height": 35381.953125
+      }
+    ],
+    "lcp": 844,
+    "cls": 0.008623037443004425
+  },
+  {
+    "path": "/text-effect-generator/",
+    "run": 3,
+    "shifts": [
+      {
+        "time": 1184.3000001907349,
+        "value": 0.008623037443004425,
+        "sources": [
+          {
+            "html": "<main class=\"library\"> <form class=\"panel gen-controls\" id=\"gen-form\" autocomplete=\"off\" onsubmit=\"return false\"> <label class=\"gen-field gen-text\"> <span class=\"mono\">Your text</span> <input type=\"text\" id=\"gen-text\" name=\"text\" maxlength=\"16\" placeholder=\"Type something…\" spellcheck=\"false\"> </label> <label class=\"gen-field gen-color\"> <span class=\"mono\">Text</span> <input type=\"color\" id=\"gen-i",
+            "previous": {
+              "x": 0,
+              "y": 603.53125,
+              "width": 390,
+              "height": 240.46875,
+              "top": 603.53125,
+              "right": 390,
+              "bottom": 844,
+              "left": 0
+            },
+            "current": {
+              "x": 0,
+              "y": 629.125,
+              "width": 390,
+              "height": 214.875,
+              "top": 629.125,
+              "right": 390,
+              "bottom": 844,
+              "left": 0
+            }
+          }
+        ]
+      }
+    ],
+    "mutations": [
+      {
+        "time": 901,
+        "tag": "ASIDE",
+        "class": "site-sidebar menu-enhanced",
+        "height": 91
+      },
+      {
+        "time": 901,
+        "tag": "HTML",
+        "class": "lazy-enabled",
+        "height": 35381.953125
+      }
+    ],
+    "lcp": 944,
+    "cls": 0.008623037443004425
+  }
+]

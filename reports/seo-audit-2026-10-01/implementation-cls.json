@@ -1,0 +1,85 @@
+{
+  "conditions": "Local production build; 4x CPU slowdown, 150ms latency, ~1.6Mbps, cache disabled, fonts delayed 1500ms, page scripts delayed 1200ms. Lab samples, not real-user percentiles.",
+  "results": [
+    {
+      "path": "/",
+      "cls": 0,
+      "lcp_ms": 2388,
+      "shifts": [],
+      "width": 320,
+      "documentWidth": 320,
+      "fontStatus": "loaded",
+      "sidebarHeight": 75
+    },
+    {
+      "path": "/text-effect-generator/",
+      "cls": 0,
+      "lcp_ms": 2408,
+      "shifts": [],
+      "width": 320,
+      "documentWidth": 320,
+      "fontStatus": "loaded",
+      "sidebarHeight": 75
+    },
+    {
+      "path": "/",
+      "cls": 0,
+      "lcp_ms": 2408,
+      "shifts": [],
+      "width": 390,
+      "documentWidth": 390,
+      "fontStatus": "loaded",
+      "sidebarHeight": 75
+    },
+    {
+      "path": "/text-effect-generator/",
+      "cls": 0,
+      "lcp_ms": 2396,
+      "shifts": [],
+      "width": 390,
+      "documentWidth": 390,
+      "fontStatus": "loaded",
+      "sidebarHeight": 75
+    },
+    {
+      "path": "/",
+      "cls": 0,
+      "lcp_ms": 2412,
+      "shifts": [],
+      "width": 430,
+      "documentWidth": 430,
+      "fontStatus": "loaded",
+      "sidebarHeight": 75
+    },
+    {
+      "path": "/text-effect-generator/",
+      "cls": 0,
+      "lcp_ms": 2400,
+      "shifts": [],
+      "width": 430,
+      "documentWidth": 430,
+      "fontStatus": "loaded",
+      "sidebarHeight": 75
+    },
+    {
+      "path": "/css-neon-glow-text-effects/",
+      "cls": 0,
+      "lcp_ms": 2336,
+      "shifts": [],
+      "width": 390,
+      "documentWidth": 390,
+      "fontStatus": "loaded",
+      "sidebarHeight": 75
+    },
+    {
+      "path": "/effects/neon-text-effect/",
+      "cls": 0,
+      "lcp_ms": 2376,
+      "shifts": [],
+      "width": 390,
+      "documentWidth": 390,
+      "fontStatus": "loaded",
+      "sidebarHeight": 75
+    }
+  ]
+}

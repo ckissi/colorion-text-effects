@@ -1,0 +1,56 @@
+---
+interface Props {
+  markup: string;
+  css: string;
+  /** Original effect CSS needed by an override example; included when copying. */
+  baseCss?: string;
+}
+const { markup, css, baseCss } = Astro.props;
+const copyable = `${markup}\n\n<style>\n${baseCss ? `${baseCss}\n\n` : ''}${css}\n</style>`;
+---
+
+<div class="guide-example">
+  <div class="guide-preview" set:html={markup} />
+  <style is:inline set:html={css} />
+  <button type="button" class="modal-copy mono guide-copy" data-example-copy>Copy example HTML + CSS</button>
+  <h3>HTML</h3>
+  <div class="effect-code"><pre><code>{markup}</code></pre></div>
+  <h3>{baseCss ? 'CSS to add after the original' : 'CSS'}</h3>
+  <div class="effect-code"><pre><code>{css}</code></pre></div>
+  <template data-example-code>{copyable}</template>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-example-copy]').forEach((button) => {
+    let reset: number | undefined;
+    button.addEventListener('click', async () => {
+      const template = button.closest('.guide-example')?.querySelector<HTMLTemplateElement>('[data-example-code]');
+      const text = template?.content.textContent;
+      if (!text) return;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        const previousFocus = document.activeElement as HTMLElement | null;
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.cssText = 'position:fixed;opacity:0';
+        document.body.append(textarea);
+        textarea.select();
+        const copied = document.execCommand('copy');
+        textarea.remove();
+        previousFocus?.focus({ preventScroll: true });
+        if (!copied) {
+          button.textContent = 'Select the code below to copy';
+          return;
+        }
+      }
+      button.textContent = 'Copied ✓';
+      button.classList.add('copied');
+      window.clearTimeout(reset);
+      reset = window.setTimeout(() => {
+        button.textContent = 'Copy example HTML + CSS';
+        button.classList.remove('copied');
+      }, 1800);
+    });
+  });
+</script>

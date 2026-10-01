@@ -2,12 +2,14 @@
 import Layout from '../../layouts/Layout.astro';
 import Effect from '../../components/Effect.astro';
 import EffectCard from '../../components/EffectCard.astro';
+import CodeExample from '../../components/CodeExample.astro';
 import Sidebar from '../../components/Sidebar.astro';
 import { effects, perLetter, usesDataText, type Effect as EffectData } from '../../data/effects';
 import { categories, categoryLabels, categoryPath, effectPath, effectSeo } from '../../data/seo';
 import { effectBlurbs, effectCss, effectMarkup, prompts, snippets } from '../../utils/effectCss';
 import { guides, relatedEffects } from '../../utils/effectGuide';
 import { effectDates } from '../../utils/lastmod';
+import { effectEditorial } from '../../data/effectEditorial';
 
 export function getStaticPaths() {
   return effects.map((effect) => ({ params: { slug: effectSeo(effect).slug }, props: { effect } }));
@@ -20,6 +22,7 @@ interface Props {
 const { effect } = Astro.props;
 const { keyword, category } = effectSeo(effect);
 const guide = guides.get(effect)!;
+const editorial = effectEditorial[effect.type];
 const related = relatedEffects(effect);
 const position = effects.indexOf(effect);
 const prev = effects[(position - 1 + effects.length) % effects.length];
@@ -175,6 +178,7 @@ if (guide.techniques.some((t) => t.id === 'property'))
 
         <section class="effect-section">
           <h2>How the {lowerKeyword} works</h2>
+          {editorial?.walkthrough.map((paragraph) => <p>{paragraph}</p>)}
           <p>
             {effect.name} uses {guide.keyframeCount} <code>@keyframes</code> animation{guide.keyframeCount === 1 ? '' : 's'}
             {loop && <>, looping every {loop}</>}. These are the CSS techniques it relies on:
@@ -190,6 +194,29 @@ if (guide.techniques.some((t) => t.id === 'property'))
             }
           </dl>
         </section>
+
+        {
+          editorial && (
+            <>
+              <section class="effect-section" aria-labelledby="variation-title">
+                <h2 id="variation-title">{editorial.variation.title}</h2>
+                <p>{editorial.variation.description}</p>
+                <CodeExample markup={editorial.variation.markup} css={editorial.variation.css} baseCss={css} />
+              </section>
+              <section class="effect-section" aria-labelledby="troubleshooting-title">
+                <h2 id="troubleshooting-title">Troubleshooting the {lowerKeyword}</h2>
+                {editorial.troubleshooting.map(({ question, answer }) => (
+                  <div class="guide-answer">
+                    <h3>{question}</h3>
+                    <p>{answer}</p>
+                  </div>
+                ))}
+                <p><strong>Browser behavior:</strong> {editorial.browserNote}</p>
+                <p><a href={editorial.reference.href}>{editorial.reference.label}</a></p>
+              </section>
+            </>
+          )
+        }
 
         <section class="effect-section">
           <h2>Customise it</h2>

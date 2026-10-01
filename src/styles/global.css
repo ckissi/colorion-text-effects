@@ -1,39 +1,88 @@
-/* Self-hosted fonts (latin subset) — same-origin and preloaded, so the hero
-   headline renders in Inter without a late swap that would delay LCP. */
+/* Preloaded fonts use optional display: slow first visits keep the fallback
+   instead of reflowing visible text. Subsequent visits use the cached font. */
 @font-face {
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
-  font-display: swap;
+  font-display: optional;
   src: url("/fonts/inter-latin-400-normal.woff2") format("woff2");
 }
 @font-face {
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
-  font-display: swap;
+  font-display: optional;
   src: url("/fonts/inter-latin-500-normal.woff2") format("woff2");
 }
 @font-face {
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;
-  font-display: swap;
+  font-display: optional;
   src: url("/fonts/inter-latin-600-normal.woff2") format("woff2");
 }
 @font-face {
   font-family: "JetBrains Mono";
   font-style: normal;
   font-weight: 400;
-  font-display: swap;
+  font-display: optional;
   src: url("/fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2");
 }
 @font-face {
   font-family: "JetBrains Mono";
   font-style: normal;
   font-weight: 600;
-  font-display: swap;
+  font-display: optional;
   src: url("/fonts/jetbrains-mono-latin-600-normal.woff2") format("woff2");
+}
+
+/* Measured at 1000px against the shipped latin faces using a mixed-case Latin
+   corpus. Arial/Courier New widths and font bounding boxes determine these
+   values; optional display also covers systems without either local font. */
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial");
+  font-weight: 400;
+  size-adjust: 106.0169%;
+  ascent-override: 91.4005%;
+  descent-override: 22.7322%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial");
+  font-weight: 500;
+  size-adjust: 107.1333%;
+  ascent-override: 90.4480%;
+  descent-override: 22.4953%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT");
+  font-weight: 600;
+  size-adjust: 101.8761%;
+  ascent-override: 95.1156%;
+  descent-override: 23.6562%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "JetBrains Mono Fallback";
+  src: local("Courier New"), local("CourierNewPSMT");
+  font-weight: 400;
+  size-adjust: 99.9837%;
+  ascent-override: 102.0166%;
+  descent-override: 30.0049%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "JetBrains Mono Fallback";
+  src: local("Courier New Bold"), local("CourierNewPS-BoldMT");
+  font-weight: 600;
+  size-adjust: 99.9837%;
+  ascent-override: 102.0166%;
+  descent-override: 30.0049%;
+  line-gap-override: 0%;
 }
 
 :root {
@@ -75,14 +124,14 @@
 body {
   background: var(--background);
   color: var(--text-primary);
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", "Inter Fallback", sans-serif;
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
 .mono {
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
   font-size: 12px;
   font-weight: 600;
   line-height: 1.2;
@@ -142,7 +191,7 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--r-control);
   cursor: pointer;
-  font: 600 20px/1 "JetBrains Mono", monospace;
+  font: 600 20px/1 "JetBrains Mono", "JetBrains Mono Fallback", monospace;
   transition: background .15s, border-color .15s, color .15s;
 }
 
@@ -165,7 +214,7 @@ body {
   margin-top: calc(var(--base) * -1.5);
   padding: calc(var(--base) * 1.5);
   color: var(--text-secondary);
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
   font-size: 12px;
   font-weight: 600;
   line-height: 1.35;
@@ -240,7 +289,7 @@ body {
 }
 
 @media (min-width: 861px) {
-  .site-sidebar.is-collapsed {
+  html.sidebar-collapsed .site-sidebar {
     width: var(--sidebar-collapsed-width);
     align-items: center;
     padding-left: calc(var(--base) * 2);
@@ -248,40 +297,40 @@ body {
     overflow: hidden;
   }
 
-  .site-sidebar.is-collapsed + .page-shell {
+  html.sidebar-collapsed .site-sidebar + .page-shell {
     margin-left: var(--sidebar-collapsed-width);
   }
 
-  .site-sidebar.is-collapsed .sidebar-brand {
+  html.sidebar-collapsed .site-sidebar .sidebar-brand {
     justify-content: center;
     padding-bottom: calc(var(--base) * 2);
     border-bottom: 1px solid var(--divider);
   }
 
-  .site-sidebar.is-collapsed .sidebar-brand > div:not(.brand-mark),
-  .site-sidebar.is-collapsed .sidebar-credit span,
-  .site-sidebar.is-collapsed .sidebar-label {
+  html.sidebar-collapsed .sidebar-brand > div:not(.brand-mark),
+  html.sidebar-collapsed .sidebar-credit span,
+  html.sidebar-collapsed .sidebar-label {
     display: none;
   }
 
-  .site-sidebar.is-collapsed .sidebar-nav {
+  html.sidebar-collapsed .site-sidebar .sidebar-nav {
     width: 100%;
     justify-items: center;
   }
 
-  .site-sidebar.is-collapsed .sidebar-nav a {
+  html.sidebar-collapsed .site-sidebar .sidebar-nav a {
     width: 42px;
     justify-content: center;
     padding-left: 0;
     padding-right: 0;
   }
 
-  .site-sidebar.is-collapsed .sidebar-collapse {
+  html.sidebar-collapsed .site-sidebar .sidebar-collapse {
     align-self: center;
     margin-top: 0;
   }
 
-  .site-sidebar.is-collapsed .sidebar-credit {
+  html.sidebar-collapsed .site-sidebar .sidebar-credit {
     justify-content: center;
     margin-top: 0;
     padding: var(--base);
@@ -311,7 +360,7 @@ body {
   display: grid;
   place-items: center;
   color: var(--background);
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
   font-weight: 600;
   font-size: 13px;
 }
@@ -380,7 +429,7 @@ h1 em {
 }
 
 .hero p code {
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
   font-size: 0.9em;
   background: color-mix(in srgb, var(--text-primary) 8%, transparent);
   border: 1px solid var(--border);
@@ -485,7 +534,7 @@ h1 em {
 }
 
 .cell h3 {
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.18em;
@@ -556,6 +605,7 @@ h1 em {
 
 /* 03 Teletype — typewriter with blinking caret (word must match the ch width) */
 .fx-typewriter {
+  box-sizing: content-box; /* the caret sits outside the character-count width */
   font: 600 24px/1.2 "JetBrains Mono", monospace;
   letter-spacing: 0;
   color: var(--ink);
@@ -4141,7 +4191,7 @@ h1 em {
 .modal-code {
   margin: 0;
   padding: calc(var(--base) * 3);
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
   font-size: 12px;
   line-height: 1.65;
   color: color-mix(in srgb, var(--text-primary) 88%, var(--background));
@@ -4163,7 +4213,7 @@ h1 em {
   align-items: center;
   gap: calc(var(--base) * 1.25);
   color: var(--text-secondary);
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
   font-size: 12px;
   font-weight: 600;
   line-height: 1.35;
@@ -4276,6 +4326,8 @@ h1 em {
     cursor: pointer;
   }
 
+  html:not(.js) .sidebar-toggle { display: none; }
+
   .sidebar-toggle span {
     width: 18px;
     height: 2px;
@@ -4303,11 +4355,11 @@ h1 em {
     margin-top: 0;
   }
 
-  .site-sidebar.menu-enhanced .sidebar-credit {
+  .js .site-sidebar .sidebar-credit {
     display: none;
   }
 
-  .site-sidebar.menu-enhanced.is-open .sidebar-credit {
+  .js .site-sidebar.is-open .sidebar-credit {
     display: flex;
   }
 
@@ -4320,20 +4372,18 @@ h1 em {
     border-top: 1px solid var(--divider);
   }
 
-  .site-sidebar.menu-enhanced .sidebar-nav {
-    max-height: 0;
-    padding-top: 0;
-    border-top: 0;
-    overflow: hidden;
+  .js .site-sidebar .sidebar-nav {
+    display: none;
   }
 
-  .site-sidebar.menu-enhanced.is-open .sidebar-nav {
+  .js .site-sidebar.is-open .sidebar-nav {
+    display: grid;
     max-height: none;
     padding-top: calc(var(--base) * 1.5);
     border-top: 1px solid var(--divider);
   }
 
-  .site-sidebar.menu-enhanced.is-open {
+  .js .site-sidebar.is-open {
     position: fixed;
     inset: 0;
     align-content: start;
@@ -4400,7 +4450,7 @@ h1 em {
 .cell-keyword {
   display: block;
   margin-top: 6px;
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", "Inter Fallback", sans-serif;
   font-size: 12px;
   font-weight: 400;
   letter-spacing: 0;
@@ -4437,8 +4487,10 @@ h1 em {
   margin: 0 auto;
   padding: 0 calc(var(--base) * 5) var(--section-padding);
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: calc(var(--base) * 7);
 }
+.effect-body > * { min-width: 0; }
 
 .effect-stage {
   --ink: var(--text-primary);
@@ -4485,7 +4537,7 @@ h1 em {
   box-shadow: inset 0 0 0 1px var(--border);
 }
 
-.effect-section { display: grid; gap: calc(var(--base) * 2); }
+.effect-section { display: grid; grid-template-columns: minmax(0, 1fr); gap: calc(var(--base) * 2); }
 .effect-section h2 {
   font-size: clamp(22px, 2.6vw, 28px);
   font-weight: 500;
@@ -4496,11 +4548,59 @@ h1 em {
 .effect-techniques { max-width: 760px; color: var(--text-secondary); }
 .effect-section code,
 .effect-list code {
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
   font-size: 0.88em;
   color: var(--text-primary);
 }
 .effect-section strong { color: var(--text-primary); font-weight: 500; }
+
+.category-guide {
+  display: grid;
+  gap: calc(var(--base) * 7);
+  margin-top: calc(var(--base) * 7);
+}
+.effect-section h3 {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.guide-answer { display: grid; gap: var(--base); max-width: 760px; }
+.guide-answer p { color: var(--text-secondary); }
+.guide-example { display: grid; gap: calc(var(--base) * 2); min-width: 0; }
+.guide-copy { justify-self: start; }
+.guide-preview {
+  --ink: var(--text-primary);
+  --ink-2: var(--primary);
+  --ink-3: var(--accent-2);
+  min-height: 180px;
+  display: grid;
+  place-items: center;
+  padding: calc(var(--base) * 4);
+  background: var(--surface);
+  border: 1px solid var(--divider);
+  overflow: hidden;
+}
+.guide-preview > * { max-width: 100%; }
+.comparison-wrap {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--divider);
+}
+.comparison-wrap:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+.effect-comparison { width: 100%; min-width: 680px; border-collapse: collapse; text-align: left; }
+.effect-comparison caption { padding: calc(var(--base) * 2); text-align: left; color: var(--text-secondary); }
+.effect-comparison th,
+.effect-comparison td { padding: calc(var(--base) * 2); vertical-align: top; border-top: 1px solid var(--divider); }
+.effect-comparison thead th { background: var(--surface); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+.effect-comparison tbody th { width: 22%; font-weight: 500; }
+.effect-comparison td { color: var(--text-secondary); font-size: 14px; }
+.effect-comparison a { color: var(--text-primary); text-decoration-color: var(--primary); text-underline-offset: 4px; }
+.effect-comparison a:hover { color: var(--primary); }
+
+@media (max-width: 560px) {
+  .guide-preview { padding: calc(var(--base) * 2); }
+}
 
 .effect-code {
   overflow: auto;
@@ -4511,7 +4611,7 @@ h1 em {
 .effect-code pre {
   margin: 0;
   padding: calc(var(--base) * 3);
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
   font-size: 12px;
   line-height: 1.65;
   color: color-mix(in srgb, var(--text-primary) 88%, var(--background));
@@ -4681,7 +4781,7 @@ h1 em {
 .gen-text { flex: 1 1 260px; }
 .gen-text input {
   width: 100%;
-  font: 500 20px/1.2 "JetBrains Mono", monospace;
+  font: 500 20px/1.2 "JetBrains Mono", "JetBrains Mono Fallback", monospace;
   color: var(--text-primary);
   background: var(--background);
   border: 1px solid var(--border);
@@ -4713,9 +4813,8 @@ h1 em {
 .gen-steps strong { color: var(--text-primary); font-weight: 500; }
 .gen-steps { max-width: 760px; color: var(--text-secondary); }
 .gen-steps code {
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono", "JetBrains Mono Fallback", monospace;
   font-size: .9em;
   color: var(--text-primary);
 }
 .gen-cta { color: var(--primary); }
-

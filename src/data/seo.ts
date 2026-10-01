@@ -91,7 +91,7 @@ export const categories: Record<Category, CategoryInfo> = {
     summary: 'Per-letter wave, bounce, pendulum, domino, explode and marquee text animations in pure CSS.',
     intro: [
       'Letter-by-letter animation in CSS wraps each character in its own element with an index custom property — <b style="--i:3">. Every letter runs the same @keyframes, but animation-delay: calc(var(--i) * 0.08s) offsets them so the motion ripples through the word.',
-      'With that one pattern you get waves, bounces, swinging pendulums, toppling dominoes, shattering and smoke-like letters, and laser bolts that fire each letter into place. Transforms keep it GPU-composited, so it stays smooth even on long words.',
+      'With that one pattern you get waves, bounces, swinging pendulums, toppling dominoes, shattering and smoke-like letters, and laser bolts that fire each letter into place. Transforms move letters without changing the surrounding layout. Rendering cost still depends on the browser and the number of animated elements, so keep display phrases short.',
     ],
   },
   texture: {

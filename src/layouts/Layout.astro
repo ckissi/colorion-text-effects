@@ -50,6 +50,14 @@ const jsonLd = {
     <title>{title}</title>
     <link rel="canonical" href={canonical} />
 
+    <!-- Decide enhancement and saved sidebar geometry before the first paint. -->
+    <script is:inline>
+      document.documentElement.classList.add('js');
+      try {
+        document.documentElement.classList.toggle('sidebar-collapsed', localStorage.getItem('colorion-sidebar-collapsed') === '1');
+      } catch {}
+    </script>
+
     <!-- Site chrome + only the effects this page renders (see utils/pageCss.ts) -->
     <style is:inline set:html={pageCss(styles)}></style>
 
@@ -80,10 +88,8 @@ const jsonLd = {
     <!-- Structured data -->
     <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
 
-    <!-- Self-hosted fonts. Preload the above-the-fold weights (Inter 500 powers
-         the hero h1 / LCP element; Inter 400 the body copy; JetBrains Mono 600
-         paints every effect stage) so they arrive before paint. @font-face
-         lives in the inlined stylesheet. -->
+    <!-- Preload the hero, body and navigation faces. Optional font display keeps
+         the matched fallback for this visit if a face arrives after first layout. -->
     <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin-500-normal.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin-400-normal.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/fonts/jetbrains-mono-latin-600-normal.woff2" crossorigin />

@@ -104,7 +104,7 @@ const TECHNIQUES: Technique[] = [
     id: 'filter',
     label: 'CSS filters',
     detail:
-      'Filter functions such as blur(), brightness(), drop-shadow() and hue-rotate() post-process the rendered letters on the GPU.',
+      'Filter functions such as blur(), brightness(), drop-shadow() and hue-rotate() change the rendered letters. Large blurred areas can require substantial painting work, so check the effect on the devices you support.',
     test: has(/(?:^|[\s;{])filter\s*:/),
   },
   {
@@ -144,7 +144,7 @@ const TECHNIQUES: Technique[] = [
     id: 'transform',
     label: 'Keyframed transforms',
     detail:
-      'The motion comes from translate, scale, rotate and skew inside @keyframes. Transforms are composited on the GPU, so the animation stays smooth without triggering layout.',
+      'The motion comes from translate, scale, rotate and skew inside @keyframes. Transforms move the rendered element without changing its layout dimensions; browser compositing and painting determine the actual performance.',
     test: animates(/transform\s*:|translate|scale\(|rotate|skew/),
   },
   {

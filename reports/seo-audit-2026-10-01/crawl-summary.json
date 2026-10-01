@@ -1,0 +1,191 @@
+{
+  "date": "2026-10-01",
+  "site": "https://text-effects.colorion.co/",
+  "pages": 109,
+  "page_types": {
+    "home": 1,
+    "generator": 1,
+    "categories": 8,
+    "effects": 99
+  },
+  "http_status_counts": {
+    "200": 109
+  },
+  "schema_counts": {
+    "WebSite": 109,
+    "CollectionPage": 9,
+    "FAQPage": 1,
+    "BreadcrumbList": 108,
+    "WebApplication": 1,
+    "TechArticle": 99
+  },
+  "extra_url_checks": [
+    {
+      "url": "https://text-effects.colorion.co/robots.txt",
+      "status": 200,
+      "final_url": "https://text-effects.colorion.co/robots.txt",
+      "canonical": null,
+      "headers": {
+        "content-type": "text/plain",
+        "cf-cache-status": "HIT",
+        "age": "144",
+        "cache-control": "public, max-age=2592000, s-maxage=2592000",
+        "last-modified": "Thu, 09 Jul 2026 06:54:16 GMT"
+      }
+    },
+    {
+      "url": "https://text-effects.colorion.co/text-effect-generator/",
+      "status": 200,
+      "final_url": "https://text-effects.colorion.co/text-effect-generator/",
+      "canonical": [
+        "https://text-effects.colorion.co/text-effect-generator/"
+      ],
+      "headers": {
+        "content-type": "text/html",
+        "cf-cache-status": "HIT",
+        "age": "156",
+        "cache-control": "public, max-age=0, s-maxage=2592000",
+        "last-modified": "Thu, 01 Oct 2026 11:50:08 GMT"
+      }
+    },
+    {
+      "url": "https://text-effects.colorion.co/this-page-does-not-exist-seo-audit/",
+      "status": 404,
+      "final_url": "https://text-effects.colorion.co/this-page-does-not-exist-seo-audit/",
+      "canonical": [],
+      "headers": {
+        "content-type": "text/html",
+        "cache-control": "public, max-age=0"
+      }
+    },
+    {
+      "url": "https://text-effects.colorion.co/effects/neon-text-effect",
+      "status": 200,
+      "final_url": "https://text-effects.colorion.co/effects/neon-text-effect",
+      "canonical": [
+        "https://text-effects.colorion.co/effects/neon-text-effect/"
+      ],
+      "headers": {
+        "content-type": "text/html",
+        "cf-cache-status": "HIT",
+        "age": "144",
+        "cache-control": "public, max-age=0, s-maxage=2592000",
+        "last-modified": "Thu, 01 Oct 2026 11:50:08 GMT"
+      }
+    },
+    {
+      "url": "https://text-effects.colorion.co/effects/neon-text-effect/index.html",
+      "status": 200,
+      "final_url": "https://text-effects.colorion.co/effects/neon-text-effect/index.html",
+      "canonical": [
+        "https://text-effects.colorion.co/effects/neon-text-effect/"
+      ],
+      "headers": {
+        "content-type": "text/html",
+        "cf-cache-status": "HIT",
+        "age": "144",
+        "cache-control": "public, max-age=0, s-maxage=2592000",
+        "last-modified": "Thu, 01 Oct 2026 11:50:08 GMT"
+      }
+    },
+    {
+      "url": "https://text-effects.colorion.co/index.html",
+      "status": 200,
+      "final_url": "https://text-effects.colorion.co/index.html",
+      "canonical": [
+        "https://text-effects.colorion.co/"
+      ],
+      "headers": {
+        "content-type": "text/html",
+        "cf-cache-status": "HIT",
+        "age": "144",
+        "cache-control": "public, max-age=0, s-maxage=2592000",
+        "last-modified": "Thu, 01 Oct 2026 11:50:10 GMT"
+      }
+    },
+    {
+      "url": "https://text-effects.colorion.co/og-image.png",
+      "status": 200,
+      "final_url": "https://text-effects.colorion.co/og-image.png",
+      "canonical": null,
+      "headers": {
+        "content-type": "image/png",
+        "cf-cache-status": "HIT",
+        "age": "144",
+        "cache-control": "public, max-age=2592000, s-maxage=2592000",
+        "last-modified": "Thu, 09 Jul 2026 06:54:16 GMT"
+      }
+    },
+    {
+      "url": "https://text-effects.colorion.co/favicon.ico",
+      "status": 200,
+      "final_url": "https://text-effects.colorion.co/favicon.ico",
+      "canonical": null,
+      "headers": {
+        "content-type": "image/vnd.microsoft.icon",
+        "cf-cache-status": "HIT",
+        "age": "144",
+        "cache-control": "public, max-age=2592000, s-maxage=2592000",
+        "last-modified": "Thu, 09 Jul 2026 06:54:16 GMT"
+      }
+    },
+    {
+      "url": "https://text-effects.colorion.co/site.webmanifest",
+      "status": 200,
+      "final_url": "https://text-effects.colorion.co/site.webmanifest",
+      "canonical": null,
+      "headers": {
+        "content-type": "application/octet-stream",
+        "cf-cache-status": "HIT",
+        "age": "144",
+        "cache-control": "public, max-age=2592000, s-maxage=2592000",
+        "last-modified": "Thu, 09 Jul 2026 06:54:16 GMT"
+      }
+    },
+    {
+      "url": "https://text-effects.colorion.co/?ref=seo-audit",
+      "status": 200,
+      "final_url": "https://text-effects.colorion.co/?ref=seo-audit",
+      "canonical": [
+        "https://text-effects.colorion.co/"
+      ],
+      "headers": {
+        "content-type": "text/html",
+        "cf-cache-status": "HIT",
+        "age": "144",
+        "cache-control": "public, max-age=0, s-maxage=2592000",
+        "last-modified": "Thu, 01 Oct 2026 11:50:10 GMT"
+      }
+    },
+    {
+      "url": "https://text-effects.colorion.co/text-effect-generator/?text=HELLO",
+      "status": 200,
+      "final_url": "https://text-effects.colorion.co/text-effect-generator/?text=HELLO",
+      "canonical": [
+        "https://text-effects.colorion.co/text-effect-generator/"
+      ],
+      "headers": {
+        "content-type": "text/html",
+        "cf-cache-status": "HIT",
+        "age": "143",
+        "cache-control": "public, max-age=0, s-maxage=2592000",
+        "last-modified": "Thu, 01 Oct 2026 11:50:08 GMT"
+      }
+    },
+    {
+      "url": "http://text-effects.colorion.co/",
+      "status": 200,
+      "final_url": "https://text-effects.colorion.co/",
+      "canonical": [
+        "https://text-effects.colorion.co/"
+      ],
+      "headers": {
+        "content-type": "text/html",
+        "cf-cache-status": "HIT",
+        "age": "157",
+        "cache-control": "public, max-age=0, s-maxage=2592000",
+        "last-modified": "Thu, 01 Oct 2026 11:50:10 GMT"
+      }
+    }
+  ]
+}

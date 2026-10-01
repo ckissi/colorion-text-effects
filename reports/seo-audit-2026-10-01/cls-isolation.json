@@ -1,0 +1,584 @@
+[
+  {
+    "path": "/",
+    "earlyMenu": false,
+    "cls": 0.08327886409319803,
+    "shifts": [
+      {
+        "time": 1335.2999999523163,
+        "value": 0.05384012040612209,
+        "sources": [
+          {
+            "node": "#text",
+            "html": "<p>\nA library of 99 animated text effects built with pure CSS —\n        aurora gradients, glitches, split-flap boards, liquid fills and other\n        lesser-seen tricks. No JavaScript, no dependencies",
+            "previous": {
+              "x": 16,
+              "y": 534.5829467773438,
+              "width": 358,
+              "height": 45.59375,
+              "top": 534.5829467773438,
+              "right": 374,
+              "bottom": 580.1766967773438,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 533.5829467773438,
+              "width": 358,
+              "height": 45.59375,
+              "top": 533.5829467773438,
+              "right": 374,
+              "bottom": 579.1766967773438,
+              "left": 16
+            }
+          },
+          {
+            "node": "#text",
+            "html": "<p>\nA library of 99 animated text effects built with pure CSS —\n        aurora gradients, glitches, split-flap boards, liquid fills and other\n        lesser-seen tricks. No JavaScript, no dependencies",
+            "previous": {
+              "x": 16,
+              "y": 560.1766967773438,
+              "width": 358,
+              "height": 45.59375,
+              "top": 560.1766967773438,
+              "right": 374,
+              "bottom": 605.7704467773438,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 559.1766967773438,
+              "width": 358,
+              "height": 45.59375,
+              "top": 559.1766967773438,
+              "right": 374,
+              "bottom": 604.7704467773438,
+              "left": 16
+            }
+          },
+          {
+            "node": "#text",
+            "html": "<a class=\"gen-cta\" href=\"/text-effect-generator/\">Try the text effect generator →</a>",
+            "previous": {
+              "x": 16,
+              "y": 636.9579467773438,
+              "width": 358,
+              "height": 45.59375,
+              "top": 636.9579467773438,
+              "right": 374,
+              "bottom": 682.5516967773438,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 635.9579467773438,
+              "width": 358,
+              "height": 45.59375,
+              "top": 635.9579467773438,
+              "right": 374,
+              "bottom": 681.5516967773438,
+              "left": 16
+            }
+          },
+          {
+            "node": "#text",
+            "html": "<code>prefers-reduced-motion</code>",
+            "previous": {
+              "x": 16,
+              "y": 612.3641967773438,
+              "width": 358,
+              "height": 42.59375,
+              "top": 612.3641967773438,
+              "right": 374,
+              "bottom": 654.9579467773438,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 613.3641967773438,
+              "width": 358,
+              "height": 42.59375,
+              "top": 613.3641967773438,
+              "right": 374,
+              "bottom": 655.9579467773438,
+              "left": 16
+            }
+          },
+          {
+            "node": "#text",
+            "html": "<code>--ink</code>",
+            "previous": {
+              "x": 16,
+              "y": 586.7704467773438,
+              "width": 358,
+              "height": 17,
+              "top": 586.7704467773438,
+              "right": 374,
+              "bottom": 603.7704467773438,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 613.3641967773438,
+              "width": 358,
+              "height": 17,
+              "top": 613.3641967773438,
+              "right": 374,
+              "bottom": 630.3641967773438,
+              "left": 16
+            }
+          }
+        ]
+      },
+      {
+        "time": 1348.9000000953674,
+        "value": 0.029438743687075934,
+        "sources": [
+          {
+            "node": "P",
+            "html": "<p>\nA library of 99 animated text effects built with pure CSS —\n        aurora gradients, glitches, split-flap boards, liquid fills and other\n        lesser-seen tricks. No JavaScript, no dependencies",
+            "previous": {
+              "x": 16,
+              "y": 470.791259765625,
+              "width": 358,
+              "height": 213.9375,
+              "top": 470.791259765625,
+              "right": 374,
+              "bottom": 684.728759765625,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 470.791259765625,
+              "width": 358,
+              "height": 255.9375,
+              "top": 470.791259765625,
+              "right": 374,
+              "bottom": 726.728759765625,
+              "left": 16
+            }
+          },
+          {
+            "node": "#text",
+            "html": "<h1 class=\"home-title\">99 <em>CSS text effects</em><br>&amp; animations, free to copy.</h1>",
+            "previous": {
+              "x": 16,
+              "y": 318.9845886230469,
+              "width": 358,
+              "height": 90.59375,
+              "top": 318.9845886230469,
+              "right": 374,
+              "bottom": 409.5783386230469,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 359.5783386230469,
+              "width": 358,
+              "height": 87.1875,
+              "top": 359.5783386230469,
+              "right": 374,
+              "bottom": 446.7658386230469,
+              "left": 16
+            }
+          },
+          {
+            "node": "MAIN",
+            "html": "<main class=\"library\"> <nav class=\"category-nav mono\" aria-label=\"Browse effects by style\"> <a href=\"/\" aria-current=\"page\">All <span>99</span></a> <a href=\"/css-gradient-text-animations/\" title=\"CSS ",
+            "previous": {
+              "x": 0,
+              "y": 733.109375,
+              "width": 390,
+              "height": 110.890625,
+              "top": 733.109375,
+              "right": 390,
+              "bottom": 844,
+              "left": 0
+            },
+            "current": {
+              "x": 0,
+              "y": 774.703125,
+              "width": 390,
+              "height": 69.296875,
+              "top": 774.703125,
+              "right": 390,
+              "bottom": 844,
+              "left": 0
+            }
+          },
+          {
+            "node": "#text",
+            "html": "<em>CSS text effects</em>",
+            "previous": {
+              "x": 16,
+              "y": 280.3908386230469,
+              "width": 358,
+              "height": 87.59375,
+              "top": 280.3908386230469,
+              "right": 374,
+              "bottom": 367.9845886230469,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 280.3908386230469,
+              "width": 358,
+              "height": 86.59375,
+              "top": 280.3908386230469,
+              "right": 374,
+              "bottom": 366.9845886230469,
+              "left": 16
+            }
+          }
+        ]
+      }
+    ],
+    "classes": [
+      {
+        "time": 853.9000000953674,
+        "class": "site-sidebar menu-enhanced"
+      }
+    ],
+    "fonts": [
+      {
+        "time": 1384.7999999523163,
+        "faces": [
+          {
+            "family": "JetBrains Mono",
+            "weight": "600"
+          },
+          {
+            "family": "Inter",
+            "weight": "400"
+          },
+          {
+            "family": "Inter",
+            "weight": "500"
+          },
+          {
+            "family": "JetBrains Mono",
+            "weight": "400"
+          },
+          {
+            "family": "Inter",
+            "weight": "600"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/",
+    "earlyMenu": true,
+    "cls": 0.20196423821925868,
+    "shifts": [
+      {
+        "time": 1243.7000000476837,
+        "value": 0.20196423821925868,
+        "sources": [
+          {
+            "node": "P",
+            "html": "<p>\nA library of 99 animated text effects built with pure CSS —\n        aurora gradients, glitches, split-flap boards, liquid fills and other\n        lesser-seen tricks. No JavaScript, no dependencies",
+            "previous": {
+              "x": 16,
+              "y": 470.7912902832031,
+              "width": 358,
+              "height": 213.93746948242188,
+              "top": 470.7912902832031,
+              "right": 374,
+              "bottom": 684.728759765625,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 470.7912902832031,
+              "width": 358,
+              "height": 255.93746948242188,
+              "top": 470.7912902832031,
+              "right": 374,
+              "bottom": 726.728759765625,
+              "left": 16
+            }
+          },
+          {
+            "node": "#text",
+            "html": "<h1 class=\"home-title\">99 <em>CSS text effects</em><br>&amp; animations, free to copy.</h1>",
+            "previous": {
+              "x": 16,
+              "y": 318.9845886230469,
+              "width": 358,
+              "height": 90.59375,
+              "top": 318.9845886230469,
+              "right": 374,
+              "bottom": 409.5783386230469,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 359.5783386230469,
+              "width": 358,
+              "height": 87.1875,
+              "top": 359.5783386230469,
+              "right": 374,
+              "bottom": 446.7658386230469,
+              "left": 16
+            }
+          },
+          {
+            "node": "MAIN",
+            "html": "<main class=\"library\"> <nav class=\"category-nav mono\" aria-label=\"Browse effects by style\"> <a href=\"/\" aria-current=\"page\">All <span>99</span></a> <a href=\"/css-gradient-text-animations/\" title=\"CSS ",
+            "previous": {
+              "x": 0,
+              "y": 733.109375,
+              "width": 390,
+              "height": 110.890625,
+              "top": 733.109375,
+              "right": 390,
+              "bottom": 844,
+              "left": 0
+            },
+            "current": {
+              "x": 0,
+              "y": 774.703125,
+              "width": 390,
+              "height": 69.296875,
+              "top": 774.703125,
+              "right": 390,
+              "bottom": 844,
+              "left": 0
+            }
+          },
+          {
+            "node": "#text",
+            "html": "<em>CSS text effects</em>",
+            "previous": {
+              "x": 16,
+              "y": 280.3908386230469,
+              "width": 358,
+              "height": 87.59375,
+              "top": 280.3908386230469,
+              "right": 374,
+              "bottom": 367.9845886230469,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 280.3908386230469,
+              "width": 358,
+              "height": 86.59375,
+              "top": 280.3908386230469,
+              "right": 374,
+              "bottom": 366.9845886230469,
+              "left": 16
+            }
+          },
+          {
+            "node": "#text",
+            "html": "<a class=\"gen-cta\" href=\"/text-effect-generator/\">Try the text effect generator →</a>",
+            "previous": {
+              "x": 16,
+              "y": 678.135009765625,
+              "width": 358,
+              "height": 45.59375,
+              "top": 678.135009765625,
+              "right": 374,
+              "bottom": 723.728759765625,
+              "left": 16
+            },
+            "current": {
+              "x": 16,
+              "y": 677.541259765625,
+              "width": 358,
+              "height": 45.59375,
+              "top": 677.541259765625,
+              "right": 374,
+              "bottom": 723.135009765625,
+              "left": 16
+            }
+          }
+        ]
+      }
+    ],
+    "classes": [
+      {
+        "time": 329.90000009536743,
+        "class": "site-sidebar menu-enhanced"
+      },
+      {
+        "time": 762.5999999046326,
+        "class": "site-sidebar menu-enhanced"
+      }
+    ],
+    "fonts": [
+      {
+        "time": 1287.5999999046326,
+        "faces": [
+          {
+            "family": "JetBrains Mono",
+            "weight": "600"
+          },
+          {
+            "family": "Inter",
+            "weight": "500"
+          },
+          {
+            "family": "Inter",
+            "weight": "400"
+          },
+          {
+            "family": "JetBrains Mono",
+            "weight": "400"
+          },
+          {
+            "family": "Inter",
+            "weight": "600"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/text-effect-generator/",
+    "earlyMenu": false,
+    "cls": 0.008623037443004425,
+    "shifts": [
+      {
+        "time": 1237.5999999046326,
+        "value": 0.008623037443004425,
+        "sources": [
+          {
+            "node": "MAIN",
+            "html": "<main class=\"library\"> <form class=\"panel gen-controls\" id=\"gen-form\" autocomplete=\"off\" onsubmit=\"return false\"> <label class=\"gen-field gen-text\"> <span class=\"mono\">Your text</span> <input type=\"te",
+            "previous": {
+              "x": 0,
+              "y": 603.53125,
+              "width": 390,
+              "height": 240.46875,
+              "top": 603.53125,
+              "right": 390,
+              "bottom": 844,
+              "left": 0
+            },
+            "current": {
+              "x": 0,
+              "y": 629.125,
+              "width": 390,
+              "height": 214.875,
+              "top": 629.125,
+              "right": 390,
+              "bottom": 844,
+              "left": 0
+            }
+          }
+        ]
+      }
+    ],
+    "classes": [
+      {
+        "time": 757.7999999523163,
+        "class": "site-sidebar menu-enhanced"
+      }
+    ],
+    "fonts": [
+      {
+        "time": 1276.4000000953674,
+        "faces": [
+          {
+            "family": "JetBrains Mono",
+            "weight": "600"
+          },
+          {
+            "family": "Inter",
+            "weight": "500"
+          },
+          {
+            "family": "Inter",
+            "weight": "400"
+          },
+          {
+            "family": "JetBrains Mono",
+            "weight": "400"
+          },
+          {
+            "family": "Inter",
+            "weight": "600"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/text-effect-generator/",
+    "earlyMenu": true,
+    "cls": 0.008623037443004425,
+    "shifts": [
+      {
+        "time": 1268.5,
+        "value": 0.008623037443004425,
+        "sources": [
+          {
+            "node": "MAIN",
+            "html": "<main class=\"library\"> <form class=\"panel gen-controls\" id=\"gen-form\" autocomplete=\"off\" onsubmit=\"return false\"> <label class=\"gen-field gen-text\"> <span class=\"mono\">Your text</span> <input type=\"te",
+            "previous": {
+              "x": 0,
+              "y": 603.53125,
+              "width": 390,
+              "height": 240.46875,
+              "top": 603.53125,
+              "right": 390,
+              "bottom": 844,
+              "left": 0
+            },
+            "current": {
+              "x": 0,
+              "y": 629.125,
+              "width": 390,
+              "height": 214.875,
+              "top": 629.125,
+              "right": 390,
+              "bottom": 844,
+              "left": 0
+            }
+          }
+        ]
+      }
+    ],
+    "classes": [
+      {
+        "time": 308.5,
+        "class": "site-sidebar menu-enhanced"
+      },
+      {
+        "time": 722,
+        "class": "site-sidebar menu-enhanced"
+      }
+    ],
+    "fonts": [
+      {
+        "time": 1271,
+        "faces": [
+          {
+            "family": "Inter",
+            "weight": "500"
+          },
+          {
+            "family": "JetBrains Mono",
+            "weight": "600"
+          },
+          {
+            "family": "JetBrains Mono",
+            "weight": "400"
+          },
+          {
+            "family": "Inter",
+            "weight": "400"
+          },
+          {
+            "family": "Inter",
+            "weight": "600"
+          }
+        ]
+      }
+    ]
+  }
+]

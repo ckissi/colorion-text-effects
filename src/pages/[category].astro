@@ -3,6 +3,10 @@ import Layout from '../layouts/Layout.astro';
 import EffectCard from '../components/EffectCard.astro';
 import CategoryNav from '../components/CategoryNav.astro';
 import Sidebar from '../components/Sidebar.astro';
+import CodeExample from '../components/CodeExample.astro';
+import { effects, perLetter, usesDataText } from '../data/effects';
+import { categoryGuides } from '../data/categoryGuides';
+import { guides } from '../utils/effectGuide';
 import { categories, categoryOrder, categoryPath, effectPath, effectSeo, effectsIn, type Category } from '../data/seo';
 
 export function getStaticPaths() {
@@ -15,6 +19,12 @@ interface Props {
 
 const { category } = Astro.props;
 const info = categories[category];
+const guide = categoryGuides[category];
+const comparisons = guide.comparisons.map((row) => {
+  const effect = effects.find((e) => e.type === row.type);
+  if (!effect || effectSeo(effect).category !== category) throw new Error(`Invalid ${category} comparison: ${row.type}`);
+  return { ...row, effect, loop: guides.get(effect)!.loopSeconds };
+});
 const list = effectsIn(category);
 const n = list.length;
 
@@ -94,6 +104,41 @@ const schema = [
         <div class="grid">
           {list.map((effect) => <EffectCard effect={effect} />)}
         </div>
+      </div>
+
+      <div class="category-guide">
+        <section class="effect-section" aria-labelledby="choosing-title">
+          <h2 id="choosing-title">Choosing {info.heading.toLowerCase().replace(/\bcss\b/g, 'CSS').replace(/\b3d\b/g, '3D')}</h2>
+          <p>{guide.choosing}</p>
+          <div class="comparison-wrap" role="region" aria-label="Compare text effects" tabindex="0">
+            <table class="effect-comparison">
+              <caption>Three styles to start with</caption>
+              <thead><tr><th scope="col">Effect</th><th scope="col">Best for</th><th scope="col">Markup / loop</th><th scope="col">What to consider</th></tr></thead>
+              <tbody>
+                {comparisons.map(({ effect, bestFor, tradeoff, loop }) => (
+                  <tr>
+                    <th scope="row"><a href={effectPath(effect)}>{effectSeo(effect).keyword}</a></th>
+                    <td>{bestFor}</td>
+                    <td>{perLetter.has(effect.type) ? 'Indexed letters' : usesDataText.has(effect.type) ? 'One element + data-text' : 'One text element'}<br />{loop ? `${+loop.toFixed(2)}s loop` : 'Static'}</td>
+                    <td>{tradeoff}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section class="effect-section" aria-labelledby="example-title">
+          <h2 id="example-title">{guide.example.title}</h2>
+          <p>{guide.example.explanation}</p>
+          <CodeExample markup={guide.example.markup} css={guide.example.css} />
+        </section>
+        <section class="effect-section" aria-labelledby="questions-title">
+          <h2 id="questions-title">Before you use these effects</h2>
+          {guide.questions.map(({ question, answer }) => (
+            <div class="guide-answer"><h3>{question}</h3><p>{answer}</p></div>
+          ))}
+          <p>Ready to adapt a style? <a href={`/text-effect-generator/?effect=${effectSeo(comparisons[0].effect).slug}`}>Try your own text and colours in the generator</a>, or open a guide above for the complete implementation.</p>
+        </section>
       </div>
     </main>
 
