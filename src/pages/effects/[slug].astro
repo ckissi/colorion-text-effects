@@ -1,0 +1,307 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Effect from '../../components/Effect.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import { effects, perLetter, usesDataText, type Effect as EffectData } from '../../data/effects';
+import { categoryLabels, effectPath, effectSeo } from '../../data/seo';
+import { effectBlurbs, effectCss, effectMarkup, prompts, snippets } from '../../utils/effectCss';
+import { guides, relatedEffects } from '../../utils/effectGuide';
+
+export function getStaticPaths() {
+  return effects.map((effect) => ({ params: { slug: effectSeo(effect).slug }, props: { effect } }));
+}
+
+interface Props {
+  effect: EffectData;
+}
+
+const { effect } = Astro.props;
+const { keyword, category } = effectSeo(effect);
+const guide = guides.get(effect)!;
+const related = relatedEffects(effect);
+const position = effects.indexOf(effect);
+const prev = effects[(position - 1 + effects.length) % effects.length];
+const next = effects[(position + 1) % effects.length];
+
+const blurb = effectBlurbs[effect.type] ?? '';
+// Marker comments can carry an implementation aside in parentheses — keep the
+// headline description to the first clause.
+const sentence = blurb.replace(/\s*\(.*\)\s*$/, '');
+const lede = sentence.charAt(0).toUpperCase() + sentence.slice(1);
+const lowerKeyword = keyword.toLowerCase();
+const markup = effectMarkup(effect);
+const css = effectCss[effect.type] ?? '';
+const loop = guide.loopSeconds ? `${+guide.loopSeconds.toFixed(2)}s` : '';
+
+const title = `${keyword} in Pure CSS — Free Copy & Paste Code`;
+const description = `${lede}. A free ${lowerKeyword} made with pure CSS — no JavaScript. Copy the HTML and CSS, or an AI prompt to recreate it.`;
+
+const SITE = Astro.site ?? new URL('https://text-effects.colorion.co');
+const url = new URL(effectPath(effect), SITE).href;
+const schema = [
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'CSS Text Effects', item: SITE.href },
+      { '@type': 'ListItem', position: 2, name: keyword, item: url },
+    ],
+  },
+  {
+    '@type': 'TechArticle',
+    headline: `${keyword} in Pure CSS`,
+    description,
+    url,
+    inLanguage: 'en',
+    isPartOf: { '@id': `${SITE.href}#website` },
+    image: new URL('/og-image.png', SITE).href,
+    proficiencyLevel: 'Beginner',
+    about: ['CSS animation', 'Text effects', 'Typography'],
+    hasPart: {
+      '@type': 'SoftwareSourceCode',
+      name: `${effect.name} — ${keyword}`,
+      programmingLanguage: 'CSS',
+      codeSampleType: 'full solution',
+      license: 'https://opensource.org/licenses/MIT',
+      codeRepository: 'https://github.com/ckissi/colorion-text-effects',
+    },
+  },
+];
+
+// Effect-specific notes for adapting the snippet to a different word.
+const textNotes: string[] = [];
+if (perLetter.has(effect.type))
+  textNotes.push(
+    'Wrap every letter in its own <b> with an increasing --i index (style="--i:0", "--i:1"…). Keep role="img" and the aria-label on the wrapper so screen readers hear the whole word once.'
+  );
+if (usesDataText.has(effect.type))
+  textNotes.push('Keep the data-text attribute identical to the visible text — the pseudo-element layers copy it from there.');
+if (effect.type === 'typewriter')
+  textNotes.push('Set width to the number of characters in ch units and match the steps() count, so the caret stops exactly at the last letter.');
+if (effect.type === 'contour') textNotes.push('Widen the SVG viewBox for longer words so the outline is not cropped.');
+if (effect.type === 'decoder') textNotes.push('The word lives in the @keyframes content values — edit the final frames to spell your own text.');
+if (effect.type === 'ticker')
+  textNotes.push('Repeat your phrase the same number of times as the original so the loop stays seamless.');
+
+const support: string[] = [];
+if (guide.techniques.some((t) => t.id === 'reflect'))
+  support.push('-webkit-box-reflect is Chromium and Safari only; Firefox shows the word without its reflection.');
+if (guide.techniques.some((t) => t.id === 'property'))
+  support.push('@property needs Chrome 85+, Safari 16.4+ or Firefox 128+; older browsers show the effect without the interpolated value.');
+---
+
+<Layout title={title} description={description} schema={schema} ogType="article">
+  <Sidebar />
+
+  <div class="page-shell">
+    <header class="site-header effect-header">
+      <nav class="breadcrumbs mono" aria-label="Breadcrumb">
+        <a href="/" id="home-link">CSS Text Effects</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{effect.name}</span>
+      </nav>
+      <div class="header-status mono">
+        <span class="esc-hint"><kbd>Esc</kbd> all effects</span>
+        <span class="pulse-dot"></span>
+        #{effect.index} of {effects.length}
+      </div>
+    </header>
+
+    <main class="effect-page" data-slug={effectSeo(effect).slug}>
+      <section class="hero effect-hero">
+        <span class="hero-tag mono">{categoryLabels[category]} · Pure CSS · No JavaScript</span>
+        <h1>{keyword} <em>in pure CSS</em></h1>
+        <p>
+          {lede}. <strong>{effect.name}</strong> is a free {lowerKeyword} built with nothing but HTML and
+          CSS — no JavaScript, no images, no dependencies. Copy the code below, or grab the AI prompt and
+          let your coding agent rebuild it.
+        </p>
+      </section>
+
+      <div class="effect-body">
+        <div class="panel effect-demo">
+          <div class="effect-stage">
+            <Effect type={effect.type} text={effect.text} />
+          </div>
+          <div class="effect-demo-foot">
+            <ul class="effect-facts mono">
+              <li>{categoryLabels[category]}</li>
+              <li>{guide.keyframeCount} @keyframes</li>
+              {loop && <li>{loop} loop</li>}
+              <li>{perLetter.has(effect.type) ? 'Per-letter' : 'Whole word'}</li>
+            </ul>
+            <div class="effect-copy-buttons">
+              <button class="modal-copy mono effect-copy-alt" type="button" data-copy="prompt" data-label="Copy AI prompt">
+                Copy AI prompt
+              </button>
+              <button class="modal-copy mono" type="button" data-copy="css" data-label="Copy HTML + CSS">
+                Copy HTML + CSS
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <section class="effect-section">
+          <h2>HTML</h2>
+          <p>Paste this markup wherever the text should appear.</p>
+          <div class="effect-code"><pre><code>{markup}</code></pre></div>
+        </section>
+
+        <section class="effect-section">
+          <h2>CSS</h2>
+          <p>
+            Self-contained: every <code>@keyframes</code> the effect uses is included, and it respects
+            <code>prefers-reduced-motion</code>.
+          </p>
+          <div class="effect-code"><pre><code>{css}</code></pre></div>
+        </section>
+
+        <section class="effect-section">
+          <h2>How the {lowerKeyword} works</h2>
+          <p>
+            {effect.name} uses {guide.keyframeCount} <code>@keyframes</code> animation{guide.keyframeCount === 1 ? '' : 's'}
+            {loop && <>, looping every {loop}</>}. These are the CSS techniques it relies on:
+          </p>
+          <dl class="effect-techniques">
+            {
+              guide.techniques.map((t) => (
+                <div>
+                  <dt class="mono">{t.label}</dt>
+                  <dd>{t.detail}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </section>
+
+        <section class="effect-section">
+          <h2>Customise it</h2>
+          <ul class="effect-list">
+            <li>
+              <strong>Colours</strong>: the effect paints with three tokens. Override <code>--ink</code> (main
+              text), <code>--ink-2</code> and <code>--ink-3</code> (accents) on the element or on
+              <code>:root</code> to re-skin it.
+            </li>
+            <li>
+              <strong>Text</strong>: swap “{effect.text.replace(/ .*$/, '')}” for your own word.
+              {textNotes.map((note) => <> {note}</>)}
+            </li>
+            <li>
+              <strong>Size</strong>: change the font size in the <code>font</code> shorthand on
+              <code>.fx-{effect.type}</code>. Most offsets use <code>em</code> or <code>ch</code>, so they scale with
+              it.
+            </li>
+            {
+              loop && (
+                <li>
+                  <strong>Speed</strong>: the duration in each <code>animation</code> shorthand ({loop} by default)
+                  sets the pace. Scale them all by the same factor to keep the layers in sync.
+                </li>
+              )
+            }
+            <li>
+              <strong>Accessibility</strong>: under <code>prefers-reduced-motion: reduce</code> the animation stops
+              and the text stays readable.
+            </li>
+          </ul>
+          {
+            support.length > 0 && (
+              <p class="effect-note">
+                <strong>Browser support:</strong> {support.join(' ')}
+              </p>
+            )
+          }
+        </section>
+
+        <section class="effect-section">
+          <h2>Related text effects</h2>
+          <div class="panel">
+            <div class="grid effect-related">
+              {
+                related.map((r) => (
+                  <a class="cell" href={effectPath(r)}>
+                    <span class="cell-index mono">{r.index}</span>
+                    <div class="stage">
+                      <Effect type={r.type} text={r.text} />
+                    </div>
+                    <h3>
+                      {r.name}
+                      <span class="cell-keyword">{effectSeo(r).keyword}</span>
+                    </h3>
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+        </section>
+
+        <nav class="effect-pager mono" aria-label="More effects">
+          <a href={effectPath(prev)} rel="prev">← {effectSeo(prev).keyword}</a>
+          <a href="/">All {effects.length} effects</a>
+          <a href={effectPath(next)} rel="next">{effectSeo(next).keyword} →</a>
+        </nav>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <span class="mono">CSS Text Effects</span>
+      <nav class="footer-links mono">
+        <a href="https://github.com/ckissi/colorion-text-effects" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <span class="mono">Pure CSS · No dependencies · MIT licensed</span>
+    </footer>
+  </div>
+
+  <template id="copy-css">{snippets[effect.type]}</template>
+  <template id="copy-prompt">{prompts[effect.type]}</template>
+</Layout>
+
+<script>
+  // Esc returns to the library in one press. It loads "/" directly rather than
+  // going back in history (the previous entry may carry a modal's #hash), and
+  // tells the home page which card to scroll back to.
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape' || e.defaultPrevented || e.isComposing || e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return;
+    // Escape also stops browser loading; cancel that action before navigating.
+    // The sidebar handles Escape in capture and prevents it when closing a menu.
+    e.preventDefault();
+    if (e.repeat) return;
+    try {
+      sessionStorage.setItem('library-return', document.querySelector<HTMLElement>('[data-slug]')?.dataset.slug ?? '');
+    } catch {
+      // storage unavailable — just land at the top
+    }
+    location.href = '/';
+  });
+
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) => {
+    let reset: number | undefined;
+    btn.addEventListener('click', async () => {
+      const tpl = document.getElementById(`copy-${btn.dataset.copy}`) as HTMLTemplateElement | null;
+      const text = tpl?.content.textContent ?? tpl?.innerHTML ?? '';
+      if (!text) return;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        // fallback for non-secure contexts
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+      }
+      (window as { plausible?: (e: string, o: object) => void }).plausible?.('Copy', {
+        props: { effect: document.title, mode: btn.dataset.copy ?? '', from: 'page' },
+      });
+      btn.textContent = 'Copied ✓';
+      btn.classList.add('copied');
+      window.clearTimeout(reset);
+      reset = window.setTimeout(() => {
+        btn.textContent = btn.dataset.label ?? '';
+        btn.classList.remove('copied');
+      }, 1800);
+    });
+  });
+</script>

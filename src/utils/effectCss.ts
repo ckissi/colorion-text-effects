@@ -67,9 +67,15 @@ function selfContained(block: string): string {
 }
 
 export const effectCss: Record<string, string> = {};
+// One-line description from each effect's marker comment (text after the "—").
+export const effectBlurbs: Record<string, string> = {};
 for (const effect of effects) {
   const block = byIndex.get(effect.index);
-  if (block) effectCss[effect.type] = INK_NOTE + selfContained(block);
+  if (!block) continue;
+  effectCss[effect.type] = INK_NOTE + selfContained(block);
+  const marker = block.match(/^\/\*\s*\d{2}\s+((?:[^*]|\*(?!\/))*)\*\//);
+  const blurb = marker?.[1].replace(/\s+/g, ' ').split(/\s+—\s+/).slice(1).join(' — ').trim();
+  if (blurb) effectBlurbs[effect.type] = blurb;
 }
 
 /** HTML markup a given effect needs — mirrors Effect.astro. */

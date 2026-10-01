@@ -5,11 +5,16 @@ import { effects } from '../data/effects';
 interface Props {
   title?: string;
   description?: string;
+  /** extra schema.org nodes, merged into the page's JSON-LD @graph */
+  schema?: Record<string, unknown>[];
+  ogType?: 'website' | 'article';
 }
 
 const {
   title = `CSS Text Effects — ${effects.length} pure-CSS text animations, free to copy`,
   description = `A library of ${effects.length} animated text effects built with pure CSS — gradient, glitch, typewriter, neon, liquid fill and more. Click any effect to copy its CSS. No JavaScript, no dependencies, MIT licensed.`,
+  schema = [],
+  ogType = 'website',
 } = Astro.props;
 
 // Absolute URLs for canonical + social tags. Astro.site is configured in
@@ -19,10 +24,15 @@ const canonical = new URL(Astro.url.pathname, SITE).href;
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: 'CSS Text Effects',
-  url: SITE.href,
-  description,
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE.href}#website`,
+      name: 'CSS Text Effects',
+      url: SITE.href,
+    },
+    ...schema,
+  ],
 };
 ---
 
@@ -44,7 +54,7 @@ const jsonLd = {
     <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="CSS Text Effects" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

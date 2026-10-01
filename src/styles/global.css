@@ -107,6 +107,8 @@ body {
 }
 
 .sidebar-brand {
+  color: inherit;
+  text-decoration: none;
   display: flex;
   align-items: center;
   gap: calc(var(--base) * 1.5);
@@ -3617,6 +3619,8 @@ h1 em {
   right: calc(var(--base) * 3);
   display: flex;
   gap: calc(var(--base));
+  z-index: 2; /* above the card-wide link */
+  pointer-events: none; /* hidden gap between buttons falls through to the link */
   opacity: 0;
   transform: translateY(-4px);
   transition: opacity .25s, transform .25s;
@@ -3634,10 +3638,16 @@ h1 em {
 }
 
 .cell:hover .cell-actions,
-.cell:focus-visible .cell-actions { opacity: 1; transform: translateY(0); }
+.cell:focus-within .cell-actions { opacity: 1; transform: translateY(0); }
 
 .cell:hover .cell-action,
-.cell:focus-visible .cell-action { pointer-events: auto; }
+.cell:focus-within .cell-action { pointer-events: auto; }
+
+/* touch screens have no hover — keep the quick-copy buttons visible */
+@media (hover: none) {
+  .cell-actions { opacity: 1; transform: none; }
+  .cell-action { pointer-events: auto; }
+}
 
 .cell-action:hover { filter: brightness(1.08); }
 
@@ -3646,7 +3656,7 @@ h1 em {
   background: color-mix(in srgb, var(--primary) 16%, var(--background));
 }
 
-.cell:focus-visible { outline: 2px solid var(--primary); outline-offset: -3px; }
+.cell:has(.cell-link:focus-visible) { outline: 2px solid var(--primary); outline-offset: -3px; }
 
 /* ---------- CSS modal ---------- */
 .modal-overlay {
@@ -3836,13 +3846,34 @@ h1 em {
   transition: filter .2s, background .2s, color .2s;
 }
 .modal-copy:hover { filter: brightness(1.08); }
+
+.modal-actions { display: flex; align-items: center; gap: var(--base); }
+.modal-page {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  text-decoration: none;
+  white-space: nowrap;
+  padding: calc(var(--base) * 1.25) calc(var(--base) * 2);
+  border-radius: var(--r-control);
+  box-shadow: inset 0 0 0 1px var(--border);
+  transition: background .2s, box-shadow .2s;
+}
+.modal-page:hover,
+.modal-page:focus-visible {
+  background: color-mix(in srgb, var(--text-primary) 8%, var(--surface));
+  box-shadow: inset 0 0 0 1px var(--text-secondary);
+}
 .modal-copy.copied { background: var(--text-primary); color: var(--background); }
 
 @media (max-width: 560px) {
   .modal-title { font-size: 11px; }
   .modal-code { font-size: 11px; }
   .modal-foot { align-items: stretch; flex-direction: column; }
-  .modal-copy { width: 100%; }
+  .modal-actions { width: 100%; }
+  .modal-actions > * { flex: 1; text-align: center; }
 }
 
 @media (max-width: 860px) {
@@ -3988,3 +4019,197 @@ h1 em {
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
+
+/* ---------- Card links ---------- */
+.cell-link {
+  color: inherit;
+  text-decoration: none;
+}
+.cell:hover .cell-link,
+.cell-link:focus-visible { color: var(--text-primary); }
+.cell-link:focus-visible { outline: none; } /* the whole card gets the ring */
+/* stretch the link over the whole card so clicking the effect opens its page */
+.cell-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* the searchable plain-English name under the brand name */
+.cell-keyword {
+  display: block;
+  margin-top: 6px;
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: color-mix(in srgb, var(--text-secondary) 75%, var(--surface));
+}
+
+/* ---------- Effect detail page ---------- */
+.effect-header { justify-content: space-between; gap: var(--gap); }
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: var(--base);
+  min-width: 0;
+  color: var(--text-secondary);
+}
+.breadcrumbs a { color: inherit; text-decoration: none; }
+.breadcrumbs a:hover,
+.breadcrumbs a:focus-visible { color: var(--text-primary); }
+.breadcrumbs [aria-current] {
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.effect-hero { padding-bottom: calc(var(--base) * 5); }
+.effect-hero h1 { max-width: 80%; font-size: clamp(32px, 5vw, 56px); }
+.effect-hero p strong { color: var(--text-primary); font-weight: 500; }
+
+.effect-body {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 calc(var(--base) * 5) var(--section-padding);
+  display: grid;
+  gap: calc(var(--base) * 7);
+}
+
+.effect-stage {
+  --ink: var(--text-primary);
+  --ink-2: var(--primary);
+  --ink-3: var(--accent-2);
+  min-height: 300px;
+  display: grid;
+  place-items: center;
+  padding: calc(var(--base) * 4);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--primary) 8%, transparent), transparent 65%),
+    var(--surface);
+}
+.effect-stage > * { transform: scale(1.5); }
+
+.effect-demo-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  padding: calc(var(--base) * 2) calc(var(--base) * 3);
+  border-top: 1px solid var(--divider);
+}
+
+.effect-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--base);
+  list-style: none;
+  color: var(--text-secondary);
+}
+.effect-facts li {
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  padding: 2px 10px;
+}
+
+.effect-copy-buttons { display: flex; flex-wrap: wrap; gap: var(--base); }
+.effect-copy-alt {
+  background: transparent;
+  color: var(--text-primary);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+
+.effect-section { display: grid; gap: calc(var(--base) * 2); }
+.effect-section h2 {
+  font-size: clamp(22px, 2.6vw, 28px);
+  font-weight: 500;
+  line-height: 1.2;
+}
+.effect-section > p,
+.effect-list,
+.effect-techniques { max-width: 760px; color: var(--text-secondary); }
+.effect-section code,
+.effect-list code {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.88em;
+  color: var(--text-primary);
+}
+.effect-section strong { color: var(--text-primary); font-weight: 500; }
+
+.effect-code {
+  overflow: auto;
+  max-height: 520px;
+  background: var(--background);
+  border: 1px solid var(--divider);
+}
+.effect-code pre {
+  margin: 0;
+  padding: calc(var(--base) * 3);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  line-height: 1.65;
+  color: color-mix(in srgb, var(--text-primary) 88%, var(--background));
+  white-space: pre;
+  tab-size: 2;
+}
+
+.effect-techniques { display: grid; gap: calc(var(--base) * 2); }
+.effect-techniques > div {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: var(--gap);
+  padding-top: calc(var(--base) * 2);
+  border-top: 1px solid var(--divider);
+}
+.effect-techniques dt { color: var(--text-primary); font-size: 13px; }
+
+.effect-list { display: grid; gap: calc(var(--base) * 1.5); padding-left: 1.2em; }
+.effect-note { color: var(--text-secondary); }
+
+.effect-related .cell { color: inherit; text-decoration: none; }
+.effect-related .cell h3 { transition: color .2s; }
+.effect-related .cell:hover h3 { color: var(--text-primary); }
+.effect-related .cell:focus-visible { outline: 2px solid var(--primary); outline-offset: -3px; }
+
+.effect-pager {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--gap);
+  flex-wrap: wrap;
+  padding-top: calc(var(--base) * 3);
+  border-top: 1px solid var(--divider);
+}
+.effect-pager a { color: var(--text-secondary); text-decoration: none; }
+.effect-pager a:hover,
+.effect-pager a:focus-visible { color: var(--text-primary); }
+
+@media (max-width: 860px) {
+  .effect-hero h1 { max-width: 100%; }
+  .effect-stage > * { transform: scale(1.2); }
+  .effect-techniques > div { grid-template-columns: 1fr; gap: 4px; }
+}
+
+@media (max-width: 560px) {
+  .effect-body { padding-left: calc(var(--base) * 2); padding-right: calc(var(--base) * 2); }
+  .effect-stage { min-height: 220px; }
+  .effect-stage > * { transform: none; }
+  .effect-copy-buttons, .effect-copy-buttons .modal-copy { width: 100%; }
+}
+
+.esc-hint { display: inline-flex; align-items: center; gap: 6px; margin-right: calc(var(--base) * 2); }
+.esc-hint kbd {
+  font: inherit;
+  font-size: 11px;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  padding: 0 5px;
+}
+@media (hover: none) { .esc-hint { display: none; } }

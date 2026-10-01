@@ -1,157 +1,38 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Effect from '../components/Effect.astro';
+import Sidebar from '../components/Sidebar.astro';
 import { effects } from '../data/effects';
+import { effectPath, effectSeo } from '../data/seo';
 
 // The CSS snippets + LLM prompts are emitted as a static /effect-data.json file
 // (see effect-data.json.ts) and fetched on demand when the modal first opens,
 // so that text stays out of the initial HTML document.
 
-// Cross-promo: the other tools in the Colorion network, surfaced in the header
-// dropdown. `?ref=` attributes the referral back to this site.
-const REF = 'text-effects.colorion.co';
-// `icon` is the inner markup of a 24x24 stroke icon — it is the only thing left
-// visible once the sidebar collapses to its icon rail.
-const colorionLinks = [
+const SITE = Astro.site ?? new URL('https://text-effects.colorion.co');
+const schema = [
   {
-    label: 'Motion effects',
-    href: 'https://kinetics.colorion.co',
-    icon: '<path d="M3 12h3l3-7 4 14 3-7h5" />',
-  },
-  {
-    label: 'Colorion',
-    href: 'https://www.colorion.co',
-    icon: '<path d="M12 3s6 6.2 6 10a6 6 0 0 1-12 0c0-3.8 6-10 6-10Z" />',
-  },
-  {
-    label: '2 Color Combinations',
-    href: 'https://2colors.colorion.co',
-    icon: '<circle cx="9" cy="12" r="6" /><circle cx="15" cy="12" r="6" />',
-  },
-  {
-    label: 'Color Palettes',
-    href: 'https://colorpalettes.colorion.co',
-    icon: '<rect x="3" y="3" width="8" height="8" rx="1.5" /><rect x="13" y="3" width="8" height="8" rx="1.5" /><rect x="3" y="13" width="8" height="8" rx="1.5" /><rect x="13" y="13" width="8" height="8" rx="1.5" />',
-  },
-  {
-    label: 'Palette Generator',
-    href: 'https://palettegenerator.colorion.co',
-    icon: '<path d="M5 19 16 8" /><path d="m14 6 4 4 2-2-4-4-2 2Z" /><path d="M6 3v4M4 5h4M17 16v3M15.5 17.5h3" />',
-  },
-  {
-    label: 'Material Colors',
-    href: 'https://material.colorion.co',
-    icon: '<path d="m12 3 9 5-9 5-9-5 9-5Z" /><path d="m3 13 9 5 9-5" />',
-  },
-  {
-    label: 'Mobile Palette',
-    href: 'https://mobilepalette.colorion.co',
-    icon: '<rect x="6" y="2.5" width="12" height="19" rx="2.5" /><path d="M10.5 18.5h3" />',
-  },
-  {
-    label: 'Gradients',
-    href: 'https://gradients.colorion.co',
-    icon: '<rect x="3" y="3" width="18" height="18" rx="3" /><path d="M3 15 15 3M8 21 21 8" />',
-  },
-  {
-    label: 'Gradient Buttons',
-    href: 'https://gradientbuttons.colorion.co',
-    icon: '<rect x="2.5" y="7" width="19" height="10" rx="5" /><path d="M7 17 17 7" />',
-  },
-  {
-    label: 'Animated Buttons',
-    href: 'https://animatedbuttons.colorion.co',
-    icon: '<rect x="2.5" y="6" width="14" height="9" rx="4.5" /><path d="m14 14 7 3-3 1-1 3-3-7Z" />',
-  },
-  {
-    label: 'Font Combinations',
-    href: 'https://fontcombinations.colorion.co',
-    icon: '<path d="M3 20 8 5l5 15M4.6 15.5h6.8" /><path d="M15 20V11h3.5a2.75 2.75 0 0 1 0 5.5H15" />',
-  },
-  {
-    label: 'Toggles',
-    href: 'https://toggles.colorion.co',
-    icon: '<rect x="2.5" y="7" width="19" height="10" rx="5" /><circle cx="16.5" cy="12" r="2.75" />',
-  },
-  {
-    label: 'CSS Tooltips',
-    href: 'https://tooltips.colorion.co',
-    icon: '<path d="M4 4h16v11H13l-4 4v-4H4V4Z" />',
-  },
-  {
-    label: 'CSS Loaders',
-    href: 'https://cssloaders.colorion.co',
-    icon: '<path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.9 2.9M15.5 15.5l2.9 2.9M18.4 5.6l-2.9 2.9M8.5 15.5l-2.9 2.9" />',
+    '@type': 'CollectionPage',
+    '@id': `${SITE.href}#library`,
+    name: 'CSS Text Effects',
+    url: SITE.href,
+    isPartOf: { '@id': `${SITE.href}#website` },
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: effects.length,
+      itemListElement: effects.map((effect, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: effectSeo(effect).keyword,
+        url: new URL(effectPath(effect), SITE).href,
+      })),
+    },
   },
 ];
 ---
 
-<Layout>
-  <aside class="site-sidebar" aria-label="Colorion tools">
-    <div class="sidebar-brand">
-      <div class="brand-mark">T</div>
-      <div>
-        <span class="mono">CSS Text Effects</span>
-        <strong>Colorion Tools</strong>
-      </div>
-    </div>
-    <button
-      class="sidebar-collapse"
-      type="button"
-      aria-label="Collapse Colorion tools sidebar"
-      aria-controls="colorion-sidebar-nav"
-      aria-expanded="true"
-    >
-      ‹
-    </button>
-    <button
-      class="sidebar-toggle"
-      type="button"
-      aria-label="Open Colorion tools menu"
-      aria-controls="colorion-sidebar-nav"
-      aria-expanded="false"
-    >
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <a
-      class="sidebar-credit"
-      href="https://x.com/domi_kissi"
-      target="_blank"
-      rel="noopener"
-    >
-      <img src="/domi.jpg" alt="" width="32" height="32" />
-      <span>Design inspiration by @domi_kissi.</span>
-    </a>
-    <nav class="sidebar-nav" id="colorion-sidebar-nav">
-      {
-        colorionLinks.map((link) => (
-          <a
-            class="mono"
-            href={`${link.href}?ref=${REF}`}
-            target="_blank"
-            rel="noopener"
-            referrerpolicy="no-referrer-when-downgrade"
-            title={link.label}
-          >
-            <svg
-              class="sidebar-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.6"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-              set:html={link.icon}
-            />
-            <span class="sidebar-label">{link.label}</span>
-          </a>
-        ))
-      }
-    </nav>
-  </aside>
+<Layout schema={schema}>
+  <Sidebar />
 
   <div class="page-shell">
     <header class="site-header">
@@ -179,7 +60,7 @@ const colorionLinks = [
       <div class="panel">
         <h2 class="sr-only">Text effect library</h2>
         <div class="library-head">
-          <span class="mono">Click an effect to copy its CSS or prompt</span>
+          <span class="mono">Click an effect for its code &amp; guide · Prompt / CSS for a quick copy</span>
           <span class="mono">{effects.length} effects</span>
         </div>
 
@@ -188,30 +69,30 @@ const colorionLinks = [
           effects.map((effect) => (
             <article
               class="cell"
-              role="button"
-              tabindex="0"
               data-type={effect.type}
               data-name={effect.name}
               data-index={effect.index}
-              aria-label={`View CSS for ${effect.name} text effect`}
+              data-slug={effectSeo(effect).slug}
             >
               <span class="cell-index mono">{effect.index}</span>
               <div class="cell-actions">
-                <button class="cell-action mono" type="button" data-action="prompt" tabindex="-1" aria-label={`Copy LLM prompt for ${effect.name} text effect`}>◳ Prompt</button>
-                <button class="cell-action mono" type="button" data-action="css" tabindex="-1" aria-label={`View CSS for ${effect.name} text effect`}>⧉ CSS</button>
+                <button class="cell-action mono" type="button" data-action="prompt" aria-label={`Copy LLM prompt for ${effect.name} text effect`}><span aria-hidden="true">◳</span> Prompt</button>
+                <button class="cell-action mono" type="button" data-action="css" aria-label={`View CSS for ${effect.name} text effect`}><span aria-hidden="true">⧉</span> CSS</button>
               </div>
               <div class="stage">
                 <Effect type={effect.type} text={effect.text} />
               </div>
-              <h3>{effect.name}</h3>
+              <h3>
+                <a class="cell-link" href={effectPath(effect)}>
+                  {effect.name}
+                  <span class="cell-keyword">{effectSeo(effect).keyword}</span>
+                </a>
+              </h3>
             </article>
           ))
         }
         </div>
 
-        <div class="sentinel" id="sentinel" hidden>
-          <span class="mono">Loading more effects…</span>
-        </div>
       </div>
     </main>
 
@@ -252,7 +133,10 @@ const colorionLinks = [
             <img src="/domi.jpg" alt="" width="32" height="32" />
             <span>Design inspiration by @domi_kissi.</span>
           </a>
-          <button class="modal-copy mono" id="modal-copy">Copy CSS</button>
+          <div class="modal-actions">
+            <a class="modal-page mono" id="modal-page" href="/">Full page →</a>
+            <button class="modal-copy mono" id="modal-copy">Copy CSS</button>
+          </div>
         </div>
       </div>
     </div>
@@ -260,15 +144,13 @@ const colorionLinks = [
 </Layout>
 
 <script>
-  const BATCH = 12;
   const cells = Array.from(document.querySelectorAll<HTMLElement>('.cell'));
-  const sentinel = document.getElementById('sentinel')!;
 
-  // mark lazy mode active so CSS can pause off-screen animations;
-  // without JS everything stays visible and animated (progressive enhancement)
+  // Every card is in the HTML (so crawlers and no-JS visitors see all of them);
+  // .cell's content-visibility: auto skips rendering far-offscreen ones. Mark
+  // lazy mode active so CSS pauses animations of cells outside the viewport.
   document.documentElement.classList.add('lazy-enabled');
 
-  // pause/resume animations as cells enter and leave the viewport
   const visibility = new IntersectionObserver(
     (entries) => {
       for (const entry of entries) {
@@ -277,31 +159,43 @@ const colorionLinks = [
     },
     { rootMargin: '100px' }
   );
+  cells.forEach((cell) => visibility.observe(cell));
 
-  // reveal cells in batches as the sentinel approaches the viewport
-  let shown = BATCH;
-  cells.slice(BATCH).forEach((cell) => cell.setAttribute('hidden', ''));
-  cells.slice(0, BATCH).forEach((cell) => visibility.observe(cell));
+  // Remember the grid scroll position so returning from an effect page (Back
+  // or Esc) lands on the same card, even if native restoration ran before the
+  // page reached its full height.
+  const SCROLL_KEY = 'library-scroll';
+  window.addEventListener('pagehide', () => {
+    try {
+      sessionStorage.setItem(SCROLL_KEY, String(scrollY));
+    } catch {
+      // storage unavailable — native restoration still applies
+    }
+  });
+  const nav = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
+  const isBackForward = nav?.type === 'back_forward';
+  if (isBackForward) {
+    try {
+      const saved = Number(sessionStorage.getItem(SCROLL_KEY));
+      if (saved && Math.abs(scrollY - saved) > 50) scrollTo(0, saved);
+    } catch {
+      // ignore
+    }
+  }
 
-  const loadMore = new IntersectionObserver(
-    (entries) => {
-      if (!entries[0].isIntersecting) return;
-      cells.slice(shown, shown + BATCH).forEach((cell) => {
-        cell.removeAttribute('hidden');
-        visibility.observe(cell);
+  // Esc on an effect page sends the visitor here with the card to return to.
+  try {
+    const returnSlug = sessionStorage.getItem('library-return');
+    sessionStorage.removeItem('library-return');
+    const card = returnSlug && cells.find((c) => c.dataset.slug === returnSlug);
+    if (card) {
+      requestAnimationFrame(() => {
+        card.scrollIntoView({ block: 'center' });
+        card.querySelector<HTMLElement>('.cell-link')?.focus({ preventScroll: true });
       });
-      shown += BATCH;
-      if (shown >= cells.length) {
-        loadMore.disconnect();
-        sentinel.remove();
-      }
-    },
-    { rootMargin: '300px' }
-  );
-
-  if (cells.length > BATCH) {
-    sentinel.removeAttribute('hidden');
-    loadMore.observe(sentinel);
+    }
+  } catch {
+    // ignore
   }
 
   // ---------- Copy-to-clipboard modal ----------
@@ -333,6 +227,12 @@ const colorionLinks = [
   const modalCode = document.getElementById('modal-code')!;
   const copyBtn = document.getElementById('modal-copy') as HTMLButtonElement;
   const closeBtn = document.getElementById('modal-close')!;
+  const pageLink = document.getElementById('modal-page') as HTMLAnchorElement;
+
+  // Plausible custom events (no-op if the script is blocked). Register the
+  // "Copy" and "Open effect page" goals in Plausible to see them.
+  const track = (event: string, props: Record<string, string>) =>
+    (window as { plausible?: (e: string, o: object) => void }).plausible?.(event, { props });
 
   let lastFocused: HTMLElement | null = null;
   let copyReset: number | undefined;
@@ -350,6 +250,10 @@ const colorionLinks = [
     currentText = '';
     modalIndex.textContent = cell.dataset.index || '';
     modalTitle.textContent = cell.dataset.name || '';
+    pageLink.href = `/effects/${cell.dataset.slug}/`;
+    // Deep link: /#<slug> reopens this effect. A hash (not a path) keeps it from
+    // competing with the effect's own page in search.
+    history.replaceState(null, '', `#${cell.dataset.slug}`);
     modalCode.textContent = 'Loading…';
 
     // clone the live effect for the preview
@@ -359,7 +263,7 @@ const colorionLinks = [
     copyBtn.textContent = config.copyLabel;
     copyBtn.classList.remove('copied');
 
-    lastFocused = cell;
+    lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     overlay.removeAttribute('hidden');
     document.body.style.overflow = 'hidden';
     copyBtn.focus();
@@ -379,6 +283,7 @@ const colorionLinks = [
     overlay.setAttribute('hidden', '');
     document.body.style.overflow = '';
     modalPreview.replaceChildren();
+    history.replaceState(null, '', location.pathname + location.search);
     lastFocused?.focus();
   }
 
@@ -398,6 +303,7 @@ const colorionLinks = [
       document.execCommand('copy');
       ta.remove();
     }
+    track('Copy', { effect: modalTitle.textContent || '', mode: currentMode, from: 'modal' });
     copyBtn.textContent = 'Copied ✓';
     copyBtn.classList.add('copied');
     window.clearTimeout(copyReset);
@@ -407,95 +313,46 @@ const colorionLinks = [
     }, 1800);
   }
 
+  // The card itself is a link to the effect's page (the name's stretched
+  // ::after); only the Prompt / CSS buttons open the quick-copy modal.
   cells.forEach((cell) => {
-    cell.addEventListener('click', (e) => {
-      const action = (e.target as HTMLElement).closest<HTMLElement>('[data-action]');
-      openModal(cell, action?.dataset.action === 'prompt' ? 'prompt' : 'css');
-    });
-    cell.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openModal(cell);
-      }
+    cell.querySelectorAll<HTMLButtonElement>('[data-action]').forEach((btn) => {
+      btn.addEventListener('click', () => openModal(cell, btn.dataset.action === 'prompt' ? 'prompt' : 'css'));
     });
   });
 
   copyBtn.addEventListener('click', copyCss);
+  pageLink.addEventListener('click', () => {
+    track('Open effect page', { effect: modalTitle.textContent || '' });
+    // close first so this history entry is a clean "/" (no #hash that would
+    // reopen the modal when the visitor comes back)
+    closeModal();
+  });
   closeBtn.addEventListener('click', closeModal);
   overlay.addEventListener('click', (e) => {
     if (e.target === overlay) closeModal();
   });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !overlay.hasAttribute('hidden')) closeModal();
+  // The modal takes priority over the sidebar and page shortcuts.
+  window.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape' || e.defaultPrevented || e.isComposing || overlay.hasAttribute('hidden')) return;
+    e.preventDefault();
+    if (!e.repeat) closeModal();
+  }, { capture: true });
+
+  // Open the effect named in the URL hash, on load and on in-page hash changes.
+  // Only on a fresh visit — coming Back to an entry that still has a hash
+  // should not pop the modal open again.
+  const openFromHash = () => {
+    const slug = decodeURIComponent(location.hash.slice(1));
+    const cell = slug && cells.find((c) => c.dataset.slug === slug);
+    if (cell) openModal(cell);
+  };
+  if (!isBackForward) openFromHash();
+  else if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+  window.addEventListener('hashchange', openFromHash);
+  // bfcache restores the page exactly as it was left — close a modal left open
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted && !overlay.hasAttribute('hidden')) closeModal();
   });
 
-  // ---------- Mobile Colorion hamburger ----------
-  const sidebar = document.querySelector<HTMLElement>('.site-sidebar');
-  const sidebarToggle = document.querySelector<HTMLButtonElement>('.sidebar-toggle');
-  const sidebarCollapse = document.querySelector<HTMLButtonElement>('.sidebar-collapse');
-  const sidebarNav = document.getElementById('colorion-sidebar-nav');
-
-  if (sidebar && sidebarToggle && sidebarNav) {
-    sidebar.classList.add('menu-enhanced');
-
-    const setSidebarOpen = (open: boolean) => {
-      sidebar.classList.toggle('is-open', open);
-      sidebarToggle.setAttribute('aria-expanded', String(open));
-      sidebarToggle.setAttribute(
-        'aria-label',
-        open ? 'Close Colorion tools menu' : 'Open Colorion tools menu'
-      );
-    };
-
-    sidebarToggle.addEventListener('click', () => {
-      setSidebarOpen(!sidebar.classList.contains('is-open'));
-    });
-
-    sidebarNav.querySelectorAll('a').forEach((a) => {
-      a.addEventListener('click', () => setSidebarOpen(false));
-    });
-
-    document.addEventListener('click', (e) => {
-      if (sidebar.classList.contains('is-open') && !sidebar.contains(e.target as Node)) {
-        setSidebarOpen(false);
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && sidebar.classList.contains('is-open')) {
-        setSidebarOpen(false);
-        sidebarToggle.focus();
-      }
-    });
-  }
-
-  // ---------- Desktop sidebar collapse ----------
-  if (sidebar && sidebarCollapse) {
-    const STORAGE_KEY = 'colorion-sidebar-collapsed';
-
-    const setSidebarCollapsed = (collapsed: boolean) => {
-      sidebar.classList.toggle('is-collapsed', collapsed);
-      sidebarCollapse.setAttribute('aria-expanded', String(!collapsed));
-      sidebarCollapse.setAttribute(
-        'aria-label',
-        collapsed ? 'Expand Colorion tools sidebar' : 'Collapse Colorion tools sidebar'
-      );
-      sidebarCollapse.textContent = collapsed ? '›' : '‹';
-      try {
-        localStorage.setItem(STORAGE_KEY, collapsed ? '1' : '0');
-      } catch {
-        // Ignore storage failures; the current interaction still works.
-      }
-    };
-
-    try {
-      setSidebarCollapsed(localStorage.getItem(STORAGE_KEY) === '1');
-    } catch {
-      setSidebarCollapsed(false);
-    }
-
-    sidebarCollapse.addEventListener('click', () => {
-      setSidebarCollapsed(!sidebar.classList.contains('is-collapsed'));
-    });
-  }
 </script>
