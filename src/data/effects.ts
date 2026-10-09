@@ -97,7 +97,16 @@ export type EffectType =
   | 'gentle'
   | 'rotator'
   | 'loader'
-  | 'fade';
+  | 'fade'
+  | 'halftone'
+  | 'risograph'
+  | 'sticker'
+  | 'papercut'
+  | 'letterpress'
+  | 'embroidery'
+  | 'stretch'
+  | 'candystripe'
+  | 'disco';
 
 export interface Effect {
   index: string;
@@ -212,6 +221,15 @@ export const effects: Effect[] = [
   { index: '97', name: 'Rotator', type: 'rotator', text: 'BOLD' },
   { index: '98', name: 'Loader', type: 'loader', text: 'LOADING' },
   { index: '99', name: 'Dissolve', type: 'fade', text: 'FADE\u00a0AWAY' },
+  { index: '100', name: 'Ben-Day', type: 'halftone', text: 'HALFTONE' },
+  { index: '101', name: 'Riso-Press', type: 'risograph', text: 'OVERPRINT' },
+  { index: '102', name: 'Peel-Off', type: 'sticker', text: 'STICKER' },
+  { index: '103', name: 'Paper-Stack', type: 'papercut', text: 'PAPER' },
+  { index: '104', name: 'Impression', type: 'letterpress', text: 'PRESS' },
+  { index: '105', name: 'Satin-Stitch', type: 'embroidery', text: 'STITCH' },
+  { index: '106', name: 'Stretch-Club', type: 'stretch', text: 'STRETCH' },
+  { index: '107', name: 'Candy-Stripe', type: 'candystripe', text: 'CANDY' },
+  { index: '108', name: 'Mirrorball', type: 'disco', text: 'DISCO' },
 ];
 
 /** effects whose letters are wrapped in indexed <b> spans for per-letter animation */
@@ -247,6 +265,9 @@ export const perLetter = new Set<EffectType>([
   'pewpew',
   'loader',
   'fade',
+  'sticker',
+  'papercut',
+  'stretch',
 ]);
 
 /** effects that duplicate their text into pseudo-elements via data-text */
@@ -275,4 +296,9 @@ export const usesDataText = new Set<EffectType>([
   'lens',
   'grunge',
   'invisible',
+  'halftone',
+  'risograph',
+  'letterpress',
+  'embroidery',
+  'disco',
 ]);

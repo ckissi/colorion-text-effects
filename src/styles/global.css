@@ -3943,6 +3943,300 @@ h1 em {
   84%, 100%{ opacity: 0; transform: translateY(-8px); filter: blur(6px); }
 }
 
+/* 100 Ben-Day — offset halftone dots slide across bold outlined letters */
+.fx-halftone {
+  position: relative;
+  isolation: isolate;
+  font: 900 36px/1.15 Arial, sans-serif;
+  letter-spacing: -.045em;
+  white-space: pre;
+  color: var(--ink-2);
+  -webkit-text-stroke: 1px var(--ink);
+  paint-order: stroke fill;
+}
+.fx-halftone::before,
+.fx-halftone::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.fx-halftone::before {
+  z-index: -1;
+  color: var(--ink-3);
+  -webkit-text-stroke: 0;
+  transform: translate(4px, 5px);
+}
+.fx-halftone::after {
+  color: transparent;
+  -webkit-text-stroke: 0;
+  background: radial-gradient(circle, var(--ink) 0 1px, transparent 1.2px) 0 0 / 4px 4px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: fx-halftone-drift 3s linear infinite;
+}
+@keyframes fx-halftone-drift {
+  to { background-position: 4px 4px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-halftone::after { animation: none; }
+}
+
+/* 101 Riso-Press — two textured ink plates drift out of print registration */
+.fx-risograph {
+  position: relative;
+  isolation: isolate;
+  font: 900 34px/1.2 Arial, sans-serif;
+  letter-spacing: -.055em;
+  white-space: pre;
+  color: var(--ink-2);
+}
+.fx-risograph::before,
+.fx-risograph::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.fx-risograph::before {
+  z-index: -1;
+  background-image: radial-gradient(circle, transparent 0 .55px, var(--ink-3) .8px);
+  background-size: 3px 3px;
+  transform: translate(4px, 3px);
+  animation: fx-riso-register 4s ease-in-out infinite;
+}
+.fx-risograph::after {
+  background-image: radial-gradient(circle, var(--ink) 0 .65px, transparent .9px);
+  background-size: 3px 3px;
+  opacity: .42;
+}
+@keyframes fx-riso-register {
+  0%, 100% { transform: translate(4px, 3px); }
+  45% { transform: translate(-4px, 1px); }
+  70% { transform: translate(2px, -3px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-risograph::before { animation: none; }
+}
+
+/* 102 Peel-Off — thick die-cut sticker letters lift from their offset shadows */
+.fx-sticker {
+  display: inline-flex;
+  isolation: isolate;
+  font: 900 38px/1.2 Arial, sans-serif;
+  letter-spacing: -.035em;
+  white-space: pre;
+}
+.fx-sticker b {
+  display: inline-block;
+  font-weight: inherit;
+  color: var(--ink-2);
+  -webkit-text-stroke: 6px var(--ink);
+  paint-order: stroke fill;
+  text-shadow: 2px 4px 0 var(--ink-3), 3px 6px 0 var(--ink-3);
+  transform: rotate(-5deg);
+  animation: fx-sticker-peel 3.8s cubic-bezier(.22,1,.36,1) infinite;
+  animation-delay: calc(var(--i) * .1s);
+}
+.fx-sticker b:nth-child(even) { color: var(--ink-3); }
+@keyframes fx-sticker-peel {
+  0%, 65%, 100% { transform: translateY(0) rotate(-5deg); }
+  22% { transform: translateY(-8px) rotate(7deg); }
+  36% { transform: translateY(2px) rotate(-7deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-sticker b { animation: none; }
+}
+
+/* 103 Paper-Stack — layered paper letters float above colorful cut edges */
+.fx-papercut {
+  display: inline-flex;
+  font: 900 42px/1.15 Arial, sans-serif;
+  letter-spacing: .02em;
+  white-space: pre;
+}
+.fx-papercut b {
+  display: inline-block;
+  font-weight: inherit;
+  color: var(--ink);
+  text-shadow:
+    1px 1px 0 var(--ink-3), 2px 2px 0 var(--ink-3),
+    3px 3px 0 var(--ink-2), 4px 4px 0 var(--ink-2),
+    5px 5px 0 color-mix(in srgb, var(--ink-2) 55%, #21142b),
+    6px 6px 0 color-mix(in srgb, var(--ink-2) 55%, #21142b),
+    9px 12px 6px #08070f66;
+  transform: rotate(-3deg);
+  animation: fx-paper-float 4.6s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -.22s);
+}
+.fx-papercut b:nth-child(even) { color: color-mix(in srgb, var(--ink-3) 30%, var(--ink)); }
+@keyframes fx-paper-float {
+  0%, 100% { transform: translateY(2px) rotate(-3deg); }
+  50% { transform: translateY(-6px) rotate(4deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-papercut b { animation: none; }
+}
+
+/* 104 Impression — recessed letterpress type catches a soft grazing light */
+.fx-letterpress {
+  position: relative;
+  font: 900 48px/1.2 Georgia, serif;
+  letter-spacing: .025em;
+  white-space: pre;
+  color: color-mix(in srgb, var(--ink-2) 55%, #21142b);
+  text-shadow: 0 -2px 1px #08070fcc, 0 1px 0 var(--ink-2), 0 2px 1px color-mix(in srgb, var(--ink) 55%, transparent);
+}
+.fx-letterpress::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: transparent;
+  text-shadow: none;
+  background: linear-gradient(105deg, transparent 30%, var(--ink-3) 48%, var(--ink) 50%, transparent 62%) 100% 0 / 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  opacity: .6;
+  animation: fx-press-light 5s ease-in-out infinite;
+}
+@keyframes fx-press-light {
+  0%, 15% { background-position: 100% 0; }
+  65%, 100% { background-position: 0 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-letterpress::after { animation: none; opacity: .25; background-position: 50% 0; }
+}
+
+/* 105 Satin-Stitch — diagonal satin threads shimmer inside embroidered letters */
+.fx-embroidery {
+  position: relative;
+  font: 900 42px/1.2 Arial, sans-serif;
+  letter-spacing: .035em;
+  white-space: pre;
+  color: transparent;
+  background: repeating-linear-gradient(120deg,
+    var(--ink-2) 0 1px,
+    color-mix(in srgb, var(--ink-2) 45%, var(--ink)) 1px 2px,
+    color-mix(in srgb, var(--ink-2) 65%, #21142b) 2px 3px);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-stroke: .6px var(--ink-3);
+  filter: drop-shadow(1px 2px 0 color-mix(in srgb, var(--ink-2) 60%, #21142b)) drop-shadow(0 4px 2px #08070f88);
+}
+.fx-embroidery::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: transparent;
+  -webkit-text-stroke: 0;
+  background: linear-gradient(110deg, transparent 38%, var(--ink) 50%, transparent 62%) 100% 0 / 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  opacity: .65;
+  animation: fx-thread-sheen 4.5s ease-in-out infinite;
+}
+@keyframes fx-thread-sheen {
+  0%, 10% { background-position: 100% 0; }
+  75%, 100% { background-position: 0 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-embroidery::after { animation: none; background-position: 50% 0; opacity: .25; }
+}
+
+/* 106 Stretch-Club — condensed letters stretch upward in a staggered rhythm */
+.fx-stretch {
+  display: inline-flex;
+  font: 900 38px/1 Arial, sans-serif;
+  letter-spacing: -.04em;
+  white-space: pre;
+}
+.fx-stretch b {
+  display: inline-block;
+  font-weight: inherit;
+  color: var(--ink);
+  transform-origin: center bottom;
+  animation: fx-stretch-rise 3.6s cubic-bezier(.65,0,.35,1) infinite;
+  animation-delay: calc(var(--i) * .1s);
+}
+.fx-stretch b:nth-child(3n+1) { color: var(--ink-2); }
+.fx-stretch b:nth-child(3n+2) { color: var(--ink-3); }
+@keyframes fx-stretch-rise {
+  0%, 12%, 70%, 100% { transform: scale(.85, 1); }
+  34%, 42% { transform: scale(.65, 1.8); }
+  55% { transform: scale(1.05, .85); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-stretch b { animation: none; }
+}
+
+/* 107 Candy-Stripe — glossy diagonal candy stripes flow through rounded type */
+.fx-candystripe {
+  font: 900 44px/1.2 "Arial Rounded MT Bold", Arial, sans-serif;
+  letter-spacing: .02em;
+  white-space: pre;
+  color: transparent;
+  background:
+    linear-gradient(180deg, var(--ink) 0%, transparent 38%, #21142b55 72%, transparent 100%),
+    repeating-linear-gradient(135deg, var(--ink-2) 0 8px, var(--ink) 8px 16px, var(--ink-3) 16px 24px, var(--ink) 24px 32px);
+  background-size: 100% 100%, 90.51px 90.51px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-stroke: .6px var(--ink);
+  filter: drop-shadow(0 3px 0 color-mix(in srgb, var(--ink-2) 60%, #21142b));
+  animation: fx-candy-slide 4s linear infinite;
+}
+@keyframes fx-candy-slide {
+  to { background-position: 0 0, 90.51px 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-candystripe { animation: none; }
+}
+
+/* 108 Mirrorball — mirrored mosaic tiles catch a traveling disco highlight */
+.fx-disco {
+  position: relative;
+  font: 900 46px/1.2 Arial, sans-serif;
+  letter-spacing: .04em;
+  white-space: pre;
+  color: transparent;
+  background:
+    repeating-linear-gradient(0deg, #21142b88 0 1px, transparent 1px 6px),
+    repeating-linear-gradient(90deg, #21142b88 0 1px, transparent 1px 6px),
+    repeating-conic-gradient(from 45deg,
+      var(--ink) 0deg 90deg, color-mix(in srgb, var(--ink-3) 65%, var(--ink)) 90deg 180deg,
+      color-mix(in srgb, var(--ink-2) 60%, #21142b) 180deg 270deg,
+      color-mix(in srgb, var(--ink-3) 50%, #21142b) 270deg 360deg) 0 0 / 12px 12px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-stroke: .5px color-mix(in srgb, var(--ink) 70%, transparent);
+  filter: drop-shadow(0 2px 0 color-mix(in srgb, var(--ink-2) 60%, #21142b));
+}
+.fx-disco::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: transparent;
+  -webkit-text-stroke: 0;
+  background: linear-gradient(115deg, transparent 35%, var(--ink) 49%, var(--ink-3) 51%, transparent 65%) 100% 0 / 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: fx-disco-light 3.8s ease-in-out infinite;
+}
+@keyframes fx-disco-light {
+  0%, 8% { background-position: 100% 0; opacity: .2; }
+  45% { opacity: .9; }
+  85%, 100% { background-position: 0 0; opacity: .2; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-disco::after { animation: none; background-position: 50% 0; opacity: .3; }
+}
+
 /* ---------- Lazy loading ---------- */
 /* skip rendering work for far-offscreen cells */
 .cell {

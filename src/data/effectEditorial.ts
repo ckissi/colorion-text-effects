@@ -10,6 +10,182 @@ interface Editorial {
 
 /** Hand-written guidance for the priority effects, checked against their CSS. */
 export const effectEditorial: Partial<Record<EffectType, Editorial>> = {
+  halftone: {
+    walkthrough: [
+      'Ben-Day combines a solid accent fill with a contrasting outline. A cyan copy sits 4px right and 5px down, like an offset print plate.',
+      'The top copy clips a repeating radial gradient to the letters. Its 4px background shift matches one full dot tile, keeping the three-second loop continuous.',
+    ],
+    variation: {
+      title: 'Use a coarser comic-book dot screen',
+      description: 'Increase both dot size and tile spacing. The new animation moves by one 6px tile so the larger pattern loops without a jump.',
+      markup: '<div class="fx-halftone fx-halftone-coarse" data-text="PRINT">PRINT</div>',
+      css: `.fx-halftone-coarse::after {
+  background-image: radial-gradient(circle, var(--ink) 0 1.5px, transparent 1.8px);
+  background-size: 6px 6px;
+  animation-name: fx-halftone-coarse-drift;
+}
+@keyframes fx-halftone-coarse-drift { to { background-position: 6px 6px; } }`,
+    },
+    troubleshooting: [
+      { question: 'Why do the dots cover the whole rectangle?', answer: 'Keep background-clip: text and its prefixed declaration on the top pseudo-element. The transparent text color lets the clipped dot pattern show through.' },
+      { question: 'How is this different from dot-matrix text?', answer: 'The solid letter face remains visible under the print dots. Dot-matrix lettering uses dots to form the entire character, like a printer display.' },
+    ],
+    browserNote: 'This effect uses radial gradients, text clipping and paint-order. The reduced-motion rule stops the dots and retains all three print layers.',
+    reference: { label: 'MDN: background-clip', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip' },
+  },
+  risograph: {
+    walkthrough: [
+      'Riso-Press keeps a magenta text face above a cyan copy. Small transparent holes in the cyan plate and pale dots above simulate uneven ink coverage.',
+      'The lower plate drifts smoothly between three offsets over four seconds. This imitates print misregistration while the original word stays still and readable.',
+    ],
+    variation: {
+      title: 'Make a single-color overprint',
+      description: 'Use the same ink for both plates and reduce the texture opacity. The moving registration offset still separates their edges.',
+      markup: '<div class="fx-risograph fx-risograph-single" data-text="EDITION">EDITION</div>',
+      css: `.fx-risograph-single { --ink-3: var(--ink-2); }
+.fx-risograph-single::after { opacity: .2; }`,
+    },
+    troubleshooting: [
+      { question: 'Why is the lower print plate missing?', answer: 'Keep isolation: isolate on the wrapper. It contains the negative z-index copy, so the cyan plate remains above the surrounding page background.' },
+      { question: 'Can I make the printing look less precise?', answer: 'Increase the translate distances slightly or enlarge the dot tiles. Leave the original face stationary so the heading remains readable.' },
+    ],
+    browserNote: 'The effect uses native gradients, pseudo-elements and 2D transforms. Reduced motion keeps the lower plate at its normal 4px by 3px offset.',
+    reference: { label: 'MDN: isolation', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/isolation' },
+  },
+  sticker: {
+    walkthrough: [
+      'Peel-Off draws each letter with a thick light stroke. paint-order: stroke fill places that stroke beneath the colored face, preserving the letter shape.',
+      'Sharp cyan shadows create the die-cut edge. Each letter lifts and tilts on a delayed cycle, suggesting individual stickers peeling from a sheet.',
+    ],
+    variation: {
+      title: 'Keep the sticker outline without the bounce',
+      description: 'This variation keeps the die-cut border and offset shadow. Alternate letter angles add a pasted-on look with no animation.',
+      markup: '<div class="fx-sticker fx-sticker-static" role="img" aria-label="YES"><b aria-hidden="true" style="--i:0">Y</b><b aria-hidden="true" style="--i:1">E</b><b aria-hidden="true" style="--i:2">S</b></div>',
+      css: `.fx-sticker-static b { animation: none; transform: rotate(-5deg); }
+.fx-sticker-static b:nth-child(even) { transform: rotate(5deg); }`,
+    },
+    troubleshooting: [
+      { question: 'Why does the thick outline hide the fill?', answer: 'Keep paint-order: stroke fill. If the browser does not support it on text, reduce the stroke width so the colored face remains visible.' },
+      { question: 'Why do the outside edges get cut off?', answer: 'Allow space for the 6px stroke, shadow and 8px lift. A tightly clipped parent can trim all three.' },
+    ],
+    browserNote: 'Modern browsers support text strokes and paint-order. Reduced motion stops the letter lifts and keeps a slight static tilt.',
+    reference: { label: 'MDN: paint-order', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/paint-order' },
+  },
+  papercut: {
+    walkthrough: [
+      'Paper-Stack uses six sharp text shadows to imitate stacked sheets. The first two form a cyan edge, followed by pink and darker pink layers.',
+      'Each letter floats on a different phase of the same animation. Unlike folding text, these letter faces remain visible throughout the cycle.',
+    ],
+    variation: {
+      title: 'Use a pink paper face',
+      description: 'Change only the face colors. The cyan and pink cut edges still use the original shadow stack.',
+      markup: '<div class="fx-papercut fx-papercut-pink" role="img" aria-label="CUT"><b aria-hidden="true" style="--i:0">C</b><b aria-hidden="true" style="--i:1">U</b><b aria-hidden="true" style="--i:2">T</b></div>',
+      css: `.fx-papercut-pink b { color: var(--ink-2); }
+.fx-papercut-pink b:nth-child(even) { color: var(--ink); }`,
+    },
+    troubleshooting: [
+      { question: 'Why do large headings have thin paper edges?', answer: 'The shadow offsets use pixels. Increase the six offsets together when increasing font-size, or use em units to make the depth scale with the letters.' },
+      { question: 'How do I keep all the letters still?', answer: 'Set animation: none on .fx-papercut b. The colored layers remain because text-shadow belongs to the normal style, outside the keyframes.' },
+    ],
+    browserNote: 'This uses 2D transforms and layered text shadows, with color-mix() for the darker edges. Reduced motion retains the complete paper stack.',
+    reference: { label: 'MDN: text-shadow', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow' },
+  },
+  letterpress: {
+    walkthrough: [
+      'Impression places a dark shadow above the letters and a light edge below. That reversed lighting makes the serif text appear pressed into the surface.',
+      'A clipped gradient sweeps across a duplicate of the word. Its low opacity suggests grazing light without removing the recessed face.',
+    ],
+    variation: {
+      title: 'Make a steady engraved label',
+      description: 'Remove the moving highlight and brighten the recessed fill. Use this for a label that needs consistent contrast.',
+      markup: '<div class="fx-letterpress fx-letterpress-steady" data-text="TYPE">TYPE</div>',
+      css: `.fx-letterpress-steady { color: var(--ink-2); }
+.fx-letterpress-steady::after { display: none; }`,
+    },
+    troubleshooting: [
+      { question: 'Why does the word look raised instead of recessed?', answer: 'Keep the dark shadow above and the pale edge below. Reversing those two directions makes the lighting suggest raised lettering.' },
+      { question: 'Why is the pressed face too dark?', answer: 'Increase the accent proportion in the color-mix() fill or use the steady variation. Match the ink to the surface where the label will appear.' },
+    ],
+    browserNote: 'The indentation is an optical effect made with text shadows. It does not require a real inset text mask. Reduced motion leaves a faint stationary highlight.',
+    reference: { label: 'MDN: text-shadow', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow' },
+  },
+  embroidery: {
+    walkthrough: [
+      'Satin-Stitch clips narrow diagonal stripes to bold lettering. Alternating light and dark pink strands imitate the direction and sheen of satin embroidery.',
+      'A fine cyan stroke and two drop shadows define the sewn edge. A separate text copy supplies the moving highlight without shifting the thread pattern.',
+    ],
+    variation: {
+      title: 'Make a matte embroidered patch',
+      description: 'Hide the sheen layer for a steady thread texture. The stitched fill, border and raised edge remain.',
+      markup: '<div class="fx-embroidery fx-embroidery-matte" data-text="PATCH">PATCH</div>',
+      css: `.fx-embroidery-matte::after { display: none; }`,
+    },
+    troubleshooting: [
+      { question: 'Why do thin fonts lose the thread texture?', answer: 'Use a heavy font with enough area inside each letter. Small or thin lettering leaves too little space for the 3px repeating thread pattern.' },
+      { question: 'How do I change the thread direction?', answer: 'Change the 120deg angle in repeating-linear-gradient. The highlight uses its own angle, so it can still cross the threads independently.' },
+    ],
+    browserNote: 'The stitch texture is a CSS approximation, made from gradients rather than a fabric image. Reduced motion stops the sheen and keeps the threads visible.',
+    reference: { label: 'MDN: repeating-linear-gradient()', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/repeating-linear-gradient' },
+  },
+  stretch: {
+    walkthrough: [
+      'Stretch-Club scales each letter from its bottom edge. The tall phase narrows the letter while increasing its height to 1.8 times its original size.',
+      'A short squash follows the tall hold, then the letter returns to normal. The 0.1-second delays move this rhythm through the word.',
+    ],
+    variation: {
+      title: 'Use a smaller stretch for compact headings',
+      description: 'Replace the tall phase with a 1.35 scale. The original timing, bottom pivot and reduced-motion rule still apply.',
+      markup: '<div class="fx-stretch fx-stretch-small" role="img" aria-label="UP"><b aria-hidden="true" style="--i:0">U</b><b aria-hidden="true" style="--i:1">P</b></div>',
+      css: `.fx-stretch-small b { animation-name: fx-stretch-small-rise; }
+@keyframes fx-stretch-small-rise {
+  0%, 12%, 70%, 100% { transform: scale(.85, 1); }
+  34%, 42% { transform: scale(.75, 1.35); }
+  55% { transform: scale(1.05, .9); }
+}`,
+    },
+    troubleshooting: [
+      { question: 'Why are the taller letters cut off?', answer: 'CSS transforms do not increase layout height. Reserve space above the baseline for the 1.8 scale or use the smaller-stretch variation.' },
+      { question: 'How can all the letters stretch together?', answer: 'Set animation-delay: 0s on every letter. Keep the individual wrappers because the transform origin belongs to each character.' },
+    ],
+    browserNote: 'This effect uses native scale transforms without variable fonts or JavaScript. Reduced motion stops the animation and shows the full word at its normal height.',
+    reference: { label: 'MDN: transform-origin', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin' },
+  },
+  candystripe: {
+    walkthrough: [
+      'Candy-Stripe clips diagonal pink, pale and cyan bands to rounded lettering. A second vertical gradient adds a glossy cap and a darker lower edge.',
+      'Only the stripe background moves. The 90.51px shift covers two diagonal pattern periods, so the four-second loop returns to matching stripes.',
+    ],
+    variation: {
+      title: 'Use classic two-color candy stripes',
+      description: 'Set both accents to the same color. The pale separating bands and glossy surface remain.',
+      markup: '<div class="fx-candystripe fx-candystripe-duo">SWEET</div>',
+      css: `.fx-candystripe-duo { --ink-3: var(--ink-2); }`,
+    },
+    troubleshooting: [
+      { question: 'Why does the stripe loop jump after I edit it?', answer: 'The horizontal travel must match a whole diagonal pattern period. Changing stripe widths or the angle also changes that distance.' },
+      { question: 'Why does the font look different on another device?', answer: 'Arial Rounded MT Bold is a local font. Devices without it use Arial. Supply your own rounded web font if an identical letter shape is required.' },
+    ],
+    browserNote: 'The stripes use repeating linear gradients and text clipping. No image or external font is required. Reduced motion keeps the gloss and diagonal fill stationary.',
+    reference: { label: 'MDN: repeating-linear-gradient()', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/repeating-linear-gradient' },
+  },
+  disco: {
+    walkthrough: [
+      'Mirrorball builds a four-tone mosaic with a repeating conic gradient. Two linear gradients add the horizontal and vertical seams between mirrored tiles.',
+      'A clipped highlight crosses a duplicate of the text. The tile pattern stays fixed while the reflection brightens and fades over 3.8 seconds.',
+    ],
+    variation: {
+      title: 'Use a cooler mirrorball palette',
+      description: 'Replace the pink facets with the cyan accent. The dark seams still separate the mirror tiles.',
+      markup: '<div class="fx-disco fx-disco-cool" data-text="DANCE">DANCE</div>',
+      css: `.fx-disco-cool { --ink-2: var(--ink-3); }`,
+    },
+    troubleshooting: [
+      { question: 'Why does the text look like ordinary chrome?', answer: 'Keep both 6px seam gradients above the 12px conic tile pattern. Those visible square divisions distinguish mirrorball lettering from smooth chrome.' },
+      { question: 'Can I make the mirror tiles larger?', answer: 'Increase the seam spacing and the conic background size together. The conic tile should remain twice the seam spacing to preserve the four-tone grid.' },
+    ],
+    browserNote: 'The mirrored finish uses native gradients and a small drop shadow. Reduced motion keeps a stationary reflection over the complete mosaic.',
+    reference: { label: 'MDN: repeating-conic-gradient()', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/repeating-conic-gradient' },
+  },
   glitch: {
     walkthrough: [
       'Glitchcore keeps the real word still and draws two coloured copies with ::before and ::after. The first copy exposes the top 45% of the word; the second exposes the bottom 55%. Their different clipping edges make the distortion look like a torn video signal rather than a whole-word shake.',

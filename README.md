@@ -1,6 +1,6 @@
 # CSS Text Effects
 
-A library of 81 animated text effects built with pure CSS — aurora gradients,
+A library of 108 animated text effects built with pure CSS — aurora gradients,
 glitches, split-flap boards, liquid fills, CRT phosphor terminals and other
 lesser-seen tricks. No JavaScript, no dependencies, MIT licensed.
 
@@ -40,5 +40,8 @@ re-skinned by overriding them: `--ink` (main text colour), `--ink-2` and
    numbered marker comment; prefix keyframes with `fx-`.
 2. Add the entry to `src/data/effects.ts` (and to `perLetter` / `usesDataText`
    if it needs indexed letters or a `data-text` duplicate).
-3. If it needs bespoke markup, extend both `Effect.astro` and
+3. Add a keyword, unique slug and category to `src/data/seo.ts`.
+4. If it needs bespoke markup, extend both `Effect.astro` and
    `effectMarkup()` in `effectCss.ts` — they must mirror each other.
+5. Include a reduced-motion override inside the effect's CSS block so copied
+   snippets also stop animating when the visitor requests reduced motion.

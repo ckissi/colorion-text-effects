@@ -44,7 +44,7 @@ export const allKeyframes = extractKeyframes(css);
 
 // Slice the effects section into one block per numbered marker.
 // Allow multi-line marker comments (e.g. 24 Still-Water, 30 Negative).
-const markerRe = /\/\*\s*(\d{2})\s+(?:[^*]|\*(?!\/))*\*\//g;
+const markerRe = /\/\*\s*(\d{2,})\s+(?:[^*]|\*(?!\/))*\*\//g;
 const markers = [...css.matchAll(markerRe)];
 const sectionEnd = css.indexOf('/* ---------- Lazy loading');
 
@@ -80,7 +80,7 @@ for (const effect of effects) {
   if (!block) continue;
   effectBlocks[effect.type] = block;
   effectCss[effect.type] = INK_NOTE + selfContained(block);
-  const marker = block.match(/^\/\*\s*\d{2}\s+((?:[^*]|\*(?!\/))*)\*\//);
+  const marker = block.match(/^\/\*\s*\d{2,}\s+((?:[^*]|\*(?!\/))*)\*\//);
   const blurb = marker?.[1].replace(/\s+/g, ' ').split(/\s+—\s+/).slice(1).join(' — ').trim();
   if (blurb) effectBlurbs[effect.type] = blurb;
 }

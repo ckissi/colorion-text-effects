@@ -217,6 +217,15 @@ const seo: Record<EffectType, EffectSeo> = {
   rotator: { slug: 'text-changing-animation', keyword: 'Text Changing Animation', category: 'reveal' },
   loader: { slug: 'text-loading-animation', keyword: 'Text Loading Animation', category: 'motion' },
   fade: { slug: 'fading-text-effect', keyword: 'Fading Text Effect', category: 'reveal' },
+  halftone: { slug: 'halftone-text-effect', keyword: 'Halftone Text Effect', category: 'texture' },
+  risograph: { slug: 'risograph-text-effect', keyword: 'Risograph Text Effect', category: 'retro' },
+  sticker: { slug: 'sticker-text-effect', keyword: 'Sticker Text Effect', category: 'depth' },
+  papercut: { slug: 'paper-cut-text-effect', keyword: 'Paper Cut Text Effect', category: 'depth' },
+  letterpress: { slug: 'letterpress-text-effect', keyword: 'Letterpress Text Effect', category: 'texture' },
+  embroidery: { slug: 'embroidery-text-effect', keyword: 'Embroidery Text Effect', category: 'texture' },
+  stretch: { slug: 'stretch-text-animation', keyword: 'Stretch Text Animation', category: 'motion' },
+  candystripe: { slug: 'candy-stripe-text-effect', keyword: 'Candy Stripe Text Effect', category: 'texture' },
+  disco: { slug: 'disco-text-effect', keyword: 'Disco Mirrorball Text Effect', category: 'texture' },
 };
 
 export const effectSeo = (effect: Effect): EffectSeo => seo[effect.type];

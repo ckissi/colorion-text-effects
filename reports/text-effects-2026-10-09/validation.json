@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "effects": 108,
+  "newEffects": 9,
+  "checks": [
+    "Production build: 118 pages",
+    "108 snippet blocks remain isolated across the 99/100 boundary",
+    "All referenced keyframes included",
+    "All nine new routes, sitemap entries, home and generator cards exist",
+    "All nine snippets include reduced-motion overrides",
+    "All nine pages include original walkthroughs, variations and troubleshooting"
+  ],
+  "browserChecks": [
+    "Desktop previews at 1440px and 1125px",
+    "Mobile generator at 390px without horizontal overflow",
+    "All nine previews accept FRESH & BOLD",
+    "Custom embroidery snippet copies escaped text, custom colors and reduced-motion CSS using the keyboard",
+    "All nine animations disabled under emulated reduced motion"
+  ]
+}
