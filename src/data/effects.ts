@@ -106,7 +106,13 @@ export type EffectType =
   | 'embroidery'
   | 'stretch'
   | 'candystripe'
-  | 'disco';
+  | 'disco'
+  | 'waxseal'
+  | 'ticket'
+  | 'carbon'
+  | 'typehammer'
+  | 'labelmaker'
+  | 'inkroller';
 
 export interface Effect {
   index: string;
@@ -230,6 +236,12 @@ export const effects: Effect[] = [
   { index: '106', name: 'Stretch-Club', type: 'stretch', text: 'STRETCH' },
   { index: '107', name: 'Candy-Stripe', type: 'candystripe', text: 'CANDY' },
   { index: '108', name: 'Mirrorball', type: 'disco', text: 'DISCO' },
+  { index: '109', name: 'Wax-Seal', type: 'waxseal', text: 'SEALED' },
+  { index: '110', name: 'Ticket-Punch', type: 'ticket', text: 'ADMIT ONE' },
+  { index: '111', name: 'Carbon-Copy', type: 'carbon', text: 'ORIGINAL' },
+  { index: '112', name: 'Type-Hammer', type: 'typehammer', text: 'STRIKE' },
+  { index: '113', name: 'Label-Maker', type: 'labelmaker', text: 'ARCHIVE' },
+  { index: '114', name: 'Ink-Roller', type: 'inkroller', text: 'PRINT' },
 ];
 
 /** effects whose letters are wrapped in indexed <b> spans for per-letter animation */
@@ -268,6 +280,8 @@ export const perLetter = new Set<EffectType>([
   'sticker',
   'papercut',
   'stretch',
+  'typehammer',
+  'labelmaker',
 ]);
 
 /** effects that duplicate their text into pseudo-elements via data-text */
@@ -301,4 +315,6 @@ export const usesDataText = new Set<EffectType>([
   'letterpress',
   'embroidery',
   'disco',
+  'carbon',
+  'inkroller',
 ]);

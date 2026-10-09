@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "effects": 114,
+  "newEffects": [
+    "waxseal",
+    "ticket",
+    "carbon",
+    "typehammer",
+    "labelmaker",
+    "inkroller"
+  ],
+  "pagesBuilt": 124,
+  "checks": [
+    "All 114 snippet blocks isolated",
+    "All referenced animation keyframes included",
+    "Six effect pages, homepage cards, generator cards and sitemap URLs present",
+    "Six guides with walkthroughs, variations and troubleshooting",
+    "Reduced-motion overrides included in all six snippets"
+  ],
+  "browserChecks": [
+    "Six layered desktop previews inspected",
+    "390px mobile generator without horizontal page overflow",
+    "All six previews accept FRESH & BOLD",
+    "Carbon-Copy clipboard HTML escapes custom ampersand",
+    "Reduced motion disables wrapper, letter and pseudo-element animations for all six effects"
+  ],
+  "guideWritingIssuesPer100Words": 0.12
+}

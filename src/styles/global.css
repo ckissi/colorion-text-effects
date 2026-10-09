@@ -4237,6 +4237,343 @@ h1 em {
   .fx-disco::after { animation: none; background-position: 50% 0; opacity: .3; }
 }
 
+/* 109 Wax-Seal — molten wax compresses beneath a rotating embossed seal */
+.fx-waxseal {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  min-width: 100px;
+  height: 100px;
+  padding: 0 12px;
+  box-sizing: border-box;
+  font: 900 17px/1.1 Georgia, serif;
+  letter-spacing: .1em;
+  white-space: pre;
+  color: color-mix(in srgb, var(--ink-2) 40%, #210f22);
+  text-shadow: 0 1px 0 color-mix(in srgb, var(--ink) 65%, transparent), 0 -1px 1px #210f22;
+  animation: fx-wax-impress 5s cubic-bezier(.22,1,.36,1) infinite;
+}
+.fx-waxseal::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  z-index: -1;
+  border-radius: 43% 57% 46% 54% / 55% 44% 56% 45%;
+  background:
+    radial-gradient(ellipse at 32% 24%, color-mix(in srgb, var(--ink) 55%, transparent), transparent 42%),
+    conic-gradient(from 20deg, var(--ink-2), #48132f, var(--ink-2), #731f48, var(--ink-2));
+  box-shadow: inset 3px 4px 5px #ffffff55, inset -4px -5px 6px #16081788, 0 7px 0 #260f24, 0 12px 16px #08070f66;
+  animation: fx-wax-pool 5s ease-in-out infinite;
+}
+.fx-waxseal::after {
+  content: '';
+  position: absolute;
+  inset: 15px;
+  border: 3px double color-mix(in srgb, var(--ink) 45%, var(--ink-2));
+  border-radius: 50%;
+  box-shadow: inset 0 2px 2px #210f2266, 0 1px 1px #ffffff55;
+  pointer-events: none;
+  animation: fx-wax-ring 5s ease-in-out infinite;
+}
+@keyframes fx-wax-impress {
+  0%, 7% { transform: rotate(-18deg) scale(1.35); opacity: 0; }
+  17% { transform: rotate(-8deg) scale(.92); opacity: 1; }
+  23%, 78% { transform: rotate(-8deg) scale(1); opacity: 1; }
+  94%, 100% { transform: rotate(-8deg) scale(1); opacity: 0; }
+}
+@keyframes fx-wax-pool {
+  0%, 12% { border-radius: 50%; transform: scale(.86); }
+  22%, 100% { border-radius: 43% 57% 46% 54% / 55% 44% 56% 45%; transform: scale(1); }
+}
+@keyframes fx-wax-ring {
+  0%, 14% { opacity: 0; transform: rotate(30deg) scale(.8); }
+  24%, 100% { opacity: 1; transform: rotate(0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-waxseal { animation: none; transform: rotate(-8deg); opacity: 1; }
+  .fx-waxseal::before, .fx-waxseal::after { animation: none; }
+}
+
+/* 110 Ticket-Punch — a perforated admission ticket snaps apart at its stub */
+.fx-ticket {
+  position: relative;
+  isolation: isolate;
+  padding: 28px 53px 28px 20px;
+  margin-right: 30px;
+  font: 900 25px/1 Arial, sans-serif;
+  letter-spacing: .1em;
+  white-space: pre;
+  color: #21142b;
+  background:
+    radial-gradient(circle at 0 50%, transparent 9px, var(--ink-3) 9.5px) left / calc(100% - 36px) 100% no-repeat;
+  filter: drop-shadow(0 6px 0 #08070f55);
+  transform: rotate(-5deg);
+  animation: fx-ticket-arrive 4.8s cubic-bezier(.22,1,.36,1) infinite;
+}
+.fx-ticket::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  right: 48px;
+  top: 10px;
+  bottom: 10px;
+  border-top: 2px solid #21142b;
+  border-bottom: 2px solid #21142b;
+  background: repeating-linear-gradient(90deg, #21142b 0 2px, transparent 2px 5px) bottom / 100% 5px no-repeat;
+  opacity: .5;
+  pointer-events: none;
+}
+.fx-ticket::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 36px;
+  border-left: 2px dashed #21142b99;
+  box-sizing: border-box;
+  background:
+    repeating-linear-gradient(90deg, #21142b 0 2px, transparent 2px 5px) center / 20px 38px no-repeat,
+    radial-gradient(circle at 100% 50%, transparent 9px, var(--ink-2) 9.5px);
+  transform-origin: left bottom;
+  animation: fx-ticket-tear 4.8s ease-in-out infinite;
+}
+@keyframes fx-ticket-arrive {
+  0%, 7% { transform: translateY(-20px) rotate(-12deg); opacity: 0; }
+  20%, 76% { transform: translateY(0) rotate(-5deg); opacity: 1; }
+  94%, 100% { transform: translateY(12px) rotate(-3deg); opacity: 0; }
+}
+@keyframes fx-ticket-tear {
+  0%, 38% { transform: translate(0) rotate(0); opacity: 1; }
+  48% { transform: translate(1px, 2px) rotate(12deg); opacity: 1; }
+  62%, 100% { transform: translate(16px, 24px) rotate(28deg); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-ticket { animation: none; }
+  .fx-ticket::after { animation: none; }
+}
+
+/* 111 Carbon-Copy — three paper impressions fan apart after a typing impact */
+.fx-carbon {
+  position: relative;
+  isolation: isolate;
+  padding: 14px 18px;
+  margin-right: 28px;
+  font: 700 27px/1.1 'Courier New', monospace;
+  letter-spacing: .06em;
+  white-space: pre;
+  color: #21142b;
+  background: linear-gradient(transparent 95%, #21142b18 95%) 0 0 / 100% 8px, var(--ink);
+  border: 1px solid #21142b33;
+  box-shadow: 0 3px 5px #08070f44;
+  transform: rotate(-3deg);
+  animation: fx-carbon-strike 5.2s ease-in-out infinite;
+}
+.fx-carbon::before, .fx-carbon::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: -1px;
+  padding: 14px 18px;
+  border: 1px solid #21142b33;
+  box-shadow: 0 3px 5px #08070f44;
+  pointer-events: none;
+  transform-origin: left bottom;
+}
+.fx-carbon::before {
+  z-index: -2;
+  color: color-mix(in srgb, #21142b 45%, var(--ink-2));
+  background: var(--ink-2);
+  transform: translate(9px, 18px) rotate(6deg);
+  animation: fx-carbon-third 5.2s ease-in-out infinite;
+}
+.fx-carbon::after {
+  z-index: -1;
+  color: color-mix(in srgb, #21142b 65%, var(--ink-3));
+  background: var(--ink-3);
+  transform: translate(5px, 9px) rotate(3deg);
+  animation: fx-carbon-second 5.2s ease-in-out infinite;
+}
+@keyframes fx-carbon-strike {
+  0%, 9% { transform: translateY(-10px) rotate(-3deg); opacity: 0; }
+  17% { transform: translateY(2px) rotate(-3deg); opacity: 1; }
+  22%, 82% { transform: translateY(0) rotate(-3deg); opacity: 1; }
+  96%, 100% { opacity: 0; transform: translateY(0) rotate(-3deg); }
+}
+@keyframes fx-carbon-second {
+  0%, 24% { transform: translate(0) rotate(0); }
+  46%, 100% { transform: translate(5px, 9px) rotate(3deg); }
+}
+@keyframes fx-carbon-third {
+  0%, 30% { transform: translate(0) rotate(0); }
+  54%, 100% { transform: translate(9px, 18px) rotate(6deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-carbon, .fx-carbon::before, .fx-carbon::after { animation: none; }
+}
+
+/* 112 Type-Hammer — individual metal type blocks swing down and leave ink impressions */
+.fx-typehammer {
+  display: inline-flex;
+  gap: .04em;
+  font: 900 30px/1 'Courier New', monospace;
+  white-space: pre;
+  perspective: 600px;
+  padding: 12px 0 24px;
+}
+.fx-typehammer b {
+  position: relative;
+  display: inline-block;
+  padding: .2em .13em;
+  font-weight: inherit;
+  color: #21142b;
+  background: linear-gradient(135deg, var(--ink), color-mix(in srgb, var(--ink-3) 65%, #21142b));
+  border: 1px solid color-mix(in srgb, var(--ink) 65%, transparent);
+  border-radius: 3px 3px 0 0;
+  box-shadow: inset 0 2px 0 #ffffff77, 0 4px 0 #21142b;
+  transform-origin: center 140%;
+  animation: fx-typehammer-strike 4.6s cubic-bezier(.22,1,.36,1) infinite;
+  animation-delay: calc(var(--i) * .12s);
+}
+.fx-typehammer b::before {
+  content: '';
+  position: absolute;
+  width: 3px;
+  height: 15px;
+  top: 100%;
+  left: calc(50% - 1.5px);
+  background: linear-gradient(90deg, var(--ink), #21142b);
+  z-index: -1;
+}
+.fx-typehammer b::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border: 2px solid var(--ink-2);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  animation: fx-typehammer-impact 4.6s ease-out infinite;
+  animation-delay: calc(var(--i) * .12s);
+}
+@keyframes fx-typehammer-strike {
+  0%, 8% { transform: rotateX(-78deg) translateY(8px); opacity: .25; }
+  18% { transform: rotateX(7deg) translateY(-2px); opacity: 1; }
+  24% { transform: rotateX(-12deg) translateY(2px); }
+  32%, 72% { transform: rotateX(0) translateY(0); opacity: 1; }
+  92%, 100% { transform: rotateX(-78deg) translateY(8px); opacity: .25; }
+}
+@keyframes fx-typehammer-impact {
+  0%, 16% { transform: scale(.65); opacity: 0; }
+  19% { transform: scale(.8); opacity: .7; }
+  34%, 100% { transform: scale(1.65); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-typehammer b, .fx-typehammer b::after { animation: none; }
+  .fx-typehammer b { transform: none; opacity: 1; }
+}
+
+/* 113 Label-Maker — raised white glyphs emboss onto a feeding strip of ridged tape */
+.fx-labelmaker {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  padding: 15px 22px;
+  font: 900 27px/1 'Courier New', monospace;
+  letter-spacing: .1em;
+  white-space: pre;
+  background: repeating-linear-gradient(0deg, transparent 0 2px, #08070f22 2px 3px), color-mix(in srgb, var(--ink-2) 55%, #21142b);
+  border-top: 2px solid color-mix(in srgb, var(--ink-2) 65%, var(--ink));
+  border-bottom: 3px solid #21142b;
+  box-shadow: 0 5px 7px #08070f66;
+  transform: rotate(-4deg);
+  animation: fx-label-feed 5s cubic-bezier(.22,1,.36,1) infinite;
+}
+.fx-labelmaker b {
+  font-weight: inherit;
+  color: var(--ink);
+  text-shadow: -1px -1px 0 #08070faa, 1px 1px 0 #ffffff55, 0 2px 2px #08070f88;
+  animation: fx-label-emboss 5s steps(1,end) infinite;
+  animation-delay: calc(var(--i) * .13s);
+}
+.fx-labelmaker::before, .fx-labelmaker::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  bottom: -3px;
+  width: 7px;
+  background: repeating-linear-gradient(135deg, #21142b 0 3px, var(--ink-2) 3px 5px);
+  pointer-events: none;
+}
+.fx-labelmaker::before { left: -3px; clip-path: polygon(0 0,100% 0,50% 16%,100% 33%,50% 50%,100% 66%,50% 83%,100% 100%,0 100%); }
+.fx-labelmaker::after { right: -3px; clip-path: polygon(100% 0,0 0,50% 16%,0 33%,50% 50%,0 66%,50% 83%,0 100%,100% 100%); }
+@keyframes fx-label-feed {
+  0%, 6% { clip-path: inset(-8px 100% -12px -8px); transform: translateX(-12px) rotate(-4deg); }
+  34%, 80% { clip-path: inset(-8px -8px -12px -8px); transform: translateX(0) rotate(-4deg); }
+  95%, 100% { clip-path: inset(-8px -8px -12px -8px); transform: translateX(12px) rotate(-4deg); opacity: 0; }
+  6%, 80% { opacity: 1; }
+}
+@keyframes fx-label-emboss {
+  0%, 12% { color: transparent; text-shadow: none; }
+  20%, 100% { color: var(--ink); text-shadow: -1px -1px 0 #08070faa, 1px 1px 0 #ffffff55, 0 2px 2px #08070f88; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-labelmaker, .fx-labelmaker b { animation: none; }
+}
+
+/* 114 Ink-Roller — a brayer rolls a textured ink face over a ghosted outline */
+.fx-inkroller {
+  position: relative;
+  isolation: isolate;
+  font: 900 36px/1.1 Arial, sans-serif;
+  letter-spacing: -.02em;
+  white-space: pre;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--ink) 35%, transparent);
+}
+.fx-inkroller::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  -webkit-text-stroke: 0;
+  background:
+    repeating-linear-gradient(4deg, transparent 0 5px, #21142b66 5px 6px, transparent 6px 9px),
+    linear-gradient(90deg, var(--ink-2), var(--ink-3));
+  -webkit-background-clip: text;
+  background-clip: text;
+  clip-path: inset(0 0 0 0);
+  animation: fx-roller-print 4.8s ease-in-out infinite;
+}
+.fx-inkroller::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  bottom: -10px;
+  left: 0;
+  width: 13px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #21142b, var(--ink-2) 35%, var(--ink) 52%, var(--ink-2) 68%, #21142b);
+  box-shadow: 3px 0 6px #08070f77, 0 -5px 0 -2px var(--ink-3), 0 5px 0 -2px var(--ink-3);
+  -webkit-text-stroke: 0;
+  animation: fx-roller-travel 4.8s ease-in-out infinite;
+}
+@keyframes fx-roller-print {
+  0%, 10% { clip-path: inset(0 100% 0 0); }
+  54%, 82% { clip-path: inset(0 0 0 0); opacity: 1; }
+  96%, 100% { clip-path: inset(0 0 0 0); opacity: 0; }
+}
+@keyframes fx-roller-travel {
+  0%, 8% { left: 0; transform: rotate(-8deg); opacity: 0; }
+  12% { left: 0; transform: rotate(-8deg); opacity: 1; }
+  54% { left: calc(100% - 13px); transform: rotate(8deg); opacity: 1; }
+  64%, 100% { left: calc(100% - 13px); transform: rotate(8deg) translateY(15px); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-inkroller::before { animation: none; }
+  .fx-inkroller::after { animation: none; display: none; }
+}
+
 /* ---------- Lazy loading ---------- */
 /* skip rendering work for far-offscreen cells */
 .cell {

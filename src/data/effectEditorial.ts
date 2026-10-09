@@ -10,6 +10,168 @@ interface Editorial {
 
 /** Hand-written guidance for the priority effects, checked against their CSS. */
 export const effectEditorial: Partial<Record<EffectType, Editorial>> = {
+  waxseal: {
+    "walkthrough": [
+      "Wax-Seal combines an irregular wax pool, an inset double ring and recessed serif lettering. Three animations coordinate the impact, wax compression and delayed impression.",
+      "The word arrives at a larger scale, compresses at 17%, then settles at a slight angle. Highlights and dark lower edges give the wax depth."
+    ],
+    "variation": {
+      "title": "Keep a permanent wax impression",
+      "description": "Stop all three animations and retain the settled angle. This variation suits an invitation or certificate.",
+      "markup": "<div class=\"fx-waxseal fx-waxseal-fixed\">SEALED</div>",
+      "css": ".fx-waxseal-fixed { animation: none; transform: rotate(-8deg); opacity: 1; }\n.fx-waxseal-fixed::before, .fx-waxseal-fixed::after { animation: none; }"
+    },
+    "troubleshooting": [
+      {
+        "question": "Why does a long word widen the seal?",
+        "answer": "The wrapper grows with the text. Use a short label for a round seal or accept an oval shape for longer words."
+      },
+      {
+        "question": "Why is the wax behind the page?",
+        "answer": "Keep isolation: isolate on the wrapper. It contains the wax layer with its negative z-index."
+      }
+    ],
+    "browserNote": "The wax uses CSS gradients, border radii and shadows. Reduced motion shows the complete seal without an impact or fade.",
+    "reference": {
+      "label": "MDN: text-shadow",
+      "href": "https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow"
+    }
+  },
+  ticket: {
+    "walkthrough": [
+      "Ticket-Punch draws a cyan ticket body with a separate pink stub. Radial gradients cut semicircular notches into the outside edges.",
+      "A dashed seam marks the tear line. The stub pivots from its lower left corner, moves down and right, then disappears while the ticket remains."
+    ],
+    "variation": {
+      "title": "Keep the ticket and stub attached",
+      "description": "Stop the tear animation while the ticket still enters and exits. The perforation and barcode texture remain.",
+      "markup": "<div class=\"fx-ticket fx-ticket-intact\">ADMIT ONE</div>",
+      "css": ".fx-ticket-intact::after { animation: none; }"
+    },
+    "troubleshooting": [
+      {
+        "question": "Why do the notches have square corners?",
+        "answer": "Keep the radial gradient and its transparent center. A solid background behind the gradient fills the notch."
+      },
+      {
+        "question": "How can I widen the stub?",
+        "answer": "Change its width, the body background width and the right padding together. The current stub uses 36px."
+      }
+    ],
+    "browserNote": "The perforations use gradients and a dashed border. Reduced motion retains an intact ticket with a slight static angle.",
+    "reference": {
+      "label": "MDN: transform-origin",
+      "href": "https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin"
+    }
+  },
+  carbon: {
+    "walkthrough": [
+      "Carbon-Copy prints the word onto three overlapping sheets. The original has pale ruled paper, while the lower impressions use cyan and pink surfaces.",
+      "The stack absorbs a short vertical impact. Two delayed rotations then separate the lower sheets around their bottom left corners."
+    ],
+    "variation": {
+      "title": "Make a two-sheet carbon copy",
+      "description": "Hide the lowest sheet. The original and cyan impression keep their impact and separation.",
+      "markup": "<div class=\"fx-carbon fx-carbon-pair\" data-text=\"COPY\">COPY</div>",
+      "css": ".fx-carbon-pair::before { display: none; }"
+    },
+    "troubleshooting": [
+      {
+        "question": "Why do the copies contain the wrong word?",
+        "answer": "Set data-text to the same value as the visible text. Both lower sheets read that attribute."
+      },
+      {
+        "question": "Why are the lower sheets hidden?",
+        "answer": "Keep isolation: isolate and allow space below the wrapper. The fanned sheets extend beyond its layout box."
+      }
+    ],
+    "browserNote": "Pseudo-elements supply the two impressions without extra markup. Reduced motion shows the separated sheets and keeps the original readable.",
+    "reference": {
+      "label": "MDN: transform-origin",
+      "href": "https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin"
+    }
+  },
+  typehammer: {
+    "walkthrough": [
+      "Type-Hammer wraps each character in an indexed metal block. Perspective and a transform origin below the block make each letter swing like a typewriter arm.",
+      "Each arm strikes, rebounds and settles with a 0.12-second delay between letters. A brief expanding ring marks the impact, while a narrow stem suggests the mechanism."
+    ],
+    "variation": {
+      "title": "Strike every letter at once",
+      "description": "Remove the delays from the blocks and impact rings. The whole word now strikes as a single mechanical plate.",
+      "markup": "<div class=\"fx-typehammer fx-typehammer-sync\" role=\"img\" aria-label=\"INK\"><b aria-hidden=\"true\" style=\"--i:0\">I</b><b aria-hidden=\"true\" style=\"--i:1\">N</b><b aria-hidden=\"true\" style=\"--i:2\">K</b></div>",
+      "css": ".fx-typehammer-sync b, .fx-typehammer-sync b::after { animation-delay: 0s; }"
+    },
+    "troubleshooting": [
+      {
+        "question": "Why do the letters move together?",
+        "answer": "Give each b element its own --i value, starting at zero. That index controls the block and impact delays."
+      },
+      {
+        "question": "Why do the blocks look flat?",
+        "answer": "Keep perspective on the parent and rotateX in the keyframes. The transform origin below each block creates the swinging arm."
+      }
+    ],
+    "browserNote": "The mechanism uses CSS perspective and 3D transforms. Reduced motion shows upright metal blocks and hides the impact rings.",
+    "reference": {
+      "label": "MDN: transform-origin",
+      "href": "https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin"
+    }
+  },
+  labelmaker: {
+    "walkthrough": [
+      "Label-Maker uses a ridged colored tape with serrated ends. Opposing text shadows make pale letters appear pressed into raised plastic.",
+      "An expanding clip reveals the tape from left to right. Individual letters appear in discrete steps, with a 0.13-second delay between impressions."
+    ],
+    "variation": {
+      "title": "Use a finished archive label",
+      "description": "Stop the feed and character animations. The embossed lettering, tape ridges and cut edges remain.",
+      "markup": "<div class=\"fx-labelmaker fx-labelmaker-fixed\" role=\"img\" aria-label=\"FILE\"><b aria-hidden=\"true\" style=\"--i:0\">F</b><b aria-hidden=\"true\" style=\"--i:1\">I</b><b aria-hidden=\"true\" style=\"--i:2\">L</b><b aria-hidden=\"true\" style=\"--i:3\">E</b></div>",
+      "css": ".fx-labelmaker-fixed, .fx-labelmaker-fixed b { animation: none; }"
+    },
+    "troubleshooting": [
+      {
+        "question": "Why does the tape disappear between cycles?",
+        "answer": "The feed animation fades the completed label before the next pass. Use the fixed variation for a permanent label."
+      },
+      {
+        "question": "Why do very long labels finish late?",
+        "answer": "Letter delays increase with --i. Reduce the 0.13-second delay or increase the duration for a long line."
+      }
+    ],
+    "browserNote": "The tape uses polygon clips and stepped letter timing. Reduced motion shows the finished label with every character visible.",
+    "reference": {
+      "label": "MDN: clip-path",
+      "href": "https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path"
+    }
+  },
+  inkroller: {
+    "walkthrough": [
+      "Ink-Roller begins with a faint outline. A text duplicate supplies a colored ink face with narrow streaks from a repeating gradient.",
+      "The brayer crosses the word as a matching clip reveals the ink. It then lifts away, leaving the complete impression before the next cycle."
+    ],
+    "variation": {
+      "title": "Use a single ink color",
+      "description": "Set the secondary accent to the primary accent. The roller still reveals the streaked face from left to right.",
+      "markup": "<div class=\"fx-inkroller fx-inkroller-single\" data-text=\"PRINT\">PRINT</div>",
+      "css": ".fx-inkroller-single { --ink-3: var(--ink-2); }"
+    },
+    "troubleshooting": [
+      {
+        "question": "Why is only the outline visible?",
+        "answer": "Keep data-text equal to the visible word. The ink layer reads that attribute and clips its background to the duplicated text."
+      },
+      {
+        "question": "Why is the roller cut off?",
+        "answer": "Allow at least 15px above and below the word. The roller extends beyond the text box before it lifts away."
+      }
+    ],
+    "browserNote": "The print uses a clipped gradient and an animated pseudo-element. Reduced motion hides the roller and displays the complete ink face.",
+    "reference": {
+      "label": "MDN: clip-path",
+      "href": "https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path"
+    }
+  },
   halftone: {
     walkthrough: [
       'Ben-Day combines a solid accent fill with a contrasting outline. A cyan copy sits 4px right and 5px down, like an offset print plate.',

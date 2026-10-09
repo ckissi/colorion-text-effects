@@ -226,6 +226,12 @@ const seo: Record<EffectType, EffectSeo> = {
   stretch: { slug: 'stretch-text-animation', keyword: 'Stretch Text Animation', category: 'motion' },
   candystripe: { slug: 'candy-stripe-text-effect', keyword: 'Candy Stripe Text Effect', category: 'texture' },
   disco: { slug: 'disco-text-effect', keyword: 'Disco Mirrorball Text Effect', category: 'texture' },
+  waxseal: { slug: 'wax-seal-text-effect', keyword: 'Wax Seal Text Effect', category: 'depth' },
+  ticket: { slug: 'ticket-text-animation', keyword: 'Ticket Text Animation', category: 'reveal' },
+  carbon: { slug: 'carbon-copy-text-effect', keyword: 'Carbon Copy Text Effect', category: 'retro' },
+  typehammer: { slug: 'typewriter-hammer-text-animation', keyword: 'Typewriter Hammer Text Animation', category: 'motion' },
+  labelmaker: { slug: 'embossed-label-text-effect', keyword: 'Embossed Label Text Effect', category: 'retro' },
+  inkroller: { slug: 'ink-roller-text-animation', keyword: 'Ink Roller Text Animation', category: 'reveal' },
 };
 
 export const effectSeo = (effect: Effect): EffectSeo => seo[effect.type];
