@@ -535,4 +535,78 @@ export const effectEditorial: Partial<Record<EffectType, Editorial>> = {
     browserNote: 'The transforms and text shadows are established features, but the original colour calculations require color-mix(). Use literal shadow colours as an older-browser fallback. Removing animation retains the extrusion because its shadow stack is a normal element style.',
     reference: { label: 'MDN: color-mix() compatibility', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix' },
   },
+  ribbon: {
+    walkthrough: [
+      'Ribbon-Banner draws the banner with two pseudo-elements. ::before is the band: a vertical pink gradient cut into a swallowtail by a clip-path polygon, with an inset highlight along the top and a darker underside. The word sits on top of that band.',
+      '::after supplies the folded ends. Two triangle gradients sit at the bottom corners and are tucked behind the band with a negative z-index, so only the part beyond each notch stays visible — the fold of the ribbon.',
+      'The whole banner sways about 1.4 degrees over 4.6 seconds while the tails translate one pixel the other way, so the folds stay attached as the ribbon swings.',
+    ],
+    variation: {
+      title: 'Hold the banner still',
+      description: 'Add this override after the original CSS to remove the sway. The notched band, folded tails and gradient all remain.',
+      markup: '<div class="fx-ribbon fx-ribbon-still">SALE</div>',
+      css: `.fx-ribbon-still,
+.fx-ribbon-still::after { animation: none; }`,
+    },
+    troubleshooting: [
+      { question: 'Why do the folded tails vanish behind the page?', answer: 'Keep isolation: isolate on the wrapper. The band and tails use negative z-index values, and isolation contains them so they stay above the page background but behind the word.' },
+      { question: 'How do I change the notch depth?', answer: 'The 18px in the clip-path polygon sets how far each end cuts in. Change it and the horizontal padding together so the word still clears the notches.' },
+    ],
+    browserNote: 'The banner is built from gradients, a clip-path polygon and 2D transforms. Reduced motion stops the sway and leaves a static banner. The folded tails are decorative, so the word stays readable without them.',
+    reference: { label: 'MDN: clip-path', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path' },
+  },
+  lava: {
+    walkthrough: [
+      'Lava-Lamp fills the letters with four radial-gradient blobs painted over a deep-red linear gradient. background-clip: text limits the paint to the glyphs, and color: transparent lets it show through.',
+      'A second copy of the word, ::after, carries three brighter blobs and blends with mix-blend-mode: screen, so the highlights add to the layer beneath instead of covering it. The two layers drift their background-position in opposite directions over nine and 6.5 seconds, which makes the blobs appear to slide and merge.',
+      'The palette is deliberately fixed, so the effect does not read the --ink tokens. Edit the gradient stops directly to recolour the lamp.',
+    ],
+    variation: {
+      title: 'Cool the lamp to blue',
+      description: 'Add this override after the original CSS. Both the base layer and the blended highlight copy are recoloured, so the blobs still merge the same way. It sets background-image only, so the text clipping and drift are preserved.',
+      markup: '<div class="fx-lava fx-lava-cool" data-text="LAVA">LAVA</div>',
+      css: `.fx-lava-cool {
+  background-image:
+    radial-gradient(circle at 24% 80%, #7cf5ff 0 19%, transparent 22%),
+    radial-gradient(circle at 74% 26%, #2b7bff 0 21%, transparent 24%),
+    radial-gradient(circle at 50% 58%, #8a2be2 0 23%, transparent 26%),
+    radial-gradient(circle at 12% 30%, #00e5ff 0 17%, transparent 20%),
+    linear-gradient(180deg, #062a66, #020a1f 96%);
+}
+.fx-lava-cool::after {
+  background-image:
+    radial-gradient(circle at 32% 46%, #e8fdff 0 15%, transparent 18%),
+    radial-gradient(circle at 78% 72%, #37a0ff 0 22%, transparent 25%),
+    radial-gradient(circle at 60% 18%, #b06bff 0 18%, transparent 21%);
+}`,
+    },
+    troubleshooting: [
+      { question: 'Why is the word invisible?', answer: 'Transparent text relies on the clipped background. Keep both the prefixed and unprefixed background-clip: text declarations, and make sure no later rule resets the background.' },
+      { question: 'Why does my --ink colour have no effect?', answer: 'Lava-Lamp uses a fixed warm palette instead of the colour tokens. Override the gradient stops as in the variation rather than setting --ink.' },
+    ],
+    browserNote: 'The lamp uses radial gradients, text clipping and mix-blend-mode: screen. Without text clipping, keep a solid colour fallback. Reduced motion stops both layers on their first frame.',
+    reference: { label: 'MDN: mix-blend-mode', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode' },
+  },
+  chalk: {
+    walkthrough: [
+      'Chalk-Board paints the slate as the element’s own background: a soft radial sheen and faint diagonal streaks over a dark green, framed by inset shadows.',
+      'The word is a ::before copy of the text, filled with a pale gradient and then worn down by two inline-SVG feTurbulence masks. The coarse mask breaks up the edges and the fine mask scatters dust through the strokes; mask-composite: intersect keeps only where both are opaque.',
+      'A clip-path wipe writes the word from left to right, and a blurred ::after dot trails the reveal as a puff of chalk dust.',
+    ],
+    variation: {
+      title: 'Write in blue chalk',
+      description: 'Add this override after the original CSS to tint the chalk layer. The board, the wear masks and the dust puff are unchanged.',
+      markup: '<div class="fx-chalk fx-chalk-blue" data-text="CHALK">CHALK</div>',
+      css: `.fx-chalk-blue::before {
+  color: #cfe8ff;
+  text-shadow: 0 0 3px #cfe8ff8c, 0 0 9px #cfe8ff33;
+}`,
+    },
+    troubleshooting: [
+      { question: 'Why is the word missing?', answer: 'The chalk layer reads data-text, so keep the attribute identical to the visible text. The wrapper’s own text is transparent on purpose — it only reserves the layout.' },
+      { question: 'Why does the chalk look solid instead of dusty?', answer: 'Both feTurbulence masks must survive. Keep the prefixed and unprefixed mask-image lists and mask-composite: intersect. Raising baseFrequency makes the grain finer.' },
+    ],
+    browserNote: 'The wear comes from SVG turbulence used as a CSS mask (no image files) plus a clip-path reveal. Reduced motion shows the finished word with the texture still applied and hides the dust puff.',
+    reference: { label: 'MDN: mask-composite', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/mask-composite' },
+  },
 };

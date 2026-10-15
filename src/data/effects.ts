@@ -112,7 +112,10 @@ export type EffectType =
   | 'carbon'
   | 'typehammer'
   | 'labelmaker'
-  | 'inkroller';
+  | 'inkroller'
+  | 'ribbon'
+  | 'lava'
+  | 'chalk';
 
 export interface Effect {
   index: string;
@@ -242,6 +245,9 @@ export const effects: Effect[] = [
   { index: '112', name: 'Type-Hammer', type: 'typehammer', text: 'STRIKE' },
   { index: '113', name: 'Label-Maker', type: 'labelmaker', text: 'ARCHIVE' },
   { index: '114', name: 'Ink-Roller', type: 'inkroller', text: 'PRINT' },
+  { index: '115', name: 'Ribbon-Banner', type: 'ribbon', text: 'SALE' },
+  { index: '116', name: 'Lava-Lamp', type: 'lava', text: 'LAVA' },
+  { index: '117', name: 'Chalk-Board', type: 'chalk', text: 'CHALK' },
 ];
 
 /** effects whose letters are wrapped in indexed <b> spans for per-letter animation */
@@ -317,4 +323,6 @@ export const usesDataText = new Set<EffectType>([
   'disco',
   'carbon',
   'inkroller',
+  'lava',
+  'chalk',
 ]);

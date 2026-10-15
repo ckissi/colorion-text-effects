@@ -232,6 +232,9 @@ const seo: Record<EffectType, EffectSeo> = {
   typehammer: { slug: 'typewriter-hammer-text-animation', keyword: 'Typewriter Hammer Text Animation', category: 'motion' },
   labelmaker: { slug: 'embossed-label-text-effect', keyword: 'Embossed Label Text Effect', category: 'retro' },
   inkroller: { slug: 'ink-roller-text-animation', keyword: 'Ink Roller Text Animation', category: 'reveal' },
+  ribbon: { slug: 'ribbon-banner-text-effect', keyword: 'Ribbon Banner Text Effect', category: 'depth' },
+  lava: { slug: 'lava-lamp-text-effect', keyword: 'Lava Lamp Text Effect', category: 'gradient' },
+  chalk: { slug: 'chalkboard-text-effect', keyword: 'Chalkboard Text Effect', category: 'texture' },
 };
 
 export const effectSeo = (effect: Effect): EffectSeo => seo[effect.type];

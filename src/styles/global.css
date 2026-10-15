@@ -4574,6 +4574,177 @@ h1 em {
   .fx-inkroller::after { animation: none; display: none; }
 }
 
+/* 115 Ribbon-Banner — a folded banner with notched ends sways behind the word */
+.fx-ribbon {
+  position: relative;
+  isolation: isolate;
+  display: inline-block;
+  padding: .36em 1.35em;
+  font: 800 27px/1.1 Georgia, 'Times New Roman', serif;
+  letter-spacing: .09em;
+  white-space: pre;
+  color: color-mix(in srgb, var(--ink) 28%, #38081f);
+  text-shadow: 0 1px 0 #ffffff5e;
+  animation: fx-ribbon-sway 4.6s ease-in-out infinite;
+}
+.fx-ribbon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--ink-2) 68%, #ffffff) 0%,
+    var(--ink-2) 48%,
+    color-mix(in srgb, var(--ink-2) 58%, #2a0716) 100%
+  );
+  clip-path: polygon(0 0, 100% 0, calc(100% - 18px) 50%, 100% 100%, 0 100%, 18px 50%);
+  box-shadow: inset 0 2px 0 #ffffff66, inset 0 -5px 8px #2a07165e;
+}
+/* the folded tails tuck behind each notched end and hang below the band */
+.fx-ribbon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    linear-gradient(45deg, color-mix(in srgb, var(--ink-2) 32%, #180310) 50%, transparent 50%) left calc(100% - 5px) / 19px 17px no-repeat,
+    linear-gradient(315deg, color-mix(in srgb, var(--ink-2) 32%, #180310) 50%, transparent 50%) right calc(100% - 5px) / 19px 17px no-repeat;
+  animation: fx-ribbon-tail 4.6s ease-in-out infinite;
+}
+@keyframes fx-ribbon-sway {
+  0%, 100% { transform: rotate(-1.4deg) translateY(0); }
+  50% { transform: rotate(1.4deg) translateY(-2px); }
+}
+@keyframes fx-ribbon-tail {
+  0%, 100% { transform: translate(-1px, 0); }
+  50% { transform: translate(1px, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-ribbon { animation: none; }
+  .fx-ribbon::after { animation: none; }
+}
+
+/* 116 Lava-Lamp — molten blobs drift and merge inside the letterforms */
+.fx-lava {
+  position: relative;
+  font: 800 40px/1.1 Arial, 'Helvetica Neue', sans-serif;
+  letter-spacing: .02em;
+  white-space: pre;
+  color: transparent;
+  background:
+    radial-gradient(circle at 24% 80%, #ffd000 0 19%, transparent 22%),
+    radial-gradient(circle at 74% 26%, #ff7a00 0 21%, transparent 24%),
+    radial-gradient(circle at 50% 58%, #ff0066 0 23%, transparent 26%),
+    radial-gradient(circle at 12% 30%, #ff2d00 0 17%, transparent 20%),
+    linear-gradient(180deg, #b00028, #4d0016 96%);
+  background-size: 150% 190%;
+  background-position: 0% 0%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 18px #ff4d1a55) drop-shadow(0 0 6px #ffb70355);
+  animation: fx-lava-drift 9s ease-in-out infinite;
+}
+.fx-lava::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: transparent;
+  background:
+    radial-gradient(circle at 32% 46%, #fff2a8 0 15%, transparent 18%),
+    radial-gradient(circle at 78% 72%, #ff7b00 0 22%, transparent 25%),
+    radial-gradient(circle at 60% 18%, #ff2d6f 0 18%, transparent 21%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  mix-blend-mode: screen;
+  animation: fx-lava-blobs 6.5s ease-in-out infinite;
+}
+@keyframes fx-lava-drift {
+  0%, 100% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+}
+@keyframes fx-lava-blobs {
+  0%, 100% { background-position: 100% 0%; }
+  50% { background-position: 0% 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-lava { animation: none; }
+  .fx-lava::after { animation: none; }
+}
+
+/* 117 Chalk-Board — chalk dust writes the word onto a slate board */
+.fx-chalk {
+  position: relative;
+  isolation: isolate;
+  display: inline-block;
+  padding: .36em .78em;
+  font: 700 34px/1.15 Arial, 'Helvetica Neue', sans-serif;
+  letter-spacing: .03em;
+  white-space: pre;
+  color: transparent;
+  border-radius: 12px;
+  background:
+    radial-gradient(ellipse at 30% 16%, #ffffff10, transparent 55%),
+    repeating-linear-gradient(114deg, #ffffff05 0 3px, transparent 3px 9px),
+    #24322b;
+  box-shadow:
+    inset 0 0 0 4px #0f1814,
+    inset 0 0 34px #000000b3,
+    0 8px 18px #08070f88;
+}
+.fx-chalk::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: inherit;
+  color: #f6fdf9;
+  text-shadow: 0 0 3px #ffffff8c, 0 0 9px #ffffff33;
+  -webkit-mask-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='100'%3E%3Cfilter id='c' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3' seed='11'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -5 0 0 0 3.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23c)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='d' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -8 0 0 0 6.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23d)'/%3E%3C/svg%3E");
+  -webkit-mask-composite: source-in;
+  mask-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='100'%3E%3Cfilter id='c' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3' seed='11'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -5 0 0 0 3.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23c)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='d' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -8 0 0 0 6.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23d)'/%3E%3C/svg%3E");
+  mask-composite: intersect;
+  clip-path: inset(0 100% 0 0);
+  animation: fx-chalk-write 5.4s ease-in-out infinite;
+}
+.fx-chalk::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 6%;
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff5c, #ffffff12 55%, transparent 72%);
+  opacity: 0;
+  pointer-events: none;
+  animation: fx-chalk-dust 5.4s ease-in-out infinite;
+}
+@keyframes fx-chalk-write {
+  0%, 8% { clip-path: inset(0 100% 0 0); }
+  52%, 86% { clip-path: inset(0 0 0 0); }
+  97%, 100% { clip-path: inset(0 0 0 0); opacity: 0; }
+}
+@keyframes fx-chalk-dust {
+  0%, 5% { left: 4%; opacity: 0; }
+  12% { opacity: .85; }
+  50% { left: 96%; opacity: .55; }
+  58%, 100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-chalk::before { animation: none; clip-path: none; opacity: 1; }
+  .fx-chalk::after { animation: none; opacity: 0; }
+}
+
 /* ---------- Lazy loading ---------- */
 /* skip rendering work for far-offscreen cells */
 .cell {
