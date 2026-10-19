@@ -283,7 +283,7 @@ const schema = [
   const pageLink = document.getElementById('modal-page') as HTMLAnchorElement;
 
   // Plausible custom events (no-op if the script is blocked). Register the
-  // "Copy" and "Open effect page" goals in Plausible to see them.
+  // "Copy CSS", "Copy Prompt" and "Open effect page" goals in Plausible to see them.
   const track = (event: string, props: Record<string, string>) =>
     (window as { plausible?: (e: string, o: object) => void }).plausible?.(event, { props });
 
@@ -356,7 +356,7 @@ const schema = [
       document.execCommand('copy');
       ta.remove();
     }
-    track('Copy', { effect: modalTitle.textContent || '', mode: currentMode, from: 'modal' });
+    track(currentMode === 'css' ? 'Copy CSS' : 'Copy Prompt', { effect: modalTitle.textContent || '', from: 'modal' });
     copyBtn.textContent = 'Copied ✓';
     copyBtn.classList.add('copied');
     window.clearTimeout(copyReset);

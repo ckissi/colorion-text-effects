@@ -330,8 +330,8 @@ if (guide.techniques.some((t) => t.id === 'property'))
         document.execCommand('copy');
         ta.remove();
       }
-      (window as { plausible?: (e: string, o: object) => void }).plausible?.('Copy', {
-        props: { effect: document.title, mode: btn.dataset.copy ?? '', from: 'page' },
+      (window as { plausible?: (e: string, o: object) => void }).plausible?.(btn.dataset.copy === 'prompt' ? 'Copy Prompt' : 'Copy CSS', {
+        props: { effect: document.title, from: 'page' },
       });
       btn.textContent = 'Copied ✓';
       btn.classList.add('copied');

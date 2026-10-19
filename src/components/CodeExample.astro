@@ -44,6 +44,9 @@ const copyable = `${markup}\n\n<style>\n${baseCss ? `${baseCss}\n\n` : ''}${css}
           return;
         }
       }
+      (window as { plausible?: (e: string, o: object) => void }).plausible?.('Copy Example', {
+        props: { page: location.pathname },
+      });
       button.textContent = 'Copied ✓';
       button.classList.add('copied');
       window.clearTimeout(reset);

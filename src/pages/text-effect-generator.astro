@@ -280,8 +280,8 @@ const schema = [
       document.execCommand('copy');
       ta.remove();
     }
-    (window as { plausible?: (e: string, o: object) => void }).plausible?.('Copy', {
-      props: { effect: cell.dataset.name || '', mode, from: 'generator' },
+    (window as { plausible?: (e: string, o: object) => void }).plausible?.(mode === 'css' ? 'Copy CSS' : 'Copy Prompt', {
+      props: { effect: cell.dataset.name || '', from: 'generator' },
     });
     const label = btn.innerHTML;
     btn.textContent = 'Copied ✓';
