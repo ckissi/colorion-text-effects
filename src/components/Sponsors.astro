@@ -1,0 +1,41 @@
+---
+// Sponsors are configured in src/data/sponsors.json and their logos live in
+// public/sponsors/. The rail is rendered site-wide by Layout.astro.
+import { sponsors } from '../utils/sponsors';
+---
+
+{
+  sponsors.length > 0 && (
+    <aside class="sponsor-rail" aria-label="Sponsors">
+      <p class="sponsor-rail-label mono">Sponsored</p>
+      {sponsors.map((sponsor) => (
+        <a
+          class="sponsor-card"
+          href={sponsor.url}
+          target="_blank"
+          rel="noopener sponsored"
+          referrerpolicy="no-referrer-when-downgrade"
+          data-theme={sponsor.theme}
+        >
+          {sponsor.logo ? (
+            <img
+              class="sponsor-logo"
+              src={sponsor.logo}
+              alt=""
+              width="32"
+              height="32"
+              loading="lazy"
+              decoding="async"
+            />
+          ) : (
+            <span class="sponsor-logo sponsor-monogram" aria-hidden="true">
+              {sponsor.name.charAt(0)}
+            </span>
+          )}
+          <strong class="sponsor-name">{sponsor.name}</strong>
+          {sponsor.description && <span class="sponsor-desc">{sponsor.description}</span>}
+        </a>
+      ))}
+    </aside>
+  )
+}

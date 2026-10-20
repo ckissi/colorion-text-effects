@@ -235,6 +235,12 @@ const seo: Record<EffectType, EffectSeo> = {
   ribbon: { slug: 'ribbon-banner-text-effect', keyword: 'Ribbon Banner Text Effect', category: 'depth' },
   lava: { slug: 'lava-lamp-text-effect', keyword: 'Lava Lamp Text Effect', category: 'gradient' },
   chalk: { slug: 'chalkboard-text-effect', keyword: 'Chalkboard Text Effect', category: 'texture' },
+  synthwave: { slug: 'synthwave-text-effect', keyword: 'Synthwave Text Effect', category: 'retro' },
+  gradientframe: { slug: 'gradient-border-text-animation', keyword: 'Gradient Border Text Animation', category: 'gradient' },
+  textpath: { slug: 'text-on-path-animation', keyword: 'Text on Path Animation', category: 'motion' },
+  aura: { slug: 'grainy-gradient-text-effect', keyword: 'Grainy Gradient Text Effect', category: 'gradient' },
+  curtain: { slug: 'masked-text-reveal-animation', keyword: 'Masked Text Reveal Animation', category: 'reveal' },
+  annotate: { slug: 'hand-drawn-text-annotation', keyword: 'Hand-Drawn Text Annotation', category: 'reveal' },
 };
 
 export const effectSeo = (effect: Effect): EffectSeo => seo[effect.type];

@@ -1,6 +1,8 @@
 ---
 import { effects, type EffectType } from '../data/effects';
 import { pageCss } from '../utils/pageCss';
+import { hasSponsors } from '../utils/sponsors';
+import Sponsors from '../components/Sponsors.astro';
 
 interface Props {
   title?: string;
@@ -101,7 +103,8 @@ const jsonLd = {
       plausible.init()
     </script>
   </head>
-  <body>
+  <body class:list={[{ 'has-sponsors': hasSponsors }]}>
     <slot />
+    <Sponsors />
   </body>
 </html>

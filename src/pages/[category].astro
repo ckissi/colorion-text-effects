@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import EffectCard from '../components/EffectCard.astro';
 import CategoryNav from '../components/CategoryNav.astro';
 import Sidebar from '../components/Sidebar.astro';
+import SponsorMarquee from '../components/SponsorMarquee.astro';
 import CodeExample from '../components/CodeExample.astro';
 import { effects, perLetter, usesDataText } from '../data/effects';
 import { categoryGuides } from '../data/categoryGuides';
@@ -85,6 +86,7 @@ const schema = [
         <span class="pulse-dot"></span>
         {n} effects
       </div>
+      <SponsorMarquee />
     </header>
 
     <section class="hero effect-hero">

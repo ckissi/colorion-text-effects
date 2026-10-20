@@ -4,6 +4,7 @@ import Effect from '../../components/Effect.astro';
 import EffectCard from '../../components/EffectCard.astro';
 import CodeExample from '../../components/CodeExample.astro';
 import Sidebar from '../../components/Sidebar.astro';
+import SponsorMarquee from '../../components/SponsorMarquee.astro';
 import { effects, perLetter, usesDataText, type Effect as EffectData } from '../../data/effects';
 import { categories, categoryLabels, categoryPath, effectPath, effectSeo } from '../../data/seo';
 import { effectBlurbs, effectCss, effectMarkup, prompts, snippets } from '../../utils/effectCss';
@@ -96,6 +97,12 @@ if (usesDataText.has(effect.type))
 if (effect.type === 'typewriter')
   textNotes.push('Set width to the number of characters in ch units and match the steps() count, so the caret stops exactly at the last letter.');
 if (effect.type === 'contour') textNotes.push('Widen the SVG viewBox for longer words so the outline is not cropped.');
+if (effect.type === 'annotate')
+  textNotes.push('The SVG stretches to the wrapper’s width; keep the horizontal padding if the ring should clear a longer word.');
+if (effect.type === 'textpath')
+  textNotes.push(
+    'The wrapper carries --n (the number of letters) and each letter carries --i (its index). Change --n when you change the letter count, and edit the path() coordinates to reshape the curve.'
+  );
 if (effect.type === 'decoder') textNotes.push('The word lives in the @keyframes content values — edit the final frames to spell your own text.');
 if (effect.type === 'ticker')
   textNotes.push('Repeat your phrase the same number of times as the original so the loop stays seamless.');
@@ -124,6 +131,7 @@ if (guide.techniques.some((t) => t.id === 'property'))
         <span class="pulse-dot"></span>
         #{effect.index} of {effects.length}
       </div>
+      <SponsorMarquee />
     </header>
 
     <main class="effect-page" data-slug={effectSeo(effect).slug}>

@@ -78,7 +78,7 @@ const TECHNIQUES: Technique[] = [
     id: 'svg-dash',
     label: 'SVG stroke-dashoffset',
     detail:
-      'The word is SVG <text> with a dashed stroke. Animating stroke-dashoffset moves the dashes along the outline so the letters appear to trace themselves.',
+      'SVG paths or <text> carry a dashed stroke; animating stroke-dashoffset slides the dash along the outline, so the stroke appears to draw itself.',
     test: has(/stroke-dash/),
   },
   {
@@ -139,6 +139,13 @@ const TECHNIQUES: Technique[] = [
     label: 'Animated content',
     detail: 'Keyframes swap the pseudo-element’s content string frame by frame, cycling through characters with no JavaScript.',
     test: has(/%\s*\{\s*content\s*:/),
+  },
+  {
+    id: 'offset-path',
+    label: 'offset-path',
+    detail:
+      'offset-path places each element along an SVG path drawn with path(). offset-distance positions it on the curve and offset-rotate: auto turns it to follow the path tangent.',
+    test: has(/offset-path/),
   },
   {
     id: 'transform',

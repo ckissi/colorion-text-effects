@@ -1,0 +1,12 @@
+{
+  "sponsors": [
+    {
+      "name": "Sevalla",
+      "description": "apps deploy without managing infrastructure.",
+      "url": "https://sevalla.com?ref=text-effects.colorion.co",
+      "logo": "/sponsors/sevalla.svg",
+      "theme": "pink",
+      "active": true
+    }
+  ]
+}

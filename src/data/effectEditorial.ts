@@ -1,4 +1,5 @@
 import type { EffectType } from './effects';
+import { annotateMarkup } from './annotate';
 
 interface Editorial {
   walkthrough: string[];
@@ -608,5 +609,125 @@ export const effectEditorial: Partial<Record<EffectType, Editorial>> = {
     ],
     browserNote: 'The wear comes from SVG turbulence used as a CSS mask (no image files) plus a clip-path reveal. Reduced motion shows the finished word with the texture still applied and hides the dust puff.',
     reference: { label: 'MDN: mask-composite', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/mask-composite' },
+  },
+  synthwave: {
+    walkthrough: [
+      'Synth-Sunset paints the word with a vertical sunset gradient — gold at the top, hot pink through the middle and deep violet at the base — clipped to the letterforms with background-clip: text.',
+      'A ::before overlay of repeating 1px lines adds the CRT scanlines and blends with multiply so the letters stay visible underneath.',
+      'A ::after layer draws the perspective grid: two repeating linear gradients form the floor lines, a perspective() rotateX() lays it flat and a mask fades the far edge out. It scrolls towards the viewer while the sunset gradient drifts behind the letters.',
+    ],
+    variation: {
+      title: 'Freeze the grid',
+      description: 'Stop both animations to hold the grid in place while keeping the sunset gradient and the scanlines.',
+      markup: '<div class="fx-synthwave fx-synthwave-still">SYNTH</div>',
+      css: `.fx-synthwave-still,
+.fx-synthwave-still::after { animation: none; }`,
+    },
+    troubleshooting: [
+      { question: 'Why is the word invisible?', answer: 'The text colour is transparent on purpose — the gradient is painted through background-clip: text. Keep background-clip on the same element as the gradient, or the letters vanish.' },
+      { question: 'Why does the grid overlap the letters?', answer: 'The grid sits below the word by default. Lower its z-index or increase the bottom offset of the wrapper to give it more room.' },
+    ],
+    browserNote: 'Uses only gradients, clip paths and 3D transforms. Reduced motion stops the drifting gradient and the scrolling grid.',
+    reference: { label: 'MDN: background-clip', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip' },
+  },
+  gradientframe: {
+    walkthrough: [
+      'Gradient-Frame keeps the word itself solid and draws the animated border on a ::before layer that covers the whole box.',
+      'The border is a conic gradient rendered as a padding-box mask: an opaque inner layer and a transparent outer one, combined with mask-composite: exclude so only the 3px ring survives.',
+      'A registered @property custom property animates the conic gradient’s start angle, so the colours rotate smoothly. A blurred ::after copy of the same gradient adds a soft outer glow.',
+    ],
+    variation: {
+      title: 'Thicker frame',
+      description: 'Increase the padding on the ::before layer to widen the ring, and raise the border radius to keep the corners soft.',
+      markup: '<div class="fx-gradientframe fx-gradientframe-thick">FRAME</div>',
+      css: `.fx-gradientframe-thick::before { padding: 6px; }
+.fx-gradientframe-thick::after { inset: -16px; }`,
+    },
+    troubleshooting: [
+      { question: 'Why is the whole box filled with colour?', answer: 'The mask needs both layers plus mask-composite: exclude. Dropping the composite leaves the solid fill instead of a ring.' },
+      { question: 'Why does the rotation jump?', answer: 'The angle must be animatable. Keep the @property --gf-angle registration and animate the custom property rather than the background directly.' },
+    ],
+    browserNote: 'Requires @property for the animated angle, supported in all current evergreen browsers. Older engines show a static conic gradient border.',
+    reference: { label: 'MDN: @property', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/@property' },
+  },
+  textpath: {
+    walkthrough: [
+      'Path-Ride splits the word into letter spans, each carrying its own --i index and a precomputed --d slot (its percentage along the path).',
+      'Every letter is positioned with offset-path: path() along the same invisible curve, and offset-rotate: auto turns each glyph to follow the tangent of the path.',
+      'A registered --ride custom property animates from 0% to 40%, so the whole word slides forward and back along the curve while the letters keep their order. A soft ::after glow pulses behind each glyph.',
+    ],
+    variation: {
+      title: 'Straighten the curve',
+      description: 'Replace the path with a straight line to let the letters run horizontally while keeping the motion.',
+      markup: '<div class="fx-textpath fx-textpath-straight">RIDE</div>',
+      css: `.fx-textpath-straight b { offset-path: path('M 20 65 L 280 65'); }`,
+    },
+    troubleshooting: [
+      { question: 'Why are the letters stacked in one spot?', answer: 'Each letter needs its own --d slot percentage — that is what spreads the letters along the path. Without it every glyph sits at the start of the curve.' },
+      { question: 'Why are the letters upside down on the curve?', answer: 'The path curves in the opposite direction. Reverse the path coordinates, or set offset-rotate: 0deg to keep the glyphs upright.' },
+    ],
+    browserNote: 'Uses offset-path with the path() function, supported in current Chrome, Safari and Firefox. Reduced motion leaves the letters distributed along the curve with no movement.',
+    reference: { label: 'MDN: offset-path', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/offset-path' },
+  },
+  aura: {
+    walkthrough: [
+      'Aura layers three radial gradients and a long linear gradient behind the word, then clips all four to the glyphs with background-clip: text and makes the text transparent. The result is a single soft colour field rather than a flat fill.',
+      'Two drop-shadow filters on the element add the bloom: a tight magenta halo and a wider cyan one. Because the shadows are drawn from the clipped gradient, they follow the letter shapes instead of the box.',
+      'A ::before copy of the word carries a grayscale feTurbulence pattern from an inline SVG, clipped to the same glyphs and blended with overlay, which supplies the film grain. A ::after radial highlight uses screen blending for the slow specular wash. The base gradients drift their background-position over eight seconds while the grain jumps between positions with steps(1).',
+    ],
+    variation: {
+      title: 'Make the aura matte',
+      description: 'Remove the bloom and the specular wash, keeping the grainy gradient. This version sits more quietly on a light surface where a large glow would wash out.',
+      markup: '<div class="fx-aura fx-aura-matte" data-text="AURA">AURA</div>',
+      css: `.fx-aura-matte { filter: none; }
+.fx-aura-matte::after { display: none; }`,
+    },
+    troubleshooting: [
+      { question: 'Why is the word invisible?', answer: 'The fill is a background clipped to the text, and the text colour is transparent on purpose. Keep both background-clip declarations and the data-text attribute; the pseudo-element layers copy the word from that attribute.' },
+      { question: 'Why does the grain disappear?', answer: 'The grain is an inline SVG turbulence image clipped to the glyphs and blended with overlay. Keep background-clip: text and mix-blend-mode: overlay on the ::before layer, and check that no later background rule replaces the image.' },
+      { question: 'Why does the colour look flat in Firefox?', answer: 'The grain and sheen rely on overlay and screen blending, which can render differently between engines. Lower the opacity of the ::before and ::after layers if the texture becomes too strong.' },
+    ],
+    browserNote: 'Uses gradients, background-clip: text, drop-shadow filters and mix-blend-mode with an inline SVG noise texture. Reduced motion stops the drift, the sheen and the grain flicker on the first frame.',
+    reference: { label: 'MDN: background-clip', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip' },
+  },
+  curtain: {
+    walkthrough: [
+      'Curtain-Call wraps every character in its own <b> with an inline --i index. The parent is an inline-flex box with overflow: hidden, so its padding box becomes the hard mask edge.',
+      'Each letter starts 115% below that edge, rises to its natural position, holds, then continues upward and out. The rise and exit are both 2D transforms, so the letters move without changing the surrounding layout.',
+      'The stagger comes from animation-delay: calc(var(--i) * .07s), which offsets the same keyframes for every letter. A short blur at the start and end of the cycle adds a little motion blur, and the fill is a top-to-bottom gradient clipped to each glyph. The gradient keeps color: var(--ink) and uses -webkit-text-fill-color: transparent, so the --ink token still resolves inside the gradient.',
+    ],
+    variation: {
+      title: 'Reveal the whole word at once',
+      description: 'Remove the per-letter delay so every character rises on the same frame. The mask, the gradient and the exit are unchanged.',
+      markup: '<div class="fx-curtain fx-curtain-sync" role="img" aria-label="REVEAL"><b aria-hidden="true" style="--i:0">R</b><b aria-hidden="true" style="--i:1">E</b><b aria-hidden="true" style="--i:2">V</b><b aria-hidden="true" style="--i:3">E</b><b aria-hidden="true" style="--i:4">A</b><b aria-hidden="true" style="--i:5">L</b></div>',
+      css: `.fx-curtain-sync b { animation-delay: 0s; }`,
+    },
+    troubleshooting: [
+      { question: 'Why are the tops or bottoms of the letters cut off?', answer: 'The parent clips at its padding box. Keep line-height at 1.2 or higher and leave vertical padding on the wrapper; a tighter line-height clips the glyphs even while they are holding still.' },
+      { question: 'Why is the word invisible?', answer: 'The letters use -webkit-text-fill-color: transparent with a gradient clipped to the glyphs. Keep both background-clip declarations, and keep color: var(--ink) so the gradient can resolve the colour token.' },
+      { question: 'Why do the letters start already visible?', answer: 'The mask comes from overflow: hidden on the wrapper. Removing it, or giving the wrapper overflow: visible, leaves the letters travelling in open space instead of rising from behind an edge.' },
+    ],
+    browserNote: 'Uses 2D transforms, overflow clipping and background-clip: text. Reduced motion removes the animation and leaves the full word in place with its gradient.',
+    reference: { label: 'MDN: overflow', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/overflow' },
+  },
+  annotate: {
+    walkthrough: [
+      'Margin-Note keeps the word as ordinary HTML text and overlays an absolutely positioned SVG on the same box. The SVG uses preserveAspectRatio="none", so it stretches to the word’s width and the strokes stay outside the glyphs.',
+      'The ring and the underline are separate paths. Both carry pathLength="100", which normalises their length so one dash array of 100 covers the whole stroke; animating stroke-dashoffset from 100 to 0 draws them on.',
+      'The ring draws first and the underline follows with its own keyframes. vector-effect: non-scaling-stroke keeps the pen weight constant however wide the word becomes, and the whole SVG is rotated slightly so the mark looks drawn by hand. Both strokes fade out before the loop restarts.',
+    ],
+    variation: {
+      title: 'Keep only the underline',
+      description: 'Hide the ring path and leave the wavy underline. The draw order and timing of the remaining stroke are unchanged.',
+      markup: annotateMarkup('IDEA').replace('class="fx-annotate"', 'class="fx-annotate fx-annotate-underline"'),
+      css: `.fx-annotate-underline .fx-annotate-ring { display: none; }`,
+    },
+    troubleshooting: [
+      { question: 'Why does the stroke not draw?', answer: 'The animation depends on pathLength="100" and a matching stroke-dasharray and stroke-dashoffset of 100. Remove pathLength and the dash length no longer matches the real path, so the stroke appears partly drawn or not at all.' },
+      { question: 'Why is the circle stretched into a wide oval?', answer: 'preserveAspectRatio="none" stretches the SVG to the word’s box on purpose, so the mark adapts to any word. For a circular ring, switch to xMidYMid meet and give the SVG a fixed width.' },
+      { question: 'Why does the mark sit on top of the letters?', answer: 'The wrapper’s padding controls the gap between the word and the strokes. Increase the horizontal and vertical padding to push the ring outward.' },
+    ],
+    browserNote: 'Uses inline SVG, stroke-dashoffset and non-scaling strokes. Reduced motion shows the finished annotation with both strokes fully drawn.',
+    reference: { label: 'MDN: stroke-dashoffset', href: 'https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dashoffset' },
   },
 };

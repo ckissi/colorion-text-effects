@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import EffectCard from '../components/EffectCard.astro';
 import CategoryNav from '../components/CategoryNav.astro';
 import Sidebar from '../components/Sidebar.astro';
+import SponsorMarquee from '../components/SponsorMarquee.astro';
 import { effects } from '../data/effects';
 import { categories, categoryOrder, categoryPath, effectPath, effectSeo } from '../data/seo';
 
@@ -86,6 +87,7 @@ const schema = [
         <span class="pulse-dot"></span>
         {effects.length} effects · MIT
       </div>
+      <SponsorMarquee />
     </header>
 
     <section class="hero">

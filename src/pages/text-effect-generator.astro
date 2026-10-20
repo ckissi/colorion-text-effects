@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import EffectCard from '../components/EffectCard.astro';
 import Sidebar from '../components/Sidebar.astro';
+import SponsorMarquee from '../components/SponsorMarquee.astro';
 import { effects, perLetter, usesDataText } from '../data/effects';
 import { categories, categoryOrder, categoryPath } from '../data/seo';
 
@@ -56,6 +57,7 @@ const schema = [
         <span class="pulse-dot"></span>
         {n} effects · MIT
       </div>
+      <SponsorMarquee />
     </header>
 
     <section class="hero">
@@ -132,6 +134,8 @@ const schema = [
 </Layout>
 
 <script>
+  import { annotateMarkup } from '../data/annotate';
+
   type Meta = Record<string, { text: string; letters: boolean; dataText: boolean }>;
   type EffectData = { snippets: Record<string, string>; prompts: Record<string, string> };
 
@@ -163,6 +167,15 @@ const schema = [
       return `<svg class="fx-contour" viewBox="0 0 ${width} 56" role="img" aria-label="${t}"><text x="50%" y="50%" dominant-baseline="central" text-anchor="middle">${t}</text></svg>`;
     }
     if (type === 'decoder') return `<div class="fx-decoder" role="img" aria-label="${t}"></div>`;
+    if (type === 'annotate') return annotateMarkup(t);
+    if (type === 'textpath') {
+      const chars = [...text.replace(/ /g, '\u00a0')];
+      const slots = chars.length > 1 ? 60 / (chars.length - 1) : 0;
+      const spans = chars
+        .map((ch, i) => `<b aria-hidden="true" style="--i:${i};--d:${(i * slots).toFixed(2)}%">${esc(ch)}</b>`)
+        .join('');
+      return `<div class="fx-textpath" role="img" aria-label="${t}">${spans}</div>`;
+    }
     if (m.letters) {
       // per-letter spans collapse ordinary spaces, so keep them as no-break spaces
       const spans = [...text.replace(/ /g, ' ')]

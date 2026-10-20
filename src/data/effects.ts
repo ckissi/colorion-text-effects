@@ -115,7 +115,13 @@ export type EffectType =
   | 'inkroller'
   | 'ribbon'
   | 'lava'
-  | 'chalk';
+  | 'chalk'
+  | 'synthwave'
+  | 'gradientframe'
+  | 'textpath'
+  | 'aura'
+  | 'curtain'
+  | 'annotate';
 
 export interface Effect {
   index: string;
@@ -248,10 +254,17 @@ export const effects: Effect[] = [
   { index: '115', name: 'Ribbon-Banner', type: 'ribbon', text: 'SALE' },
   { index: '116', name: 'Lava-Lamp', type: 'lava', text: 'LAVA' },
   { index: '117', name: 'Chalk-Board', type: 'chalk', text: 'CHALK' },
+  { index: '118', name: 'Synth-Sunset', type: 'synthwave', text: 'SYNTH' },
+  { index: '119', name: 'Gradient-Frame', type: 'gradientframe', text: 'FRAME' },
+  { index: '120', name: 'Path-Ride', type: 'textpath', text: 'RIDE' },
+  { index: '121', name: 'Aura', type: 'aura', text: 'AURA' },
+  { index: '122', name: 'Curtain-Call', type: 'curtain', text: 'REVEAL' },
+  { index: '123', name: 'Margin-Note', type: 'annotate', text: 'IDEA' },
 ];
 
 /** effects whose letters are wrapped in indexed <b> spans for per-letter animation */
 export const perLetter = new Set<EffectType>([
+  'textpath',
   'focus',
   'wave',
   'spectrum',
@@ -288,6 +301,7 @@ export const perLetter = new Set<EffectType>([
   'stretch',
   'typehammer',
   'labelmaker',
+  'curtain',
 ]);
 
 /** effects that duplicate their text into pseudo-elements via data-text */
@@ -325,4 +339,5 @@ export const usesDataText = new Set<EffectType>([
   'inkroller',
   'lava',
   'chalk',
+  'aura',
 ]);

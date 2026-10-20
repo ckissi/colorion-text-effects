@@ -1,4 +1,5 @@
 import { effects, perLetter, usesDataText, type Effect } from '../data/effects';
+import { annotateMarkup } from '../data/annotate';
 // Import as raw text so Vite tracks global.css and re-runs this module on edit
 // (fs.readFileSync alone does not create a dependency, so snippets went stale in dev).
 import css from '../styles/global.css?raw';
@@ -91,8 +92,19 @@ export function effectMarkup(effect: Effect): string {
   if (type === 'contour') {
     return `<svg class="fx-contour" viewBox="0 0 260 56" role="img" aria-label="${text}"><text x="50%" y="50%" dominant-baseline="central" text-anchor="middle">${text}</text></svg>`;
   }
+  if (type === 'annotate') {
+    return annotateMarkup(text);
+  }
   if (type === 'decoder') {
     return `<div class="fx-decoder" role="img" aria-label="${text}"></div>`;
+  }
+  if (type === 'textpath') {
+    const letters = text.split('');
+    const slots = letters.length > 1 ? 60 / (letters.length - 1) : 0;
+    const spans = letters
+      .map((ch, i) => `<b aria-hidden="true" style="--i:${i};--d:${(i * slots).toFixed(2)}%">${ch}</b>`)
+      .join('');
+    return `<div class="fx-textpath" role="img" aria-label="${text}">${spans}</div>`;
   }
   if (perLetter.has(type)) {
     const spans = text

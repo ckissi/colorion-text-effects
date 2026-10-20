@@ -1,5 +1,6 @@
 ---
 import { perLetter, usesDataText, type EffectType } from '../data/effects';
+import { annotateLine, annotateRing } from '../data/annotate';
 
 interface Props {
   type: EffectType;
@@ -8,14 +9,23 @@ interface Props {
 
 const { type, text } = Astro.props;
 const letters = text.split('');
+// Path-Ride spaces its letters across the path; the slot for each letter is
+// precomputed here so the CSS never has to divide by a variable.
+const slots = letters.length > 1 ? 60 / (letters.length - 1) : 0;
 ---
 
 {type === 'contour' ? (
   <svg class="fx-contour" viewBox="0 0 260 56" role="img" aria-label={text}>
     <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle">{text}</text>
   </svg>
+) : type === 'annotate' ? (
+  <div class="fx-annotate" role="img" aria-label={text}>{text}<svg viewBox="0 0 200 100" preserveAspectRatio="none" aria-hidden="true"><path class="fx-annotate-ring" pathLength="100" d={annotateRing} /><path class="fx-annotate-line" pathLength="100" d={annotateLine} /></svg></div>
 ) : type === 'decoder' ? (
   <div class="fx-decoder" role="img" aria-label={text}></div>
+) : type === 'textpath' ? (
+  <div class="fx-textpath" role="img" aria-label={text}>
+    {letters.map((ch, i) => <b aria-hidden="true" style={`--i:${i};--d:${(i * slots).toFixed(2)}%`}>{ch}</b>)}
+  </div>
 ) : perLetter.has(type) ? (
   <div class={`fx-${type}`} role="img" aria-label={text}>
     {letters.map((ch, i) => <b aria-hidden="true" style={`--i:${i}`}>{ch}</b>)}

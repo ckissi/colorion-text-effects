@@ -1,0 +1,63 @@
+---
+// Mobile-only horizontal sponsor strip. It is rendered inside the site header
+// (which is otherwise empty on small screens) and is hidden on desktop, where
+// the fixed right-hand rail takes over.
+import { sponsors } from '../utils/sponsors';
+
+// A single sponsor (or a very short list) would leave a gap in the loop, so
+// repeat the list enough times to fill the widest mobile header. The track
+// then shifts by exactly one group width.
+const copies = sponsors.length ? Math.max(2, Math.ceil(12 / sponsors.length)) : 2;
+const shift = `-${100 / copies}%`;
+const duration = Math.max(14, sponsors.length * 8);
+---
+
+{
+  sponsors.length > 0 && (
+    <div class="sponsor-marquee" role="region" aria-label="Sponsors">
+      <div
+        class="sponsor-marquee-track"
+        style={`--marquee-shift: ${shift}; --marquee-duration: ${duration}s`}
+      >
+        {Array.from({ length: copies }, (_, copy) => (
+          <div
+            class="sponsor-marquee-group"
+            aria-hidden={copy === 0 ? undefined : 'true'}
+          >
+            {sponsors.map((sponsor) => (
+              <a
+                class="sponsor-marquee-item"
+                href={sponsor.url}
+                target="_blank"
+                rel="noopener sponsored"
+                referrerpolicy="no-referrer-when-downgrade"
+                data-theme={sponsor.theme}
+                tabindex={copy === 0 ? undefined : -1}
+              >
+                {sponsor.logo ? (
+                  <img
+                    class="sponsor-marquee-logo"
+                    src={sponsor.logo}
+                    alt=""
+                    width="20"
+                    height="20"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <span class="sponsor-marquee-monogram" aria-hidden="true">
+                    {sponsor.name.charAt(0)}
+                  </span>
+                )}
+                <span class="sponsor-marquee-text">
+                  <strong>{sponsor.name}</strong>
+                  {sponsor.description && <span>{sponsor.description}</span>}
+                </span>
+              </a>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}

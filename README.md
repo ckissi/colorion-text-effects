@@ -1,6 +1,6 @@
 # CSS Text Effects
 
-A library of 117 animated text effects built with pure CSS — aurora gradients,
+A library of 123 animated text effects built with pure CSS — aurora gradients,
 glitches, split-flap boards, liquid fills, CRT phosphor terminals and other
 lesser-seen tricks. No JavaScript, no dependencies, MIT licensed.
 
@@ -24,6 +24,26 @@ Live at https://texteffects.colorion.co — part of the
 Every effect paints with three colour tokens so a copied snippet can be
 re-skinned by overriding them: `--ink` (main text colour), `--ink-2` and
 `--ink-3` (accents). All animations respect `prefers-reduced-motion`.
+
+## Sponsors
+
+Sponsors are configured in one file, `src/data/sponsors.json`. Each entry
+supports:
+
+| Field         | Required | Notes                                                   |
+| :------------ | :------- | :------------------------------------------------------ |
+| `name`        | yes      | Shown in bold on the card.                              |
+| `url`         | yes      | Absolute `http(s)` URL; the card links there.           |
+| `description` | no       | Short line under the name.                              |
+| `logo`        | no       | Path under `/sponsors/`, e.g. `/sponsors/acme.svg`.     |
+| `theme`       | no       | `pink`, `blue`, `green`, `red`, `lavender` or `amber`.  |
+| `active`      | no       | Set to `false` to hide the sponsor without deleting it. |
+
+Drop logo files in `public/sponsors/` and reference them as
+`/sponsors/<file>`. The rail renders site-wide on viewports 1280px and wider;
+on mobile (860px and narrower) the same sponsors scroll as a marquee inside
+the site header. Entries without a valid `http(s)` URL are skipped. Logos are
+decorative (the name is the link text), so SVG or transparent PNG both work.
 
 ## Commands
 
