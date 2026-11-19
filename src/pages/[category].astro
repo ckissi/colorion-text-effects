@@ -4,6 +4,7 @@ import EffectCard from '../components/EffectCard.astro';
 import CategoryNav from '../components/CategoryNav.astro';
 import Sidebar from '../components/Sidebar.astro';
 import SponsorMarquee from '../components/SponsorMarquee.astro';
+import HeaderIconbar from '../components/HeaderIconbar.astro';
 import CodeExample from '../components/CodeExample.astro';
 import { effects, perLetter, usesDataText } from '../data/effects';
 import { categoryGuides } from '../data/categoryGuides';
@@ -83,6 +84,7 @@ const schema = [
         <span aria-current="page">{info.heading}</span>
       </nav>
       <div class="header-status mono">
+        <HeaderIconbar />
         <span class="pulse-dot"></span>
         {n} effects
       </div>

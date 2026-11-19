@@ -4,6 +4,7 @@ import EffectCard from '../components/EffectCard.astro';
 import CategoryNav from '../components/CategoryNav.astro';
 import Sidebar from '../components/Sidebar.astro';
 import SponsorMarquee from '../components/SponsorMarquee.astro';
+import HeaderIconbar from '../components/HeaderIconbar.astro';
 import IconbarAd from '../components/IconbarAd.astro';
 import { effects } from '../data/effects';
 import { categories, categoryOrder, categoryPath, effectPath, effectSeo } from '../data/seo';
@@ -85,6 +86,7 @@ const schema = [
   <div class="page-shell">
     <header class="site-header">
       <div class="header-status mono">
+        <HeaderIconbar />
         <span class="pulse-dot"></span>
         {effects.length} effects · MIT
       </div>

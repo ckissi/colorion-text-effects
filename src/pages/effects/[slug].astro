@@ -5,6 +5,7 @@ import EffectCard from '../../components/EffectCard.astro';
 import CodeExample from '../../components/CodeExample.astro';
 import Sidebar from '../../components/Sidebar.astro';
 import SponsorMarquee from '../../components/SponsorMarquee.astro';
+import HeaderIconbar from '../../components/HeaderIconbar.astro';
 import { effects, perLetter, usesDataText, type Effect as EffectData } from '../../data/effects';
 import { categories, categoryLabels, categoryPath, effectPath, effectSeo } from '../../data/seo';
 import { effectBlurbs, effectCss, effectMarkup, prompts, snippets } from '../../utils/effectCss';
@@ -127,6 +128,7 @@ if (guide.techniques.some((t) => t.id === 'property'))
         <span aria-current="page">{effect.name}</span>
       </nav>
       <div class="header-status mono">
+        <HeaderIconbar />
         <span class="esc-hint"><kbd>Esc</kbd> all effects</span>
         <span class="pulse-dot"></span>
         #{effect.index} of {effects.length}

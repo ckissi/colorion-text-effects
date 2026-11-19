@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import EffectCard from '../components/EffectCard.astro';
 import Sidebar from '../components/Sidebar.astro';
 import SponsorMarquee from '../components/SponsorMarquee.astro';
+import HeaderIconbar from '../components/HeaderIconbar.astro';
 import { effects, perLetter, usesDataText } from '../data/effects';
 import { categories, categoryOrder, categoryPath } from '../data/seo';
 
@@ -54,6 +55,7 @@ const schema = [
         <span aria-current="page">Text effect generator</span>
       </nav>
       <div class="header-status mono">
+        <HeaderIconbar />
         <span class="pulse-dot"></span>
         {n} effects · MIT
       </div>

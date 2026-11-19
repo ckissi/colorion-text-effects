@@ -6257,3 +6257,31 @@ h1 em {
   text-transform: uppercase;
   color: var(--primary);
 }
+
+/* ---------- Iconbar header link ---------- */
+.header-promo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: calc(var(--base) * 2);
+  padding: 4px 10px;
+  border: 1px solid color-mix(in srgb, var(--primary) 40%, var(--border));
+  border-radius: var(--r-pill);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: background .2s, border-color .2s;
+}
+.header-promo svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.header-promo:hover,
+.header-promo:focus-visible {
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  border-color: var(--primary);
+}
