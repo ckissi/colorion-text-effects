@@ -4,6 +4,7 @@ import EffectCard from '../components/EffectCard.astro';
 import CategoryNav from '../components/CategoryNav.astro';
 import Sidebar from '../components/Sidebar.astro';
 import SponsorMarquee from '../components/SponsorMarquee.astro';
+import IconbarAd from '../components/IconbarAd.astro';
 import { effects } from '../data/effects';
 import { categories, categoryOrder, categoryPath, effectPath, effectSeo } from '../data/seo';
 
@@ -115,7 +116,9 @@ const schema = [
         </div>
 
         <div class="grid" id="effect-grid">
-          {effects.map((effect) => <EffectCard effect={effect} actions />)}
+          {effects.slice(0, 2).map((effect) => <EffectCard effect={effect} actions />)}
+          <IconbarAd />
+          {effects.slice(2).map((effect) => <EffectCard effect={effect} actions />)}
         </div>
 
       </div>

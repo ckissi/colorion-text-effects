@@ -6217,3 +6217,43 @@ h1 em {
   .sponsor-marquee { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
   .sponsor-marquee-track { animation: none; }
 }
+
+/* ---------- Iconbar house ad (home grid card) ---------- */
+.ad-cell .cell-index { letter-spacing: .18em; text-transform: uppercase; }
+.ad-stage { gap: calc(var(--base) * 2); align-content: center; }
+.ad-keys { display: flex; gap: 6px; justify-content: center; }
+.ad-keys kbd {
+  min-width: 26px;
+  padding: 3px 6px;
+  border: 1px solid var(--divider);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  font: 600 12px/1.2 "JetBrains Mono", monospace;
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--text-primary) 5%, var(--surface));
+  text-align: center;
+}
+.ad-icons { display: flex; gap: 14px; justify-content: center; }
+.ad-icons svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform .3s, stroke .3s;
+}
+.ad-icons svg:nth-child(even) { stroke: var(--accent-2); }
+.ad-cell:hover .ad-icons svg { transform: translateY(-3px); }
+.ad-cell:hover .ad-icons svg:nth-child(2) { transition-delay: .04s; }
+.ad-cell:hover .ad-icons svg:nth-child(3) { transition-delay: .08s; }
+.ad-cell:hover .ad-icons svg:nth-child(4) { transition-delay: .12s; }
+.ad-cell .cell-keyword { max-width: 30ch; margin-inline: auto; }
+.ad-cta {
+  margin-top: calc(var(--base) * -2);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--primary);
+}

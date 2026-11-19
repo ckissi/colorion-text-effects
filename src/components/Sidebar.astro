@@ -4,7 +4,14 @@
 const REF = 'text-effects.colorion.co';
 // `icon` is the inner markup of a 24x24 stroke icon — it is the only thing left
 // visible once the sidebar collapses to its icon rail.
-const colorionLinks = [
+const colorionLinks: { label: string; href: string; icon: string; noRef?: boolean; event?: string }[] = [
+  {
+    label: 'Iconbar for Mac',
+    href: 'https://tablericons.com/iconbar/',
+    icon: '<rect x="3" y="4" width="18" height="16" rx="2.5" /><path d="M3 8.5h18" /><path d="M12 17.2l-3.1-3.05a1.9 1.9 0 1 1 3.1-2.2 1.9 1.9 0 1 1 3.1 2.2Z" />',
+    noRef: true,
+    event: 'Iconbar+click',
+  },
   {
     label: 'Motion effects',
     href: 'https://kinetics.colorion.co',
@@ -120,8 +127,8 @@ const colorionLinks = [
     {
       colorionLinks.map((link) => (
         <a
-          class="mono"
-          href={`${link.href}?ref=${REF}`}
+          class={link.event ? `mono plausible-event-name=${link.event}` : 'mono'}
+          href={link.noRef ? link.href : `${link.href}?ref=${REF}`}
           target="_blank"
           rel="noopener"
           referrerpolicy="no-referrer-when-downgrade"
